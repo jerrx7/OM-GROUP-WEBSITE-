@@ -1,0 +1,13 @@
+# Editor / tool settings
+.claude/
+
+# Old versions (not needed for production)
+OM Group Landing v1.html
+OM Group Landing.html
+OM-GROUP-/
+
+# Dev-only files
+tweaks-panel.jsx
+
+# Raw / duplicate uploads folder (~100MB+ of duplicates)
+uploads/
