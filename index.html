@@ -2773,16 +2773,8 @@ root.render(<App />);
     // The Apps Script Web App URL
     const webAppUrl = 'https://script.google.com/macros/s/AKfycbyzx5ecPmIlv2BJ0vco0zG0FS1adHSXJ-81Mrh-GVS9wi3cOsec8zCQ1KL08dA4KIhafA/exec';
 
-    if (!webAppUrl || webAppUrl === '[[GOOGLE_APPS_SCRIPT_WEBAPP_URL]]') {
-      // Simulate success for local testing before setup
-      setTimeout(() => {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = originalBtnText;
-        form.style.display = 'none';
-        successContainer.style.display = 'flex';
-      }, 1000);
-      return;
-    }
+    console.log('[OM Quote] Submitting to:', webAppUrl);
+    console.log('[OM Quote] Form data:', data);
 
     const params = new URLSearchParams(data);
     fetch(webAppUrl, {
@@ -2794,13 +2786,14 @@ root.render(<App />);
       body: params.toString()
     })
     .then(() => {
+      console.log('[OM Quote] Fetch resolved — row should now appear in Google Sheet.');
       submitBtn.disabled = false;
       submitBtn.innerHTML = originalBtnText;
       form.style.display = 'none';
       successContainer.style.display = 'flex';
     })
     .catch(err => {
-      console.error('Error submitting form:', err);
+      console.error('[OM Quote] Fetch failed (network error):', err);
       submitBtn.disabled = false;
       submitBtn.innerHTML = originalBtnText;
       errorBanner.style.display = 'block';
