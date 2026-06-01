@@ -2787,10 +2787,7 @@ root.render(<App />);
     })
     .then(() => {
       console.log('[OM Quote] Fetch resolved — row should now appear in Google Sheet.');
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = originalBtnText;
-      form.style.display = 'none';
-      successContainer.style.display = 'flex';
+      window.location.href = '/thank-you.html';
     })
     .catch(err => {
       console.error('[OM Quote] Fetch failed (network error):', err);

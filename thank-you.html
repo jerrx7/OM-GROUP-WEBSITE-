@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Thank You — OM Group of Companies</title>
+<meta name="robots" content="noindex, nofollow" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     GOOGLE ADS CONVERSION TRACKING
+     ─────────────────────────────────────────────────────────────────
+     SETUP INSTRUCTIONS:
+     1. In Google Ads → Tools & Settings → Measurement → Conversions
+     2. Create a new conversion action (type: "Website")
+     3. Replace YOUR_CONVERSION_ID and YOUR_CONVERSION_LABEL below
+        with the values from your Google Ads conversion tag snippet.
+     4. Replace YOUR_GTAG_ID with your Google Ads account tag ID
+        (format: AW-XXXXXXXXXX)
+     ═══════════════════════════════════════════════════════════════════ -->
+
+<!-- Google tag (gtag.js) — replace YOUR_GTAG_ID with AW-XXXXXXXXXX -->
+<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_GTAG_ID"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'YOUR_GTAG_ID');
+</script> -->
+
+<!-- Google Ads Conversion Event — fires once when this page loads -->
+<!-- <script>
+  gtag('event', 'conversion', {
+    'send_to': 'YOUR_GTAG_ID/YOUR_CONVERSION_LABEL'
+  });
+</script> -->
+
+<style>
+:root {
+  --accent:       #F15A29;
+  --accent-deep:  #D94817;
+  --accent-soft:  rgba(241,90,41,.10);
+  --accent-line:  rgba(241,90,41,.22);
+  --navy:         #1E2A47;
+  --black:        #0E0E10;
+  --ink:          #141416;
+  --grey:         #6B6B6B;
+  --grey-2:       #8E8E8E;
+  --bone:         #FAF8F3;
+  --bone-2:       #F2EEE3;
+  --white:        #FFFFFF;
+  --line:         rgba(20,20,22,.10);
+  --serif:        "Cormorant Garamond","Playfair Display",Georgia,serif;
+  --sans:         "Inter",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  background: var(--white);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  line-height: 1.5;
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+
+/* ── NAV ────────────────────────────────────────────────────────── */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 0 48px;
+  background: rgba(255,255,255,.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.brand-logo {
+  height: 48px;
+  display: flex;
+  align-items: center;
+}
+.brand-logo img {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(241,90,41,.14));
+}
+
+/* ── MAIN ───────────────────────────────────────────────────────── */
+main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 24px 80px;
+  background: var(--bone);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative background geometry */
+main::before {
+  content: "";
+  position: absolute;
+  top: -120px; right: -120px;
+  width: 480px; height: 480px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(241,90,41,.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+main::after {
+  content: "";
+  position: absolute;
+  bottom: -80px; left: -80px;
+  width: 360px; height: 360px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(30,42,71,.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ── CARD ───────────────────────────────────────────────────────── */
+.card {
+  position: relative;
+  z-index: 1;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--accent);
+  border-radius: 2px;
+  padding: 64px 56px 56px;
+  max-width: 580px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 24px 80px -20px rgba(20,20,22,.10);
+  animation: cardIn .6s cubic-bezier(.22,.61,.36,1) both;
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ── CHECK ICON ─────────────────────────────────────────────────── */
+.check-wrap {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  border: 2px solid var(--accent-line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 32px;
+  animation: popIn .5s .2s cubic-bezier(.34,1.56,.64,1) both;
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(.6); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.check-wrap svg {
+  width: 32px;
+  height: 32px;
+}
+
+/* ── EYEBROW ────────────────────────────────────────────────────── */
+.eyebrow {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.eyebrow::before,
+.eyebrow::after {
+  content: "";
+  width: 24px;
+  height: 1px;
+  background: var(--accent);
+}
+
+/* ── TYPOGRAPHY ─────────────────────────────────────────────────── */
+.heading {
+  font-family: var(--serif);
+  font-size: clamp(30px, 5vw, 40px);
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.2;
+  letter-spacing: -.01em;
+  margin-bottom: 16px;
+}
+
+.subheading {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+
+.body-text {
+  font-size: 14px;
+  color: var(--grey);
+  line-height: 1.7;
+  margin-bottom: 40px;
+}
+
+/* ── DIVIDER ────────────────────────────────────────────────────── */
+.divider {
+  width: 48px;
+  height: 2px;
+  background: var(--accent);
+  margin: 0 auto 28px;
+  border-radius: 1px;
+}
+
+/* ── BUTTONS ────────────────────────────────────────────────────── */
+.btn-group {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 50px;
+  padding: 0 28px;
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-radius: 1px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform .2s ease, background .25s ease, color .25s ease,
+              border-color .25s ease, box-shadow .25s ease;
+  text-decoration: none;
+}
+.btn:hover { transform: scale(1.02); }
+
+.btn-accent {
+  background: var(--accent);
+  color: var(--white);
+  border-color: var(--accent);
+}
+.btn-accent:hover {
+  background: var(--accent-deep);
+  border-color: var(--accent-deep);
+  box-shadow: 0 14px 40px -16px rgba(241,90,41,.55);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.btn-ghost:hover { background: var(--accent-soft); }
+
+.btn-arrow { font-size: 13px; letter-spacing: 0; font-weight: 400; }
+
+/* ── FOOTER ─────────────────────────────────────────────────────── */
+footer {
+  padding: 24px 48px;
+  background: var(--navy);
+  text-align: center;
+}
+footer p {
+  font-size: 12px;
+  color: rgba(255,255,255,.45);
+  letter-spacing: .04em;
+}
+footer a {
+  color: rgba(255,255,255,.65);
+  transition: color .2s;
+}
+footer a:hover { color: var(--accent); }
+
+/* ── RESPONSIVE ─────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .nav { padding: 0 24px; }
+  .card { padding: 48px 28px 40px; }
+  .btn-group { flex-direction: column; align-items: center; }
+  .btn { width: 100%; max-width: 280px; }
+  footer { padding: 20px 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ──────────────────────────────────────────────────── -->
+<header class="nav" role="banner">
+  <a href="/" class="brand-logo" aria-label="OM Group — Home">
+    <img src="assets/om-group-logo-header.png" alt="OM Group" />
+  </a>
+  <a href="/" class="btn btn-ghost" style="height:40px;padding:0 20px;font-size:10px;">
+    Back to Home <span class="btn-arrow">→</span>
+  </a>
+</header>
+
+<!-- ── MAIN CONTENT ───────────────────────────────────────────────── -->
+<main>
+  <div class="card" role="main">
+
+    <!-- Animated checkmark -->
+    <div class="check-wrap" aria-hidden="true">
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polyline
+          points="6,17 13,24 26,9"
+          stroke="#F15A29"
+          stroke-width="2.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-dasharray="36"
+          stroke-dashoffset="36"
+          style="animation: drawCheck .45s .4s ease forwards;"
+        />
+      </svg>
+    </div>
+
+    <style>
+      @keyframes drawCheck {
+        to { stroke-dashoffset: 0; }
+      }
+    </style>
+
+    <div class="eyebrow">Request Submitted</div>
+
+    <h1 class="heading">Thank You For<br>Your Request</h1>
+
+    <div class="divider"></div>
+
+    <p class="subheading">Your quotation request has been received successfully.</p>
+    <p class="body-text">Our team will review your requirements and contact you shortly.</p>
+
+    <div class="btn-group">
+      <a href="/" class="btn btn-accent">
+        Back to Home <span class="btn-arrow">→</span>
+      </a>
+      <a href="/#contact" class="btn btn-ghost">
+        Contact Us
+      </a>
+    </div>
+
+  </div>
+</main>
+
+<!-- ── FOOTER ─────────────────────────────────────────────────────── -->
+<footer>
+  <p>&copy; 2025 OM Group of Companies. All rights reserved. &nbsp;|&nbsp; Goa, India &nbsp;|&nbsp; <a href="mailto:info@omgroupco.com">info@omgroupco.com</a></p>
+</footer>
+
+</body>
+</html>
