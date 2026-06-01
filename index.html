@@ -2477,6 +2477,21 @@ root.render(<App />);
   </div>
 </div>
 
+<!-- Google reCAPTCHA v2 API — async, non-blocking -->
+<!-- ═══════════════════════════════════════════════════════════════════
+     HOW TO GET YOUR KEYS:
+     1. Go to https://www.google.com/recaptcha/admin/create
+     2. Label: "OM Group Website"
+     3. Type: reCAPTCHA v2 → "I'm not a robot" Checkbox
+     4. Domains: add your Vercel domain (e.g. omgroupco.vercel.app)
+                 AND your custom domain if you have one
+     5. Submit → you get two keys:
+        SITE KEY   → paste as data-sitekey below (public, goes in HTML)
+        SECRET KEY → keep private, needed only if you add server-side
+                     verification to the Apps Script later
+     ═══════════════════════════════════════════════════════════════════ -->
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 <!-- Request a Quote Modal -->
 <div id="quoteModal" class="q-modal" aria-hidden="true" role="dialog">
   <div class="q-modal-overlay" tabindex="-1"></div>
@@ -2569,6 +2584,14 @@ root.render(<App />);
         <textarea id="message" name="message" rows="4" placeholder="Describe your project requirements..."></textarea>
       </div>
       
+      <!-- reCAPTCHA v2 — replace YOUR_RECAPTCHA_SITE_KEY_HERE with your Site Key -->
+      <div class="q-form-group" style="margin-bottom:4px;">
+        <div class="g-recaptcha" data-sitekey="YOUR_RECAPTCHA_SITE_KEY_HERE"></div>
+        <div id="recaptchaError" style="display:none;font-size:12px;color:#D94817;margin-top:6px;font-family:inherit;">
+          Please complete the CAPTCHA verification to continue.
+        </div>
+      </div>
+
       <div class="q-modal-footer">
         <button type="submit" class="btn btn-accent" id="submitQuoteBtn">Submit Request</button>
       </div>
@@ -2667,6 +2690,11 @@ root.render(<App />);
     form.querySelectorAll('.q-form-group').forEach(group => {
       group.classList.remove('invalid');
     });
+
+    // Reset reCAPTCHA widget and hide its error on modal close
+    if (typeof grecaptcha !== 'undefined') { grecaptcha.reset(); }
+    const recaptchaErrorEl = document.getElementById('recaptchaError');
+    if (recaptchaErrorEl) recaptchaErrorEl.style.display = 'none';
   }
 
   trigger.addEventListener('click', openModal);
@@ -2757,6 +2785,15 @@ root.render(<App />);
       if (firstInvalid) firstInvalid.focus();
       return;
     }
+
+    // reCAPTCHA v2 validation — must be completed before submission proceeds
+    const recaptchaErrorEl = document.getElementById('recaptchaError');
+    const recaptchaToken = (typeof grecaptcha !== 'undefined') ? grecaptcha.getResponse() : '';
+    if (!recaptchaToken) {
+      recaptchaErrorEl.style.display = 'block';
+      return;
+    }
+    recaptchaErrorEl.style.display = 'none';
 
     const originalBtnText = submitBtn.innerHTML;
     submitBtn.disabled = true;
