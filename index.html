@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
 <!-- Google Tag Manager -->
@@ -11,6 +11,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>OM Group of Companies — A Foundation of Trust</title>
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -2054,9 +2060,7 @@ ESTD. GOA, INDIA ·</span>
     <p class="contact-sub fade-up d2">Supply aggregates, ready-mix concrete or heavy machinery for your next project in Goa. Our team responds within one business day.</p>
     <div class="contact-cta fade-up d3"><a href="mailto:hello@omgroupgoa.in" id="requestQuoteBtn" class="btn btn-accent" style="height:60px;padding:0 38px;font-size:12px">Request a Quote <span class="btn-arrow">→</span></a></div>
     <div class="contact-info fade-up d4">
-      <div class="cinfo"><div class="lab">Phone</div><div class="val" style="font-family: Garamond">+91-9049629684
-+91-8788732881 
-Goa Office</div></div>
+      <div class="cinfo"><div class="lab">Phone</div><div class="val" style="font-family: Garamond"><a href="tel:+919049629684">+91-9049629684</a><br><a href="tel:+918788732881">+91-8788732881</a><br>Goa Office</div></div>
       <div class="cinfo"><div class="lab">Email</div><div class="val">info@omgroupco.com</div></div>
       <div class="cinfo"><div class="lab">Location</div><div class="val">Goa, India</div></div>
     </div>
@@ -3075,6 +3079,8 @@ root.render(<App />);
         submitBtn.innerHTML = originalText;
         form.style.display = 'none';
         successBox.style.display = 'flex';
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({'event': 'careers_submit_success'});
       })
       .catch(err => {
         console.error('Careers form error:', err);
