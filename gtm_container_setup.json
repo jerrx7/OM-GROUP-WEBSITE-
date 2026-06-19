@@ -51,7 +51,7 @@
           {
             "type": "TEMPLATE",
             "key": "value",
-            "value": "AW-123456789"
+            "value": "AW-REPLACE_WITH_YOUR_CONVERSION_ID"
           }
         ],
         "parentFolderId": "1"
@@ -66,7 +66,7 @@
           {
             "type": "TEMPLATE",
             "key": "value",
-            "value": "CONV_LABEL_QUOTE"
+            "value": "REPLACE_WITH_QUOTE_LABEL"
           }
         ],
         "parentFolderId": "2"
@@ -81,7 +81,7 @@
           {
             "type": "TEMPLATE",
             "key": "value",
-            "value": "CONV_LABEL_CAREERS"
+            "value": "REPLACE_WITH_CAREERS_LABEL"
           }
         ],
         "parentFolderId": "2"
@@ -96,7 +96,7 @@
           {
             "type": "TEMPLATE",
             "key": "value",
-            "value": "CONV_LABEL_WHATSAPP"
+            "value": "REPLACE_WITH_WHATSAPP_LABEL"
           }
         ],
         "parentFolderId": "2"
@@ -111,7 +111,7 @@
           {
             "type": "TEMPLATE",
             "key": "value",
-            "value": "CONV_LABEL_PHONE"
+            "value": "REPLACE_WITH_PHONE_LABEL"
           }
         ],
         "parentFolderId": "2"
@@ -126,7 +126,7 @@
           {
             "type": "TEMPLATE",
             "key": "value",
-            "value": "CONV_LABEL_EMAIL"
+            "value": "REPLACE_WITH_EMAIL_LABEL"
           }
         ],
         "parentFolderId": "2"
@@ -144,15 +144,17 @@
         "containerId": "789012",
         "type": "CLICK_URL",
         "name": "Click URL"
-      },
-      {
-        "accountId": "123456",
-        "containerId": "789012",
-        "type": "FORM_ID",
-        "name": "Form ID"
       }
     ],
     "trigger": [
+      {
+        "accountId": "123456",
+        "containerId": "789012",
+        "triggerId": "16",
+        "name": "Trigger - All Pages",
+        "type": "PAGEVIEW",
+        "parentFolderId": "1"
+      },
       {
         "accountId": "123456",
         "containerId": "789012",
@@ -181,22 +183,22 @@
       {
         "accountId": "123456",
         "containerId": "789012",
-        "triggerId": "11",
-        "name": "Trigger - Form Submission - Careers Form",
-        "type": "FORM_SUBMISSION",
-        "filter": [
+        "triggerId": "15",
+        "name": "Trigger - Custom Event - Careers Form Success",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
           {
             "type": "EQUALS",
             "parameter": [
               {
                 "type": "TEMPLATE",
                 "key": "arg0",
-                "value": "{{Form ID}}"
+                "value": "{{_event}}"
               },
               {
                 "type": "TEMPLATE",
                 "key": "arg1",
-                "value": "careersForm"
+                "value": "careers_submit_success"
               }
             ]
           }
@@ -212,13 +214,18 @@
         "parameter": [
           {
             "type": "BOOLEAN",
-            "key": "waitCheckValidation",
-            "value": "true"
+            "key": "waitForTags",
+            "value": "false"
           },
           {
             "type": "BOOLEAN",
             "key": "checkValidation",
             "value": "false"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "onlyLinks",
+            "value": "true"
           }
         ],
         "filter": [
@@ -249,13 +256,18 @@
         "parameter": [
           {
             "type": "BOOLEAN",
-            "key": "waitCheckValidation",
-            "value": "true"
+            "key": "waitForTags",
+            "value": "false"
           },
           {
             "type": "BOOLEAN",
             "key": "checkValidation",
             "value": "false"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "onlyLinks",
+            "value": "true"
           }
         ],
         "filter": [
@@ -286,13 +298,18 @@
         "parameter": [
           {
             "type": "BOOLEAN",
-            "key": "waitCheckValidation",
-            "value": "true"
+            "key": "waitForTags",
+            "value": "false"
           },
           {
             "type": "BOOLEAN",
             "key": "checkValidation",
             "value": "false"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "onlyLinks",
+            "value": "true"
           }
         ],
         "filter": [
@@ -321,15 +338,20 @@
         "containerId": "789012",
         "tagId": "20",
         "name": "GT - Core Setup",
-        "type": "googtag",
+        "type": "html",
         "parameter": [
           {
             "type": "TEMPLATE",
-            "key": "tagId",
-            "value": "{{Google Ads Conversion ID}}"
+            "key": "html",
+            "value": "<script async src=\"https://www.googletagmanager.com/gtag/js?id={{Google Ads Conversion ID}}\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n  gtag('config', '{{Google Ads Conversion ID}}');\n</script>"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "supportDocumentWrite",
+            "value": "false"
           }
         ],
-        "firingTriggerId": ["2147483647"],
+        "firingTriggerId": ["16"],
         "parentFolderId": "1"
       },
       {
@@ -337,15 +359,20 @@
         "containerId": "789012",
         "tagId": "21",
         "name": "Google Ads - Conversion Linker",
-        "type": "gac",
+        "type": "html",
         "parameter": [
           {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\n  /* Conversion Linker: captures GCLID from landing URL and stores it\n     in a first-party cookie for Google Ads conversion attribution. */\n  (function() {\n    try {\n      var params = new URLSearchParams(window.location.search);\n      var gclid  = params.get('gclid');\n      var gclsrc = params.get('gclsrc');\n      if (!gclid) return;\n      if (gclsrc && gclsrc.indexOf('aw') === -1) return;\n      var expiry = new Date();\n      expiry.setDate(expiry.getDate() + 90);\n      document.cookie =\n        '_gcl_aw=GCL.' + Math.floor(Date.now() / 1000) + '.' + gclid +\n        '; expires=' + expiry.toUTCString() +\n        '; path=/; SameSite=Lax';\n    } catch (e) {}\n  })();\n</script>"
+          },
+          {
             "type": "BOOLEAN",
-            "key": "enableCrossDomain",
+            "key": "supportDocumentWrite",
             "value": "false"
           }
         ],
-        "firingTriggerId": ["2147483647"],
+        "firingTriggerId": ["16"],
         "parentFolderId": "1"
       },
       {
@@ -364,6 +391,11 @@
             "type": "TEMPLATE",
             "key": "conversionLabel",
             "value": "{{Label - Request Quote}}"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "remarketing_only",
+            "value": "false"
           }
         ],
         "firingTriggerId": ["10"],
@@ -385,9 +417,14 @@
             "type": "TEMPLATE",
             "key": "conversionLabel",
             "value": "{{Label - Careers Form}}"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "remarketing_only",
+            "value": "false"
           }
         ],
-        "firingTriggerId": ["11"],
+        "firingTriggerId": ["15"],
         "parentFolderId": "2"
       },
       {
@@ -406,6 +443,11 @@
             "type": "TEMPLATE",
             "key": "conversionLabel",
             "value": "{{Label - WhatsApp Click}}"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "remarketing_only",
+            "value": "false"
           }
         ],
         "firingTriggerId": ["12"],
@@ -427,6 +469,11 @@
             "type": "TEMPLATE",
             "key": "conversionLabel",
             "value": "{{Label - Phone Click}}"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "remarketing_only",
+            "value": "false"
           }
         ],
         "firingTriggerId": ["13"],
@@ -448,6 +495,11 @@
             "type": "TEMPLATE",
             "key": "conversionLabel",
             "value": "{{Label - Email Click}}"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "remarketing_only",
+            "value": "false"
           }
         ],
         "firingTriggerId": ["14"],

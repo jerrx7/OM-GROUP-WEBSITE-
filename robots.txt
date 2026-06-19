@@ -1,12 +1,16 @@
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
 User-agent: *
-Allow: /favicon.ico
-Allow: /favicon-16x16.png
-Allow: /favicon-32x32.png
-Allow: /favicon-48x48.png
-Allow: /favicon-64x64.png
-Allow: /favicon-96x96.png
-Allow: /apple-touch-icon.png
-Allow: /android-chrome-192x192.png
-Allow: /android-chrome-512x512.png
-Allow: /site.webmanifest
-Disallow:
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /private/
+Disallow: /login/
+Disallow: /uploads/
+Allow: /
+
+# Sitemap
+Sitemap: https://www.omgroupco.com/sitemap.xml
