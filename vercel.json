@@ -1,6 +1,17 @@
 {
   "redirects": [
     {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "om-group-website.vercel.app"
+        }
+      ],
+      "destination": "https://www.omgroupco.com/",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
       "has": [
         {
