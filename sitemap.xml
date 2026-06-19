@@ -1,9 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://www.omgroupco.com/</loc>
     <lastmod>2026-06-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://www.omgroupco.com/assets/om-group-logo-full.png</image:loc>
+      <image:title>OM Group — A Foundation of Trust</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.omgroupco.com/assets/goa-presence-map.png</image:loc>
+      <image:title>OM Group Presence Map — Operational Sites Across Goa</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.omgroupco.com/assets/concrete.png</image:loc>
+      <image:title>Ready-Mix Concrete — OM Group Sabsol Qualitech Batching Plant, Goa</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.omgroupco.com/img/products/agg-20mm.png</image:loc>
+      <image:title>20mm Crushed Stone Aggregate — Structural Grade, OM Group Goa</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.omgroupco.com/img/products/m-sand.png</image:loc>
+      <image:title>Manufactured Sand (M-Sand) — IS 383 Compliant, OM Group Goa</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.omgroupco.com/img/products/gsb.png</image:loc>
+      <image:title>Granular Sub-Base (GSB) — Highway Grade Road Foundation Material, OM Group</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.omgroupco.com/img/products/boulders.png</image:loc>
+      <image:title>Natural Stone Boulders — Heavy-Duty for Retaining Walls and Marine Works</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.omgroupco.com/assets/wmm.png</image:loc>
+      <image:title>Wet Mix Macadam (WMM) — Road Base Material, OM Group Goa</image:title>
+    </image:image>
   </url>
 </urlset>

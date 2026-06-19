@@ -1,6 +1,6 @@
 {
   "exportFormatVersion": 2,
-  "exportTime": "2026-06-04 12:00:00",
+  "exportTime": "2026-06-19 00:00:00",
   "containerVersion": {
     "path": "accounts/123456/containers/789012/versions/0",
     "accountId": "123456",
@@ -36,8 +36,8 @@
       {
         "accountId": "123456",
         "containerId": "789012",
-        "folderId": "4",
-        "name": "Click Tracking"
+        "folderId": "5",
+        "name": "Google Analytics 4"
       }
     ],
     "variable": [
@@ -51,7 +51,7 @@
           {
             "type": "TEMPLATE",
             "key": "value",
-            "value": "AW-REPLACE_WITH_YOUR_CONVERSION_ID"
+            "value": "AW-18196067615"
           }
         ],
         "parentFolderId": "1"
@@ -66,7 +66,7 @@
           {
             "type": "TEMPLATE",
             "key": "value",
-            "value": "REPLACE_WITH_QUOTE_LABEL"
+            "value": "424ACJ35pbgcEJ_qx-RD"
           }
         ],
         "parentFolderId": "2"
@@ -74,62 +74,17 @@
       {
         "accountId": "123456",
         "containerId": "789012",
-        "variableId": "3",
-        "name": "Label - Careers Form",
+        "variableId": "7",
+        "name": "GA4 Measurement ID",
         "type": "c",
         "parameter": [
           {
             "type": "TEMPLATE",
             "key": "value",
-            "value": "REPLACE_WITH_CAREERS_LABEL"
+            "value": "G-X2Q0RTMBDQ"
           }
         ],
-        "parentFolderId": "2"
-      },
-      {
-        "accountId": "123456",
-        "containerId": "789012",
-        "variableId": "4",
-        "name": "Label - WhatsApp Click",
-        "type": "c",
-        "parameter": [
-          {
-            "type": "TEMPLATE",
-            "key": "value",
-            "value": "REPLACE_WITH_WHATSAPP_LABEL"
-          }
-        ],
-        "parentFolderId": "2"
-      },
-      {
-        "accountId": "123456",
-        "containerId": "789012",
-        "variableId": "5",
-        "name": "Label - Phone Click",
-        "type": "c",
-        "parameter": [
-          {
-            "type": "TEMPLATE",
-            "key": "value",
-            "value": "REPLACE_WITH_PHONE_LABEL"
-          }
-        ],
-        "parentFolderId": "2"
-      },
-      {
-        "accountId": "123456",
-        "containerId": "789012",
-        "variableId": "6",
-        "name": "Label - Email Click",
-        "type": "c",
-        "parameter": [
-          {
-            "type": "TEMPLATE",
-            "key": "value",
-            "value": "REPLACE_WITH_EMAIL_LABEL"
-          }
-        ],
-        "parentFolderId": "2"
+        "parentFolderId": "5"
       }
     ],
     "builtInVariable": [
@@ -138,12 +93,6 @@
         "containerId": "789012",
         "type": "PAGE_PATH",
         "name": "Page Path"
-      },
-      {
-        "accountId": "123456",
-        "containerId": "789012",
-        "type": "CLICK_URL",
-        "name": "Click URL"
       }
     ],
     "trigger": [
@@ -179,157 +128,6 @@
           }
         ],
         "parentFolderId": "3"
-      },
-      {
-        "accountId": "123456",
-        "containerId": "789012",
-        "triggerId": "15",
-        "name": "Trigger - Custom Event - Careers Form Success",
-        "type": "CUSTOM_EVENT",
-        "customEventFilter": [
-          {
-            "type": "EQUALS",
-            "parameter": [
-              {
-                "type": "TEMPLATE",
-                "key": "arg0",
-                "value": "{{_event}}"
-              },
-              {
-                "type": "TEMPLATE",
-                "key": "arg1",
-                "value": "careers_submit_success"
-              }
-            ]
-          }
-        ],
-        "parentFolderId": "3"
-      },
-      {
-        "accountId": "123456",
-        "containerId": "789012",
-        "triggerId": "12",
-        "name": "Trigger - Link Click - WhatsApp",
-        "type": "LINK_CLICK",
-        "parameter": [
-          {
-            "type": "BOOLEAN",
-            "key": "waitForTags",
-            "value": "false"
-          },
-          {
-            "type": "BOOLEAN",
-            "key": "checkValidation",
-            "value": "false"
-          },
-          {
-            "type": "BOOLEAN",
-            "key": "onlyLinks",
-            "value": "true"
-          }
-        ],
-        "filter": [
-          {
-            "type": "CONTAINS",
-            "parameter": [
-              {
-                "type": "TEMPLATE",
-                "key": "arg0",
-                "value": "{{Click URL}}"
-              },
-              {
-                "type": "TEMPLATE",
-                "key": "arg1",
-                "value": "wa.me"
-              }
-            ]
-          }
-        ],
-        "parentFolderId": "4"
-      },
-      {
-        "accountId": "123456",
-        "containerId": "789012",
-        "triggerId": "13",
-        "name": "Trigger - Link Click - Phone",
-        "type": "LINK_CLICK",
-        "parameter": [
-          {
-            "type": "BOOLEAN",
-            "key": "waitForTags",
-            "value": "false"
-          },
-          {
-            "type": "BOOLEAN",
-            "key": "checkValidation",
-            "value": "false"
-          },
-          {
-            "type": "BOOLEAN",
-            "key": "onlyLinks",
-            "value": "true"
-          }
-        ],
-        "filter": [
-          {
-            "type": "STARTS_WITH",
-            "parameter": [
-              {
-                "type": "TEMPLATE",
-                "key": "arg0",
-                "value": "{{Click URL}}"
-              },
-              {
-                "type": "TEMPLATE",
-                "key": "arg1",
-                "value": "tel:"
-              }
-            ]
-          }
-        ],
-        "parentFolderId": "4"
-      },
-      {
-        "accountId": "123456",
-        "containerId": "789012",
-        "triggerId": "14",
-        "name": "Trigger - Link Click - Email",
-        "type": "LINK_CLICK",
-        "parameter": [
-          {
-            "type": "BOOLEAN",
-            "key": "waitForTags",
-            "value": "false"
-          },
-          {
-            "type": "BOOLEAN",
-            "key": "checkValidation",
-            "value": "false"
-          },
-          {
-            "type": "BOOLEAN",
-            "key": "onlyLinks",
-            "value": "true"
-          }
-        ],
-        "filter": [
-          {
-            "type": "STARTS_WITH",
-            "parameter": [
-              {
-                "type": "TEMPLATE",
-                "key": "arg0",
-                "value": "{{Click URL}}"
-              },
-              {
-                "type": "TEMPLATE",
-                "key": "arg1",
-                "value": "mailto:"
-              }
-            ]
-          }
-        ],
-        "parentFolderId": "4"
       }
     ],
     "tag": [
@@ -404,106 +202,80 @@
       {
         "accountId": "123456",
         "containerId": "789012",
-        "tagId": "23",
-        "name": "Google Ads - Conversion - Careers Form",
-        "type": "awct",
+        "tagId": "27",
+        "name": "GA4 - Configuration",
+        "type": "gaawc",
         "parameter": [
           {
             "type": "TEMPLATE",
-            "key": "conversionId",
-            "value": "{{Google Ads Conversion ID}}"
-          },
-          {
-            "type": "TEMPLATE",
-            "key": "conversionLabel",
-            "value": "{{Label - Careers Form}}"
+            "key": "measurementId",
+            "value": "{{GA4 Measurement ID}}"
           },
           {
             "type": "BOOLEAN",
-            "key": "remarketing_only",
-            "value": "false"
+            "key": "sendPageView",
+            "value": "true"
           }
         ],
-        "firingTriggerId": ["15"],
-        "parentFolderId": "2"
+        "firingTriggerId": ["16"],
+        "parentFolderId": "5"
       },
       {
         "accountId": "123456",
         "containerId": "789012",
-        "tagId": "24",
-        "name": "Google Ads - Conversion - WhatsApp Click",
-        "type": "awct",
+        "tagId": "28",
+        "name": "GA4 - Event - generate_lead (Request Quote)",
+        "type": "gaawe",
         "parameter": [
           {
             "type": "TEMPLATE",
-            "key": "conversionId",
-            "value": "{{Google Ads Conversion ID}}"
+            "key": "measurementIdOverride",
+            "value": "{{GA4 Measurement ID}}"
           },
           {
             "type": "TEMPLATE",
-            "key": "conversionLabel",
-            "value": "{{Label - WhatsApp Click}}"
+            "key": "eventName",
+            "value": "generate_lead"
           },
           {
-            "type": "BOOLEAN",
-            "key": "remarketing_only",
-            "value": "false"
+            "type": "LIST",
+            "key": "eventParameters",
+            "list": [
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "lead_source"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "request_quote_form"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "method"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "website_form"
+                  }
+                ]
+              }
+            ]
           }
         ],
-        "firingTriggerId": ["12"],
-        "parentFolderId": "2"
-      },
-      {
-        "accountId": "123456",
-        "containerId": "789012",
-        "tagId": "25",
-        "name": "Google Ads - Conversion - Phone Click",
-        "type": "awct",
-        "parameter": [
-          {
-            "type": "TEMPLATE",
-            "key": "conversionId",
-            "value": "{{Google Ads Conversion ID}}"
-          },
-          {
-            "type": "TEMPLATE",
-            "key": "conversionLabel",
-            "value": "{{Label - Phone Click}}"
-          },
-          {
-            "type": "BOOLEAN",
-            "key": "remarketing_only",
-            "value": "false"
-          }
-        ],
-        "firingTriggerId": ["13"],
-        "parentFolderId": "2"
-      },
-      {
-        "accountId": "123456",
-        "containerId": "789012",
-        "tagId": "26",
-        "name": "Google Ads - Conversion - Email Click",
-        "type": "awct",
-        "parameter": [
-          {
-            "type": "TEMPLATE",
-            "key": "conversionId",
-            "value": "{{Google Ads Conversion ID}}"
-          },
-          {
-            "type": "TEMPLATE",
-            "key": "conversionLabel",
-            "value": "{{Label - Email Click}}"
-          },
-          {
-            "type": "BOOLEAN",
-            "key": "remarketing_only",
-            "value": "false"
-          }
-        ],
-        "firingTriggerId": ["14"],
-        "parentFolderId": "2"
+        "firingTriggerId": ["10"],
+        "parentFolderId": "5"
       }
     ]
   }

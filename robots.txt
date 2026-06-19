@@ -1,8 +1,15 @@
 User-agent: Googlebot
 Allow: /
+Allow: /assets/
+Allow: /img/
+Allow: /favicon.ico
+Allow: /apple-touch-icon.png
 
 User-agent: Bingbot
 Allow: /
+Allow: /assets/
+Allow: /img/
+Allow: /favicon.ico
 
 User-agent: *
 Disallow: /admin/
@@ -10,6 +17,8 @@ Disallow: /dashboard/
 Disallow: /private/
 Disallow: /login/
 Disallow: /uploads/
+Allow: /assets/
+Allow: /img/
 Allow: /
 
 # Sitemap
