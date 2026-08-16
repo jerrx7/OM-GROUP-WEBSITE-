@@ -1172,6 +1172,12 @@ footer{background:var(--bone);color:var(--ink);padding:72px 0 36px;border-top:1p
   font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;
   padding:6px 10px;border:1px solid var(--accent-line);color:var(--accent);
 }
+.ps-item-link{
+  display:inline-flex;align-items:center;gap:6px;margin-top:14px;
+  font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;
+  color:var(--accent);transition:gap .2s;
+}
+.ps-item-link:hover{gap:10px}
 
 /* RMC grade plate variant */
 .ps-grade{
@@ -1781,6 +1787,7 @@ ESTD. GOA, INDIA ·</span>
             </ul>
             <div class="ps-apps"><b>Applications</b>RCC structures · Residential · Commercial · Concrete blocks · Precast · Flooring</div>
             <div class="ps-badges"><span class="ps-badge">RCC Grade</span><span class="ps-badge">Low Absorption</span><span class="ps-badge">High Strength</span></div>
+            <a href="/products/10mm-aggregate" class="ps-item-link">View Full Details <span>→</span></a>
           </div>
         </div>
         <div class="ps-item">
@@ -2840,6 +2847,27 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
       closeModal();
     }
   });
+
+  // Pre-fill and auto-open from a product page CTA, e.g. /?category=Stone%20Aggregates&subcategory=10MM#contact
+  (function prefillFromQueryParams() {
+    const params = new URLSearchParams(window.location.search);
+    const category = params.get('category');
+    const subcategory = params.get('subcategory');
+    if (!category) return;
+
+    const categoryOption = Array.from(categorySelect.options).find(o => o.value === category);
+    if (!categoryOption) return;
+
+    categorySelect.value = category;
+    categorySelect.dispatchEvent(new Event('change'));
+
+    if (subcategory) {
+      const subcategoryOption = Array.from(subcategorySelect.options).find(o => o.value === subcategory);
+      if (subcategoryOption) subcategorySelect.value = subcategory;
+    }
+
+    openModal();
+  })();
 
   function validateField(inputEl) {
     const group = inputEl.closest('.q-form-group');

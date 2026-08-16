@@ -39,4 +39,14 @@
       <image:title>Wet Mix Macadam (WMM) — Road Base Material, OM Group Goa</image:title>
     </image:image>
   </url>
+  <url>
+    <loc>https://www.omgroupco.com/products/10mm-aggregate</loc>
+    <lastmod>2026-08-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.omgroupco.com/img/products/agg-10mm.png</image:loc>
+      <image:title>10mm Crushed Stone Aggregate — OM Group Goa</image:title>
+    </image:image>
+  </url>
 </urlset>
