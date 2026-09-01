@@ -66,7 +66,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       "name": "OM Group",
       "alternateName": "OM Group of Companies",
       "description": "OM Group is a Goa-based conglomerate of ten companies delivering crushed stone aggregates, ready-mix concrete, M-Sand, P-Sand, GSB, WMM, and heavy machinery logistics across Goa, Maharashtra and Karnataka.",
-      "url": "https://www.omgroupco.com",
+      "url": "https://www.omgroupco.com/",
       "logo": {
         "@type": "ImageObject",
         "@id": "https://www.omgroupco.com/#logo",
@@ -128,7 +128,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       "image": {
         "@id": "https://www.omgroupco.com/#logo"
       },
-      "url": "https://www.omgroupco.com",
+      "url": "https://www.omgroupco.com/",
       "telephone": ["+919049629684", "+918788732881"],
       "email": "info@omgroupco.com",
       "address": {
@@ -201,7 +201,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             "itemOffered": {
               "@type": "Service",
               "name": "Ready Mix Concrete (RMC)",
-              "description": "High-performance RMC grades M20 to M40 batched at our Kundaim and Thivim plants and delivered on-site with modern transit mixers."
+              "description": "RMC grades M20 to M45, with high-strength grades such as M60 on request, batched at our Kundaim and Thivim plants and delivered on-site with modern transit mixers."
             }
           },
           {
@@ -218,7 +218,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     {
       "@type": "WebSite",
       "@id": "https://www.omgroupco.com/#website",
-      "url": "https://www.omgroupco.com",
+      "url": "https://www.omgroupco.com/",
       "name": "OM Group",
       "description": "Official website of OM Group — Construction Materials Supplier in Goa. Supplying crushed stone aggregates, RMC, sand, GSB and WMM across Goa, Maharashtra and Karnataka.",
       "publisher": {
@@ -713,7 +713,7 @@ body.dark .sec-ink{background:var(--bone-2);color:var(--ink)}
 .pcard h4{font-family:var(--serif);font-size:24px;font-weight:500;color:var(--ink);line-height:1.2}
 .pcard p{font-size:14px;color:var(--grey);line-height:1.6}
 
-.facilities{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:96px}
+.facilities{display:grid;grid-template-columns:1fr 1fr 1fr;gap:48px;margin-top:96px}
 .facility{
   background:var(--white);border:1px solid var(--line);padding:56px 48px;
   display:flex;flex-direction:column;position:relative;
@@ -1186,6 +1186,12 @@ footer{background:var(--bone);color:var(--ink);padding:72px 0 36px;border-top:1p
   transition:border-color .4s ease, transform .4s ease, box-shadow .4s ease;
 }
 .ps-grade:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:0 24px 50px -32px rgba(241,90,41,.3)}
+.ps-grade-img{
+  height:108px;padding:12px 18px 0;
+  display:flex;align-items:flex-end;justify-content:center;
+  background:var(--white);overflow:hidden;
+}
+.ps-grade-img img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;display:block}
 .ps-grade-plate{
   position:relative;padding:36px 26px 26px;
   background:var(--white);border-bottom:1px solid var(--line-soft);
@@ -1393,6 +1399,35 @@ footer{background:var(--bone);color:var(--ink);padding:72px 0 36px;border-top:1p
 }
 #submitQuoteBtn {
   min-width: 150px;
+}
+
+/* ===== RMC Plant Selector Modal ===== */
+#rmcPlantModal .q-modal-container{max-width:600px}
+#rmcPlantModal .q-modal-header{align-items:flex-start}
+.plant-modal-sub{font-size:13.5px;color:var(--grey);margin-top:4px}
+.plant-select-list{display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:8px;border-radius:2px;overflow:hidden}
+.plant-select-row{
+  display:flex;align-items:center;gap:20px;background:var(--white);
+  padding:20px 22px;transition:background .25s ease,transform .3s cubic-bezier(.16,1,.3,1);
+  text-decoration:none;
+}
+.plant-select-row:hover{background:var(--bone)}
+.plant-select-row:focus-visible{background:var(--bone);outline:2px solid var(--accent);outline-offset:-2px}
+.psr-num{font-family:var(--serif);font-size:22px;font-style:italic;color:var(--accent);flex-shrink:0;width:28px}
+.psr-body{flex:1;display:flex;flex-direction:column;gap:2px;min-width:0}
+.psr-name{font-size:15.5px;font-weight:700;color:var(--ink)}
+.psr-loc{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--grey-2);font-weight:600}
+.psr-desc{font-size:13px;color:var(--grey);margin-top:2px;line-height:1.5}
+.psr-cta{
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--accent);
+  display:flex;align-items:center;gap:6px;flex-shrink:0;transition:transform .3s cubic-bezier(.16,1,.3,1);
+  white-space:nowrap;
+}
+.plant-select-row:hover .psr-cta .btn-arrow,.plant-select-row:focus-visible .psr-cta .btn-arrow{transform:translateX(4px)}
+.psr-cta .btn-arrow{display:inline-block;transition:transform .3s cubic-bezier(.16,1,.3,1)}
+@media (max-width:640px){
+  .plant-select-row{flex-wrap:wrap;gap:10px 20px;padding:18px}
+  .psr-cta{width:100%;justify-content:flex-end}
 }
 .q-success-container {
   text-align: center;
@@ -1608,7 +1643,7 @@ ESTD. GOA, INDIA ·</span>
   <div class="container hero-stats fade-up d4">
     <div class="stats-row">
       <div class="stat"><div class="stat-num"><span class="count" data-to="10" style="text-align: center">10</span><span class="plus">+</span></div><div class="stat-divider"></div><div class="stat-label">Associate Companies</div></div>
-      <div class="stat"><div class="stat-num serif" style="font-style: italic; font-size: 45px">Tri-Locations</div><div class="stat-divider"></div><div class="stat-label">RMC Batching Plants</div></div>
+      <div class="stat"><div class="stat-num serif" style="font-style: italic; font-size: 45px">Two Locations</div><div class="stat-divider"></div><div class="stat-label">RMC Batching Plants</div></div>
       <div class="stat"><div class="stat-num serif" style="font-style: italic; font-size: 45px">Multiple</div><div class="stat-divider"></div><div class="stat-label">Strategic Locations</div></div>
       <div class="stat"><div class="stat-num serif" style="font-style: italic; font-size: 45px">All&nbsp;of&nbsp;Goa</div><div class="stat-divider"></div><div class="stat-label">Service Reach</div></div>
     </div>
@@ -1636,7 +1671,7 @@ ESTD. GOA, INDIA ·</span>
     </div>
     <div class="about-stats fade-up d2">
       <div class="col"><div class="num">10</div><div class="lab">Associate Companies</div><div class="desc">A diversified portfolio across aggregates, concrete and heavy machinery.</div></div>
-      <div class="col"><div class="num text">Tri-Locations</div><div class="lab">RMC Batching Plants</div><div class="desc">Modern facilities at Kundaim and Thivim with UltraTech Cement supply.</div></div>
+      <div class="col"><div class="num text">Two Locations</div><div class="lab">RMC Batching Plants</div><div class="desc">Modern facilities at Kundaim and Thivim with UltraTech Cement supply.</div></div>
       <div class="col"><div class="num">∞</div><div class="lab">Pan-Goa Reach</div><div class="desc">From Pernem to Canacona — North and South Goa, served end-to-end.</div></div>
     </div>
   </div>
@@ -1680,6 +1715,7 @@ ESTD. GOA, INDIA ·</span>
         <p>Owner-operated fleet of JCBs, transit mixers, tippers and earth-moving equipment available for project leasing and turnkey site operations.</p>
         <ul><li>JCB excavators &amp; backhoe loaders</li><li>Transit mixers &amp; tippers</li><li>Operations across Kundaim, Thivim &amp; Sancoale</li></ul>
         <div class="bigcard-foot"><div><div class="label">Coverage</div><div class="value">North &amp; South Goa</div></div><div><div class="label">Model</div><div class="value">Lease + Crew</div></div></div>
+        <div style="margin-top:16px"><a href="/infrastructure/fleet-logistics" style="color:var(--accent);font-weight:600;font-size:13px">Explore Fleet &amp; Logistics →</a></div>
       </article>
     </div></section>
 
@@ -1769,6 +1805,7 @@ ESTD. GOA, INDIA ·</span>
             </ul>
             <div class="ps-apps"><b>Applications</b>Paver blocks · Interlocking tiles · Drainage systems · Lightweight RCC · Sidewalks</div>
             <div class="ps-badges"><span class="ps-badge">IS Compliant</span><span class="ps-badge">Machine Crushed</span><span class="ps-badge">High Drainage</span></div>
+            <a href="/products/6mm-aggregate" class="ps-item-link">View Full Details <span>→</span></a>
           </div>
         </div>
         <div class="ps-item">
@@ -1806,6 +1843,7 @@ ESTD. GOA, INDIA ·</span>
             </ul>
             <div class="ps-apps"><b>Applications</b>Bridges · Flyovers · Highways · Industrial foundations · High-rises · Heavy RCC</div>
             <div class="ps-badges"><span class="ps-badge">Structural Grade</span><span class="ps-badge">Heavy Load</span><span class="ps-badge">Highway Ready</span></div>
+            <a href="/products/20mm-aggregate" class="ps-item-link">View Full Details <span>→</span></a>
           </div>
         </div>
         <div class="ps-item">
@@ -1823,6 +1861,45 @@ ESTD. GOA, INDIA ·</span>
             </ul>
             <div class="ps-apps"><b>Applications</b>RCC slabs · Columns · Beams · Commercial concrete</div>
             <div class="ps-badges"><span class="ps-badge">RCC Grade</span><span class="ps-badge">VSI Processed</span></div>
+            <a href="/products/12mm-aggregate" class="ps-item-link">View Full Details <span>→</span></a>
+          </div>
+        </div>
+        <div class="ps-item">
+          <div class="ps-item-img"><img src="img/products/agg-40mm.png" alt="40mm Crushed Stone Aggregate — heavy-duty grade for foundations, mass concrete and infrastructure" width="400" height="400" loading="lazy"/></div>
+          <div class="ps-item-body">
+            <span class="ps-item-tag">Grade · 40mm</span>
+            <h4 class="ps-item-name">40mm Aggregates</h4>
+            <p class="ps-item-desc">Large-size crushed aggregate engineered for heavy-duty concrete, foundations, drainage and infrastructure applications.</p>
+            <ul class="ps-specs">
+              <li><span>Size Range</span><b>32 – 40 mm</b></li>
+              <li><span>Shape</span><b>Angular / Coarse</b></li>
+              <li><span>Crushing</span><b>Machine Crushed</b></li>
+              <li><span>Strength</span><b>High</b></li>
+              <li><span>Load Capacity</span><b>Heavy-Duty</b></li>
+              <li><span>RCC Use</span><b>Heavy Structural / Mass Concrete</b></li>
+            </ul>
+            <div class="ps-apps"><b>Applications</b>Heavy foundations · Mass concrete · Large RCC works · Drainage layers · Infrastructure works</div>
+            <div class="ps-badges"><span class="ps-badge">Heavy Duty</span><span class="ps-badge">Large Aggregate</span><span class="ps-badge">Infrastructure</span></div>
+            <a href="/products/40mm-aggregate" class="ps-item-link">View Full Details <span>→</span></a>
+          </div>
+        </div>
+        <div class="ps-item">
+          <div class="ps-item-img"><img src="img/products/agg-60mm.png" alt="60mm Crushed Stone Aggregate — large-size grade for mass concrete, drainage and heavy infrastructure" width="400" height="400" loading="lazy"/></div>
+          <div class="ps-item-body">
+            <span class="ps-item-tag">Grade · 60mm</span>
+            <h4 class="ps-item-name">60mm Aggregates</h4>
+            <p class="ps-item-desc">Large-size crushed stone aggregate for heavy-duty infrastructure, drainage, mass concrete and specialised construction applications.</p>
+            <ul class="ps-specs">
+              <li><span>Size Range</span><b>50 – 60 mm</b></li>
+              <li><span>Shape</span><b>Angular / Coarse</b></li>
+              <li><span>Crushing</span><b>Machine Crushed</b></li>
+              <li><span>Strength</span><b>Very High</b></li>
+              <li><span>Load Capacity</span><b>Very High</b></li>
+              <li><span>RCC Use</span><b>Mass Concrete / Infrastructure</b></li>
+            </ul>
+            <div class="ps-apps"><b>Applications</b>Mass concrete · Heavy foundations · Drainage works · Infrastructure · Large-scale construction</div>
+            <div class="ps-badges"><span class="ps-badge">Heavy Duty</span><span class="ps-badge">Large Size</span><span class="ps-badge">Infrastructure</span></div>
+            <a href="/products/60mm-aggregate" class="ps-item-link">View Full Details <span>→</span></a>
           </div>
         </div>
       </div>
@@ -1837,22 +1914,22 @@ ESTD. GOA, INDIA ·</span>
         </div>
         <p class="ph-meta">Premium manufactured and washed sand produced through advanced crushing and screening — optimised for concrete, plaster and masonry applications.</p>
       </div>
-      <div class="ps-items cols-4">
+      <div class="ps-items cols-5">
         <div class="ps-item">
-          <div class="ps-item-img"><img src="img/products/m-sand.png" alt="Manufactured Sand (M-Sand) — IS 383 compliant, Zone II, for structural concrete and RCC" width="400" height="400" loading="lazy"/></div>
+          <div class="ps-item-img"><img src="img/products/m-sand.png" alt="Manufactured Sand (M-Sand) — fine aggregate for structural concrete and RCC" width="400" height="400" loading="lazy"/></div>
           <div class="ps-item-body">
             <span class="ps-item-tag">Type · M-Sand</span>
             <h4 class="ps-item-name">Manufactured Sand</h4>
-            <p class="ps-item-desc">Premium manufactured sand produced through advanced crushing and grading technology for superior concrete performance.</p>
+            <p class="ps-item-desc">Manufactured sand graded as fine aggregate for concrete, RCC and masonry. Current grading information available on request.</p>
             <ul class="ps-specs">
-              <li><span>Grading Zone</span><b>Zone II</b></li>
-              <li><span>IS Standard</span><b>IS 383</b></li>
-              <li><span>Particle Shape</span><b>Cubical</b></li>
-              <li><span>Silt Content</span><b>Low</b></li>
-              <li><span>Concrete Use</span><b>Excellent</b></li>
+              <li><span>Category</span><b>Fine Aggregate</b></li>
+              <li><span>Particle Size</span><b>Passing 4.75mm</b></li>
+              <li><span>Standard</span><b>IS 383:2016</b></li>
+              <li><span>Grading</span><b>Zones I–IV, on request</b></li>
             </ul>
             <div class="ps-apps"><b>Applications</b>RCC concrete · High-rise · Commercial · Structural · Infrastructure</div>
-            <div class="ps-badges"><span class="ps-badge">IS 383</span><span class="ps-badge">Concrete Grade</span><span class="ps-badge">Low Silt</span></div>
+            <div class="ps-badges"><span class="ps-badge">IS 383:2016</span><span class="ps-badge">Fine Aggregate</span></div>
+            <a href="/products/m-sand" class="ps-item-link">View Full Details <span>→</span></a>
           </div>
         </div>
         <div class="ps-item">
@@ -1872,19 +1949,19 @@ ESTD. GOA, INDIA ·</span>
           </div>
         </div>
         <div class="ps-item">
-          <div class="ps-item-img"><img src="img/products/p-sand.png" alt="Plaster Sand (P-Sand) — ultra-fine, low silt, for smooth internal and external wall plastering" width="400" height="400" loading="lazy"/></div>
+          <div class="ps-item-img"><img src="img/products/p-sand.png" alt="Plaster Sand (P-Sand) — manufactured by OM Group for internal and external wall plastering" width="400" height="400" loading="lazy"/></div>
           <div class="ps-item-body">
             <span class="ps-item-tag">Type · P-Sand</span>
             <h4 class="ps-item-name">Plaster Sand</h4>
-            <p class="ps-item-desc">Ultra-fine plastering sand engineered for smooth wall finishes and superior workability.</p>
+            <p class="ps-item-desc">Manufactured and supplied by OM Group, classified for plastering applications. Current grading information available on request.</p>
             <ul class="ps-specs">
-              <li><span>Texture</span><b>Fine</b></li>
-              <li><span>Silt Content</span><b>Very Low</b></li>
-              <li><span>Finish Quality</span><b>Smooth</b></li>
-              <li><span>Plaster Use</span><b>Excellent</b></li>
+              <li><span>Category</span><b>Plaster-Grade Fine Aggregate</b></li>
+              <li><span>Standard</span><b>IS 1542:1992</b></li>
+              <li><span>Grading</span><b>On request</b></li>
             </ul>
-            <div class="ps-apps"><b>Applications</b>Internal plastering · External walls · Decorative · Premium finishes</div>
-            <div class="ps-badges"><span class="ps-badge">Fine Texture</span><span class="ps-badge">Smooth Finish</span><span class="ps-badge">Wall Grade</span></div>
+            <div class="ps-apps"><b>Applications</b>Internal plastering · External walls · Ceiling plaster · Rendering</div>
+            <div class="ps-badges"><span class="ps-badge">IS 1542:1992</span><span class="ps-badge">Manufactured by OM Group</span></div>
+            <a href="/products/plaster-sand" class="ps-item-link">View Full Details <span>→</span></a>
           </div>
         </div>
         <div class="ps-item">
@@ -1901,6 +1978,25 @@ ESTD. GOA, INDIA ·</span>
             </ul>
             <div class="ps-apps"><b>Applications</b>Structural concrete · RCC batching · Industrial flooring · Foundations</div>
             <div class="ps-badges"><span class="ps-badge">Structural Use</span><span class="ps-badge">High Strength</span><span class="ps-badge">RCC Compatible</span></div>
+            <a href="/products/concrete-sand" class="ps-item-link">View Full Details <span>→</span></a>
+          </div>
+        </div>
+        <div class="ps-item">
+          <div class="ps-item-img"><img src="img/products/river-sand.png" alt="River Sand — naturally sourced fine aggregate for masonry, plastering and general construction" width="400" height="400" loading="lazy"/></div>
+          <div class="ps-item-body">
+            <span class="ps-item-tag">Type · River</span>
+            <h4 class="ps-item-name">River Sand</h4>
+            <p class="ps-item-desc">Naturally sourced fine aggregate selected for masonry, plastering and general construction applications. Clean, fine-grained material with consistent texture and grading, subject to project requirements.</p>
+            <ul class="ps-specs">
+              <li><span>Category</span><b>Natural Fine Aggregate</b></li>
+              <li><span>Particle Size</span><b>Fine</b></li>
+              <li><span>Texture</span><b>Natural &amp; Fine</b></li>
+              <li><span>Purity</span><b>Clean Grade</b></li>
+              <li><span>Grading</span><b>Available as Required</b></li>
+            </ul>
+            <div class="ps-apps"><b>Applications</b>Masonry · Plastering · RCC Concrete · General Construction</div>
+            <div class="ps-badges"><span class="ps-badge">Natural Sand</span><span class="ps-badge">Fine Aggregate</span><span class="ps-badge">Construction Grade</span></div>
+            <a href="/products/river-sand" class="ps-item-link">View Full Details <span>→</span></a>
           </div>
         </div>
       </div>
@@ -1913,10 +2009,11 @@ ESTD. GOA, INDIA ·</span>
           <span class="ph-eyebrow">Division · Ready-Mix Concrete</span>
           <h3>High-performance grades, <em>batched and delivered.</em></h3>
         </div>
-        <p class="ph-meta">Produced at our Sabsol Qualitech plants with UltraTech Cement and delivered through an owned transit-mixer fleet across Goa.</p>
+        <p class="ph-meta">Produced at our Sabsol Qualitech plants with UltraTech Cement and delivered through an owned transit-mixer fleet across Goa. <a href="/products/ready-mix-concrete" style="color:var(--accent);font-weight:600">View full RMC grade guide →</a></p>
       </div>
-      <div class="ps-items cols-5">
+      <div class="ps-items cols-4">
         <div class="ps-grade">
+          <div class="ps-grade-img"><img src="/img/products/om-group-rmc-m20-transparent.png" alt="M20 Ready Mix Concrete" width="1000" height="581" loading="lazy" decoding="async"/></div>
           <div class="ps-grade-plate">
             <div class="ps-grade-name">M20<em>MPa</em></div>
             <div class="ps-grade-strength">Compressive <b>20 MPa</b></div>
@@ -1930,9 +2027,11 @@ ESTD. GOA, INDIA ·</span>
             </ul>
             <div class="ps-apps"><b>Use</b>Residential · Slabs · Footings · Beams · Columns</div>
             <div class="ps-badges"><span class="ps-badge">RCC Grade</span><span class="ps-badge">Residential</span></div>
+            <a href="/products/ready-mix-concrete#m20" class="ps-item-link">View M20 Grade →</a>
           </div>
         </div>
         <div class="ps-grade">
+          <div class="ps-grade-img"><img src="/img/products/om-group-rmc-m25-transparent.png" alt="M25 Ready Mix Concrete" width="1000" height="549" loading="lazy" decoding="async"/></div>
           <div class="ps-grade-plate">
             <div class="ps-grade-name">M25<em>MPa</em></div>
             <div class="ps-grade-strength">Compressive <b>25 MPa</b></div>
@@ -1946,9 +2045,11 @@ ESTD. GOA, INDIA ·</span>
             </ul>
             <div class="ps-apps"><b>Use</b>Commercial · Mid-rise · Structural RCC · Infrastructure</div>
             <div class="ps-badges"><span class="ps-badge">Commercial</span><span class="ps-badge">High Durability</span></div>
+            <a href="/products/ready-mix-concrete#m25" class="ps-item-link">View M25 Grade →</a>
           </div>
         </div>
         <div class="ps-grade">
+          <div class="ps-grade-img"><img src="/img/products/om-group-rmc-m30-transparent.png" alt="M30 Ready Mix Concrete" width="1000" height="598" loading="lazy" decoding="async"/></div>
           <div class="ps-grade-plate">
             <div class="ps-grade-name">M30<em>MPa</em></div>
             <div class="ps-grade-strength">Compressive <b>30 MPa</b></div>
@@ -1962,9 +2063,11 @@ ESTD. GOA, INDIA ·</span>
             </ul>
             <div class="ps-apps"><b>Use</b>High-rise · Industrial foundations · Large commercial · Infrastructure</div>
             <div class="ps-badges"><span class="ps-badge">Infrastructure</span><span class="ps-badge">Industrial Use</span></div>
+            <a href="/products/ready-mix-concrete#m30" class="ps-item-link">View M30 Grade →</a>
           </div>
         </div>
         <div class="ps-grade">
+          <div class="ps-grade-img"><img src="/img/products/om-group-rmc-m35-transparent.png" alt="M35 Ready Mix Concrete" width="1000" height="535" loading="lazy" decoding="async"/></div>
           <div class="ps-grade-plate">
             <div class="ps-grade-name">M35<em>MPa</em></div>
             <div class="ps-grade-strength">Compressive <b>35 MPa</b></div>
@@ -1978,9 +2081,11 @@ ESTD. GOA, INDIA ·</span>
             </ul>
             <div class="ps-apps"><b>Use</b>Bridges · Flyovers · Industrial · Commercial towers</div>
             <div class="ps-badges"><span class="ps-badge">Heavy Duty</span><span class="ps-badge">Bridge Grade</span></div>
+            <a href="/products/ready-mix-concrete#m35" class="ps-item-link">View M35 Grade →</a>
           </div>
         </div>
         <div class="ps-grade">
+          <div class="ps-grade-img"><img src="/img/products/om-group-rmc-m40-transparent.png" alt="M40 Ready Mix Concrete" width="1000" height="586" loading="lazy" decoding="async"/></div>
           <div class="ps-grade-plate">
             <div class="ps-grade-name">M40<em>MPa</em></div>
             <div class="ps-grade-strength">Compressive <b>40 MPa</b></div>
@@ -1994,6 +2099,33 @@ ESTD. GOA, INDIA ·</span>
             </ul>
             <div class="ps-apps"><b>Use</b>Mega infrastructure · High-load foundations · Bridges · Industrial mega projects</div>
             <div class="ps-badges"><span class="ps-badge">Premium Grade</span><span class="ps-badge">Extreme</span></div>
+            <a href="/products/ready-mix-concrete#m40" class="ps-item-link">View M40 Grade →</a>
+          </div>
+        </div>
+        <div class="ps-grade">
+          <div class="ps-grade-img"><img src="/img/products/om-group-rmc-m45-transparent.png" alt="M45 Ready Mix Concrete" width="1000" height="535" loading="lazy" decoding="async"/></div>
+          <div class="ps-grade-plate">
+            <div class="ps-grade-name">M45<em>MPa</em></div>
+            <div class="ps-grade-strength">Compressive <b>45 MPa</b></div>
+          </div>
+          <div class="ps-grade-body">
+            <p class="ps-item-desc">Standard-concrete grade toward the upper end of the range, for demanding commercial and industrial structures.</p>
+            <div class="ps-apps"><b>Use</b>Demanding commercial · Industrial · Special RCC work</div>
+            <div class="ps-badges"><span class="ps-badge">Design Mix</span><span class="ps-badge">On Request</span></div>
+            <a href="/products/ready-mix-concrete#m45" class="ps-item-link">View M45 Grade →</a>
+          </div>
+        </div>
+        <div class="ps-grade">
+          <div class="ps-grade-img"><img src="/img/products/om-group-rmc-m60-transparent.png" alt="M60 High-Strength Ready Mix Concrete" width="1000" height="592" loading="lazy" decoding="async"/></div>
+          <div class="ps-grade-plate">
+            <div class="ps-grade-name">M60<em>MPa</em></div>
+            <div class="ps-grade-strength">Compressive <b>60 MPa</b></div>
+          </div>
+          <div class="ps-grade-body">
+            <p class="ps-item-desc">High-strength concrete requiring performance-based mix evaluation, supplied on request for specialised applications.</p>
+            <div class="ps-apps"><b>Use</b>Specialised high-strength · Precast · Heavily loaded structures</div>
+            <div class="ps-badges"><span class="ps-badge">High-Strength</span><span class="ps-badge">On Request</span></div>
+            <a href="/products/ready-mix-concrete#m60" class="ps-item-link">Discuss M60 →</a>
           </div>
         </div>
         <div class="ps-chart-card">
@@ -2014,7 +2146,7 @@ ESTD. GOA, INDIA ·</span>
           <span class="ph-eyebrow">Division · GSB, Boulders &amp; Metal</span>
           <h3>Foundational materials for <em>road &amp; heavy works.</em></h3>
         </div>
-        <p class="ph-meta">Robust granular materials, natural boulders and construction metal — engineered for road infrastructure, embankment stability and heavy-duty environments.</p>
+        <p class="ph-meta">Robust granular materials, natural boulders and construction metal — engineered for road infrastructure, embankment stability and heavy-duty environments. <a href="/products/granular-sub-base" style="color:var(--accent);font-weight:600">View full GSB specification guide →</a> &nbsp;|&nbsp; <a href="/products/boulders" style="color:var(--accent);font-weight:600">View full boulder specification guide →</a> &nbsp;|&nbsp; <a href="/products/wmm" style="color:var(--accent);font-weight:600">View full WMM specification guide →</a> &nbsp;|&nbsp; <a href="/products/road-base-material" style="color:var(--accent);font-weight:600">Not sure which road material you need? →</a></p>
       </div>
       <div class="ps-items cols-4">
         <div class="ps-item">
@@ -2031,6 +2163,7 @@ ESTD. GOA, INDIA ·</span>
             </ul>
             <div class="ps-apps"><b>Applications</b>Highway sub-base · Road construction · Pavement layers · Infrastructure foundations</div>
             <div class="ps-badges"><span class="ps-badge">Highway Grade</span><span class="ps-badge">High Compaction</span></div>
+            <a href="/products/granular-sub-base" class="ps-item-link">View Full Details <span>→</span></a>
           </div>
         </div>
         <div class="ps-item">
@@ -2047,6 +2180,7 @@ ESTD. GOA, INDIA ·</span>
             </ul>
             <div class="ps-apps"><b>Applications</b>Retaining walls · River protection · Reinforcement · Landscaping · Marine works</div>
             <div class="ps-badges"><span class="ps-badge">Heavy Duty</span><span class="ps-badge">Natural Stone</span></div>
+            <a href="/products/boulders" class="ps-item-link">View Full Details <span>→</span></a>
           </div>
         </div>
         <div class="ps-item">
@@ -2064,6 +2198,7 @@ ESTD. GOA, INDIA ·</span>
             </ul>
             <div class="ps-apps"><b>Applications</b>National highways · Flexible pavement · Airport roads · Industrial corridors · Smart-city infrastructure</div>
             <div class="ps-badges"><span class="ps-badge">Highway Grade</span><span class="ps-badge">Heavy Load</span><span class="ps-badge">High Compaction</span><span class="ps-badge">Infrastructure Ready</span></div>
+            <a href="/products/wmm" class="ps-item-link">View Full Details <span>→</span></a>
           </div>
         </div>
         <div class="ps-item">
@@ -2079,6 +2214,7 @@ ESTD. GOA, INDIA ·</span>
             </ul>
             <div class="ps-apps"><b>Applications</b>Road foundations · Highway layers · Infrastructure · Pavement systems</div>
             <div class="ps-badges"><span class="ps-badge">Road Infra</span><span class="ps-badge">Base Layer</span></div>
+            <a href="/products/road-base-material" class="ps-item-link">View Full Details <span>→</span></a>
           </div>
         </div>
       </div>
@@ -2116,7 +2252,7 @@ ESTD. GOA, INDIA ·</span>
           <li><span>Cement Partner</span><b>UltraTech Cement</b></li>
           <li><span>Delivery</span><b>Owned Transit Mixers</b></li>
         </ul>
-        <div class="facility-foot"><span style="font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:700">Pan-Goa Coverage</span><button class="btn-light-ghost">Learn More →</button></div>
+        <div class="facility-foot"><span style="font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:700">Pan-Goa Coverage</span><button type="button" class="btn-light-ghost" id="openRmcPlantSelectorBtn" aria-haspopup="dialog" aria-controls="rmcPlantModal">Learn More →</button></div>
       </div>
       <div class="facility fade-up d1">
         <div class="facility-eyebrow">Core Venture · 02</div>
@@ -2126,7 +2262,17 @@ ESTD. GOA, INDIA ·</span>
           <li><span>Output</span><b>Multi-grade Aggregates</b></li>
           <li><span>Source</span><b>In-house Quarrying</b></li>
         </ul>
-        <div class="facility-foot"><span style="font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:700">Specification-Grade</span><button class="btn-light-ghost">Learn More →</button></div>
+        <div class="facility-foot"><span style="font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:700">Specification-Grade</span><a href="/infrastructure/banda-wafoli-vsi-crusher" class="btn-light-ghost" style="text-decoration:none;display:inline-flex;align-items:center">Learn More →</a></div>
+      </div>
+      <div class="facility fade-up d2">
+        <div class="facility-eyebrow">Core Venture · 03</div>
+        <h3>Fleet &amp; Logistics<br/>Across Goa.</h3>
+        <ul class="facility-specs">
+          <li><span>Vehicles</span><b>Trucks, Tippers &amp; JCBs</b></li>
+          <li><span>Coverage</span><b>North &amp; South Goa</b></li>
+          <li><span>Model</span><b>Vehicle Partnership</b></li>
+        </ul>
+        <div class="facility-foot"><span style="font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:700">Fleet Partner Program</span><a href="/infrastructure/fleet-logistics" class="btn-light-ghost" style="text-decoration:none;display:inline-flex;align-items:center">Learn More →</a></div>
       </div>
     </div>
   </div>
@@ -2206,9 +2352,9 @@ ESTD. GOA, INDIA ·</span>
             <span class="ring r2"></span><span class="ring r3"></span><span class="glow"></span>
             <span class="tip"><b>Headquarters</b>Chicalim · Mormugao</span>
           </a>
-          <a class="pm-marker" style="left: 52%; top: 80%; text-align: justify; font-size: 10px; width: 70px; height: 70px; padding: 0px; border-radius: 0px; margin: -20px 700px 700px -35px" tabindex="0" aria-label="South Goa RMC Plant">
+          <a class="pm-marker" style="left: 52%; top: 80%; text-align: justify; font-size: 10px; width: 70px; height: 70px; padding: 0px; border-radius: 0px; margin: -20px 700px 700px -35px" tabindex="0" aria-label="Sancoale Infrastructure Base">
             <span class="ring r2"></span><span class="ring r3"></span><span class="glow"></span>
-            <span class="tip"><b>South Goa</b>RMC Plant · Deployment Base</span>
+            <span class="tip"><b>Sancoale</b>Infrastructure Base · South Goa</span>
           </a>
         </div>
       </div>
@@ -2752,6 +2898,49 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
   </div>
 </div>
 
+<!-- RMC Plant Selector Modal -->
+<div id="rmcPlantModal" class="q-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="rmcPlantModalTitle">
+  <div class="q-modal-overlay" tabindex="-1"></div>
+  <div class="q-modal-container">
+    <div class="q-modal-header">
+      <div>
+        <h3 class="q-modal-title" id="rmcPlantModalTitle">Select an RMC Plant</h3>
+        <p class="plant-modal-sub">Explore OM Group's RMC facilities in Goa.</p>
+      </div>
+      <button type="button" class="q-modal-close" id="closeRmcPlantModalBtn" aria-label="Close plant selector">&times;</button>
+    </div>
+    <div class="plant-select-list" role="list" aria-label="RMC plants">
+      <a href="/infrastructure/kundaim-rmc-plant" class="plant-select-row" role="listitem" data-plant="Kundaim">
+        <span class="psr-num">01</span>
+        <span class="psr-body">
+          <span class="psr-name">Kundaim RMC Plant</span>
+          <span class="psr-loc">Kundaim, Goa</span>
+          <span class="psr-desc">Ready-Mix Concrete manufacturing facility at Kundaim, Goa.</span>
+        </span>
+        <span class="psr-cta">View Plant <span class="btn-arrow">→</span></span>
+      </a>
+      <a href="/infrastructure/thivim-rmc-plant" class="plant-select-row" role="listitem" data-plant="Thivim">
+        <span class="psr-num">02</span>
+        <span class="psr-body">
+          <span class="psr-name">Thivim RMC Plant</span>
+          <span class="psr-loc">Thivim, Goa</span>
+          <span class="psr-desc">Ready-Mix Concrete manufacturing facility at Thivim, Goa.</span>
+        </span>
+        <span class="psr-cta">View Plant <span class="btn-arrow">→</span></span>
+      </a>
+      <a href="/infrastructure/sancoale-rmc-plant" class="plant-select-row" role="listitem" data-plant="Sancoale">
+        <span class="psr-num">03</span>
+        <span class="psr-body">
+          <span class="psr-name">Sancoale — Infrastructure Base</span>
+          <span class="psr-loc">Sancoale, Goa</span>
+          <span class="psr-desc">Strategic aggregate &amp; construction-material supply position in South Goa.</span>
+        </span>
+        <span class="psr-cta">View Details <span class="btn-arrow">→</span></span>
+      </a>
+    </div>
+  </div>
+</div>
+
 <script>
 (function() {
   const modal = document.getElementById('quoteModal');
@@ -2785,9 +2974,9 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
   const subcategoryGroup = document.getElementById('subcategoryGroup');
 
   const subcategories = {
-    "Ready Mix Concrete (RMC)": ["M10", "M15", "M20", "M25", "M30", "M35", "M40", "M45", "M50 & Above"],
+    "Ready Mix Concrete (RMC)": ["M10", "M15", "M20", "M25", "M30", "M35", "M40", "M45", "M50 & Above", "M60"],
     "Sand": ["M-Sand (Manufactured Sand)", "P-Sand (Plastering Sand)", "W-Sand (Wash Sand)", "R-Sand (River Sand)"],
-    "Stone Aggregates": ["6MM", "10MM", "12.5MM", "20MM", "40MM", "Boulders", "GSB (Granular Sub-Base)", "WMM (Wet Mix Macadam)"],
+    "Stone Aggregates": ["6MM", "10MM", "12.5MM", "20MM", "40MM", "60MM", "40MM + 60MM MIX", "Boulders", "GSB (Granular Sub-Base)", "WMM (Wet Mix Macadam)"],
     "Heavy Machinery & Fleet Hire": ["JCB", "Poclain", "Road Roller", "Tippers / Dumpers", "Water Tankers"],
     "Transport & Logistics": ["Dumpers / Tippers", "Trailers", "Truck Wooden Body", "Pickup"]
   };
@@ -2864,6 +3053,12 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
     if (subcategory) {
       const subcategoryOption = Array.from(subcategorySelect.options).find(o => o.value === subcategory);
       if (subcategoryOption) subcategorySelect.value = subcategory;
+    }
+
+    const message = params.get('message');
+    if (message) {
+      const messageField = document.getElementById('message');
+      if (messageField) messageField.value = message;
     }
 
     openModal();
@@ -3236,6 +3431,69 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
       });
     };
     reader.readAsDataURL(file);
+  });
+})();
+</script>
+
+<!-- RMC Plant Selector: open/close, focus trap, analytics -->
+<script>
+(function() {
+  const modal = document.getElementById('rmcPlantModal');
+  const overlay = modal && modal.querySelector('.q-modal-overlay');
+  const closeBtn = document.getElementById('closeRmcPlantModalBtn');
+  const openBtn = document.getElementById('openRmcPlantSelectorBtn');
+  const list = modal && modal.querySelector('.plant-select-list');
+  if (!modal || !overlay || !closeBtn || !openBtn || !list) return;
+
+  let lastFocused = null;
+
+  function getFocusable() {
+    return Array.from(modal.querySelectorAll('a[href], button:not([disabled])'));
+  }
+
+  function openModal(e) {
+    if (e) e.preventDefault();
+    lastFocused = document.activeElement;
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({'event': 'rmc_plant_selector_open'});
+    closeBtn.focus();
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+  }
+
+  openBtn.addEventListener('click', openModal);
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', closeModal);
+
+  window.addEventListener('keydown', function(e) {
+    if (!modal.classList.contains('open')) return;
+    if (e.key === 'Escape') { closeModal(); return; }
+    if (e.key === 'Tab') {
+      const focusable = getFocusable();
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault(); last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault(); first.focus();
+      }
+    }
+  });
+
+  list.addEventListener('click', function(e) {
+    const row = e.target.closest('.plant-select-row');
+    if (!row) return;
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({'event': 'rmc_plant_selected', 'plant_name': row.dataset.plant});
   });
 })();
 </script>

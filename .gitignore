@@ -11,3 +11,6 @@ tweaks-panel.jsx
 
 # Raw / duplicate uploads folder (~100MB+ of duplicates)
 uploads/
+
+# Local tooling (sharp, used by scripts/image-cutout.js)
+node_modules/
