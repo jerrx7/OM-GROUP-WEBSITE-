@@ -316,7 +316,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   border-bottom:1px solid transparent;
 }
 .nav.solid{
-  background:rgba(255,255,255,.92);
+  background:rgba(255,255,255,.90);
   backdrop-filter:saturate(140%) blur(12px);
   -webkit-backdrop-filter:saturate(140%) blur(12px);
   border-bottom:1px solid var(--line-soft);
@@ -1161,6 +1161,8 @@ body.dark .facilities{--fx-halo:rgba(255,255,255,.05)}
   .presence-head{align-items:flex-start;flex-direction:column;gap:28px}
   .presence-stats{flex-wrap:wrap;gap:0}
   .presence-stats .ps .num{font-size:34px}
+  .presence-stats .ps:has(> .num:empty){display:none}
+  .presence-stats .ps:nth-child(2){padding-left:0;border-left:0}
   /* stage shrinks below 1180px: scale the nudge with it (% margins resolve against stage width) */
   .pm-marker{margin:calc(var(--dy,0) * 100% / 1180) 0 0 calc(var(--dx,0) * 100% / 1180)}
 }
@@ -1182,8 +1184,7 @@ body.dark .facilities{--fx-halo:rgba(255,255,255,.05)}
   /* stack the stats; drop the empty spacer .ps that offsets the first one when the row wraps */
   .presence-stats{flex-direction:column;align-items:flex-start;gap:16px}
   .presence-stats .ps:has(> .num:empty){display:none}
-  .presence-stats .ps{padding:0 18px}
-  .presence-stats .ps:first-child{padding-left:0}
+  .presence-stats .ps,.presence-stats .ps:nth-child(2){padding:0 0 0 18px;border-left:1px solid var(--line-soft)}
 }
 
 .clients-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
@@ -1888,7 +1889,33 @@ footer{background:var(--bone);color:var(--ink);padding:72px 0 36px;border-top:1p
   margin-top: 4px;
 }
 #otherPositionGroup { display: none }
+
+/* ============ MOBILE EDITORIAL REVEALS + HERO LABEL (phones only, <=640px) ============ */
+@media(max-width:640px){
+  .hero-eyebrow{display:flex;align-items:flex-start;gap:16px;margin-bottom:30px;font-size:10.5px;letter-spacing:.24em;line-height:1.55}
+  .hero-eyebrow::before{flex:none;margin-top:.78em}
+  .hero-eyebrow-t{display:flex;flex-direction:column;gap:5px;min-width:0}
+  .hero-eyebrow-t i{display:none}
+}
+@media(min-width:641px){.hero-eyebrow-t i{font-style:normal;white-space:pre}}
+@media(prefers-reduced-motion:no-preference){
+  :root{--rv-ease:cubic-bezier(.22,.8,.24,1)}
+  .rv-host.fade-up{opacity:1;transform:none;transition:none}
+  .rv,.rv-w{opacity:0;transform:translate3d(0,24px,0);transition:opacity .9s var(--rv-ease) var(--d,0ms),transform .9s var(--rv-ease) var(--d,0ms)}
+  .rv-w{display:inline-block;transition-duration:1s}
+  .rv-scale{transform:scale(.82);transform-origin:left center}
+  .rv-in .rv,.rv-in .rv-w,.rv.rv-in{opacity:1;transform:none}
+  .rv-l::before,.rv-l-t::before{transform:scaleX(0);transform-origin:left center;transition:transform .8s var(--rv-ease) var(--d,0ms)}
+  .rv-in .rv-l::before,.rv-in .rv-l-t::before{transform:none}
+  .about-quote.rv-v{border-left:0;position:relative}
+  .about-quote.rv-v::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--accent);transform:scaleY(0);transform-origin:top center;transition:transform 1s var(--rv-ease)}
+  .rv-in .about-quote.rv-v::before{transform:none}
+  .about-sig.rv::before{transform:scaleX(0);transform-origin:left center;transition:transform .8s var(--rv-ease) var(--d,0ms)}
+  .rv-in .about-sig.rv::before{transform:none}
+}
 </style>
+<link rel="stylesheet" href="assets/mega-nav.css">
+<link rel="stylesheet" href="/assets/motion.css">
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -1927,10 +1954,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="hero-bg" id="heroBg" style="transform: translate3d(0px, 55.5556px, 0px); background-size: auto; background-position: center bottom"></div>
   <div class="hero-grid"></div>
   <div class="container hero-content">
-    <span class="eyebrow hero-eyebrow fade-up"> INDUSTRIAL CONGLOMERATE .
-ESTD. GOA, INDIA ·</span>
+    <span class="eyebrow hero-eyebrow fade-up"><span class="hero-eyebrow-t"><span>Industrial Conglomerate</span><i aria-hidden="true"> · </i><span>Estd. Goa, India</span></span></span>
     <h1 class="fade-up d1">The Foundation of <em style="color:#F15A29;font-style:italic;font-weight:500">Trust.</em></h1>
-    <p class="hero-sub fade-up d2">A conglomerate of ten companies delivering construction aggregates, ready-mix concrete and heavy machinery — engineered for the projects that shape a state.</p>
+    <p class="hero-sub fade-up d2">A conglomerate of ten companies delivering construction aggregates, ready mix concrete and heavy machinery, engineered to support the projects that shape a state.</p>
     <div class="hero-ctas fade-up d3">
       <a href="#companies" class="btn btn-accent">Explore Our Companies <span class="btn-arrow">→</span></a>
       <a href="#contact" class="btn btn-ghost">Get in Touch</a>
@@ -1951,15 +1977,15 @@ ESTD. GOA, INDIA ·</span>
       </div>
       <div class="about-copy fade-up d1">
         <span class="eyebrow about-eyebrow">About the Group</span>
-        <p style="font-size: 16px; color: rgb(107, 107, 107)">OM Group of Companies is a Goa-rooted conglomerate of ten associate firms operating across construction aggregates trading, ready-mix concrete production, stone crushing, mineral logistics and heavy-equipment leasing.</p>
+        <p style="font-size: 16px; color: rgb(107, 107, 107)">OM Group of Companies is a conglomerate of ten associate firms based in Goa, operating across construction aggregates trading, ready mix concrete production, stone crushing, mineral logistics and heavy equipment leasing.</p>
         <p>Built on a foundation of trust over decades of disciplined execution, our operations span two modern RMC batching plants, a VSI stone crusher, and a managed fleet that keeps Goa's most ambitious projects on schedule.</p>
-        <p>We supply government, infrastructure and private clients with materials produced and delivered to specification — pairing the agility of a local operator with the standards of a national name.</p>
+        <p>We supply government, infrastructure and private clients with materials produced and delivered to specification, pairing the agility of a local operator with the standards of a national name.</p>
       </div>
     </div>
     <div class="about-stats fade-up d2">
       <div class="col"><div class="num">10</div><div class="lab">Associate Companies</div><div class="desc">A diversified portfolio across aggregates, concrete and heavy machinery.</div></div>
       <div class="col"><div class="num text">Tri-Locations</div><div class="lab">RMC Batching Plants</div><div class="desc">Modern facilities at Kundaim and Thivim with UltraTech Cement supply.</div></div>
-      <div class="col"><div class="num">∞</div><div class="lab">Pan-Goa Reach</div><div class="desc">From Pernem to Canacona — North and South Goa, served end-to-end.</div></div>
+      <div class="col"><div class="num">∞</div><div class="lab">Pan Goa Reach</div><div class="desc">From Pernem to Canacona, we serve North and South Goa from start to finish.</div></div>
     </div>
   </div>
 </section>
@@ -1970,15 +1996,15 @@ ESTD. GOA, INDIA ·</span>
       <span class="eyebrow center">Group Structure</span>
       <h2 class="sec-title">The OM Group <span class="it">Ecosystem.</span></h2>
       <span class="sec-rule"></span>
-      <p style="max-width:60ch;color:var(--grey);font-size:16px;line-height:1.65">Ten companies, organised into two complementary divisions — aggregates trading partners that move material across Goa, and core ventures that produce and process it.</p>
+      <p style="max-width:60ch;color:var(--grey);font-size:16px;line-height:1.65">Ten companies, organised into two complementary divisions: aggregates trading partners that move material across Goa, and core ventures that produce and process it.</p>
     </div>
 
     <div class="fade-up"><div class="subgroup-label"><span class="dot"></span>Division 01 · Aggregates Trading<span class="dot"></span></div></div>
 
     <div class="cards-6">
-      <div class="cx-cell fade-up"><article class="ccard" data-company="om-transport"><div class="ccard-logo"><img src="assets/logos/orange/om-transport-v3.webp" alt="OM Transport logo" width="640" height="481" loading="lazy" decoding="async"/></div><div class="ccard-body"><h3 class="ccard-name">OM Transport</h3><p class="ccard-desc">Heavy-haul logistics for aggregates, sand and construction metal across Goa.</p><div class="ccard-foot"><span class="ccard-meta">Trading Partner</span><button type="button" class="ccard-open" aria-haspopup="dialog" aria-expanded="false" aria-label="Explore OM Transport profile">Explore<span class="ccard-cue" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></button></div></div></article></div>
+      <div class="cx-cell fade-up"><article class="ccard" data-company="om-transport"><div class="ccard-logo"><img src="assets/logos/orange/om-transport-v3.webp" alt="OM Transport logo" width="640" height="481" loading="lazy" decoding="async"/></div><div class="ccard-body"><h3 class="ccard-name">OM Transport</h3><p class="ccard-desc">Heavy haul logistics for aggregates, sand and construction metal across Goa.</p><div class="ccard-foot"><span class="ccard-meta">Trading Partner</span><button type="button" class="ccard-open" aria-haspopup="dialog" aria-expanded="false" aria-label="Explore OM Transport profile">Explore<span class="ccard-cue" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></button></div></div></article></div>
       <div class="cx-cell fade-up d1"><article class="ccard" data-company="om-enterprises"><div class="ccard-logo"><img src="assets/logos/orange/om-enterprises.webp" alt="Om Enterprises logo" width="640" height="427" loading="lazy" decoding="async"/></div><div class="ccard-body"><h3 class="ccard-name">Om Enterprises</h3><p class="ccard-desc">Bulk aggregates trading for residential and commercial site supply.</p><div class="ccard-foot"><span class="ccard-meta">Trading Partner</span><button type="button" class="ccard-open" aria-haspopup="dialog" aria-expanded="false" aria-label="Explore Om Enterprises profile">Explore<span class="ccard-cue" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></button></div></div></article></div>
-      <div class="cx-cell fade-up d2"><article class="ccard" data-company="maharudra"><div class="ccard-logo"><img src="assets/logos/orange/maharudra.webp" alt="Maharudra Infrastructure logo" width="640" height="481" loading="lazy" decoding="async"/></div><div class="ccard-body"><h3 class="ccard-name">Maharudra Infrastructure</h3><p class="ccard-desc">Site-grade aggregates and structural fill for infrastructure projects.</p><div class="ccard-foot"><span class="ccard-meta">Trading Partner</span><button type="button" class="ccard-open" aria-haspopup="dialog" aria-expanded="false" aria-label="Explore Maharudra Infrastructure profile">Explore<span class="ccard-cue" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></button></div></div></article></div>
+      <div class="cx-cell fade-up d2"><article class="ccard" data-company="maharudra"><div class="ccard-logo"><img src="assets/logos/orange/maharudra.webp" alt="Maharudra Infrastructure logo" width="640" height="481" loading="lazy" decoding="async"/></div><div class="ccard-body"><h3 class="ccard-name">Maharudra Infrastructure</h3><p class="ccard-desc">Site grade aggregates and structural fill for infrastructure projects.</p><div class="ccard-foot"><span class="ccard-meta">Trading Partner</span><button type="button" class="ccard-open" aria-haspopup="dialog" aria-expanded="false" aria-label="Explore Maharudra Infrastructure profile">Explore<span class="ccard-cue" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></button></div></div></article></div>
       <div class="cx-cell fade-up"><article class="ccard" data-company="swastik"><div class="ccard-logo"><img src="assets/logos/orange/swastik.webp" alt="Swastik Enterprises logo" width="640" height="360" loading="lazy" decoding="async"/></div><div class="ccard-body"><h3 class="ccard-name">Swastik Enterprises</h3><p class="ccard-desc">Sourcing partner for sand, GSB and construction metal across North Goa.</p><div class="ccard-foot"><span class="ccard-meta">Trading Partner</span><button type="button" class="ccard-open" aria-haspopup="dialog" aria-expanded="false" aria-label="Explore Swastik Enterprises profile">Explore<span class="ccard-cue" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></button></div></div></article></div>
       <div class="cx-cell fade-up d1"><article class="ccard" data-company="corestone"><div class="ccard-logo"><img src="assets/logos/orange/corestone.webp" alt="Corestone Solutions logo" width="640" height="214" loading="lazy" decoding="async"/></div><div class="ccard-body"><h3 class="ccard-name">Corestone Solutions</h3><p class="ccard-desc">Specialist supply of crushed stone grades to RCC contractors.</p><div class="ccard-foot"><span class="ccard-meta">Trading Partner</span><button type="button" class="ccard-open" aria-haspopup="dialog" aria-expanded="false" aria-label="Explore Corestone Solutions profile">Explore<span class="ccard-cue" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></button></div></div></article></div>
       <div class="cx-cell fade-up d2"><article class="ccard" data-company="om-minerals"><div class="ccard-logo"><img src="assets/logos/orange/om-minerals.webp" alt="Om Minerals &amp; Logistics logo" width="640" height="427" loading="lazy" decoding="async"/></div><div class="ccard-body"><h3 class="ccard-name">Om Minerals &amp; Logistics</h3><p class="ccard-desc">Mineral sourcing and logistics partner for project supply across Goa.</p><div class="ccard-foot"><span class="ccard-meta">Trading Partner</span><button type="button" class="ccard-open" aria-haspopup="dialog" aria-expanded="false" aria-label="Explore Om Minerals &amp; Logistics profile">Explore<span class="ccard-cue" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></button></div></div></article></div>
@@ -1987,8 +2013,8 @@ ESTD. GOA, INDIA ·</span>
     <div class="fade-up" style="margin-top:96px"><div class="subgroup-label"><span class="dot"></span>Division 02 · Core Ventures<span class="dot"></span></div></div>
 
     <div class="cards-2">
-      <div class="cx-cell fade-up"><article class="ccard ccard--feature" data-company="sabsol-qualitech"><div class="ccard-logo"><img src="assets/logos/orange/sabsol-qualitech-v2.webp" alt="Sabsol Qualitech Industries LLP logo" width="640" height="299" loading="lazy" decoding="async"/></div><div class="ccard-body"><span class="ccard-tag">Manufacturing · RMC + Crushing</span><h3 class="ccard-name">Sabsol Qualitech<br/><span class="it">Industries LLP.</span></h3><p class="ccard-desc">Two modern ready-mix concrete batching plants and a VSI stone crusher delivering specification-grade concrete and aggregates across Goa.</p><div class="ccard-foot"><span class="ccard-meta">Core Venture</span><button type="button" class="ccard-open" aria-haspopup="dialog" aria-expanded="false" aria-label="Explore Sabsol Qualitech Industries LLP profile">Explore<span class="ccard-cue" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></button></div></div></article></div>
-      <div class="cx-cell fade-up d1"><article class="ccard ccard--feature" data-company="sabsol-heavy"><div class="ccard-logo"><img src="assets/logos/orange/sabsol-heavy-v2.webp" alt="Sabsol Heavy Machines LLP logo" width="640" height="210" loading="lazy" decoding="async"/></div><div class="ccard-body"><span class="ccard-tag">Equipment · Leasing &amp; Operations</span><h3 class="ccard-name">Sabsol Heavy Machines<br/><span class="it">LLP.</span></h3><p class="ccard-desc">Owner-operated fleet of JCBs, transit mixers, tippers and earth-moving equipment available for project leasing and turnkey site operations.</p><div class="ccard-foot"><span class="ccard-meta">Core Venture</span><button type="button" class="ccard-open" aria-haspopup="dialog" aria-expanded="false" aria-label="Explore Sabsol Heavy Machines LLP profile">Explore<span class="ccard-cue" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></button></div></div></article></div>
+      <div class="cx-cell fade-up"><article class="ccard ccard--feature" data-company="sabsol-qualitech"><div class="ccard-logo"><img src="assets/logos/orange/sabsol-qualitech-v2.webp" alt="Sabsol Qualitech Industries LLP logo" width="640" height="299" loading="lazy" decoding="async"/></div><div class="ccard-body"><span class="ccard-tag">Manufacturing · RMC + Crushing</span><h3 class="ccard-name">Sabsol Qualitech<br/><span class="it">Industries LLP.</span></h3><p class="ccard-desc">Two modern ready mix concrete batching plants and a VSI stone crusher delivering specification grade concrete and aggregates across Goa.</p><div class="ccard-foot"><span class="ccard-meta">Core Venture</span><button type="button" class="ccard-open" aria-haspopup="dialog" aria-expanded="false" aria-label="Explore Sabsol Qualitech Industries LLP profile">Explore<span class="ccard-cue" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></button></div></div></article></div>
+      <div class="cx-cell fade-up d1"><article class="ccard ccard--feature" data-company="sabsol-heavy"><div class="ccard-logo"><img src="assets/logos/orange/sabsol-heavy-v2.webp" alt="Sabsol Heavy Machines LLP logo" width="640" height="210" loading="lazy" decoding="async"/></div><div class="ccard-body"><span class="ccard-tag">Equipment · Leasing &amp; Operations</span><h3 class="ccard-name">Sabsol Heavy Machines<br/><span class="it">LLP.</span></h3><p class="ccard-desc">Owner operated fleet of JCBs, transit mixers, tippers and earth moving equipment available for project leasing and turnkey site operations.</p><div class="ccard-foot"><span class="ccard-meta">Core Venture</span><button type="button" class="ccard-open" aria-haspopup="dialog" aria-expanded="false" aria-label="Explore Sabsol Heavy Machines LLP profile">Explore<span class="ccard-cue" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></button></div></div></article></div>
     </div>
   </div>
 </section>
@@ -1998,7 +2024,7 @@ ESTD. GOA, INDIA ·</span>
     <div class="sec-head fade-up">
       <span class="eyebrow center">Products &amp; Services</span>
       <h2 class="sec-title">What <span class="it">we deliver.</span></h2>
-      <p class="sec-sub">High-performance construction materials engineered for infrastructure, commercial, industrial, and large-scale development projects.</p>
+      <p class="sec-sub">High performance construction materials for infrastructure, commercial, industrial, and large scale development projects.</p>
       <span class="sec-rule"></span>
     </div>
 
@@ -2009,7 +2035,7 @@ ESTD. GOA, INDIA ·</span>
         </div>
         <div class="ps-card-body">
           <h3>Crushed Stone Aggregates</h3>
-          <p>Precision-graded aggregates engineered for RCC structures, highways, infrastructure, and high-load applications.</p>
+          <p>Precision graded aggregates for RCC structures, highways, infrastructure, and high load applications.</p>
           <div class="ps-card-foot"><span>Explore Grades</span><span class="ps-arrow">→</span></div>
         </div>
       </button>
@@ -2025,11 +2051,11 @@ ESTD. GOA, INDIA ·</span>
       </button>
       <button class="ps-card" type="button" data-cat="rmc" aria-expanded="false">
         <div class="ps-card-media">
-          <img src="assets/concrete.png" alt="Ready-Mix Concrete" width="400" height="400" loading="lazy"/>
+          <img src="assets/concrete.png" alt="Ready Mix Concrete" width="400" height="400" loading="lazy"/>
         </div>
         <div class="ps-card-body">
-          <h3>Ready-Mix Concrete</h3>
-          <p>High-performance ready-mix concrete engineered for structural durability and large-scale infrastructure execution.</p>
+          <h3>Ready Mix Concrete</h3>
+          <p>High performance ready mix concrete for structural durability and large scale infrastructure execution.</p>
           <div class="ps-card-foot"><span>Explore Grades</span><span class="ps-arrow">→</span></div>
         </div>
       </button>
@@ -2039,7 +2065,7 @@ ESTD. GOA, INDIA ·</span>
         </div>
         <div class="ps-card-body">
           <h3>GSB, Boulders &amp; Metal</h3>
-          <p>Robust foundational materials engineered for road infrastructure, embankment stability and heavy-duty construction.</p>
+          <p>Robust foundational materials for road infrastructure, embankment stability and heavy duty construction.</p>
           <div class="ps-card-foot"><span>Explore</span><span class="ps-arrow">→</span></div>
         </div>
       </button>
@@ -2054,19 +2080,19 @@ ESTD. GOA, INDIA ·</span>
       <div class="ps-panel-head">
         <div>
           <span class="ph-eyebrow">Division · Crushed Stone Aggregates</span>
-          <h3>Specification-grade aggregates from <em>VSI processing.</em></h3>
+          <h3>Specification grade aggregates from <em>VSI processing.</em></h3>
         </div>
-        <p class="ph-meta">Multiple sieve grades produced at our Banda Wafoli quarry — engineered for RCC, road base, paver and structural concrete applications across Goa.</p>
+        <p class="ph-meta">Multiple sieve grades produced at our Banda Wafoli quarry for RCC, road base, paver and structural concrete applications across Goa.</p>
       </div>
       <div class="ps-items">
         <div class="ps-item">
-          <div class="ps-item-img"><img src="img/products/agg-6mm.png" alt="6mm Crushed Stone Aggregate — fine grade for paver blocks and lightweight RCC" width="400" height="400" loading="lazy"/></div>
+          <div class="ps-item-img"><img src="img/products/agg-6mm.png" alt="6mm Crushed Stone Aggregate, fine grade for paver blocks and lightweight RCC" width="400" height="400" loading="lazy"/></div>
           <div class="ps-item-body">
             <span class="ps-item-tag">Grade · 6mm</span>
             <h4 class="ps-item-name">6mm Aggregates</h4>
-            <p class="ps-item-desc">Fine-grade crushed aggregates designed for precision concrete, paver blocks and finishing infrastructure works.</p>
+            <p class="ps-item-desc">Fine grade crushed aggregates designed for precision concrete, paver blocks and finishing infrastructure works.</p>
             <ul class="ps-specs">
-              <li><span>Size Range</span><b>4 – 6 mm</b></li>
+              <li><span>Size Range</span><b>4 to 6 mm</b></li>
               <li><span>Shape</span><b>Angular</b></li>
               <li><span>Surface</span><b>Rough Textured</b></li>
               <li><span>Crushing</span><b>Machine Crushed</b></li>
@@ -2079,13 +2105,13 @@ ESTD. GOA, INDIA ·</span>
           </div>
         </div>
         <div class="ps-item">
-          <div class="ps-item-img"><img src="img/products/agg-10mm.png" alt="10mm Crushed Stone Aggregate — VSI processed, for residential and commercial RCC" width="400" height="400" loading="lazy"/></div>
+          <div class="ps-item-img"><img src="img/products/agg-10mm.png" alt="10mm Crushed Stone Aggregate, VSI processed, for residential and commercial RCC" width="400" height="400" loading="lazy"/></div>
           <div class="ps-item-body">
             <span class="ps-item-tag">Grade · 10mm</span>
             <h4 class="ps-item-name">10mm Aggregates</h4>
             <p class="ps-item-desc">Versatile construction aggregate ideal for RCC works, residential construction and commercial concrete applications.</p>
             <ul class="ps-specs">
-              <li><span>Size Range</span><b>8 – 10 mm</b></li>
+              <li><span>Size Range</span><b>8 to 10 mm</b></li>
               <li><span>Shape</span><b>Cubical / Angular</b></li>
               <li><span>Crushing</span><b>VSI Processed</b></li>
               <li><span>Strength</span><b>High</b></li>
@@ -2098,32 +2124,32 @@ ESTD. GOA, INDIA ·</span>
           </div>
         </div>
         <div class="ps-item">
-          <div class="ps-item-img"><img src="img/products/agg-20mm.png" alt="20mm Crushed Stone Aggregate — structural grade for bridges, highways and industrial foundations" width="400" height="400" loading="lazy"/></div>
+          <div class="ps-item-img"><img src="img/products/agg-20mm.png" alt="20mm Crushed Stone Aggregate, structural grade for bridges, highways and industrial foundations" width="400" height="400" loading="lazy"/></div>
           <div class="ps-item-body">
             <span class="ps-item-tag">Grade · 20mm</span>
             <h4 class="ps-item-name">20mm Aggregates</h4>
-            <p class="ps-item-desc">Heavy-duty aggregate engineered for structural concrete, bridges, highways and industrial infrastructure.</p>
+            <p class="ps-item-desc">Heavy duty aggregate for structural concrete, bridges, highways and industrial infrastructure.</p>
             <ul class="ps-specs">
-              <li><span>Size Range</span><b>16 – 20 mm</b></li>
+              <li><span>Size Range</span><b>16 to 20 mm</b></li>
               <li><span>Shape</span><b>Angular</b></li>
               <li><span>Compression</span><b>High</b></li>
-              <li><span>Load Capacity</span><b>Heavy-Duty</b></li>
+              <li><span>Load Capacity</span><b>Heavy Duty</b></li>
               <li><span>RCC Use</span><b>Structural Grade</b></li>
               <li><span>Road Suitability</span><b>Excellent</b></li>
             </ul>
-            <div class="ps-apps"><b>Applications</b>Bridges · Flyovers · Highways · Industrial foundations · High-rises · Heavy RCC</div>
+            <div class="ps-apps"><b>Applications</b>Bridges · Flyovers · Highways · Industrial foundations · High rises · Heavy RCC</div>
             <div class="ps-badges"><span class="ps-badge">Structural Grade</span><span class="ps-badge">Heavy Load</span><span class="ps-badge">Highway Ready</span></div>
             <a href="/products/20mm-aggregate" class="ps-item-link">View Full Details <span>→</span></a>
           </div>
         </div>
         <div class="ps-item">
-          <div class="ps-item-img"><img src="img/products/agg-12mm.png" alt="12.5mm Crushed Stone Aggregate — VSI processed, for general purpose RCC slabs and columns" width="400" height="400" loading="lazy"/></div>
+          <div class="ps-item-img"><img src="img/products/agg-12mm.png" alt="12.5mm Crushed Stone Aggregate, VSI processed, for general purpose RCC slabs and columns" width="400" height="400" loading="lazy"/></div>
           <div class="ps-item-body">
             <span class="ps-item-tag">Grade · 12.5mm</span>
             <h4 class="ps-item-name">12.5mm Aggregates</h4>
-            <p class="ps-item-desc">Mid-range structural aggregate optimised for general RCC, slabs and column concrete.</p>
+            <p class="ps-item-desc">Mid range structural aggregate optimised for general RCC, slabs and column concrete.</p>
             <ul class="ps-specs">
-              <li><span>Size Range</span><b>10 – 12.5 mm</b></li>
+              <li><span>Size Range</span><b>10 to 12.5 mm</b></li>
               <li><span>Shape</span><b>Cubical</b></li>
               <li><span>Crushing</span><b>VSI Processed</b></li>
               <li><span>Strength</span><b>High</b></li>
@@ -2135,17 +2161,17 @@ ESTD. GOA, INDIA ·</span>
           </div>
         </div>
         <div class="ps-item">
-          <div class="ps-item-img"><img src="img/products/agg-40mm.png" alt="40mm Crushed Stone Aggregate — heavy-duty grade for foundations, mass concrete and infrastructure" width="400" height="400" loading="lazy"/></div>
+          <div class="ps-item-img"><img src="img/products/agg-40mm.png" alt="40mm Crushed Stone Aggregate, heavy duty grade for foundations, mass concrete and infrastructure" width="400" height="400" loading="lazy"/></div>
           <div class="ps-item-body">
             <span class="ps-item-tag">Grade · 40mm</span>
             <h4 class="ps-item-name">40mm Aggregates</h4>
-            <p class="ps-item-desc">Large-size crushed aggregate engineered for heavy-duty concrete, foundations, drainage and infrastructure applications.</p>
+            <p class="ps-item-desc">Large size crushed aggregate for heavy duty concrete, foundations, drainage and infrastructure applications.</p>
             <ul class="ps-specs">
-              <li><span>Size Range</span><b>32 – 40 mm</b></li>
+              <li><span>Size Range</span><b>32 to 40 mm</b></li>
               <li><span>Shape</span><b>Angular / Coarse</b></li>
               <li><span>Crushing</span><b>Machine Crushed</b></li>
               <li><span>Strength</span><b>High</b></li>
-              <li><span>Load Capacity</span><b>Heavy-Duty</b></li>
+              <li><span>Load Capacity</span><b>Heavy Duty</b></li>
               <li><span>RCC Use</span><b>Heavy Structural / Mass Concrete</b></li>
             </ul>
             <div class="ps-apps"><b>Applications</b>Heavy foundations · Mass concrete · Large RCC works · Drainage layers · Infrastructure works</div>
@@ -2154,20 +2180,20 @@ ESTD. GOA, INDIA ·</span>
           </div>
         </div>
         <div class="ps-item">
-          <div class="ps-item-img"><img src="img/products/agg-60mm.png" alt="60mm Crushed Stone Aggregate — large-size grade for mass concrete, drainage and heavy infrastructure" width="400" height="400" loading="lazy"/></div>
+          <div class="ps-item-img"><img src="img/products/agg-60mm.png" alt="60mm Crushed Stone Aggregate, large size grade for mass concrete, drainage and heavy infrastructure" width="400" height="400" loading="lazy"/></div>
           <div class="ps-item-body">
             <span class="ps-item-tag">Grade · 60mm</span>
             <h4 class="ps-item-name">60mm Aggregates</h4>
-            <p class="ps-item-desc">Large-size crushed stone aggregate for heavy-duty infrastructure, drainage, mass concrete and specialised construction applications.</p>
+            <p class="ps-item-desc">Large size crushed stone aggregate for heavy duty infrastructure, drainage, mass concrete and specialised construction applications.</p>
             <ul class="ps-specs">
-              <li><span>Size Range</span><b>50 – 60 mm</b></li>
+              <li><span>Size Range</span><b>50 to 60 mm</b></li>
               <li><span>Shape</span><b>Angular / Coarse</b></li>
               <li><span>Crushing</span><b>Machine Crushed</b></li>
               <li><span>Strength</span><b>Very High</b></li>
               <li><span>Load Capacity</span><b>Very High</b></li>
               <li><span>RCC Use</span><b>Mass Concrete / Infrastructure</b></li>
             </ul>
-            <div class="ps-apps"><b>Applications</b>Mass concrete · Heavy foundations · Drainage works · Infrastructure · Large-scale construction</div>
+            <div class="ps-apps"><b>Applications</b>Mass concrete · Heavy foundations · Drainage works · Infrastructure · Large scale construction</div>
             <div class="ps-badges"><span class="ps-badge">Heavy Duty</span><span class="ps-badge">Large Size</span><span class="ps-badge">Infrastructure</span></div>
             <a href="/products/60mm-aggregate" class="ps-item-link">View Full Details <span>→</span></a>
           </div>
@@ -2182,28 +2208,28 @@ ESTD. GOA, INDIA ·</span>
           <span class="ph-eyebrow">Division · Sand &amp; Fines</span>
           <h3>Engineered sand solutions, <em>graded to IS 383.</em></h3>
         </div>
-        <p class="ph-meta">Premium manufactured and washed sand produced through advanced crushing and screening — optimised for concrete, plaster and masonry applications.</p>
+        <p class="ph-meta">Premium manufactured and washed sand produced through advanced crushing and screening, suited to concrete, plaster and masonry applications.</p>
       </div>
       <div class="ps-items cols-5">
         <div class="ps-item">
-          <div class="ps-item-img"><img src="img/products/m-sand.png" alt="Manufactured Sand (M-Sand) — fine aggregate for structural concrete and RCC" width="400" height="400" loading="lazy"/></div>
+          <div class="ps-item-img"><img src="img/products/m-sand.png" alt="Manufactured Sand (M Sand), fine aggregate for structural concrete and RCC" width="400" height="400" loading="lazy"/></div>
           <div class="ps-item-body">
-            <span class="ps-item-tag">Type · M-Sand</span>
+            <span class="ps-item-tag">Type · M Sand</span>
             <h4 class="ps-item-name">Manufactured Sand</h4>
             <p class="ps-item-desc">Manufactured sand graded as fine aggregate for concrete, RCC and masonry. Current grading information available on request.</p>
             <ul class="ps-specs">
               <li><span>Category</span><b>Fine Aggregate</b></li>
               <li><span>Particle Size</span><b>Passing 4.75mm</b></li>
               <li><span>Standard</span><b>IS 383:2016</b></li>
-              <li><span>Grading</span><b>Zones I–IV, on request</b></li>
+              <li><span>Grading</span><b>Zones I to IV, on request</b></li>
             </ul>
-            <div class="ps-apps"><b>Applications</b>RCC concrete · High-rise · Commercial · Structural · Infrastructure</div>
+            <div class="ps-apps"><b>Applications</b>RCC concrete · High rise · Commercial · Structural · Infrastructure</div>
             <div class="ps-badges"><span class="ps-badge">IS 383:2016</span><span class="ps-badge">Fine Aggregate</span></div>
             <a href="/products/m-sand" class="ps-item-link">View Full Details <span>→</span></a>
           </div>
         </div>
         <div class="ps-item">
-          <div class="ps-item-img"><img src="assets/washed-sand.png" alt="Washed Sand — clean, uniform grain, processed to remove impurities for concrete batching" width="400" height="400" loading="lazy"/></div>
+          <div class="ps-item-img"><img src="assets/washed-sand.png" alt="Washed Sand, clean, uniform grain, processed to remove impurities for concrete batching" width="400" height="400" loading="lazy"/></div>
           <div class="ps-item-body">
             <span class="ps-item-tag">Type · Washed</span>
             <h4 class="ps-item-name">Washed Sand</h4>
@@ -2219,13 +2245,13 @@ ESTD. GOA, INDIA ·</span>
           </div>
         </div>
         <div class="ps-item">
-          <div class="ps-item-img"><img src="img/products/p-sand.png" alt="Plaster Sand (P-Sand) — manufactured by OM Group for internal and external wall plastering" width="400" height="400" loading="lazy"/></div>
+          <div class="ps-item-img"><img src="img/products/p-sand.png" alt="Plaster Sand (P Sand), manufactured by OM Group for internal and external wall plastering" width="400" height="400" loading="lazy"/></div>
           <div class="ps-item-body">
-            <span class="ps-item-tag">Type · P-Sand</span>
+            <span class="ps-item-tag">Type · P Sand</span>
             <h4 class="ps-item-name">Plaster Sand</h4>
             <p class="ps-item-desc">Manufactured and supplied by OM Group, classified for plastering applications. Current grading information available on request.</p>
             <ul class="ps-specs">
-              <li><span>Category</span><b>Plaster-Grade Fine Aggregate</b></li>
+              <li><span>Category</span><b>Plaster Grade Fine Aggregate</b></li>
               <li><span>Standard</span><b>IS 1542:1992</b></li>
               <li><span>Grading</span><b>On request</b></li>
             </ul>
@@ -2235,11 +2261,11 @@ ESTD. GOA, INDIA ·</span>
           </div>
         </div>
         <div class="ps-item">
-          <div class="ps-item-img"><img src="assets/concrete-sand.png" alt="Concrete Sand — optimised particle distribution for high-strength structural concrete batching" width="400" height="400" loading="lazy"/></div>
+          <div class="ps-item-img"><img src="assets/concrete-sand.png" alt="Concrete Sand, optimised particle distribution for high strength structural concrete batching" width="400" height="400" loading="lazy"/></div>
           <div class="ps-item-body">
             <span class="ps-item-tag">Type · Concrete</span>
             <h4 class="ps-item-name">Concrete Sand</h4>
-            <p class="ps-item-desc">Optimised sand blend designed for high-strength concrete and infrastructure-grade batching.</p>
+            <p class="ps-item-desc">Optimised sand blend designed for high strength concrete and infrastructure grade batching.</p>
             <ul class="ps-specs">
               <li><span>Particle Distribution</span><b>Balanced</b></li>
               <li><span>Strength Support</span><b>High</b></li>
@@ -2252,11 +2278,11 @@ ESTD. GOA, INDIA ·</span>
           </div>
         </div>
         <div class="ps-item">
-          <div class="ps-item-img"><img src="img/products/river-sand.png" alt="River Sand — naturally sourced fine aggregate for masonry, plastering and general construction" width="400" height="400" loading="lazy"/></div>
+          <div class="ps-item-img"><img src="img/products/river-sand.png" alt="River Sand, naturally sourced fine aggregate for masonry, plastering and general construction" width="400" height="400" loading="lazy"/></div>
           <div class="ps-item-body">
             <span class="ps-item-tag">Type · River</span>
             <h4 class="ps-item-name">River Sand</h4>
-            <p class="ps-item-desc">Naturally sourced fine aggregate selected for masonry, plastering and general construction applications. Clean, fine-grained material with consistent texture and grading, subject to project requirements.</p>
+            <p class="ps-item-desc">Naturally sourced fine aggregate selected for masonry, plastering and general construction applications. Clean, fine grained material with consistent texture and grading, subject to project requirements.</p>
             <ul class="ps-specs">
               <li><span>Category</span><b>Natural Fine Aggregate</b></li>
               <li><span>Particle Size</span><b>Fine</b></li>
@@ -2276,10 +2302,10 @@ ESTD. GOA, INDIA ·</span>
       <button class="ps-close" aria-label="Close">✕</button>
       <div class="ps-panel-head">
         <div>
-          <span class="ph-eyebrow">Division · Ready-Mix Concrete</span>
-          <h3>High-performance grades, <em>batched and delivered.</em></h3>
+          <span class="ph-eyebrow">Division · Ready Mix Concrete</span>
+          <h3>High performance grades, <em>batched and delivered.</em></h3>
         </div>
-        <p class="ph-meta">Produced at our Sabsol Qualitech plants with UltraTech Cement and delivered through an owned transit-mixer fleet across Goa. <a href="/products/ready-mix-concrete" style="color:var(--accent);font-weight:600">View full RMC grade guide →</a></p>
+        <p class="ph-meta">Produced at our Sabsol Qualitech plants with UltraTech Cement and delivered through an owned transit mixer fleet across Goa. <a href="/products/ready-mix-concrete" style="color:var(--accent);font-weight:600">View full RMC grade guide →</a></p>
       </div>
       <div class="ps-items cols-4">
         <div class="ps-grade">
@@ -2307,13 +2333,13 @@ ESTD. GOA, INDIA ·</span>
             <div class="ps-grade-strength">Compressive <b>25 MPa</b></div>
           </div>
           <div class="ps-grade-body">
-            <p class="ps-item-desc">Enhanced structural concrete for commercial and mid-rise construction.</p>
+            <p class="ps-item-desc">Enhanced structural concrete for commercial and mid rise construction.</p>
             <ul class="ps-specs">
               <li><span>Approx PSI</span><b>3600</b></li>
               <li><span>Load Performance</span><b>High</b></li>
               <li><span>Durability</span><b>Enhanced</b></li>
             </ul>
-            <div class="ps-apps"><b>Use</b>Commercial · Mid-rise · Structural RCC · Infrastructure</div>
+            <div class="ps-apps"><b>Use</b>Commercial · Mid rise · Structural RCC · Infrastructure</div>
             <div class="ps-badges"><span class="ps-badge">Commercial</span><span class="ps-badge">High Durability</span></div>
             <a href="/products/ready-mix-concrete#m25" class="ps-item-link">View M25 Grade →</a>
           </div>
@@ -2325,13 +2351,13 @@ ESTD. GOA, INDIA ·</span>
             <div class="ps-grade-strength">Compressive <b>30 MPa</b></div>
           </div>
           <div class="ps-grade-body">
-            <p class="ps-item-desc">Premium-grade concrete for demanding structural and infrastructure environments.</p>
+            <p class="ps-item-desc">Premium grade concrete for demanding structural and infrastructure environments.</p>
             <ul class="ps-specs">
               <li><span>Approx PSI</span><b>4350</b></li>
               <li><span>Integrity</span><b>High</b></li>
               <li><span>Industrial Use</span><b>Excellent</b></li>
             </ul>
-            <div class="ps-apps"><b>Use</b>High-rise · Industrial foundations · Large commercial · Infrastructure</div>
+            <div class="ps-apps"><b>Use</b>High rise · Industrial foundations · Large commercial · Infrastructure</div>
             <div class="ps-badges"><span class="ps-badge">Infrastructure</span><span class="ps-badge">Industrial Use</span></div>
             <a href="/products/ready-mix-concrete#m30" class="ps-item-link">View M30 Grade →</a>
           </div>
@@ -2343,7 +2369,7 @@ ESTD. GOA, INDIA ·</span>
             <div class="ps-grade-strength">Compressive <b>35 MPa</b></div>
           </div>
           <div class="ps-grade-body">
-            <p class="ps-item-desc">High-strength concrete for heavy-load and industrial infrastructure projects.</p>
+            <p class="ps-item-desc">High strength concrete for heavy load and industrial infrastructure projects.</p>
             <ul class="ps-specs">
               <li><span>Approx PSI</span><b>5100</b></li>
               <li><span>Heavy Load</span><b>Excellent</b></li>
@@ -2361,13 +2387,13 @@ ESTD. GOA, INDIA ·</span>
             <div class="ps-grade-strength">Compressive <b>40 MPa</b></div>
           </div>
           <div class="ps-grade-body">
-            <p class="ps-item-desc">Advanced high-strength concrete for premium infrastructure and critical structural applications.</p>
+            <p class="ps-item-desc">Advanced high strength concrete for premium infrastructure and critical structural applications.</p>
             <ul class="ps-specs">
               <li><span>Approx PSI</span><b>5800</b></li>
               <li><span>Rating</span><b>Premium</b></li>
               <li><span>Load Capacity</span><b>Extreme</b></li>
             </ul>
-            <div class="ps-apps"><b>Use</b>Mega infrastructure · High-load foundations · Bridges · Industrial mega projects</div>
+            <div class="ps-apps"><b>Use</b>Mega infrastructure · High load foundations · Bridges · Industrial mega projects</div>
             <div class="ps-badges"><span class="ps-badge">Premium Grade</span><span class="ps-badge">Extreme</span></div>
             <a href="/products/ready-mix-concrete#m40" class="ps-item-link">View M40 Grade →</a>
           </div>
@@ -2379,31 +2405,31 @@ ESTD. GOA, INDIA ·</span>
             <div class="ps-grade-strength">Compressive <b>45 MPa</b></div>
           </div>
           <div class="ps-grade-body">
-            <p class="ps-item-desc">Standard-concrete grade toward the upper end of the range, for demanding commercial and industrial structures.</p>
+            <p class="ps-item-desc">Standard concrete grade toward the upper end of the range, for demanding commercial and industrial structures.</p>
             <div class="ps-apps"><b>Use</b>Demanding commercial · Industrial · Special RCC work</div>
             <div class="ps-badges"><span class="ps-badge">Design Mix</span><span class="ps-badge">On Request</span></div>
             <a href="/products/ready-mix-concrete#m45" class="ps-item-link">View M45 Grade →</a>
           </div>
         </div>
         <div class="ps-grade">
-          <div class="ps-grade-img"><img src="/img/products/om-group-rmc-m60-transparent.png" alt="M60 High-Strength Ready Mix Concrete" width="1000" height="592" loading="lazy" decoding="async"/></div>
+          <div class="ps-grade-img"><img src="/img/products/om-group-rmc-m60-transparent.png" alt="M60 High Strength Ready Mix Concrete" width="1000" height="592" loading="lazy" decoding="async"/></div>
           <div class="ps-grade-plate">
             <div class="ps-grade-name">M60<em>MPa</em></div>
             <div class="ps-grade-strength">Compressive <b>60 MPa</b></div>
           </div>
           <div class="ps-grade-body">
-            <p class="ps-item-desc">High-strength concrete requiring performance-based mix evaluation, supplied on request for specialised applications.</p>
-            <div class="ps-apps"><b>Use</b>Specialised high-strength · Precast · Heavily loaded structures</div>
-            <div class="ps-badges"><span class="ps-badge">High-Strength</span><span class="ps-badge">On Request</span></div>
+            <p class="ps-item-desc">High strength concrete requiring performance based mix evaluation, supplied on request for specialised applications.</p>
+            <div class="ps-apps"><b>Use</b>Specialised high strength · Precast · Heavily loaded structures</div>
+            <div class="ps-badges"><span class="ps-badge">High Strength</span><span class="ps-badge">On Request</span></div>
             <a href="/products/ready-mix-concrete#m60" class="ps-item-link">Discuss M60 →</a>
           </div>
         </div>
         <div class="ps-chart-card">
-          <div class="ps-chart-img"><img src="assets/concrete.png" alt="Ready-Mix Concrete production at OM Group Sabsol Qualitech batching plant, Goa" width="800" height="500" loading="lazy"/></div>
+          <div class="ps-chart-img"><img src="assets/concrete.png" alt="Ready Mix Concrete production at OM Group Sabsol Qualitech batching plant, Goa" width="800" height="500" loading="lazy"/></div>
           <div class="ps-chart-body">
             <span class="ph-eyebrow">Production</span>
             <h4>Batched fresh, <em>delivered on spec.</em></h4>
-            <p>Every cubic metre is produced at our Kundaim and Thivim plants with UltraTech Cement, graded aggregates and admixtures — then transported in fleet transit mixers to keep slump, strength and workability within tolerance from plant to pour.</p>m design mixes available on request.</p>
+            <p>Every cubic metre is produced at our Kundaim and Thivim plants with UltraTech Cement, graded aggregates and admixtures, then transported in fleet transit mixers to keep slump, strength and workability within tolerance from plant to pour.</p>m design mixes available on request.</p>
           </div>
         </div>
       </div>
@@ -2416,32 +2442,32 @@ ESTD. GOA, INDIA ·</span>
           <span class="ph-eyebrow">Division · GSB, Boulders &amp; Metal</span>
           <h3>Foundational materials for <em>road &amp; heavy works.</em></h3>
         </div>
-        <p class="ph-meta">Robust granular materials, natural boulders and construction metal — engineered for road infrastructure, embankment stability and heavy-duty environments. <a href="/products/granular-sub-base" style="color:var(--accent);font-weight:600">View full GSB specification guide →</a> &nbsp;|&nbsp; <a href="/products/boulders" style="color:var(--accent);font-weight:600">View full boulder specification guide →</a> &nbsp;|&nbsp; <a href="/products/wmm" style="color:var(--accent);font-weight:600">View full WMM specification guide →</a> &nbsp;|&nbsp; <a href="/products/road-base-material" style="color:var(--accent);font-weight:600">Not sure which road material you need? →</a></p>
+        <p class="ph-meta">Robust granular materials, natural boulders and construction metal for road infrastructure, embankment stability and heavy duty environments. <a href="/products/granular-sub-base" style="color:var(--accent);font-weight:600">View full GSB specification guide →</a> &nbsp;|&nbsp; <a href="/products/boulders" style="color:var(--accent);font-weight:600">View full boulder specification guide →</a> &nbsp;|&nbsp; <a href="/products/wmm" style="color:var(--accent);font-weight:600">View full WMM specification guide →</a> &nbsp;|&nbsp; <a href="/products/road-base-material" style="color:var(--accent);font-weight:600">Not sure which road material you need? →</a></p>
       </div>
       <div class="ps-items cols-4">
         <div class="ps-item">
-          <div class="ps-item-img"><img src="img/products/gsb.png" alt="Granular Sub-Base (GSB) — highway grade, well-graded for road foundation and pavement stability" width="400" height="400" loading="lazy"/></div>
+          <div class="ps-item-img"><img src="img/products/gsb.png" alt="Granular Sub Base (GSB), highway grade, well graded for road foundation and pavement stability" width="400" height="400" loading="lazy"/></div>
           <div class="ps-item-body">
             <span class="ps-item-tag">Material · GSB</span>
-            <h4 class="ps-item-name">Granular Sub-Base</h4>
-            <p class="ps-item-desc">Engineered granular sub-base material for road foundations and pavement stability.</p>
+            <h4 class="ps-item-name">Granular Sub Base</h4>
+            <p class="ps-item-desc">Granular sub base material for road foundations and pavement stability.</p>
             <ul class="ps-specs">
               <li><span>Distribution</span><b>Well Graded</b></li>
               <li><span>Compaction</span><b>Excellent</b></li>
               <li><span>Stability</span><b>High</b></li>
               <li><span>Use</span><b>Highway Grade</b></li>
             </ul>
-            <div class="ps-apps"><b>Applications</b>Highway sub-base · Road construction · Pavement layers · Infrastructure foundations</div>
+            <div class="ps-apps"><b>Applications</b>Highway sub base · Road construction · Pavement layers · Infrastructure foundations</div>
             <div class="ps-badges"><span class="ps-badge">Highway Grade</span><span class="ps-badge">High Compaction</span></div>
             <a href="/products/granular-sub-base" class="ps-item-link">View Full Details <span>→</span></a>
           </div>
         </div>
         <div class="ps-item">
-          <div class="ps-item-img"><img src="img/products/boulders.png" alt="Natural Stone Boulders — heavy-duty, for retaining walls, marine works and river protection" width="400" height="400" loading="lazy"/></div>
+          <div class="ps-item-img"><img src="img/products/boulders.png" alt="Natural Stone Boulders, heavy duty, for retaining walls, marine works and river protection" width="400" height="400" loading="lazy"/></div>
           <div class="ps-item-body">
             <span class="ps-item-tag">Material · Stone</span>
             <h4 class="ps-item-name">Boulder Supply</h4>
-            <p class="ps-item-desc">Heavy natural boulders for retaining structures, marine applications and large-scale infrastructure support.</p>
+            <p class="ps-item-desc">Heavy natural boulders for retaining structures, marine applications and large scale infrastructure support.</p>
             <ul class="ps-specs">
               <li><span>Size</span><b>Custom Sizes</b></li>
               <li><span>Density</span><b>High</b></li>
@@ -2454,29 +2480,29 @@ ESTD. GOA, INDIA ·</span>
           </div>
         </div>
         <div class="ps-item">
-          <div class="ps-item-img"><img src="assets/wmm.png" alt="Wet Mix Macadam (WMM) — well-graded, heavy-duty road base for national highways and infrastructure" width="400" height="400" loading="lazy"/></div>
+          <div class="ps-item-img"><img src="assets/wmm.png" alt="Wet Mix Macadam (WMM), well graded, heavy duty road base for national highways and infrastructure" width="400" height="400" loading="lazy"/></div>
           <div class="ps-item-body">
             <span class="ps-item-tag">Material · WMM</span>
             <h4 class="ps-item-name">Wet Mix Macadam</h4>
-            <p class="ps-item-desc">High-performance Wet Mix Macadam engineered for superior road base strength, pavement stability and long-lasting infrastructure performance under heavy traffic conditions.</p>
+            <p class="ps-item-desc">High performance Wet Mix Macadam for superior road base strength, pavement stability and long lasting infrastructure performance under heavy traffic conditions.</p>
             <ul class="ps-specs">
               <li><span>Aggregate Gradation</span><b>Well Graded</b></li>
               <li><span>Compaction Quality</span><b>Excellent</b></li>
-              <li><span>Load Bearing</span><b>Heavy-Duty</b></li>
+              <li><span>Load Bearing</span><b>Heavy Duty</b></li>
               <li><span>Surface Stability</span><b>High</b></li>
               <li><span>Drainage</span><b>Efficient</b></li>
             </ul>
-            <div class="ps-apps"><b>Applications</b>National highways · Flexible pavement · Airport roads · Industrial corridors · Smart-city infrastructure</div>
+            <div class="ps-apps"><b>Applications</b>National highways · Flexible pavement · Airport roads · Industrial corridors · Smart city infrastructure</div>
             <div class="ps-badges"><span class="ps-badge">Highway Grade</span><span class="ps-badge">Heavy Load</span><span class="ps-badge">High Compaction</span><span class="ps-badge">Infrastructure Ready</span></div>
             <a href="/products/wmm" class="ps-item-link">View Full Details <span>→</span></a>
           </div>
         </div>
         <div class="ps-item">
-          <div class="ps-item-img"><img src="assets/road-base.png" alt="Road Base Material — specialist pavement stability aggregate for highway layers and infrastructure" width="400" height="400" loading="lazy"/></div>
+          <div class="ps-item-img"><img src="assets/road-base.png" alt="Road Base Material, specialist pavement stability aggregate for highway layers and infrastructure" width="400" height="400" loading="lazy"/></div>
           <div class="ps-item-body">
             <span class="ps-item-tag">Material · Base</span>
             <h4 class="ps-item-name">Road Base Material</h4>
-            <p class="ps-item-desc">Specialised road base material engineered for pavement stability and long-term infrastructure durability.</p>
+            <p class="ps-item-desc">Specialised road base material for pavement stability and long term infrastructure durability.</p>
             <ul class="ps-specs">
               <li><span>Stability</span><b>High</b></li>
               <li><span>Compression</span><b>Excellent</b></li>
@@ -2494,22 +2520,22 @@ ESTD. GOA, INDIA ·</span>
       <div class="pcard">
         <div class="pcard-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><polygon points="12,3 21,8 21,16 12,21 3,16 3,8" stroke-linejoin="round"/><polygon points="12,8 17,11 17,15 12,18 7,15 7,11" /></svg></div>
         <h4>Crushed Stone Aggregates</h4>
-        <p>Multiple specification grades for RCC, road and structural use, from on-site crushing.</p>
+        <p>Multiple specification grades for RCC, road and structural use, from on site crushing.</p>
       </div>
       <div class="pcard">
         <div class="pcard-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 19h18M5 19c0-3 3-5 7-5s7 2 7 5M9 11l3-5 3 5" stroke-linejoin="round" stroke-linecap="round"/><circle cx="8" cy="16" r=".7" fill="currentColor"/><circle cx="14" cy="17" r=".7" fill="currentColor"/><circle cx="11" cy="14" r=".7" fill="currentColor"/></svg></div>
         <h4>Manufactured &amp; Washed Sand</h4>
-        <p>M-Sand and washed sand graded to IS standards for masonry, plaster and concrete.</p>
+        <p>M Sand and washed sand graded to IS standards for masonry, plaster and concrete.</p>
       </div>
       <div class="pcard">
         <div class="pcard-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="4" y="6" width="16" height="10" rx="1"/><path d="M8 6V4h8v2M4 12h16M9 16v3M15 16v3" stroke-linecap="round"/></svg></div>
-        <h4>Ready-Mix Concrete</h4>
-        <p>Site-delivered RMC produced with UltraTech Cement and fleet transit mixers.</p>
+        <h4>Ready Mix Concrete</h4>
+        <p>Site delivered RMC produced with UltraTech Cement and fleet transit mixers.</p>
       </div>
       <div class="pcard" style="border-right:0">
         <div class="pcard-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 20l4-9 4 5 3-4 7 8z" stroke-linejoin="round"/><circle cx="17" cy="6" r="2"/></svg></div>
         <h4>GSB, Boulders &amp; Metal</h4>
-        <p>Granular Sub-Base, boulders and construction metal for road and RCC works.</p>
+        <p>Granular Sub Base, boulders and construction metal for road and RCC works.</p>
       </div>
     </div>
 
@@ -2534,7 +2560,7 @@ ESTD. GOA, INDIA ·</span>
             <span class="fx-rule" aria-hidden="true"></span>
             <div class="facility-eyebrow">Core Venture</div>
             <h3 class="fx-title">Sabsol Qualitech RMC at Kundaim &amp; Thivim.</h3>
-            <p class="fx-desc">High-quality ready-mix concrete for infrastructure and commercial projects across Goa.</p>
+            <p class="fx-desc">High quality ready mix concrete for infrastructure and commercial projects across Goa.</p>
             <div class="fx-art"><div class="fx-art-in">
               <svg class="fx-svg" viewBox="76 14 244 200" width="244" height="200" role="img" aria-label="Illustration of a ready-mix concrete batching plant with cement silos, an aggregate conveyor and a transit mixer truck">
                 <defs>
@@ -2637,7 +2663,7 @@ ESTD. GOA, INDIA ·</span>
           <li><span class="fx-ico"><svg aria-hidden="true" focusable="false"><use href="#fx-i-mixer"/></svg></span><span>Delivery</span><b>Owned Transit Mixers</b></li>
         </ul>
         <div class="facility-foot">
-          <span class="fx-tag">Pan-Goa Coverage</span>
+          <span class="fx-tag">Pan Goa Coverage</span>
           <div class="fx-actions">
             <button type="button" class="fx-cta" id="openRmcPlantSelectorBtn" aria-haspopup="dialog" aria-controls="rmcPlantModal"><span>Learn More</span><svg aria-hidden="true" focusable="false"><use href="#fx-i-arrow"/></svg></button>
             <span class="fx-orb" aria-hidden="true"><svg><use href="#fx-i-arrow"/></svg><svg><use href="#fx-i-arrow"/></svg></span>
@@ -2651,7 +2677,7 @@ ESTD. GOA, INDIA ·</span>
             <span class="fx-rule" aria-hidden="true"></span>
             <div class="facility-eyebrow">Core Venture</div>
             <h3 class="fx-title">VSI Stone Crusher at Banda Wafoli.</h3>
-            <p class="fx-desc">Multi-grade aggregates from in-house quarrying for consistent quality and supply.</p>
+            <p class="fx-desc">Multi grade aggregates from in house quarrying for consistent quality and supply.</p>
             <div class="fx-art"><div class="fx-art-in">
               <svg class="fx-svg" viewBox="64 46 256 172" width="256" height="172" role="img" aria-label="Illustration of a vertical shaft impactor stone crusher on a steel tower, with feed and product conveyors and a graded aggregate stockpile">
                 <defs>
@@ -2732,11 +2758,11 @@ ESTD. GOA, INDIA ·</span>
         </div>
         <ul class="facility-specs">
           <li><span class="fx-ico"><svg aria-hidden="true" focusable="false"><use href="#fx-i-rotor"/></svg></span><span>Type</span><b>Vertical Shaft Impactor</b></li>
-          <li><span class="fx-ico"><svg aria-hidden="true" focusable="false"><use href="#fx-i-stones"/></svg></span><span>Output</span><b>Multi-grade Aggregates</b></li>
-          <li><span class="fx-ico"><svg aria-hidden="true" focusable="false"><use href="#fx-i-quarry"/></svg></span><span>Source</span><b>In-house Quarrying</b></li>
+          <li><span class="fx-ico"><svg aria-hidden="true" focusable="false"><use href="#fx-i-stones"/></svg></span><span>Output</span><b>Multi grade Aggregates</b></li>
+          <li><span class="fx-ico"><svg aria-hidden="true" focusable="false"><use href="#fx-i-quarry"/></svg></span><span>Source</span><b>In house Quarrying</b></li>
         </ul>
         <div class="facility-foot">
-          <span class="fx-tag">Specification-Grade</span>
+          <span class="fx-tag">Specification Grade</span>
           <div class="fx-actions">
             <a href="/infrastructure/banda-wafoli-vsi-crusher" class="fx-cta"><span>Learn More</span><svg aria-hidden="true" focusable="false"><use href="#fx-i-arrow"/></svg></a>
             <span class="fx-orb" aria-hidden="true"><svg><use href="#fx-i-arrow"/></svg><svg><use href="#fx-i-arrow"/></svg></span>
@@ -2853,7 +2879,7 @@ ESTD. GOA, INDIA ·</span>
         <div class="loc-region" style="color:var(--grey)">Quarry Site</div>
         <h4 style="color:var(--ink)">Banda Wafoli</h4>
         <div class="loc-rule"></div>
-        <p style="color:var(--grey)">VSI Stone Crusher producing multi-grade aggregates.</p>
+        <p style="color:var(--grey)">VSI Stone Crusher producing multi grade aggregates.</p>
       </div>
       <div class="loc fade-up d3" style="background:var(--white);border-color:var(--line)">
         <div class="loc-pin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-7 8-13a8 8 0 10-16 0c0 6 8 13 8 13z" stroke-linejoin="round"/><circle cx="12" cy="9" r="2.5"/></svg></div>
@@ -2872,17 +2898,17 @@ ESTD. GOA, INDIA ·</span>
             <span class="eyebrow">Presence Map</span>
             <h3>Presence across Goa.</h3>
             <span class="presence-rule"></span>
-            <p>Strategic plant, quarry and base placements across North &amp; South Goa — every district within dispatch radius, every project within reach.</p>
+            <p>Strategic plant, quarry and base placements across North &amp; South Goa, keeping every district within dispatch radius and every project within reach.</p>
           </div>
           <div class="presence-stats">
             <div class="ps"><div class="num"></div><div class="lab" style="opacity: 0"></div></div>
-            <div class="ps"><div class="num">All of Goa </div><div class="lab">Districts Covered</div></div>
-            <div class="ps"><div class="num">100%</div><div class="lab">Pan-Goa Reach</div></div>
+            <div class="ps"><div class="num">All of Goa</div><div class="lab">Districts Covered</div></div>
+            <div class="ps"><div class="num">100%</div><div class="lab">Pan Goa Reach</div></div>
           </div>
         </div>
 
         <div class="presence-stage">
-          <img class="presence-img" src="assets/goa-presence-map.png" alt="OM Group presence across Goa — five operational sites" width="1672" height="941" loading="lazy"/>
+          <img class="presence-img" src="assets/goa-presence-map.png" alt="OM Group presence across Goa, five operational sites" width="1672" height="941" loading="lazy"/>
 
           <a class="pm-marker" style="left: 33%; top: 5.5%; --dx: 18; --dy: 0" tabindex="0" aria-label="Wafoli, Banda Crusher">
             <span class="ring r2"></span><span class="ring r3"></span><span class="glow"></span>
@@ -2896,13 +2922,13 @@ ESTD. GOA, INDIA ·</span>
             <span class="ring r2"></span><span class="ring r3"></span><span class="glow"></span>
             <span class="tip"><b>Kundaim</b>RMC Plant · North Goa</span>
           </a>
-          <a class="pm-marker" style="left: 36%; top: 50%; --dx: 20; --dy: -15" tabindex="0" aria-label="OM Group Headquarters — Chicalim">
+          <a class="pm-marker" style="left: 36%; top: 50%; --dx: 20; --dy: -15" tabindex="0" aria-label="OM Group Headquarters, Chicalim">
             <span class="ring r2"></span><span class="ring r3"></span><span class="glow"></span>
             <span class="tip"><b>Headquarters</b>Chicalim · Mormugao</span>
           </a>
-          <a class="pm-marker" style="left: 52%; top: 80%; text-align: justify; font-size: 10px; width: 70px; height: 70px; padding: 0px; border-radius: 0px; --dx: -35; --dy: -20" tabindex="0" aria-label="Sancoale Infrastructure Base">
+          <a class="pm-marker" style="left: 52%; top: 80%; text-align: justify; font-size: 10px; width: 70px; height: 70px; padding: 0px; border-radius: 0px; --dx: -35; --dy: -20" tabindex="0" aria-label="South Goa Infrastructure Base">
             <span class="ring r2"></span><span class="ring r3"></span><span class="glow"></span>
-            <span class="tip"><b>SOUTH GOA</b>Infrastructure Base · South Goa</span>
+            <span class="tip"><b>South Goa</b>Infrastructure Base · South Goa</span>
           </a>
         </div>
       </div>
@@ -2927,8 +2953,8 @@ ESTD. GOA, INDIA ·</span>
     <div class="clients-grid">
       <div class="client fade-up"><h4>Real Estate Developers</h4><p>RMC, aggregates and timely deliveries for residential and commercial projects.</p><div class="client-tag">Private Sector</div></div>
       <div class="client fade-up d1"><h4>Infrastructure &amp; Road Contractors</h4><p>GSB, boulders and graded metal supplied at scale to road and bridge contractors.</p><div class="client-tag">Civil Contractors</div></div>
-      <div class="client fade-up d2"><h4>Government Projects</h4><p>Specification-grade material with documentation for public works of every scale.</p><div class="client-tag">Public Sector</div></div>
-      <div class="client fade-up d3"><h4>Individual Builders</h4><p>Reliable supply for villas, plots and small-batch construction across Goa.</p><div class="client-tag">Independent</div></div>
+      <div class="client fade-up d2"><h4>Government Projects</h4><p>Specification grade material with documentation for public works of every scale.</p><div class="client-tag">Public Sector</div></div>
+      <div class="client fade-up d3"><h4>Individual Builders</h4><p>Reliable supply for villas, plots and small batch construction across Goa.</p><div class="client-tag">Independent</div></div>
     </div>
   </div>
 </section>
@@ -2938,7 +2964,7 @@ ESTD. GOA, INDIA ·</span>
     <span class="eyebrow center">Strategic Partners</span>
     <h2 class="partners-title">Trusted by <em>industry leaders.</em></h2>
     <span class="partners-rule"></span>
-    <p class="partners-meta">Working alongside India's leading infrastructure, manufacturing and equipment groups — delivering specification-grade material to the projects that shape the nation.</p>
+    <p class="partners-meta">Working alongside India's leading infrastructure, manufacturing and equipment groups, supplying specification grade material to projects across the nation.</p>
   </div>
 
   <div class="pt-stage fade-up d1" style="font-weight: 300; text-align: right; height: 160px">
@@ -2952,10 +2978,10 @@ ESTD. GOA, INDIA ·</span>
 </section>
 
 <section style="padding:0">
-  <div class="vm">
+  <div class="vm" id="vision">
     <div class="vm-col fade-up" style="height: 250px">
       <span class="eyebrow vm-eyebrow">Our Vision</span>
-      <p class="vm-vision"><span class="lead">"</span>To be Goa's most <span class="q">trusted name</span> in construction materials — built on quality, delivered with precision, and grounded in the long view.</p>
+      <p class="vm-vision"><span class="lead">"</span>To be Goa's most <span class="q">trusted name</span> in construction materials, built on quality, delivered with precision and grounded in the long view.</p>
       <div class="vm-attrib">OM Group · 2026</div>
     </div>
     <div class="vm-vert"></div>
@@ -2964,8 +2990,8 @@ ESTD. GOA, INDIA ·</span>
       <ul class="mission-list">
         <li><span class="mission-num"></span><div class="mission-body"><h5><span class="diamond">◆</span>Engineered Quality</h5><p>Produce and supply construction materials that consistently exceed specification.</p></div></li>
         <li><span class="mission-num"></span><div class="mission-body"><h5><span class="diamond">◆</span>Disciplined Delivery</h5><p>Honour every project timeline through owned fleet, plants and crew.</p></div></li>
-        <li><span class="mission-num"></span><div class="mission-body"><h5><span class="diamond">◆</span>Pan-Goa Coverage</h5><p>Operate strategically across North and South Goa with redundant capacity.</p></div></li>
-        <li><span class="mission-num"></span><div class="mission-body"><h5><span class="diamond">◆</span>Foundation of Trust</h5><p>Build long-term partnerships with developers, contractors and government.</p></div></li>
+        <li><span class="mission-num"></span><div class="mission-body"><h5><span class="diamond">◆</span>Pan Goa Coverage</h5><p>Operate strategically across North and South Goa with redundant capacity.</p></div></li>
+        <li><span class="mission-num"></span><div class="mission-body"><h5><span class="diamond">◆</span>Foundation of Trust</h5><p>Build long term partnerships with developers, contractors and government.</p></div></li>
       </ul>
     </div>
   </div>
@@ -2975,7 +3001,7 @@ ESTD. GOA, INDIA ·</span>
   <div class="container">
     <span class="eyebrow center fade-up" style="justify-content:center;display:inline-flex">Partner With Us</span>
     <h2 class="fade-up d1">Build the next chapter <em>with us.</em></h2>
-    <p class="contact-sub fade-up d2">Supply aggregates, ready-mix concrete or heavy machinery for your next project in Goa. Our team responds within one business day.</p>
+    <p class="contact-sub fade-up d2">Supply aggregates, ready mix concrete or heavy machinery for your next project in Goa. Our team responds within one business day.</p>
     <div class="contact-cta fade-up d3"><a href="mailto:info@omgroupco.com" id="requestQuoteBtn" class="btn btn-accent" style="height:60px;padding:0 38px;font-size:12px">Request a Quote <span class="btn-arrow">→</span></a></div>
     <div class="contact-info fade-up d4">
       <div class="cinfo"><div class="lab">Phone</div><div class="val" style="font-family: Garamond"><a href="tel:+919049629684">+91-9049629684</a><br><a href="tel:+918788732881">+91-8788732881</a><br>Goa Office</div></div>
@@ -2995,32 +3021,32 @@ ESTD. GOA, INDIA ·</span>
       <div class="careers-pillar fade-up d2">
         <div class="careers-pillar-icon">◆</div>
         <h5>Career Growth</h5>
-        <p>A structured growth path across ten companies — from site-level roles to leadership. We invest in people who invest in the work.</p>
+        <p>A structured growth path across ten companies, from site level roles to leadership. We invest in people who invest in the work.</p>
       </div>
       <div class="careers-pillar fade-up d3">
         <div class="careers-pillar-icon">◆</div>
         <h5>Professional Development</h5>
-        <p>Hands-on exposure to large-scale infrastructure projects across RMC, aggregates, heavy machinery, and logistics operations.</p>
+        <p>Hands on exposure to large scale infrastructure projects across RMC, aggregates, heavy machinery, and logistics operations.</p>
       </div>
       <div class="careers-pillar fade-up d4">
         <div class="careers-pillar-icon">◆</div>
-        <h5>Long-Term Opportunity</h5>
-        <p>Join a group with deep roots in Goa and a decade-long pipeline of infrastructure and industrial projects across the state.</p>
+        <h5>Long Term Opportunity</h5>
+        <p>Join a group with deep roots in Goa and a decade long pipeline of infrastructure and industrial projects across the state.</p>
       </div>
       <div class="careers-pillar fade-up d3">
         <div class="careers-pillar-icon">◆</div>
         <h5>Dynamic Work Culture</h5>
-        <p>A culture built on accountability, precision, and mutual respect — across plant operations, field teams, and corporate functions.</p>
+        <p>A culture built on accountability, precision, and mutual respect across plant operations, field teams and corporate functions.</p>
       </div>
       <div class="careers-pillar fade-up d4">
         <div class="careers-pillar-icon">◆</div>
         <h5>Industrial Scale Projects</h5>
-        <p>Work on the real infrastructure that shapes Goa — highways, townships, ports, industrial parks, and public works.</p>
+        <p>Work on real infrastructure across Goa, including highways, townships, ports, industrial parks and public works.</p>
       </div>
       <div class="careers-pillar fade-up d5">
         <div class="careers-pillar-icon">◆</div>
         <h5>Leadership Pipeline</h5>
-        <p>High-performing individuals are fast-tracked into supervisory and management roles across our group companies.</p>
+        <p>High performing individuals are fast tracked into supervisory and management roles across our group companies.</p>
       </div>
     </div>
 
@@ -3036,12 +3062,12 @@ ESTD. GOA, INDIA ·</span>
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="brand">
-          <span class="brand-logo"><img src="assets/om-group-logo-full.png" alt="OM Group — A Foundation of Trust" width="300" height="96" loading="lazy" /></span>
+          <span class="brand-logo"><img src="assets/om-group-logo-full.png" alt="OM Group, A Foundation of Trust" width="300" height="96" loading="lazy" /></span>
         </div>
-        <p>A Goa-rooted conglomerate of ten companies operating across construction aggregates, ready-mix concrete and heavy machinery.</p>
+        <p>A conglomerate of ten companies based in Goa, operating across construction aggregates, ready mix concrete and heavy machinery.</p>
       </div>
       <div class="footer-col"><h6>Group</h6><ul><li><a href="#about">About</a></li><li><a href="#companies">Companies</a></li><li><a href="#products">Products</a></li><li><a href="#infrastructure">Infrastructure</a></li></ul></div>
-      <div class="footer-col"><h6>Core Ventures</h6><ul><li><a href="#companies">Sabsol Qualitech LLP</a></li><li><a href="#companies">Sabsol Heavy Machines</a></li><li><a href="#products">Ready-Mix Concrete</a></li><li><a href="#products">Stone Crushing</a></li></ul></div>
+      <div class="footer-col"><h6>Core Ventures</h6><ul><li><a href="#companies">Sabsol Qualitech LLP</a></li><li><a href="#companies">Sabsol Heavy Machines</a></li><li><a href="#products">Ready Mix Concrete</a></li><li><a href="#products">Stone Crushing</a></li></ul></div>
       <div class="footer-col"><h6>Contact</h6><ul><li>Goa, India</li><li><a href="mailto:info@omgroupco.com">info@omgroupco.com</a></li><li><a href="#contact">Request a Quote</a></li></ul></div>
     </div>
     <div class="footer-bottom">
@@ -3073,6 +3099,55 @@ const io = new IntersectionObserver((entries) => {
   entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
 },{threshold:0.12, rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+
+/* mobile editorial reveals: each element has its own entrance; groups fire once (IntersectionObserver) */
+(function(){
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  const $=(s,r)=>(r||document).querySelector(s), $$=(s,r)=>Array.from((r||document).querySelectorAll(s));
+  const rv=(el,d,cls)=>{ if(!el) return; el.classList.add('rv'); if(cls) el.classList.add(cls); el.style.setProperty('--d',d+'ms'); };
+  const host=el=>{ if(el) el.classList.add('rv-host'); };
+  function split(el,base,step){
+    let i=0;
+    (function walk(n){ Array.from(n.childNodes).forEach(c=>{
+      if(c.nodeType===3){
+        const f=document.createDocumentFragment();
+        c.textContent.split(/(\s+)/).forEach(p=>{ if(!p) return;
+          if(/^\s+$/.test(p)) f.appendChild(document.createTextNode(' '));
+          else { const s=document.createElement('span'); s.className='rv-w'; s.style.setProperty('--d',(base+i++*step)+'ms'); s.textContent=p; f.appendChild(s); } });
+        c.replaceWith(f);
+      } else if(c.nodeType===1 && c.tagName!=='BR') walk(c);
+    }); })(el);
+  }
+  const groups=[];
+  const hc=$('.hero-content');
+  if(hc){
+    const eb=$('.hero-eyebrow',hc), h1=$('h1',hc), sub=$('.hero-sub',hc), ctas=$('.hero-ctas',hc);
+    [eb,h1,sub,ctas].forEach(host);
+    if(eb){ eb.classList.add('rv-l'); eb.style.setProperty('--d','0ms'); $$('.hero-eyebrow-t > span',eb).forEach((s,i)=>rv(s,280+i*110)); }
+    if(h1) split(h1,520,95);
+    if(sub){ sub.classList.add('rv-soft'); split(sub,1200,26); }
+    if(ctas) $$('.btn',ctas).forEach((b,i)=>rv(b,1480+i*130));
+    requestAnimationFrame(()=>requestAnimationFrame(()=>setTimeout(()=>hc.classList.add('rv-in'),120)));
+  }
+  const ag=$('.about-grid');
+  if(ag){
+    const left=ag.children[0], copy=$('.about-copy',ag);
+    host(left); host(copy);
+    const q=$('.about-quote',left), sig=$('.about-sig',left);
+    if(q){ q.classList.add('rv-v'); split(q,320,85); }
+    if(sig) rv(sig,1100);
+    if(copy){ const eb=$('.about-eyebrow',copy); if(eb){ rv(eb,0); eb.classList.add('rv-l-t'); }
+      $$('p',copy).forEach((p,i)=>{ p.classList.add('rv-soft'); split(p,200+i*420,14); }); groups.push(copy); }
+    if(left) groups.push(left);
+  }
+  const st=$('.about-stats'); host(st);
+  $$('.about-stats .col').forEach((c,i)=>{ rv($('.num',c),0,i===2?'rv-scale':''); rv($('.lab',c),200); rv($('.desc',c),380); groups.push(c); });
+  const io2=new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting || e.boundingClientRect.top<0){ e.target.classList.add('rv-in'); io2.unobserve(e.target); }
+  }),{threshold:.2,rootMargin:'0px 0px -6% 0px'});
+  groups.forEach(g=>io2.observe(g));
+})();
 
 function easeOutQuart(t){return 1 - Math.pow(1-t,4)}
 function animateCounter(el){
@@ -3205,17 +3280,17 @@ const OM_COMPANIES = {
     name: 'OM Transport',
     logo: 'assets/logos/orange/om-transport-v3.webp', mark: 'emblem',
     division: 'Division 01 · Aggregates Trading',
-    category: 'Aggregates Logistics · Heavy-Haul Transport',
+    category: 'Aggregates Logistics · Heavy Haul Transport',
     headline: 'Material movement, coordinated from source to site.',
     about: [
       'Construction supply depends not only on material availability, but also on the ability to move the right quantity to the right site at the right time.',
-      'OM Transport is OM Group’s heavy-haul logistics partner for construction materials. It supports source-to-site movement by coordinating transport capacity, dispatch timing and project delivery requirements. Within the group’s connected supply network, this function links suppliers, operating locations, contractors and receiving sites.',
+      'OM Transport is OM Group’s heavy haul logistics partner for construction materials. It supports source to site movement by coordinating transport capacity, dispatch timing and project delivery requirements. Within the group’s connected supply network, this function links suppliers, operating locations, contractors and receiving sites.',
       'The focus is practical execution: clear material and quantity requirements, coordinated loading and dispatch, and delivery planning that reflects site readiness and prevailing operating conditions. Service commitments are tied to confirmed routes, fleet availability and each order’s requirements.'
     ],
     glance: [
-      { label: 'Core role', value: 'Heavy-haul material movement' },
+      { label: 'Core role', value: 'Heavy haul material movement' },
       { label: 'Material scope', value: 'Aggregates · sand · construction metal' },
-      { label: 'Network role', value: 'Source-to-site dispatch coordination' }
+      { label: 'Network role', value: 'Source to site dispatch coordination' }
     ],
     cta: { label: 'Discuss transport and delivery requirements', category: 'Transport & Logistics',
            message: 'I would like to discuss transport and delivery requirements with OM Transport.' }
@@ -3229,7 +3304,7 @@ const OM_COMPANIES = {
     about: [
       'Om Enterprises focuses on bulk aggregates trading for residential and commercial construction.',
       'Its role is to coordinate supply according to project requirements, including material type, grade, quantity, delivery location and requested timing. For builders and contractors, a dependable trading partner can simplify procurement by connecting material availability with practical dispatch planning.',
-      'Through OM Group’s broader supplier and logistics network, Om Enterprises supports construction-material requirements across active sites while keeping the commercial conversation focused on product, quantity, delivery and order fulfilment. Material source and availability are confirmed for each order.'
+      'Through OM Group’s broader supplier and logistics network, Om Enterprises supports construction material requirements across active sites while keeping the commercial conversation focused on product, quantity, delivery and order fulfilment. Material source and availability are confirmed for each order.'
     ],
     glance: [
       { label: 'Core role', value: 'Bulk aggregates trading' },
@@ -3244,15 +3319,15 @@ const OM_COMPANIES = {
     logo: 'assets/logos/orange/maharudra.webp', mark: 'emblem',
     division: 'Division 01 · Aggregates Trading',
     category: 'Infrastructure Materials Supply',
-    headline: 'Site-grade materials for demanding infrastructure work.',
+    headline: 'Site grade materials for demanding infrastructure work.',
     about: [
-      'Maharudra Infrastructure supports infrastructure-focused material supply, with an emphasis on site-grade aggregates and structural fill used in civil development and construction works.',
-      'Infrastructure projects often require material in planned volumes, phased deliveries and quantities that align with site preparation and execution sequences. Within OM Group’s aggregate-trading network, Maharudra helps coordinate suitable material sourcing and delivery against those project requirements.',
-      'By connecting material availability, dispatch planning and receiving-site needs, the company can help contractors manage supply across a project’s execution cycle.'
+      'Maharudra Infrastructure supports infrastructure focused material supply, with an emphasis on site grade aggregates and structural fill used in civil development and construction works.',
+      'Infrastructure projects often require material in planned volumes, phased deliveries and quantities that align with site preparation and execution sequences. Within OM Group’s aggregate trading network, Maharudra helps coordinate suitable material sourcing and delivery against those project requirements.',
+      'By connecting material availability, dispatch planning and receiving site needs, the company can help contractors manage supply across a project’s execution cycle.'
     ],
     glance: [
       { label: 'Core role', value: 'Infrastructure materials supply' },
-      { label: 'Material focus', value: 'Site-grade aggregates and structural fill' },
+      { label: 'Material focus', value: 'Site grade aggregates and structural fill' },
       { label: 'Customer focus', value: 'Infrastructure and civil projects' }
     ],
     cta: { label: 'Plan material supply for an infrastructure project', category: 'Stone Aggregates',
@@ -3265,7 +3340,7 @@ const OM_COMPANIES = {
     category: 'Regional Material Sourcing',
     headline: 'Sand, GSB and construction metal for North Goa.',
     about: [
-      'Swastik Enterprises is a sourcing partner for sand, granular sub-base (GSB) and construction metal across North Goa.',
+      'Swastik Enterprises is a sourcing partner for sand, granular sub base (GSB) and construction metal across North Goa.',
       'By focusing on frequently required construction materials, the business helps customers bring product requirements, material availability and delivery needs together in a single supply conversation. Its role is to connect customers with suitable supply options and support dispatch coordination based on quantity, location and project timing.',
       'As part of OM Group’s wider supply network, Swastik brings regional sourcing knowledge and connected logistics support. Specific grades, stock levels, technical test results and delivery times are confirmed against each order.'
     ],
@@ -3322,8 +3397,8 @@ const OM_COMPANIES = {
     category: 'Manufacturing · RMC + Crushed Aggregates',
     headline: 'Integrated concrete production and aggregate manufacturing.',
     about: [
-      'Sabsol Qualitech Industries LLP is the operating entity behind OM Group’s ready-mix concrete (RMC) batching operations and the Banda Wafoli VSI aggregate crushing facility.',
-      'Batching operations run at Kundaim and Thivim, Goa. The crushing facility at Banda Wafoli, Maharashtra, has an installed capacity of 250 tonnes per hour (TPH). This is a design-capacity figure; actual output depends on feed material, product specification, operating conditions, maintenance and scheduling.',
+      'Sabsol Qualitech Industries LLP is the operating entity behind OM Group’s ready mix concrete (RMC) batching operations and the Banda Wafoli VSI aggregate crushing facility.',
+      'Batching operations run at Kundaim and Thivim, Goa. The crushing facility at Banda Wafoli, Maharashtra, has an installed capacity of 250 tonnes per hour (TPH). This is a design capacity figure; actual output depends on feed material, product specification, operating conditions, maintenance and scheduling.',
       'The operation connects production infrastructure with OM Group’s wider material sourcing and logistics network, supporting concrete and crushed aggregate requirements for residential, commercial, road, industrial and infrastructure projects.'
     ],
     glance: [
@@ -3349,8 +3424,8 @@ const OM_COMPANIES = {
     category: 'Heavy Equipment · Fleet Partnerships',
     headline: 'Productive equipment, managed through a structured fleet model.',
     about: [
-      'Sabsol Heavy Machines LLP is OM Group’s heavy-equipment and fleet operations venture.',
-      'Its manager-partner model is designed to put productive assets to work while reducing the need for a selected manager to fund the full asset purchase upfront. Depending on the final commercial arrangement, OM Group finances or arranges the fleet asset, screens and onboards suitable managers, and assigns day-to-day operating responsibility for equipment such as JCBs, tippers, transit mixers, multi-axle trucks and related machinery.',
+      'Sabsol Heavy Machines LLP is OM Group’s heavy equipment and fleet operations venture.',
+      'Its manager partner model is designed to put productive assets to work while reducing the need for a selected manager to fund the full asset purchase upfront. Depending on the final commercial arrangement, OM Group finances or arranges the fleet asset, screens and onboards suitable managers, and assigns day to day operating responsibility for equipment such as JCBs, tippers, transit mixers, multi axle trucks and related machinery.',
       'The manager’s role centres on responsible operation, asset care, availability and performance against agreed operating standards. Each opportunity is subject to screening, an agreed contract, project demand and operating results; no income, utilisation or return is guaranteed.'
     ],
     glance: [
@@ -3417,6 +3492,7 @@ const OM_COMPANIES = {
   let afterClose = null;
   let relayout = false;
   let openToken = 0;
+  let gen = 0;                   // bumped by every open()/close(): callbacks from an older transition are ignored
 
   const nextFrame = () => new Promise(res => requestAnimationFrame(() => res()));
 
@@ -3525,11 +3601,13 @@ const OM_COMPANIES = {
   }
 
   function open(card){
+    if(state === 'closing'){ if(!afterClose) afterClose = () => open(card); return; }   // tap during a close: reopen once it lands
     if(state !== 'idle') return;
     const data = OM_COMPANIES[card.dataset.company];
     if(!data) return;
     const btn = card.querySelector('.ccard-open');
     state = 'opening';
+    const myGen = ++gen;
     active = { card, btn, data };
 
     // stop any in-flight smooth scroll (nav link, scroll-behavior) so the measured slot can't drift under the overlay
@@ -3559,7 +3637,8 @@ const OM_COMPANIES = {
         play(scrim, [{ opacity:0 }, { opacity:1 }], { duration:200, easing:EASE_STD }),
         play(cardEl, [{ opacity:0 }, { opacity:1 }], { duration:220, easing:EASE_STD })
       ];
-      settle(seq).then(() => { freeze(); state = 'open'; }).catch(() => {});
+      const ok = () => { if(myGen !== gen || state !== 'opening') return; freeze(); state = 'open'; };
+      settle(seq).then(ok, ok);
       return;
     }
 
@@ -3632,13 +3711,22 @@ const OM_COMPANIES = {
       ];
       if(rule) seq.push(play(rule, [{ transform:'scaleX(0)' }, { transform:'scaleX(1)' }], { duration:700, delay:reveal + 2 * T.stagger, easing:EASE }));
 
-      settle(seq).then(() => {
+      const ok = () => {
+        if(myGen !== gen || state !== 'opening') return;   // a close took over: never touch its animations
         freeze();
         flatten(relayout ? measure() : f);
         relayout = false;
         state = 'open';
-      }).catch(() => {});
+      };
+      settle(seq).then(ok, ok);
     }
+  }
+
+  // finish exactly once per close: on completion, on any cancelled/rejected animation, or by watchdog
+  function done(list, g){
+    const go = () => { if(g === gen && state === 'closing') finish(); };
+    settle(list).then(go, go);
+    setTimeout(go, 1800);
   }
 
   function close(){
@@ -3650,6 +3738,7 @@ const OM_COMPANIES = {
       progress = p == null ? 0 : p;
     }
     state = 'closing';
+    const myGen = ++gen;
     root.classList.add('is-animating');
     freeze();
     const { card } = active;
@@ -3659,7 +3748,7 @@ const OM_COMPANIES = {
         play(scrim, [{ opacity:0 }], { duration:180, easing:EASE_STD }),
         play(cardEl, [{ opacity:0 }], { duration:180, easing:EASE_STD })
       ];
-      settle(seq).then(finish).catch(() => {});
+      done(seq, myGen);
       return;
     }
 
@@ -3711,10 +3800,11 @@ const OM_COMPANIES = {
     ];
     // original slot unavailable (scrolled away / reflowed): settle in place instead of flying off-screen
     if(!home) seq.push(play(cardEl, [{ opacity:0 }], { duration:T.closeTravel, delay:travelAt, easing:EASE_STD }));
-    settle(seq).then(finish).catch(() => {});
+    done(seq, myGen);
   }
 
   function finish(){
+    if(!active) return;
     freeze();
     const { card, btn } = active;
     // swap the presented copy for the real card without the slot's own transition showing
@@ -3903,7 +3993,7 @@ const OM_COMPANIES = {
       <div class="q-form-group">
         <label class="q-file-label">Resume / CV <span class="q-required">*</span></label>
         <input type="file" id="c_resume" name="resume" class="q-file-upload" accept=".pdf,.doc,.docx">
-        <div class="q-file-hint">Accepted: PDF, DOC, DOCX — Maximum 10 MB</div>
+        <div class="q-file-hint">Accepted formats: PDF, DOC and DOCX. Maximum size 10 MB.</div>
         <div class="q-error-msg" id="c_resumeError">Please upload your resume (PDF, DOC, or DOCX, max 10 MB).</div>
       </div>
 
@@ -4078,7 +4168,7 @@ const OM_COMPANIES = {
         <span class="psr-body">
           <span class="psr-name">Kundaim RMC Plant</span>
           <span class="psr-loc">Kundaim, Goa</span>
-          <span class="psr-desc">Ready-Mix Concrete manufacturing facility at Kundaim, Goa.</span>
+          <span class="psr-desc">Ready Mix Concrete manufacturing facility at Kundaim, Goa.</span>
         </span>
         <span class="psr-cta">View Plant <span class="btn-arrow">→</span></span>
       </a>
@@ -4086,15 +4176,15 @@ const OM_COMPANIES = {
         <span class="psr-body">
           <span class="psr-name">Thivim RMC Plant</span>
           <span class="psr-loc">Thivim, Goa</span>
-          <span class="psr-desc">Ready-Mix Concrete manufacturing facility at Thivim, Goa.</span>
+          <span class="psr-desc">Ready Mix Concrete manufacturing facility at Thivim, Goa.</span>
         </span>
         <span class="psr-cta">View Plant <span class="btn-arrow">→</span></span>
       </a>
       <a href="/infrastructure/sancoale-rmc-plant" class="plant-select-row" role="listitem" data-plant="Sancoale">
         <span class="psr-body">
-          <span class="psr-name">Sancoale — Infrastructure Base</span>
+          <span class="psr-name">Sancoale, Infrastructure Base</span>
           <span class="psr-loc">Sancoale, Goa</span>
-          <span class="psr-desc">Strategic aggregate &amp; construction-material supply position in South Goa.</span>
+          <span class="psr-desc">Strategic aggregate &amp; construction material supply position in South Goa.</span>
         </span>
         <span class="psr-cta">View Details <span class="btn-arrow">→</span></span>
       </a>
@@ -4714,5 +4804,7 @@ const OM_COMPANIES = {
   });
 })();
 </script>
+<script src="assets/mega-nav.js" defer></script>
+<script src="/assets/motion.js" defer></script>
 </body>
 </html>
