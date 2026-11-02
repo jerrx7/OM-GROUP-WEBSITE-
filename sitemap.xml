@@ -32,6 +32,12 @@
     </image:image>
   </url>
   <url>
+    <loc>https://www.omgroupco.com/products</loc>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://www.omgroupco.com/products/10mm-aggregate</loc>
     <lastmod>2026-11-02</lastmod>
     <changefreq>weekly</changefreq>
@@ -113,12 +119,57 @@
     </image:image>
   </url>
   <url>
+    <loc>https://www.omgroupco.com/products/granular-sub-base</loc>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.omgroupco.com/img/products/om-group-granular-sub-base-og.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.omgroupco.com/products/river-sand</loc>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.omgroupco.com/img/products/om-group-river-sand-goa.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.omgroupco.com/products/boulders</loc>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.omgroupco.com/img/products/om-group-boulders-og.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.omgroupco.com/products/wmm</loc>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.omgroupco.com/img/products/om-group-wmm-og.png</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://www.omgroupco.com/products/ready-mix-concrete</loc>
     <lastmod>2026-11-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
       <image:loc>https://www.omgroupco.com/img/products/om-group-ready-mix-concrete-og.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.omgroupco.com/products/road-base-material</loc>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.omgroupco.com/img/products/om-group-road-base-material-og.png</image:loc>
     </image:image>
   </url>
   <url>
@@ -167,51 +218,6 @@
     </image:image>
   </url>
   <url>
-    <loc>https://www.omgroupco.com/products/granular-sub-base</loc>
-    <lastmod>2026-11-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://www.omgroupco.com/img/products/om-group-granular-sub-base-og.png</image:loc>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://www.omgroupco.com/products/river-sand</loc>
-    <lastmod>2026-11-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://www.omgroupco.com/img/products/om-group-river-sand-goa.webp</image:loc>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://www.omgroupco.com/products/boulders</loc>
-    <lastmod>2026-11-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://www.omgroupco.com/img/products/om-group-boulders-og.png</image:loc>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://www.omgroupco.com/products/wmm</loc>
-    <lastmod>2026-11-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://www.omgroupco.com/img/products/om-group-wmm-og.png</image:loc>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://www.omgroupco.com/products/road-base-material</loc>
-    <lastmod>2026-11-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-    <image:image>
-      <image:loc>https://www.omgroupco.com/img/products/om-group-road-base-material-og.png</image:loc>
-    </image:image>
-  </url>
-  <url>
     <loc>https://www.omgroupco.com/privacy-policy</loc>
     <lastmod>2026-11-02</lastmod>
     <changefreq>yearly</changefreq>
@@ -223,10 +229,4 @@
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
-</urlset>  <url>
-    <loc>https://www.omgroupco.com/products</loc>
-    <lastmod>2026-11-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
+</urlset>
