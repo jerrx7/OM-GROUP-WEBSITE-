@@ -1,6 +1,13 @@
 <!doctype html>
 <html lang="en">
 <head>
+<style>
+/* hero opening: hidden from the very first paint, released only when the opening sequence starts (no flash, no hide-and-replay) */
+html.rv-pre .hero .hero-content .fade-up,html.rv-pre .hero .hero-content .fade-up.in,html.rv-pre .hero .hero-content .hero-eyebrow,html.rv-pre .hero .hero-content h1,html.rv-pre .hero .hero-content .hero-sub,html.rv-pre .hero .hero-content .hero-ctas{opacity:0;transform:none;transition:none}
+html.rv-pre .hero .rv,html.rv-pre .hero .rv-w,html.rv-pre .hero .rv-l::before{transition:none}
+</style>
+<script>(function(){try{var r=document.documentElement;if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){r.classList.add('rv-pre');setTimeout(function(){r.classList.remove('rv-pre')},4500)}}catch(e){}})();</script>
+
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -3128,6 +3135,8 @@ document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
     if(h1) split(h1,520,95);
     if(sub){ sub.classList.add('rv-soft'); split(sub,1200,26); }
     if(ctas) $$('.btn',ctas).forEach((b,i)=>rv(b,1480+i*130));
+    void hc.offsetWidth;   // commit the hidden start states while transitions are still off, so nothing fades out before it fades in
+    document.documentElement.classList.remove('rv-pre');
     requestAnimationFrame(()=>requestAnimationFrame(()=>setTimeout(()=>hc.classList.add('rv-in'),120)));
   }
   const ag=$('.about-grid');
