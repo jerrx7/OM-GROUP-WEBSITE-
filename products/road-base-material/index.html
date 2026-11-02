@@ -66,7 +66,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       "@type": "BreadcrumbList",
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.omgroupco.com/" },
-        { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://www.omgroupco.com/#products" },
+        { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://www.omgroupco.com/products" },
         { "@type": "ListItem", "position": 3, "name": "Road Base Material", "item": "https://www.omgroupco.com/products/road-base-material" }
       ]
     },
@@ -404,6 +404,13 @@ footer a:hover{color:var(--accent)}
 .hub-card p{font-size:14px;color:var(--grey);line-height:1.75;margin-bottom:18px}
 .hub-card .btn{width:100%}
 @media (max-width:700px){ .hub-grid{grid-template-columns:1fr} }
+
+/* ===== FOOTER PRODUCT LINKS ===== */
+.foot-nav{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px 24px;max-width:880px;margin:0 auto 24px;padding-bottom:24px;border-bottom:1px solid var(--line)}
+.foot-nav-label{font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);font-weight:700}
+.foot-nav a{font-size:13px;color:var(--grey);transition:color .2s}
+.foot-nav a:hover{color:var(--accent)}
+@media (max-width:640px){.foot-nav{gap:10px 18px}.foot-nav-label{flex-basis:100%}}
 </style>
 <link rel="stylesheet" href="/assets/motion.css">
 </head>
@@ -421,7 +428,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <img src="/assets/om-group-logo-header.png" alt="OM Group" width="100" height="101" decoding="async" />
     </a>
     <div class="nav-actions">
-      <a href="/#products" class="nav-back">← All Products</a>
+      <a href="/products" class="nav-back">← All Products</a>
       <a href="/?category=Stone%20Aggregates&message=I%27d%20like%20a%20quote%20for%20road%20base%20material%20(GSB%2FWMM%2Fgraded%20aggregate).#contact" class="btn btn-accent btn-sm road-base-track" data-event="road_base_quote_click" data-cta="nav">Request a Quote</a>
     </div>
   </div>
@@ -429,7 +436,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <nav class="breadcrumb" aria-label="Breadcrumb">
   <div class="container">
-    <a href="/">Home</a><span class="bc-sep">›</span><a href="/#products">Products</a><span class="bc-sep">›</span><span aria-current="page">Road Base Material</span>
+    <a href="/">Home</a><span class="bc-sep">›</span><a href="/products">Products</a><span class="bc-sep">›</span><span aria-current="page">Road Base Material</span>
   </div>
 </nav>
 
@@ -843,6 +850,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <footer>
   <div class="container">
+    <nav class="foot-nav" aria-label="OM Group products">
+      <span class="foot-nav-label">Products</span>
+      <a href="/products/10mm-aggregate">10mm Aggregates</a>
+      <a href="/products/20mm-aggregate">20mm Aggregates</a>
+      <a href="/products/granular-sub-base">GSB (Granular Sub-Base)</a>
+      <a href="/products/m-sand">M-Sand</a>
+      <a href="/products/ready-mix-concrete">Ready-Mix Concrete (RMC)</a>
+      <a href="/products/plaster-sand">P-Sand (Plaster Sand)</a>
+      <a href="/products">All Products</a>
+    </nav>
     <p>&copy; 2026 OM Group of Companies. All rights reserved. &nbsp;|&nbsp; Goa, India &nbsp;|&nbsp; <a href="mailto:info@omgroupco.com">info@omgroupco.com</a> &nbsp;|&nbsp; <a href="/">omgroupco.com</a> &nbsp;|&nbsp; <a href="/privacy-policy">Privacy Policy</a> &nbsp;|&nbsp; <a href="/terms-and-conditions">Terms &amp; Conditions</a></p>
   </div>
 </footer>

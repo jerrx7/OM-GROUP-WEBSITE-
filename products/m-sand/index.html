@@ -55,7 +55,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       "@type": "BreadcrumbList",
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.omgroupco.com/" },
-        { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://www.omgroupco.com/#products" },
+        { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://www.omgroupco.com/products" },
         { "@type": "ListItem", "position": 3, "name": "M-Sand", "item": "https://www.omgroupco.com/products/m-sand" }
       ]
     },
@@ -367,6 +367,13 @@ footer a:hover{color:var(--accent)}
   .supply-line-fill{transition:none !important}
   .faq-a{transition:opacity .2s ease !important}
 }
+
+/* ===== FOOTER PRODUCT LINKS ===== */
+.foot-nav{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px 24px;max-width:880px;margin:0 auto 24px;padding-bottom:24px;border-bottom:1px solid var(--line)}
+.foot-nav-label{font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);font-weight:700}
+.foot-nav a{font-size:13px;color:var(--grey);transition:color .2s}
+.foot-nav a:hover{color:var(--accent)}
+@media (max-width:640px){.foot-nav{gap:10px 18px}.foot-nav-label{flex-basis:100%}}
 </style>
 <link rel="stylesheet" href="/assets/motion.css">
 </head>
@@ -384,7 +391,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <img src="/assets/om-group-logo-header.png" alt="OM Group" width="100" height="101" decoding="async" />
     </a>
     <div class="nav-actions">
-      <a href="/#products" class="nav-back">← All Products</a>
+      <a href="/products" class="nav-back">← All Products</a>
       <a href="/?category=Sand&subcategory=M-Sand%20(Manufactured%20Sand)#contact" class="btn btn-accent btn-sm">Request a Quote</a>
     </div>
   </div>
@@ -392,7 +399,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <nav class="breadcrumb" aria-label="Breadcrumb">
   <div class="container">
-    <a href="/">Home</a><span class="bc-sep">›</span><a href="/#products">Products</a><span class="bc-sep">›</span><span aria-current="page">M-Sand</span>
+    <a href="/">Home</a><span class="bc-sep">›</span><a href="/products">Products</a><span class="bc-sep">›</span><span aria-current="page">M-Sand</span>
   </div>
 </nav>
 
@@ -403,7 +410,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div>
         <span class="eyebrow fade-up" style="--i:0">Manufactured Sand · Goa</span>
         <h1 class="hero-h1 fade-up" style="--i:1">M-Sand Supplier in Goa</h1>
-        <p class="hero-sub fade-up" style="--i:2">M-Sand — manufactured sand graded as fine aggregate for concrete, RCC and masonry — supplied by OM Group across North and South Goa.</p>
+        <p class="hero-sub fade-up" style="--i:2">M-Sand, or manufactured sand, is fine aggregate produced by crushing hard rock and screening it to sand size, graded for concrete, RCC and masonry. OM Group supplies M-Sand to RMC plants, builders, civil contractors and block manufacturers across North and South Goa, with current grading information available on request and availability confirmed against each project requirement.</p>
         <div class="cta-row fade-up" style="--i:3">
           <a href="/?category=Sand&subcategory=M-Sand%20(Manufactured%20Sand)#contact" class="btn btn-accent">Request a Quote <span class="btn-arrow">→</span></a>
           <a href="tel:+919049629684" class="btn btn-ghost">Call OM Group</a>
@@ -686,6 +693,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div>
       <details class="faq-item fade-up" style="--i:0"><summary>What is M-Sand?<span class="faq-icon" aria-hidden="true"></span></summary><div class="faq-a"><p>M-Sand is fine aggregate produced by crushing hard rock and screening the material to sand size — passing the 4.75 mm sieve — for use in concrete and mortar.</p></div></details>
       <details class="faq-item fade-up" style="--i:1"><summary>What is manufactured sand?<span class="faq-icon" aria-hidden="true"></span></summary><div class="faq-a"><p>Manufactured sand is the formal term for M-Sand: fine aggregate made by crushing rock and classifying it to a sand grading, rather than dredged from a natural deposit.</p></div></details>
+      <details class="faq-item fade-up" style="--i:1"><summary>How is M-Sand produced?<span class="faq-icon" aria-hidden="true"></span></summary><div class="faq-a"><p>M-Sand is produced by crushing hard rock and screening the crushed material to sand size, meaning material that passes the 4.75mm sieve. The screening and classification stage is what separates manufactured sand from crusher dust: it brings the material to a fine-aggregate grading that can be used in a mix design. Crushing method also affects grain shape, which in turn affects water demand and workability. Current grading information on the material supplied is available from OM Group on request.</p></div></details>
       <details class="faq-item fade-up" style="--i:2"><summary>Is M-Sand the same as crushed sand?<span class="faq-icon" aria-hidden="true"></span></summary><div class="faq-a"><p>Yes. M-Sand, manufactured sand, crushed stone sand and crushed sand all refer to the same material.</p></div></details>
       <details class="faq-item fade-up" style="--i:3"><summary>Is M-Sand fine aggregate?<span class="faq-icon" aria-hidden="true"></span></summary><div class="faq-a"><p>Yes. Material passing the 4.75 mm sieve is fine aggregate, and M-Sand is produced to that size range.</p></div></details>
       <details class="faq-item fade-up" style="--i:4"><summary>Is M-Sand covered by IS 383?<span class="faq-icon" aria-hidden="true"></span></summary><div class="faq-a"><p>Yes. The 2016 revision of IS 383 explicitly recognises crushed stone sand alongside natural and mixed sand, with grading and fines provisions specific to it.</p></div></details>
@@ -724,9 +732,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="https://www.omgroupco.com/products/10mm-aggregate">10mm Aggregate</a>
       <a href="https://www.omgroupco.com/products/12mm-aggregate">12.5mm Aggregate</a>
       <a href="https://www.omgroupco.com/products/20mm-aggregate">20mm Aggregate</a>
-      <a href="/#products">GSB</a>
-      <a href="/#products">Boulders</a>
-      <a href="/#products">Ready-Mix Concrete</a>
+      <a href="/products/granular-sub-base">GSB</a>
+      <a href="/products/boulders">Boulders</a>
+      <a href="/products/ready-mix-concrete">Ready-Mix Concrete</a>
+      <a href="/products">All OM Group products</a>
     </div>
   </div>
 </section>
@@ -747,6 +756,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <footer>
   <div class="container">
+    <nav class="foot-nav" aria-label="OM Group products">
+      <span class="foot-nav-label">Products</span>
+      <a href="/products/10mm-aggregate">10mm Aggregates</a>
+      <a href="/products/20mm-aggregate">20mm Aggregates</a>
+      <a href="/products/granular-sub-base">GSB (Granular Sub-Base)</a>
+      <a href="/products/m-sand">M-Sand</a>
+      <a href="/products/ready-mix-concrete">Ready-Mix Concrete (RMC)</a>
+      <a href="/products/plaster-sand">P-Sand (Plaster Sand)</a>
+      <a href="/products">All Products</a>
+    </nav>
     <p>&copy; 2026 OM Group of Companies. All rights reserved. &nbsp;|&nbsp; Goa, India &nbsp;|&nbsp; <a href="mailto:info@omgroupco.com">info@omgroupco.com</a> &nbsp;|&nbsp; <a href="/">omgroupco.com</a> &nbsp;|&nbsp; <a href="/privacy-policy">Privacy Policy</a> &nbsp;|&nbsp; <a href="/terms-and-conditions">Terms &amp; Conditions</a></p>
   </div>
 </footer>

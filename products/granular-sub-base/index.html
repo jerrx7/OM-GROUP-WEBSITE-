@@ -14,7 +14,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="referrer" content="strict-origin-when-cross-origin" />
 <meta name="format-detection" content="telephone=no" />
 <title>Granular Sub-Base (GSB) Supplier in Goa | OM Group</title>
-<meta name="description" content="OM Group supplies Granular Sub-Base (GSB) for road and infrastructure projects across Goa, matched against MoRTH Clause 401 and project specifications. Request a quote." />
+<meta name="description" content="OM Group manufactures and supplies Granular Sub-Base (GSB) for roads and infrastructure across Goa, matched to MoRTH Clause 401 and project specifications. Request a quote." />
 <meta name="robots" content="index, follow" />
 <link rel="canonical" href="https://www.omgroupco.com/products/granular-sub-base" />
 <meta name="theme-color" content="#F15A29" />
@@ -46,22 +46,55 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-<!-- Structured Data: BreadcrumbList only. GSB's manufacture-vs-supply
-     relationship is not yet confirmed (OM Group's own homepage names
-     Swastik Enterprises as the sourcing/trading partner for GSB, not a
-     producer) — publishing a Product entity would require asserting a
-     manufacturer/brand relationship this page deliberately does not
-     claim. This activates to a full Product entity the moment that
-     relationship is confirmed one way or the other. See the M-Sand and
-     Concrete Sand pages for the same evidence-gated pattern. -->
+<!-- Structured Data: BreadcrumbList + Product. Manufacture by OM Group confirmed by the business (2026-11-02). No price, offer, rating or availability is published. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.omgroupco.com/" },
-    { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://www.omgroupco.com/#products" },
-    { "@type": "ListItem", "position": 3, "name": "Granular Sub-Base (GSB)", "item": "https://www.omgroupco.com/products/granular-sub-base" }
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.omgroupco.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Products",
+          "item": "https://www.omgroupco.com/products"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Granular Sub-Base (GSB)",
+          "item": "https://www.omgroupco.com/products/granular-sub-base"
+        }
+      ]
+    },
+    {
+      "@type": "Product",
+      "name": "Granular Sub-Base (GSB)",
+      "alternateName": "GSB",
+      "category": "Road Construction Material",
+      "description": "OM Group manufactures and supplies Granular Sub-Base (GSB) for road and infrastructure projects across North and South Goa, matched against the applicable grading, MoRTH Clause 401 and project specification.",
+      "image": "https://www.omgroupco.com/img/products/om-group-granular-sub-base-og.png",
+      "url": "https://www.omgroupco.com/products/granular-sub-base",
+      "brand": {
+        "@type": "Organization",
+        "@id": "https://www.omgroupco.com/#organization",
+        "name": "OM Group",
+        "url": "https://www.omgroupco.com/"
+      },
+      "manufacturer": {
+        "@type": "Organization",
+        "@id": "https://www.omgroupco.com/#organization",
+        "name": "OM Group",
+        "url": "https://www.omgroupco.com/"
+      }
+    }
   ]
 }
 </script>
@@ -363,6 +396,13 @@ footer a:hover{color:var(--accent)}
 .compare-verdict{font-size:10px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;padding:5px 10px;border-radius:2px;background:var(--ink);color:var(--white)}
 .compare-block p{font-size:14px;color:var(--grey);line-height:1.75;max-width:780px;margin-bottom:10px}
 .compare-block p:last-child{margin-bottom:0}
+
+/* ===== FOOTER PRODUCT LINKS ===== */
+.foot-nav{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px 24px;max-width:880px;margin:0 auto 24px;padding-bottom:24px;border-bottom:1px solid var(--line)}
+.foot-nav-label{font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);font-weight:700}
+.foot-nav a{font-size:13px;color:var(--grey);transition:color .2s}
+.foot-nav a:hover{color:var(--accent)}
+@media (max-width:640px){.foot-nav{gap:10px 18px}.foot-nav-label{flex-basis:100%}}
 </style>
 <link rel="stylesheet" href="/assets/motion.css">
 </head>
@@ -380,7 +420,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <img src="/assets/om-group-logo-header.png" alt="OM Group" width="100" height="101" decoding="async" />
     </a>
     <div class="nav-actions">
-      <a href="/#products" class="nav-back">← All Products</a>
+      <a href="/products" class="nav-back">← All Products</a>
       <a href="/?category=Stone%20Aggregates&subcategory=GSB%20(Granular%20Sub-Base)#contact" class="btn btn-accent btn-sm gsb-track" data-event="gsb_bulk_quote_click" data-cta="nav">Request a Quote</a>
     </div>
   </div>
@@ -388,7 +428,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <nav class="breadcrumb" aria-label="Breadcrumb">
   <div class="container">
-    <a href="/">Home</a><span class="bc-sep">›</span><a href="/#products">Products</a><span class="bc-sep">›</span><span aria-current="page">Granular Sub-Base (GSB)</span>
+    <a href="/">Home</a><span class="bc-sep">›</span><a href="/products">Products</a><span class="bc-sep">›</span><span aria-current="page">Granular Sub-Base (GSB)</span>
   </div>
 </nav>
 
@@ -399,7 +439,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div>
         <span class="eyebrow fade-up" style="--i:0">Granular Sub-Base · GSB · Goa</span>
         <h1 class="hero-h1 fade-up" style="--i:1">Granular Sub-Base (GSB) Supplier in Goa</h1>
-        <p class="hero-sub fade-up" style="--i:2">Specification-led GSB supply for road, highway and infrastructure projects across North and South Goa, matched against the applicable project grading, MoRTH Clause 401 and project specification.</p>
+        <p class="hero-sub fade-up" style="--i:2">Granular Sub-Base (GSB) is a specified blend of graded granular material that forms the sub-base layer beneath a road's base course and surface. OM Group manufactures and supplies GSB for highways, state, urban and industrial roads and site-development projects across North and South Goa, matched against the applicable grading, MoRTH Clause 401 and project specification.</p>
         <div class="cta-row fade-up" style="--i:3">
           <a href="/?category=Stone%20Aggregates&subcategory=GSB%20(Granular%20Sub-Base)#contact" class="btn btn-accent gsb-track" data-event="gsb_bulk_quote_click" data-cta="hero">Request Bulk GSB Quote <span class="btn-arrow">→</span></a>
           <a href="/?category=Stone%20Aggregates&subcategory=GSB%20(Granular%20Sub-Base)&message=I%27d%20like%20to%20request%20GSB%20grading%2Fspecification%20details%20for%20a%20project.#contact" class="btn btn-ghost gsb-track" data-event="gsb_specification_request" data-cta="hero">Request GSB Specification</a>
@@ -632,8 +672,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section class="sec">
   <div class="container fade-up">
     <span class="eyebrow">How OM Group Supplies GSB</span>
-    <h2 class="sec-title">Coordinated sourcing, <em>matched to specification.</em></h2>
-    <p class="sec-lede">OM Group supplies Granular Sub-Base across North and South Goa, matched against the applicable project grading and specification. OM Group coordinates sourcing, confirms the grading against your project's requirement, and manages delivery scheduling as part of a single procurement relationship that can also cover aggregates, sand and Ready Mix Concrete.</p>
+    <h2 class="sec-title">Manufactured and supplied, <em>matched to specification.</em></h2>
+    <p class="sec-lede">OM Group manufactures and supplies Granular Sub-Base across North and South Goa, matched against the applicable project grading and specification. OM Group confirms the grading against your project's requirement and manages delivery scheduling as part of a single procurement relationship that can also cover aggregates, sand and Ready Mix Concrete.</p>
     <div class="supply-rail" id="procureRail">
       <div class="supply-line"><div class="supply-line-fill" id="procureLineFill"></div></div>
       <div class="supply-step fade-up" style="--i:0"><span class="supply-dot">01</span><span class="supply-label">Project Location</span></div>
@@ -773,7 +813,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <details class="faq-item fade-up" style="--i:4"><summary>Who supplies GSB in Goa?<span class="faq-icon" aria-hidden="true"></span></summary><div class="faq-a"><p>OM Group supplies GSB across Goa, coordinating sourcing and specification confirmation as part of its road and infrastructure materials range.</p></div></details>
       <details class="faq-item fade-up" style="--i:0"><summary>Does OM Group supply GSB in North Goa?<span class="faq-icon" aria-hidden="true"></span></summary><div class="faq-a"><p>Yes, GSB is supplied across North Goa.</p></div></details>
       <details class="faq-item fade-up" style="--i:1"><summary>Does OM Group supply GSB in South Goa?<span class="faq-icon" aria-hidden="true"></span></summary><div class="faq-a"><p>Yes, GSB is supplied across South Goa.</p></div></details>
-      <details class="faq-item fade-up" style="--i:2"><summary>Does OM Group manufacture GSB?<span class="faq-icon" aria-hidden="true"></span></summary><div class="faq-a"><p>OM Group supplies GSB across Goa, sourced and confirmed against the applicable grading and project specification. Sourcing and specification confirmation are coordinated as part of OM Group's supply relationship.</p></div></details>
+      <details class="faq-item fade-up" style="--i:2"><summary>Does OM Group manufacture GSB?<span class="faq-icon" aria-hidden="true"></span></summary><div class="faq-a"><p>Yes. OM Group manufactures and supplies GSB across Goa, with the grading confirmed against the applicable project specification. Current grading information and available documentation can be provided on request.</p></div></details>
     </div>
     <div class="cta-row" style="margin-top:28px"><a href="/?category=Stone%20Aggregates&subcategory=GSB%20(Granular%20Sub-Base)#contact" class="btn btn-ghost btn-sm gsb-track" data-event="gsb_bulk_quote_click" data-cta="faq">Ask About GSB <span class="btn-arrow">→</span></a></div>
   </div>
@@ -793,6 +833,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="https://www.omgroupco.com/products/ready-mix-concrete" class="gsb-track" data-event="gsb_internal_link_click" data-cta="rmc">ready mix concrete</a>
       <a href="https://www.omgroupco.com/products/road-base-material" class="gsb-track" data-event="gsb_internal_link_click" data-cta="road-base-material">road base material guide</a>
       <a href="/?category=Stone%20Aggregates&subcategory=GSB%20(Granular%20Sub-Base)#contact" class="gsb-track" data-event="gsb_bulk_quote_click" data-cta="related">request a bulk quote</a>
+      <a href="/products">All OM Group products</a>
     </div>
   </div>
 </section>
@@ -813,6 +854,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <footer>
   <div class="container">
+    <nav class="foot-nav" aria-label="OM Group products">
+      <span class="foot-nav-label">Products</span>
+      <a href="/products/10mm-aggregate">10mm Aggregates</a>
+      <a href="/products/20mm-aggregate">20mm Aggregates</a>
+      <a href="/products/granular-sub-base">GSB (Granular Sub-Base)</a>
+      <a href="/products/m-sand">M-Sand</a>
+      <a href="/products/ready-mix-concrete">Ready-Mix Concrete (RMC)</a>
+      <a href="/products/plaster-sand">P-Sand (Plaster Sand)</a>
+      <a href="/products">All Products</a>
+    </nav>
     <p>&copy; 2026 OM Group of Companies. All rights reserved. &nbsp;|&nbsp; Goa, India &nbsp;|&nbsp; <a href="mailto:info@omgroupco.com">info@omgroupco.com</a> &nbsp;|&nbsp; <a href="/">omgroupco.com</a> &nbsp;|&nbsp; <a href="/privacy-policy">Privacy Policy</a> &nbsp;|&nbsp; <a href="/terms-and-conditions">Terms &amp; Conditions</a></p>
   </div>
 </footer>

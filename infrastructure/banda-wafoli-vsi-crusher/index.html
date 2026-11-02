@@ -256,6 +256,13 @@ footer a:hover{color:var(--accent)}
   .supply-line-fill{transition:none !important}
   .faq-a{transition:opacity .2s ease !important}
 }
+
+/* ===== FOOTER PRODUCT LINKS ===== */
+.foot-nav{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px 24px;max-width:880px;margin:0 auto 24px;padding-bottom:24px;border-bottom:1px solid var(--line)}
+.foot-nav-label{font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);font-weight:700}
+.foot-nav a{font-size:13px;color:var(--grey);transition:color .2s}
+.foot-nav a:hover{color:var(--accent)}
+@media (max-width:640px){.foot-nav{gap:10px 18px}.foot-nav-label{flex-basis:100%}}
 </style>
 <link rel="stylesheet" href="/assets/motion.css">
 </head>
@@ -593,6 +600,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <footer>
   <div class="container">
+    <nav class="foot-nav" aria-label="OM Group products">
+      <span class="foot-nav-label">Products</span>
+      <a href="/products/10mm-aggregate">10mm Aggregates</a>
+      <a href="/products/20mm-aggregate">20mm Aggregates</a>
+      <a href="/products/granular-sub-base">GSB (Granular Sub-Base)</a>
+      <a href="/products/m-sand">M-Sand</a>
+      <a href="/products/ready-mix-concrete">Ready-Mix Concrete (RMC)</a>
+      <a href="/products/plaster-sand">P-Sand (Plaster Sand)</a>
+      <a href="/products">All Products</a>
+    </nav>
     <p>&copy; 2026 OM Group of Companies. All rights reserved. &nbsp;|&nbsp; Goa, India &nbsp;|&nbsp; <a href="mailto:info@omgroupco.com">info@omgroupco.com</a> &nbsp;|&nbsp; <a href="/">omgroupco.com</a> &nbsp;|&nbsp; <a href="/privacy-policy">Privacy Policy</a> &nbsp;|&nbsp; <a href="/terms-and-conditions">Terms &amp; Conditions</a></p>
   </div>
 </footer>
