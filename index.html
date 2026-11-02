@@ -536,6 +536,8 @@ body.dark .pt-stage::after{background:linear-gradient(270deg,var(--bone) 0%,var(
   filter:grayscale(100%) opacity(.65);
   transition:filter .5s ease, transform .5s cubic-bezier(.2,.7,.2,1);
 }
+/* square and tall emblems sit a little smaller than the long wordmarks so every logo carries the same visual weight */
+.pt-item.pt-sq img{max-height:76px}
 .pt-item:hover{transform:translateY(-2px)}
 .pt-item:hover img{filter:grayscale(0%) opacity(1);transform:scale(1.05)}
 
@@ -550,6 +552,7 @@ body.dark .pt-stage::after{background:linear-gradient(270deg,var(--bone) 0%,var(
 }
 @media(max-width:560px){
   .pt-item{width:140px;height:78px;padding:0 20px}
+  .pt-item.pt-sq img{max-height:56px}
   .pt-stage::before,.pt-stage::after{width:80px}
 }
 
@@ -3219,33 +3222,42 @@ document.querySelectorAll('.count').forEach(el => counterIO.observe(el));
 })();
 
 (function(){
-  const partners = [
+  // Two rows, each a different set of companies (no company appears in both rows). Each track is rendered twice only to loop seamlessly.
+  const row1 = [
     {src:'assets/partners/nanu.png', alt:'Nanu'},
     {src:'assets/partners/lt.png', alt:'Larsen & Toubro'},
     {src:'assets/partners/tata.png', alt:'Tata'},
+    {src:'assets/partners/prestige.png', alt:'Prestige Group'},
     {src:'assets/partners/jsw.png', alt:'JSW Group'},
     {src:'assets/partners/siemens.png', alt:'Siemens'},
+    {src:'assets/partners/dlf.png', alt:'DLF'},
     {src:'assets/partners/ultratech.png', alt:'UltraTech Cement'},
     {src:'assets/partners/jcb.png', alt:'JCB'},
+    {src:'assets/partners/sobha.png', alt:'Sobha'},
     {src:'assets/partners/bosch.png', alt:'Bosch'},
     {src:'assets/partners/wipro.png', alt:'Wipro'},
-    {src:'assets/partners/ongc.png', alt:'ONGC'},
+    {src:'assets/partners/oberoi.png', alt:'Oberoi Realty'},
+    {src:'assets/partners/ongc.png', alt:'ONGC'}
+  ];
+  const row2 = [
     {src:'assets/partners/dilip-buildcon.png', alt:'Dilip Buildcon Limited'},
     {src:'assets/partners/lodha.png', alt:'Lodha'},
+    {src:'assets/partners/hiranandani.png', alt:'Hiranandani'},
     {src:'assets/partners/mrf.png', alt:'MRF'},
     {src:'assets/partners/cipla.png', alt:'Cipla'},
+    {src:'assets/partners/brigade.png', alt:'Brigade'},
     {src:'assets/partners/lupin.png', alt:'Lupin'},
     {src:'assets/partners/nuvoco.png', alt:'Nuvoco'},
+    {src:'assets/partners/gail.png', alt:'GAIL'},
     {src:'assets/partners/schwing.png', alt:'Schwing Stetter'},
     {src:'assets/partners/putzmeister.png', alt:'Putzmeister'},
+    {src:'assets/partners/mumbai-port-trust.png', alt:'Mumbai Port Trust'},
     {src:'assets/partners/parul.png', alt:'Parul University'},
+    {src:'assets/partners/indian-navy.png', alt:'Indian Navy'},
     {src:'assets/partners/adani.png', alt:'Adani Group'}
   ];
-  const mid = Math.ceil(partners.length / 2);
-  const row1 = partners.slice(0, mid);
-  const row2 = partners.slice(mid).concat(partners.slice(0, 1)); // pad row2 if shorter
   const buildRow = (arr) => arr.map(p =>
-    `<div class="pt-item"><img src="${p.src}" alt="${p.alt}" width="200" height="110" loading="lazy"/></div>`
+    `<div class="pt-item${/tata|prestige|hiranandani|brigade|gail|indian-navy|mumbai-port-trust/.test(p.src)?' pt-sq':''}"><img src="${p.src}" alt="${p.alt}" width="200" height="110" loading="lazy"/></div>`
   ).join('');
   const t1 = document.getElementById('ptTrack1');
   const t2 = document.getElementById('ptTrack2');
