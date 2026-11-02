@@ -1,0 +1,343 @@
+[
+  {
+    "step": 1,
+    "slug": "origin",
+    "source": "img/process/source/OM_Group_Scene_01_Basalt_Transparent_Refined.png",
+    "sourceFormat": "png",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "sourceBytes": 1844012,
+    "hasAlphaChannel": true,
+    "transparentPct": 54.7,
+    "opaqueCorners": 0,
+    "trimBox": {
+      "left": 417,
+      "top": 7,
+      "width": 1166,
+      "height": 904
+    },
+    "pixelIdenticalToSource": true,
+    "croppedMargin": {
+      "pixels": 843,
+      "maxAlpha": 3
+    },
+    "outputs": [
+      {
+        "file": "img/process/01-origin.webp",
+        "width": 1166,
+        "height": 904,
+        "bytes": 1184468
+      }
+    ]
+  },
+  {
+    "step": 2,
+    "slug": "quarry-sourcing",
+    "source": "img/process/source/OM GROUP SCENE 2 Basalt Quarry Excavator and Boulders.png",
+    "sourceFormat": "png",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "sourceBytes": 2521054,
+    "hasAlphaChannel": true,
+    "transparentPct": 43.8,
+    "opaqueCorners": 0,
+    "trimBox": {
+      "left": 206,
+      "top": 0,
+      "width": 1466,
+      "height": 941
+    },
+    "pixelIdenticalToSource": true,
+    "croppedMargin": {
+      "pixels": 4,
+      "maxAlpha": 1
+    },
+    "outputs": [
+      {
+        "file": "img/process/02-quarry-sourcing.webp",
+        "width": 1466,
+        "height": 941,
+        "bytes": 1596480
+      }
+    ]
+  },
+  {
+    "step": 3,
+    "slug": "extraction-handling",
+    "source": "img/process/source/OM GROUP SCENE 03 Excavator Loading Rock Haul Truck.png",
+    "sourceFormat": "png",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "sourceBytes": 1894053,
+    "hasAlphaChannel": true,
+    "transparentPct": 56.1,
+    "opaqueCorners": 0,
+    "trimBox": {
+      "left": 340,
+      "top": 19,
+      "width": 1332,
+      "height": 922
+    },
+    "pixelIdenticalToSource": true,
+    "croppedMargin": {
+      "pixels": 2,
+      "maxAlpha": 1
+    },
+    "outputs": [
+      {
+        "file": "img/process/03-extraction-handling.webp",
+        "width": 1332,
+        "height": 922,
+        "bytes": 1234532
+      }
+    ]
+  },
+  {
+    "step": 4,
+    "slug": "crushing",
+    "source": "img/process/source/OM GROUP SCENE 04 Industrial Rock Crushing Plant.png",
+    "sourceFormat": "png",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "sourceBytes": 2189204,
+    "hasAlphaChannel": true,
+    "transparentPct": 48.5,
+    "opaqueCorners": 0,
+    "trimBox": {
+      "left": 0,
+      "top": 6,
+      "width": 1672,
+      "height": 929
+    },
+    "pixelIdenticalToSource": true,
+    "croppedMargin": {
+      "pixels": 6,
+      "maxAlpha": 1
+    },
+    "outputs": [
+      {
+        "file": "img/process/04-crushing.webp",
+        "width": 1672,
+        "height": 929,
+        "bytes": 1405710
+      }
+    ]
+  },
+  {
+    "step": 5,
+    "slug": "screening",
+    "source": "img/process/source/OM GROUP SCENE 05 Industrial Aggregate Screening Plant.png",
+    "sourceFormat": "png",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "sourceBytes": 1921410,
+    "hasAlphaChannel": true,
+    "transparentPct": 57.2,
+    "opaqueCorners": 0,
+    "trimBox": {
+      "left": 393,
+      "top": 62,
+      "width": 1279,
+      "height": 871
+    },
+    "pixelIdenticalToSource": true,
+    "croppedMargin": {
+      "pixels": 69,
+      "maxAlpha": 1
+    },
+    "outputs": [
+      {
+        "file": "img/process/05-screening.webp",
+        "width": 1279,
+        "height": 871,
+        "bytes": 1245568
+      }
+    ]
+  },
+  {
+    "step": 6,
+    "slug": "quality-inspection",
+    "source": "img/process/source/OM GROUP SCENE 6 Aggregate Sieve Testing Equipment Still Life.png",
+    "sourceFormat": "png",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "sourceBytes": 1384118,
+    "hasAlphaChannel": true,
+    "transparentPct": 69,
+    "opaqueCorners": 1,
+    "trimBox": {
+      "left": 574,
+      "top": 0,
+      "width": 1098,
+      "height": 935
+    },
+    "pixelIdenticalToSource": true,
+    "croppedMargin": {
+      "pixels": 68,
+      "maxAlpha": 1
+    },
+    "outputs": [
+      {
+        "file": "img/process/06-quality-inspection.webp",
+        "width": 1098,
+        "height": 935,
+        "bytes": 836136
+      }
+    ]
+  },
+  {
+    "step": 7,
+    "slug": "stockpiling-dispatch",
+    "source": "img/process/source/OM GROUP SCENE 7 Wheel Loader Loading a Gravel Dump Truck.png",
+    "sourceFormat": "png",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "sourceBytes": 1896282,
+    "hasAlphaChannel": true,
+    "transparentPct": 53.2,
+    "opaqueCorners": 0,
+    "trimBox": {
+      "left": 0,
+      "top": 235,
+      "width": 1672,
+      "height": 685
+    },
+    "pixelIdenticalToSource": true,
+    "croppedMargin": {
+      "pixels": 547,
+      "maxAlpha": 1
+    },
+    "outputs": [
+      {
+        "file": "img/process/07-stockpiling-dispatch.webp",
+        "width": 1672,
+        "height": 685,
+        "bytes": 1206542
+      }
+    ]
+  },
+  {
+    "step": 8,
+    "slug": "transportation",
+    "source": "img/process/source/OM GROUP SCENE 8 Heavy-Duty Dump Truck Loaded with Rocks.png",
+    "sourceFormat": "png",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "sourceBytes": 1985835,
+    "hasAlphaChannel": true,
+    "transparentPct": 39.1,
+    "opaqueCorners": 0,
+    "trimBox": {
+      "left": 101,
+      "top": 113,
+      "width": 1549,
+      "height": 822
+    },
+    "pixelIdenticalToSource": true,
+    "croppedMargin": {
+      "pixels": 28,
+      "maxAlpha": 1
+    },
+    "outputs": [
+      {
+        "file": "img/process/08-transportation.webp",
+        "width": 1549,
+        "height": 822,
+        "bytes": 1309334
+      }
+    ]
+  },
+  {
+    "step": 9,
+    "slug": "ready-mix-concrete",
+    "source": "img/process/source/OM GROUP SCENE  9 Industrial Concrete Batching Plant and Mixer Truck.png",
+    "sourceFormat": "png",
+    "sourceWidth": 1672,
+    "sourceHeight": 940,
+    "sourceBytes": 2049573,
+    "hasAlphaChannel": true,
+    "transparentPct": 43.8,
+    "opaqueCorners": 0,
+    "trimBox": {
+      "left": 0,
+      "top": 0,
+      "width": 1672,
+      "height": 921
+    },
+    "pixelIdenticalToSource": true,
+    "croppedMargin": {
+      "pixels": 74,
+      "maxAlpha": 1
+    },
+    "outputs": [
+      {
+        "file": "img/process/09-ready-mix-concrete.webp",
+        "width": 1672,
+        "height": 921,
+        "bytes": 1443858
+      }
+    ]
+  },
+  {
+    "step": 10,
+    "slug": "construction-application",
+    "source": "img/process/source/OM_Group_Scene_10_Construction_Transparent.png",
+    "sourceFormat": "png",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "sourceBytes": 2588129,
+    "hasAlphaChannel": true,
+    "transparentPct": 39.8,
+    "opaqueCorners": 0,
+    "trimBox": {
+      "left": 0,
+      "top": 0,
+      "width": 1672,
+      "height": 941
+    },
+    "pixelIdenticalToSource": true,
+    "croppedMargin": {
+      "pixels": 0,
+      "maxAlpha": 0
+    },
+    "outputs": [
+      {
+        "file": "img/process/10-construction-application.webp",
+        "width": 1672,
+        "height": 941,
+        "bytes": 1700258
+      }
+    ]
+  },
+  {
+    "step": 11,
+    "slug": "completed-infrastructure",
+    "source": "img/process/source/OM_Group_Scene_11_Infrastructure_Transparent.png",
+    "sourceFormat": "png",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "sourceBytes": 1960597,
+    "hasAlphaChannel": true,
+    "transparentPct": 49.8,
+    "opaqueCorners": 2,
+    "trimBox": {
+      "left": 278,
+      "top": 0,
+      "width": 1394,
+      "height": 941
+    },
+    "pixelIdenticalToSource": true,
+    "croppedMargin": {
+      "pixels": 0,
+      "maxAlpha": 0
+    },
+    "outputs": [
+      {
+        "file": "img/process/11-completed-infrastructure.webp",
+        "width": 1394,
+        "height": 941,
+        "bytes": 1247780
+      }
+    ]
+  }
+]

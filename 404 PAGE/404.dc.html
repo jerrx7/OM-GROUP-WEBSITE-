@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #F4EBE2; }
+  * { box-sizing: border-box; }
+  a { color: #FE5626; text-decoration: none; }
+  a:hover { color: #FE5626; }
+</style>
+</helmet>
+<div style="min-height: 100dvh; display: flex; flex-direction: column; background: #F4EBE2; color: #302F2D; font-family: 'Schibsted Grotesk', 'Helvetica Neue', Helvetica, sans-serif; padding: clamp(20px, 3.2vw, 46px) clamp(20px, 4vw, 60px) clamp(24px, 3.4vw, 48px); -webkit-font-smoothing: antialiased;">
+
+  <sc-if value="{{ showNav }}" hint-placeholder-val="{{ true }}">
+  <header style="display: flex; align-items: baseline; justify-content: space-between; gap: clamp(16px, 4vw, 48px); flex-wrap: wrap;">
+    <nav aria-label="Primary" style="display: flex; align-items: baseline; justify-content: space-between; gap: clamp(18px, 3.4vw, 56px); flex-wrap: wrap; width: 100%; font-size: clamp(10.5px, 0.78vw, 12.5px); font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;">
+      <a href="#" style="color: #302F2D; display: inline-flex; gap: 0.35em; padding: 4px 0; transition: color 220ms ease;" style-hover="color: #FE5626" style-focus-visible="outline: 1.5px solid #FE5626; outline-offset: 4px"><sc-if value="{{ showNums }}" hint-placeholder-val="{{ true }}"><span style="color: rgba(48, 47, 45, 0.72);">01/</span></sc-if>HEY</a>
+      <span style="display: flex; align-items: baseline; gap: clamp(18px, 3.2vw, 56px); flex-wrap: wrap;">
+        <a href="#" style="color: #302F2D; display: inline-flex; gap: 0.35em; padding: 4px 0; transition: color 220ms ease;" style-hover="color: #FE5626" style-focus-visible="outline: 1.5px solid #FE5626; outline-offset: 4px"><sc-if value="{{ showNums }}" hint-placeholder-val="{{ true }}"><span style="color: rgba(48, 47, 45, 0.72);">02/</span></sc-if>ABOUT</a>
+        <a href="#" style="color: #302F2D; display: inline-flex; gap: 0.35em; padding: 4px 0; transition: color 220ms ease;" style-hover="color: #FE5626" style-focus-visible="outline: 1.5px solid #FE5626; outline-offset: 4px"><sc-if value="{{ showNums }}" hint-placeholder-val="{{ true }}"><span style="color: rgba(48, 47, 45, 0.72);">03/</span></sc-if>WORK</a>
+        <a href="#" style="color: #302F2D; display: inline-flex; gap: 0.35em; padding: 4px 0; transition: color 220ms ease;" style-hover="color: #FE5626" style-focus-visible="outline: 1.5px solid #FE5626; outline-offset: 4px"><sc-if value="{{ showNums }}" hint-placeholder-val="{{ true }}"><span style="color: rgba(48, 47, 45, 0.72);">04/</span></sc-if>CONTACT</a>
+      </span>
+    </nav>
+  </header>
+  </sc-if>
+
+  <main style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: clamp(32px, 6vh, 88px) 0 clamp(40px, 7vh, 96px);">
+
+    <h1 style="margin: 0; width: clamp(272px, 58vw, 1000px);">
+      <svg viewBox="0 0 1127 437" role="img" aria-labelledby="om404-title" style="display: block; width: 100%; height: auto; margin-bottom: -37px">
+        <title id="om404-title">404 — Page not found. The OM Group flower mark stands in for the zero.</title>
+        <g fill="#FE5626" transform="translate(-160 -315)">
+          <path d="M 354.2 323.99 A 16 16 0 0 1 366.68 318 L 405 318 A 18 18 0 0 1 423 336 L 423 563 A 9 9 0 0 0 432 572 L 458 572 A 15 15 0 0 1 473 587 L 473 605 A 15 15 0 0 1 458 620 L 432 620 A 9 9 0 0 0 423 629 L 423 703 A 18 18 0 0 1 405 721 L 386 721 A 18 18 0 0 1 368 703 L 368 629 A 9 9 0 0 0 359 620 L 178 620 A 18 18 0 0 1 160 602 L 160 572.33 A 18 18 0 0 1 163.96 561.06 L 354.2 323.99 Z M 234.77 552.02 A 11 11 0 0 0 243.27 570 L 354 570 A 13 13 0 0 0 367 557 L 367 427.31 A 13 13 0 0 0 343.95 419.06 L 234.77 552.02 Z"></path>
+          <g transform="translate(725.5 533)">
+            <path d="M -62.5 -188 A 30 30 0 0 1 -32.5 -218 L 32.5 -218 A 30 30 0 0 1 62.5 -188 L 62.5 -116.7 A 20 20 0 0 1 56.37 -102.3 L 9.71 -57.35 A 14 14 0 0 1 -9.71 -57.35 L -56.37 -102.3 A 20 20 0 0 1 -62.5 -116.7 L -62.5 -188 Z"></path>
+            <path transform="rotate(60)" d="M -62.5 -188 A 30 30 0 0 1 -32.5 -218 L 32.5 -218 A 30 30 0 0 1 62.5 -188 L 62.5 -116.7 A 20 20 0 0 1 56.37 -102.3 L 9.71 -57.35 A 14 14 0 0 1 -9.71 -57.35 L -56.37 -102.3 A 20 20 0 0 1 -62.5 -116.7 L -62.5 -188 Z"></path>
+            <path transform="rotate(120)" d="M -62.5 -188 A 30 30 0 0 1 -32.5 -218 L 32.5 -218 A 30 30 0 0 1 62.5 -188 L 62.5 -116.7 A 20 20 0 0 1 56.37 -102.3 L 9.71 -57.35 A 14 14 0 0 1 -9.71 -57.35 L -56.37 -102.3 A 20 20 0 0 1 -62.5 -116.7 L -62.5 -188 Z"></path>
+            <path transform="rotate(180)" d="M -62.5 -188 A 30 30 0 0 1 -32.5 -218 L 32.5 -218 A 30 30 0 0 1 62.5 -188 L 62.5 -116.7 A 20 20 0 0 1 56.37 -102.3 L 9.71 -57.35 A 14 14 0 0 1 -9.71 -57.35 L -56.37 -102.3 A 20 20 0 0 1 -62.5 -116.7 L -62.5 -188 Z"></path>
+            <path transform="rotate(240)" d="M -62.5 -188 A 30 30 0 0 1 -32.5 -218 L 32.5 -218 A 30 30 0 0 1 62.5 -188 L 62.5 -116.7 A 20 20 0 0 1 56.37 -102.3 L 9.71 -57.35 A 14 14 0 0 1 -9.71 -57.35 L -56.37 -102.3 A 20 20 0 0 1 -62.5 -116.7 L -62.5 -188 Z"></path>
+            <path transform="rotate(300)" d="M -62.5 -188 A 30 30 0 0 1 -32.5 -218 L 32.5 -218 A 30 30 0 0 1 62.5 -188 L 62.5 -116.7 A 20 20 0 0 1 56.37 -102.3 L 9.71 -57.35 A 14 14 0 0 1 -9.71 -57.35 L -56.37 -102.3 A 20 20 0 0 1 -62.5 -116.7 L -62.5 -188 Z"></path>
+          </g>
+          <path transform="translate(814 0)" d="M 354.2 323.99 A 16 16 0 0 1 366.68 318 L 405 318 A 18 18 0 0 1 423 336 L 423 563 A 9 9 0 0 0 432 572 L 458 572 A 15 15 0 0 1 473 587 L 473 605 A 15 15 0 0 1 458 620 L 432 620 A 9 9 0 0 0 423 629 L 423 703 A 18 18 0 0 1 405 721 L 386 721 A 18 18 0 0 1 368 703 L 368 629 A 9 9 0 0 0 359 620 L 178 620 A 18 18 0 0 1 160 602 L 160 572.33 A 18 18 0 0 1 163.96 561.06 L 354.2 323.99 Z M 234.77 552.02 A 11 11 0 0 0 243.27 570 L 354 570 A 13 13 0 0 0 367 557 L 367 427.31 A 13 13 0 0 0 343.95 419.06 L 234.77 552.02 Z"></path>
+        </g>
+      </svg>
+    </h1>
+
+    <p style="margin: clamp(30px, 4.4vw, 68px) 0 0; font-size: clamp(19px, 2vw, 32px); font-weight: 400; letter-spacing: 0.3em; color: #302F2D; text-align: center; text-wrap: pretty; margin-bottom: 53px; margin-top: 134px">Looks like you’re lost.</p>
+
+    <a href="/" style="margin: clamp(22px, 3vw, 44px) 0 0; display: inline-flex; align-items: center; gap: 1.13em; font-size: clamp(13px, 1.02vw, 16px); font-weight: 500; letter-spacing: 0.16em; color: #FE5626; padding-bottom: 5px; border-bottom: 1px solid transparent; transition: border-color 260ms ease, gap 280ms cubic-bezier(0.2, 0.7, 0.2, 1); margin-bottom: -56px; line-height: 0; flex-direction: row" style-hover="border-bottom-color: #FE5626; gap: 1.15em" style-focus-visible="outline: 1.5px solid #FE5626; outline-offset: 6px; border-bottom-color: transparent">
+      <span>Go back home</span>
+      <span aria-hidden="true" style="display: inline-flex;">
+        <svg width="22" height="10" viewBox="0 0 22 10" fill="none" aria-hidden="true" style="display: block;">
+          <path d="M0 5h19.4M15.6 1l4.2 4-4.2 4" stroke="#FE5626" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </span>
+    </a>
+  </main>
+
+  <sc-if value="{{ showBottomMark }}" hint-placeholder-val="{{ false }}">
+  <footer style="display: flex; justify-content: space-between; font-size: clamp(10px, 0.72vw, 11.5px); font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(48, 47, 45, 0.42);">
+    <span>OM Group</span>
+    <span>Error 404</span>
+  </footer>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;navStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;numbered&quot;,&quot;plain&quot;,&quot;none&quot;],&quot;default&quot;:&quot;numbered&quot;,&quot;tsType&quot;:&quot;'numbered' | 'plain' | 'none'&quot;,&quot;section&quot;:&quot;Navigation&quot;},&quot;showBottomMark&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;loadFade&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Motion&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const navStyle = this.props.navStyle ?? 'numbered';
+    return {
+      showNav: navStyle !== 'none',
+      showNums: navStyle === 'numbered',
+      showBottomMark: this.props.showBottomMark ?? false
+    };
+  }
+}
+</script>
+</body>
+</html>
