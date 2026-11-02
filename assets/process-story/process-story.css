@@ -1,0 +1,231 @@
+/* ============ PROCESS STORY — From Raw Stone to Real Infrastructure ============
+   Default (no JS, reduced motion): the 11 scenes are a normal stacked list.
+   process-story.js adds one mode class:
+   - html.pst-pin (roomy screens, fine pointer): one sticky two-column stage whose scenes
+     cross-fade under scroll control
+   - html.pst-flow (portrait phones/tablets): stacked image-then-copy blocks, sticky pill
+   - html.pst-scrolly (landscape phones/tablets): sticky image beside scrolling copy */
+
+.pst{
+  --pst-nav:76px;
+  --pst-gl:max(48px, calc((100vw - 1320px) / 2 + 48px));
+  --pst-gr:max(32px, calc((100vw - 1320px) / 2 + 24px));
+  background:var(--bone);padding:140px 0 72px;
+}
+.pst-vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* ---- intro ---- */
+.pst-intro{display:grid;grid-template-columns:5fr 6fr;gap:88px;align-items:end;margin-bottom:72px}
+.pst-intro .sec-title{margin-top:22px;max-width:13ch}
+.pst-lede{font-size:17px;line-height:1.75;color:var(--grey);max-width:60ch}
+.pst-answer{margin-top:28px;padding-top:24px;border-top:1px solid var(--line);max-width:60ch}
+.pst-answer-q{
+  font-family:var(--sans);font-size:11px;letter-spacing:.24em;text-transform:uppercase;
+  font-weight:600;color:var(--ink);margin-bottom:10px;
+}
+.pst-answer p{font-size:15px;line-height:1.72;color:var(--ink)}
+
+/* ---- scenes (stacked) ---- */
+.pst-scenes{--pst-gut:48px;list-style:none;max-width:1320px;margin:0 auto;padding:0 var(--pst-gut)}
+.pst-scene{
+  display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:72px;align-items:center;
+  padding:64px 0;border-top:1px solid var(--line);
+}
+.pst-copy{max-width:460px}
+.pst-step{display:flex;align-items:center;flex-wrap:wrap;gap:0 10px;font-size:12px;line-height:1;font-variant-numeric:tabular-nums}
+.pst-num{font-weight:600;color:var(--ink);letter-spacing:.06em}
+.pst-of{color:var(--grey-2);letter-spacing:.06em}
+.pst-eyebrow{
+  display:inline-flex;align-items:center;gap:12px;margin-left:8px;
+  font-size:11px;letter-spacing:.28em;text-transform:uppercase;font-weight:600;color:var(--accent);
+}
+.pst-eyebrow::before{content:"";width:28px;height:1px;background:var(--accent)}
+.pst-heading{
+  font-family:var(--serif);font-weight:500;letter-spacing:-.015em;line-height:1.06;
+  font-size:clamp(32px, 3.2vw, 48px);color:var(--ink);margin:22px 0 20px;max-width:16ch;
+}
+.pst-text{font-size:16px;line-height:1.72;color:var(--grey);max-width:44ch}
+.pst-text + .pst-text{margin-top:12px}
+.pst-links{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:22px}
+.pst-links-label{
+  width:100%;margin-bottom:2px;
+  font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;color:var(--grey-2);
+}
+.pst-links a{
+  display:inline-flex;align-items:center;min-height:32px;padding:0 14px;
+  border:1px solid var(--line);border-radius:999px;background:var(--white);
+  font-size:12.5px;font-weight:500;color:var(--ink);
+  transition:border-color .3s ease, color .3s ease, background .3s ease;
+}
+.pst-links a:hover{border-color:var(--accent);color:var(--accent)}
+.pst-links a:focus-visible,.pst-progress a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.pst-closing{
+  margin-top:22px;padding-left:18px;border-left:2px solid var(--accent);
+  font-family:var(--serif);font-style:italic;font-weight:500;font-size:22px;line-height:1.25;color:var(--ink);max-width:30ch;
+}
+.pst-ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.pst-ctas .btn{padding:0 20px}
+
+.pst-figure{margin:0;display:flex;align-items:center;justify-content:center}
+.pst-figure img{width:calc(100% * var(--fit, 1));height:auto;object-fit:contain}
+
+.pst-progress{display:none}
+
+/* Pin and scrolly modes stack every image on one stage; only those near the active scene are
+   displayed, so the rest are never fetched or composited. */
+html.pst-pin .pst-figure img:not(.is-near),
+html.pst-scrolly .pst-figure img:not(.is-near){display:none}
+
+/* Height of the site's fixed nav, for the modes below. */
+html.pst-flow .pst,html.pst-scrolly .pst{--pst-navh:75px;padding-bottom:0}
+@media (max-width:640px){ html.pst-flow .pst,html.pst-scrolly .pst{--pst-navh:69px} }
+
+/* ---- flow (portrait phones and tablets, motion allowed) ----
+   Every scene is its own block in normal document flow: its image in a reserved, aspect-ratio
+   box, then its heading, text and material links beneath. Nothing is pinned, so nothing ever
+   passes behind anything; scrolling only moves the progress pill on. */
+html.pst-flow .pst-scene{grid-template-columns:minmax(0, 1fr);align-items:start;scroll-margin-top:calc(var(--pst-navh) + 8px)}
+html.pst-flow .pst-figure{order:-1}
+html.pst-flow .pst-figure img{
+  width:calc(100% * var(--fit, 1));height:auto;
+  max-height:min(56vh, 560px);object-fit:contain;
+}
+@supports (height:1svh){ html.pst-flow .pst-figure img{max-height:min(56svh, 560px)} }
+html.pst-flow .pst-copy{max-width:600px}
+
+/* Flow motion (classes set by process-story.js as content crosses the screen; time-based, so every
+   transition always runs to completion and nothing is left half-way):
+   - an image condenses out of a soft blur as it arrives, and eases back (dimmer, softer) once the
+     reader has moved past it, returning crisp when scrolled back to
+   - each block of copy fades and rises into place as it arrives; copy is never faded on its way out */
+html.pst-flow .pst-figure img{
+  opacity:0;transform:translate3d(0, 14px, 0) scale(.965);filter:blur(4px); /* 14px < the gap to its copy */
+  transition:opacity .8s ease, transform 1s cubic-bezier(.2, .7, .2, 1), filter .8s ease;
+}
+html.pst-flow .pst-figure.is-in img{opacity:1;transform:none;filter:none}
+html.pst-flow .pst-figure.is-in.is-out img{
+  opacity:.28;transform:translate3d(0, -10px, 0) scale(.985);filter:blur(3px);transition-duration:.6s;
+}
+html.pst-flow .pst-copy > *{
+  opacity:0;transform:translate3d(0, 16px, 0);
+  transition:opacity .7s ease, transform .8s cubic-bezier(.2, .7, .2, 1);
+}
+html.pst-flow .pst-copy > .is-in{opacity:1;transform:none}
+
+/* ---- scrolly stage (landscape phones and tablets, motion allowed) ----
+   Native page scrolling throughout. All eleven figures share one grid area spanning every copy
+   row and stick beside the copy, below the fixed nav; each scene's copy is ordinary content on
+   its own row in the other column, so image and text never share space. */
+html.pst-scrolly .pst-scenes{
+  display:grid;grid-template-rows:repeat(11, auto);
+  grid-template-columns:minmax(0, 1fr) minmax(0, 1.2fr);column-gap:clamp(28px, 4vw, 72px);
+}
+html.pst-scrolly .pst-scene{display:contents}
+html.pst-scrolly .pst-figure{
+  grid-column:2;grid-row:1 / span 11;align-self:start;
+  position:sticky;top:calc(var(--pst-navh) + 12px);z-index:2;
+  height:calc(100vh - var(--pst-navh) - 84px);pointer-events:none;
+}
+@supports (height:1svh){ html.pst-scrolly .pst-figure{height:calc(100svh - var(--pst-navh) - 84px)} }
+html.pst-scrolly .pst-figure img{
+  position:absolute;inset:0;margin:auto;
+  width:calc(100% * var(--fit, 1));height:calc(100% * var(--fit, 1));
+  object-fit:contain;opacity:0;transform-origin:50% 60%;
+}
+html.pst-scrolly .pst-scene.is-live .pst-figure img{will-change:opacity, transform, filter}
+html.pst-scrolly .pst-copy{
+  grid-column:1;grid-row:var(--row);max-width:600px;
+  padding:12vh 0 26vh;border-top:1px solid var(--line);
+  opacity:.4;transition:opacity .5s ease;
+}
+html.pst-scrolly .pst-scene:first-child .pst-copy{border-top:0;padding-top:6vh}
+html.pst-scrolly .pst-scene:last-child .pst-copy{padding-bottom:40px}
+html.pst-scrolly .pst-scene.is-active .pst-copy{opacity:1}
+
+/* Progress pill (flow and scrolly): sticky at the foot of the screen while the story is in view.
+   It sits in the flow after the last scene, so at the end it rests in its own space and the
+   final lines are never beneath it. */
+html.pst-flow .pst-progress,html.pst-scrolly .pst-progress{
+  display:flex;align-items:center;gap:12px;width:max-content;max-width:calc(100% - 32px);
+  position:sticky;bottom:calc(12px + env(safe-area-inset-bottom, 0px));z-index:3;
+  margin:8px auto 20px;padding:6px 14px;border-radius:999px;
+  background:var(--bone);box-shadow:0 0 0 1px var(--line), 0 10px 30px -16px rgba(20,20,22,.35);
+}
+html.pst-flow .pst-progress-count,html.pst-scrolly .pst-progress-count{min-width:44px}
+html.pst-flow .pst-progress ol,html.pst-scrolly .pst-progress ol{gap:2px}
+html.pst-flow .pst-progress a,html.pst-scrolly .pst-progress a{width:20px;height:28px}
+/* Portrait: a full-width bar with a solid ground, docked like the site header, so text passes
+   cleanly beneath it instead of being half-covered by a floating pill. */
+html.pst-flow .pst-progress{
+  width:auto;max-width:none;margin:16px 0 0;border-radius:0;justify-content:center;
+  bottom:0;padding:6px 16px calc(6px + env(safe-area-inset-bottom, 0px));
+  box-shadow:0 -1px 0 var(--line);
+}
+/* the eleven step markers share the width left after the counter, so it never wraps */
+html.pst-flow .pst-progress-count{flex:none;white-space:nowrap}
+html.pst-flow .pst-progress ol{flex:0 1 264px;min-width:0}
+html.pst-flow .pst-progress li{flex:1 1 0;min-width:0}
+html.pst-flow .pst-progress a{width:100%}
+
+/* ---- pinned stage (desktop / landscape tablet, motion allowed) ---- */
+html.pst-pin .pst{padding-bottom:0}
+html.pst-pin .pst-intro{margin-bottom:24px}
+html.pst-pin .pst-track{position:relative}
+html.pst-pin .pst-stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+html.pst-pin .pst-scenes{position:absolute;inset:var(--pst-nav) 0 0 0;max-width:none;padding:0}
+html.pst-pin .pst-scene{
+  position:absolute;inset:0;border:0;
+  padding:24px var(--pst-gr) 96px var(--pst-gl);
+  grid-template-columns:minmax(300px, min(470px, 40vw)) minmax(0, 1fr);gap:clamp(40px, 5vw, 96px);
+  align-items:center;pointer-events:none;
+}
+html.pst-pin .pst-scene.is-active{pointer-events:auto}
+html.pst-pin .pst-copy{opacity:0}
+html.pst-pin .pst-figure{position:relative;align-self:stretch;min-height:0}
+html.pst-pin .pst-figure img{
+  position:absolute;inset:0;margin:auto;
+  width:calc(100% * var(--fit, 1));height:calc(100% * var(--fit, 1));
+  object-fit:contain;opacity:0;transform-origin:50% 60%;
+}
+html.pst-pin .pst-scene.is-live .pst-figure img,
+html.pst-pin .pst-scene.is-live .pst-copy{will-change:opacity, transform, filter}
+
+html.pst-pin .pst-progress{
+  display:flex;align-items:center;gap:18px;
+  position:absolute;left:var(--pst-gl);bottom:36px;z-index:2;
+}
+.pst-progress-count{font-size:12px;letter-spacing:.06em;color:var(--grey-2);font-variant-numeric:tabular-nums;min-width:52px}
+.pst-progress-num{color:var(--ink);font-weight:600}
+.pst-progress ol{list-style:none;display:flex;gap:6px}
+.pst-progress a{display:flex;align-items:center;height:24px;width:26px}
+.pst-tick{position:relative;display:block;width:100%;height:2px;background:var(--line);overflow:hidden}
+.pst-tick::after{
+  content:"";position:absolute;inset:0;background:var(--ink);
+  transform-origin:0 50%;transform:scaleX(var(--p, 0));
+}
+.pst-progress a[aria-current="step"] .pst-tick::after{background:var(--accent)}
+.pst-progress a:hover .pst-tick{background:var(--grey-2)}
+
+/* ---- responsive ---- */
+@media (max-width:1100px){
+  .pst-intro{gap:56px}
+  .pst-scenes{--pst-gut:32px}
+  .pst-scene{gap:48px}
+}
+@media (max-width:900px){
+  .pst-intro{grid-template-columns:1fr;gap:28px;margin-bottom:48px}
+  .pst-scene{grid-template-columns:1fr;gap:28px;padding:48px 0}
+  .pst-figure{order:-1} /* single column: each image above its own copy */
+  .pst-copy{max-width:600px}
+  .pst-heading{max-width:20ch}
+  .pst-text{max-width:60ch}
+}
+@media (max-width:640px){
+  .pst{padding:90px 0 40px}
+  .pst-scenes{--pst-gut:22px}
+  .pst-scene{gap:22px;padding:40px 0}
+  .pst-heading{font-size:clamp(28px, 8vw, 34px);margin:18px 0 14px}
+  .pst-text,.pst-lede{font-size:15.5px}
+  .pst-eyebrow{letter-spacing:.22em}
+  .pst-ctas .btn{flex:1 1 100%;justify-content:center}
+}

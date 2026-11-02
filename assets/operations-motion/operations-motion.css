@@ -1,0 +1,203 @@
+/* ============ CONNECTED OPERATIONS — scroll-driven SVG industrial motion graphic ============
+   The section is a tall scroll track; the stage stays pinned (position: sticky, native scrolling,
+   nothing intercepted) while scroll position drives the story. Without JS the captions read as a
+   plain ordered list. */
+
+.opm{background:var(--white);padding:140px 0 60px;--opm-navh:75px;--opm-orange:#FF5E29}
+@media (max-width:640px){ .opm{padding:90px 0 40px;--opm-navh:69px} }
+.opm-head{display:grid;grid-template-columns:5fr 6fr;gap:88px;align-items:end;margin-bottom:40px}
+.opm-head .sec-title{margin-top:22px;max-width:14ch}
+.opm-sub{font-size:17px;line-height:1.75;color:var(--grey);max-width:56ch}
+
+/* scroll track and pinned frame (JS only) */
+.opm-track{position:relative}
+html.opm-js .opm-track{height:calc(75 * 12vh + 100vh)}
+html.opm-js .opm-pin{position:sticky;top:var(--opm-navh);height:calc(100vh - var(--opm-navh));display:flex;flex-direction:column;justify-content:center}
+@supports (height:1svh){
+  html.opm-js .opm-track{height:calc(75 * 12svh + 100svh)}
+  html.opm-js .opm-pin{height:calc(100svh - var(--opm-navh))}
+}
+.opm-pin > .container{width:100%}
+
+.opm-stage{
+  position:relative;margin:0 auto;border-radius:24px;overflow:hidden;
+  aspect-ratio:16 / 9;max-width:calc((100vh - var(--opm-navh) - 96px) * 16 / 9);
+  /* warm drafting paper with a fine grid (matched to the reference art) */
+  background:
+    radial-gradient(120% 90% at 88% 0%, #ffffff 0%, rgba(255,255,255,0) 58%),
+    linear-gradient(90deg, rgba(20,20,22,.03) 1px, transparent 1px) 0 0 / 2.5% 4.4444%,
+    linear-gradient(0deg, rgba(20,20,22,.03) 1px, transparent 1px) 0 0 / 2.5% 4.4444%,
+    linear-gradient(180deg, #fcfaf6 0%, #f6f2ea 100%);
+  box-shadow:0 0 0 1px var(--line), 0 50px 90px -70px rgba(20,20,22,.45);
+}
+@supports (height:1svh){ .opm-stage{max-width:calc((100svh - var(--opm-navh) - 96px) * 16 / 9)} }
+.opm-stage.is-tall{aspect-ratio:900 / 1400;max-width:min(100%, calc((100svh - var(--opm-navh) - 84px) * 900 / 1400));background-size:auto, 4.4444% 2.8571%, 4.4444% 2.8571%, auto}
+
+/* three layers share one camera: static artwork, moving machines, flow markers + labels */
+.opm-svg{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
+/* the three world layers (static art, moving machines, flow) hold the whole world at a reference
+   scale and are moved by the camera as composited transforms: travelling repaints nothing */
+.opm-svg.opm-world{inset:auto;left:0;top:0;transform-origin:0 0;will-change:transform}
+.opm-stage.is-tall .opm-svg.opm-world{will-change:auto} /* phones zoom a lot: repaint crisp instead */
+
+/* ---- drawing language (see operations-art.js) ---- */
+/* --k: how much a redrawn (live) layer is magnified by the camera, so screen-width outlines match the layers the
+   camera scales as a whole (1 there) */
+.opm-svg{--edge:#232427;--k:1;--sw:calc(.8px * var(--k))}
+.opm-svg .o{stroke:var(--edge);stroke-width:var(--sw);stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.opm-svg .hl{fill:none;stroke:#ffffff;stroke-opacity:.4;stroke-width:1.1;stroke-linecap:round}
+.opm-svg .mo{fill:none;stroke:#1f2023;stroke-linecap:butt;stroke-linejoin:round}
+.opm-svg .mi{fill:none;stroke:#5f636a;stroke-linecap:butt;stroke-linejoin:round}
+.opm-svg .seam{fill:none;stroke:#8e8b85;stroke-opacity:.55;stroke-width:.9}
+.opm-svg .rib{fill:none;stroke:#7d7a74;stroke-width:2.2;stroke-linecap:round}
+.opm-svg .bolt{fill:none;stroke:#55585d;stroke-width:2.2;stroke-linecap:round}
+.opm-svg .rl{fill:none;stroke:var(--opm-orange);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.opm-svg .rl-t{fill:none;stroke:#c9431a;stroke-width:2.4}
+.opm-svg .lad{fill:none;stroke:#55585d;stroke-width:1.6}
+.opm-svg .spring{fill:none;stroke:#3a3c40;stroke-width:3;stroke-linejoin:round}
+.opm-svg .pipe{fill:none;stroke:#7d93a3;stroke-width:5;stroke-linejoin:round;stroke-linecap:round}
+.opm-svg .screw-o{fill:none;stroke:#1f2023;stroke-width:15}
+.opm-svg .screw{fill:none;stroke:var(--opm-orange);stroke-width:12.6}
+.opm-svg .screw-h{fill:none;stroke:#ffffff;stroke-opacity:.35;stroke-width:2.4}
+.opm-svg .screw-f{fill:none;stroke:#b8401a;stroke-width:12;stroke-dasharray:2.4 13.6;opacity:.35}
+.opm-svg .crane{fill:none;stroke:#e9774f;stroke-width:2.2;stroke-linejoin:round}
+.opm-svg .cable{fill:none;stroke:#3a3c40;stroke-width:1}
+.opm-svg .lamp{fill:none;stroke:#55585d;stroke-width:2.4;stroke-linecap:round}
+.opm-svg .layer-edge{fill:none;stroke:rgba(20,20,22,.35);stroke-width:1}
+.opm-svg .slump{fill:none;stroke:#000;stroke-opacity:.12;stroke-width:1.2;stroke-linecap:round}
+/* rock: facet edges catch light; the silhouette is a fine dark line */
+.opm-svg .fe{fill:none;stroke:#d9dadd;stroke-opacity:.22;stroke-width:.55;stroke-linejoin:round}
+.opm-svg .ro{fill:none;stroke:#0e0f10;stroke-opacity:.7;stroke-width:calc(.6px * var(--k));stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.opm-svg .rh{fill:none;stroke:#d9dbde;stroke-opacity:.5;stroke-width:.8;stroke-linecap:round}
+.opm-svg .crack-d{fill:none;stroke:#09090a;stroke-width:1.9;stroke-linejoin:round;stroke-linecap:round}
+.opm-svg .crack-l{fill:none;stroke:#c9c4bb;stroke-opacity:.45;stroke-width:.7;stroke-linejoin:round;transform:translate(.9px,.9px)}
+/* quality chapter: the workstation curve and the test report (screen space) */
+.opm-svg .screen-curve{fill:none;stroke:#7fdc9a;stroke-width:1.6;stroke-linecap:round}
+.opm-svg .opm-lab.halo{paint-order:stroke;stroke:#fbfaf7;stroke-width:3.4px;stroke-linejoin:round}
+.opm-svg .rp-card{fill:#ffffff;stroke:#e3ded5;stroke-width:1}
+.opm-svg .rp-h{fill:#141416;font-weight:700;letter-spacing:.14em}
+.opm-svg .rp-l{fill:#8E8E8E;font-weight:600;letter-spacing:.12em}
+.opm-svg .rp-v{fill:#141416;font-weight:500}
+.opm-svg .rp-grey{fill:#8E8E8E}
+.opm-svg .rp-ok{fill:#2e7d4f;font-weight:700}
+.opm-svg .rp-pass{fill:#2e7d4f;font-weight:700;letter-spacing:.08em}
+.opm-svg .rp-stamp{fill:#2e7d4f;font-weight:800;letter-spacing:.16em}
+.opm-svg .rp-stamp2{fill:#2e7d4f;font-weight:600;letter-spacing:.14em}
+.opm-svg .rp-link{fill:none;stroke:var(--opm-orange);stroke-width:1.4;stroke-dasharray:5 5}
+.opm-svg .tooth{fill:none;stroke:#4e5156;stroke-width:1.4;stroke-linecap:round}
+.opm-svg .toggle{fill:none;stroke:#3a3c40;stroke-width:9;stroke-linecap:round}
+.opm-svg .crack{fill:none;stroke:#eceae5;stroke-opacity:.85;stroke-width:1.3;stroke-linejoin:round}
+/* conveyors */
+.opm-svg .bl{fill:none;stroke:#26272a;stroke-width:5.5;stroke-linecap:round}
+.opm-svg .bl-c{fill:none;stroke:#5d6066;stroke-width:5.5;stroke-dasharray:3 11}
+.opm-svg .bl-ret{fill:none;stroke:#3a3c40;stroke-width:2.6}
+.opm-svg .rmark{fill:none;stroke:#2c2e32;stroke-width:1.2;stroke-linecap:round}
+/* cards, process marks, technical lines */
+.opm-svg .card-bg{fill:#ffffff;stroke:rgba(20,20,22,.12);stroke-width:1}
+.opm-svg .ln{fill:none;stroke:var(--edge);stroke-width:var(--sw);stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.opm-svg .faint{stroke-opacity:.34}
+.opm-svg .dash{stroke-dasharray:5 5}
+.opm-svg .acc{stroke:var(--opm-orange)}
+.opm-svg .ring{fill:#fffdfa;stroke:var(--opm-orange);stroke-width:calc(1.6px * var(--k));vector-effect:non-scaling-stroke}
+.opm-svg .ring-on,.opm-svg .opm-dot{fill:var(--opm-orange)}
+.opm-svg .trace{fill:none;stroke:var(--opm-orange);stroke-width:2.2;stroke-linecap:round}
+.opm-svg .gauge{fill:none;stroke:var(--opm-orange);stroke-width:3.4;stroke-linecap:round}
+.opm-svg .hot-frame{fill:none;stroke:var(--opm-orange);stroke-width:1.6;stroke-linecap:round;display:none}
+/* flow markers (shown and hidden by their opacity attribute each frame) */
+.opm-svg .opm-part{fill:#4a4b50;stroke:#141516;stroke-width:.12}
+.opm-svg .opm-pdot{fill:var(--opm-orange)}
+.opm-svg .opm-pdot.lt{fill:#fff1e9}
+.opm-svg .opm-pdot.water{fill:#9db4c6}
+.opm-svg .opm-pdot.concrete{fill:#9a968f}
+.opm-svg .opm-pdot.sand-m{fill:#8f8e8b}.opm-svg .opm-pdot.sand-p{fill:#cdb488}.opm-svg .opm-pdot.sand-w{fill:#b8ad98}.opm-svg .opm-pdot.sand-r{fill:#cfa565}
+/* network view (chapter 6) */
+.opm-svg .opm-node{fill:#ffffff;stroke:rgba(20,20,22,.16);stroke-width:1;vector-effect:non-scaling-stroke}
+.opm-svg .opm-node-in{fill:#f7f3ec;stroke:var(--opm-orange);stroke-opacity:.55;stroke-width:1;vector-effect:non-scaling-stroke}
+.opm-svg .opm-core{fill:#ffffff;stroke:var(--opm-orange);stroke-width:1.4;vector-effect:non-scaling-stroke}
+.opm-svg .opm-core-in{fill:none;stroke:var(--opm-orange);stroke-opacity:.3;stroke-width:1;stroke-dasharray:3 4;vector-effect:non-scaling-stroke}
+.opm-svg .ic{fill:none;stroke:#141416;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.opm-svg .ic-f{fill:#e9e3d8;stroke:none}
+.opm-svg .opm-goa-fill{fill:#f6e7de;stroke:none}
+.opm-svg .opm-goa{fill:none;stroke:var(--opm-orange);stroke-width:1.3;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+/* labels */
+.opm-svg text{font-family:var(--sans)}
+.opm-svg .opm-lab{fill:#6B6B6B;font-weight:600;letter-spacing:.16em}
+.opm-svg .opm-lab.call{fill:#2e2f33;font-weight:700;letter-spacing:.12em}
+.opm-svg .opm-lab.acc-t{fill:var(--opm-orange)}
+.opm-svg .opm-lab.faint-t{fill:var(--grey-2);font-weight:500}
+.opm-svg .opm-lab.it{font-style:italic}
+.opm-svg .opm-lab.sign{fill:#2e2f33;font-weight:700;letter-spacing:.08em}
+.opm-svg .opm-lab.card-t{fill:#141416;font-weight:600;letter-spacing:0}
+.opm-svg .opm-lab.card-s{fill:#8E8E8E;font-weight:600;letter-spacing:.16em}
+.opm-svg .opm-node-t{font-family:var(--serif);font-weight:600;fill:var(--ink)}
+.opm-svg .opm-node-s{fill:var(--grey);font-weight:600;letter-spacing:.12em}
+
+/* chapter captions (HTML over the stage) */
+.opm-caps{list-style:none}
+.opm-cap{position:absolute;left:4.2%;top:6.2%;width:38%;opacity:0;will-change:opacity, transform;pointer-events:none}
+.opm-cap-n{font-size:11px;letter-spacing:.26em;text-transform:uppercase;font-weight:600;color:var(--opm-orange);display:flex;align-items:center;gap:12px}
+.opm-cap-n::before{content:"";width:24px;height:1px;background:var(--opm-orange)}
+.opm-cap-t{font-family:var(--serif);font-weight:500;letter-spacing:-.01em;line-height:1.08;color:var(--ink);font-size:clamp(22px, 2.35vw, 36px);margin-top:12px}
+.opm-cap-s{font-size:14px;line-height:1.6;color:var(--grey);margin-top:10px;max-width:42ch}
+.opm-cta{position:absolute;right:4.2%;bottom:6%;display:flex;flex-wrap:wrap;gap:10px;opacity:0;pointer-events:none}
+.opm-cta.is-on{pointer-events:auto}
+.opm-cta .btn{padding:0 22px}
+
+/* hotspots: small orange markers on the machines; hover, focus or tap names them */
+.opm-hots{position:absolute;inset:0;pointer-events:none}
+.opm-hot{position:absolute;width:24px;height:24px;margin:-12px 0 0 -12px;border-radius:50%;pointer-events:auto;display:grid;place-items:center;background:none}
+.opm-hot::before{content:"";width:9px;height:9px;border-radius:50%;background:#fffdfa;box-shadow:0 0 0 1.5px var(--opm-orange), 0 0 0 5px rgba(255,94,41,.14);transition:transform .2s ease, background .2s ease}
+.opm-hot:hover::before,.opm-hot:focus-visible::before{transform:scale(1.25);background:var(--opm-orange)}
+.opm-hot:focus-visible{outline:2px solid var(--opm-orange);outline-offset:2px}
+.opm-tip{position:absolute;transform:translate(-50%, calc(-100% - 16px));padding:6px 11px;border-radius:6px;background:#141416;color:#fff;font-size:11.5px;font-weight:600;letter-spacing:.06em;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .15s ease}
+.opm-tip.on{opacity:1}
+
+/* chapter rail: progress through the story; a button jumps to its chapter */
+.opm-controls{display:flex;align-items:center;gap:20px;margin:16px auto 0;max-width:calc((100vh - var(--opm-navh) - 96px) * 16 / 9)}
+@supports (height:1svh){ .opm-controls{max-width:calc((100svh - var(--opm-navh) - 96px) * 16 / 9)} }
+.opm-stage.is-tall + .opm-controls{max-width:min(100%, calc((100svh - var(--opm-navh) - 84px) * 900 / 1400))}
+.opm-chapters{list-style:none;display:grid;grid-template-columns:repeat(8, minmax(0, 1fr));gap:10px;flex:1}
+.opm-chapters button{display:flex;flex-direction:column;align-items:flex-start;gap:7px;width:100%;padding:6px 0;text-align:left;color:var(--grey-2)}
+.opm-chapters .bar{position:relative;display:block;width:100%;height:2px;background:var(--line);overflow:hidden}
+.opm-chapters .bar::after{content:"";position:absolute;inset:0;background:var(--ink);transform-origin:0 50%;transform:scaleX(var(--p, 0))}
+.opm-chapters button[aria-current="step"]{color:var(--ink)}
+.opm-chapters button[aria-current="step"] .bar::after{background:var(--opm-orange)}
+.opm-chapters .n{font-size:11px;font-weight:600;letter-spacing:.1em;font-variant-numeric:tabular-nums}
+.opm-chapters .t{font-size:11.5px;letter-spacing:.04em;line-height:1.3}
+.opm-chapters button:hover{color:var(--ink)}
+.opm-chapters button:focus-visible{outline:2px solid var(--opm-orange);outline-offset:3px}
+.opm-now{display:none}
+
+/* tall stage (phones / narrow windows): captions across the top, CTA at the foot */
+.opm-stage.is-tall .opm-cap{left:6%;right:6%;top:4%;width:auto}
+.opm-stage.is-tall .opm-cap-t{font-size:clamp(20px, 5.6vw, 28px)}
+.opm-stage.is-tall .opm-cap-s{font-size:13px}
+.opm-stage.is-tall .opm-cta{left:6%;right:6%;bottom:3.5%;gap:8px}
+.opm-stage.is-tall .opm-cta .btn{flex:1 1 100%;height:42px;font-size:10.5px}
+.opm-stage.is-tall .opm-tip{font-size:11px}
+@media (max-width:360px){ .opm-stage.is-tall .opm-cap-s{display:none} }
+/* compact wide stage (landscape phones, small tablets): headline-only captions */
+.opm-stage.is-compact .opm-cap{width:42%}
+.opm-stage.is-compact .opm-cap-n{font-size:9.5px;letter-spacing:.2em}
+.opm-stage.is-compact .opm-cap-t{font-size:17px;margin-top:6px}
+.opm-stage.is-compact .opm-cap-s{display:none}
+.opm-stage.is-compact .opm-cta .btn{height:38px;padding:0 14px;font-size:10px}
+@media (max-height:520px) and (orientation:landscape){
+  .opm-stage,.opm-controls{max-width:calc((100vh - var(--opm-navh) - 64px) * 16 / 9)}
+  .opm-controls{margin-top:8px}
+}
+
+/* no JS: the captions are the content */
+html:not(.opm-js) .opm-stage{aspect-ratio:auto;max-width:none;background:none;box-shadow:none;border-radius:0}
+html:not(.opm-js) .opm-svg,html:not(.opm-js) .opm-controls{display:none}
+html:not(.opm-js) .opm-cap,html:not(.opm-js) .opm-cta{position:static;opacity:1;width:auto;margin-bottom:28px;pointer-events:auto}
+
+@media (max-width:1100px){ .opm-head{gap:56px} }
+@media (max-width:900px){
+  .opm-head{grid-template-columns:1fr;gap:24px;margin-bottom:28px}
+  .opm-chapters .t{display:none}
+  .opm-now{display:block;font-size:12px;letter-spacing:.06em;color:var(--ink);margin-top:6px}
+  .opm-controls{flex-wrap:wrap}
+}
+@media (max-width:640px){ .opm-stage{border-radius:18px} .opm-chapters{gap:5px} }
+.opm-3d{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}

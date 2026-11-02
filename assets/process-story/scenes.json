@@ -1,0 +1,221 @@
+{
+  "section": {
+    "id": "process",
+    "eyebrow": "From Source to Structure",
+    "title": "From Raw Stone to",
+    "titleAccent": "Real Infrastructure.",
+    "lede": "Every construction project begins long before the first foundation is laid. From sourcing and processing raw stone to inspecting, transporting and supplying construction materials, each stage plays a role in getting the right material to the right place. Follow the journey behind the materials that help shape Goa's roads, buildings and infrastructure.",
+    "question": "How are construction aggregates processed?",
+    "answer": "Construction aggregates are sourced, crushed to reduce their size, screened into different fractions, assessed for grading, and prepared for delivery. Depending on project requirements, aggregates may be supplied directly for construction or used as part of the ready mix concrete production process."
+  },
+  "scenes": [
+    {
+      "step": 1,
+      "slug": "origin",
+      "source": "OM_Group_Scene_01_Basalt_Transparent_Refined.png",
+      "eyebrow": "The Beginning",
+      "heading": "Every project begins with a single stone.",
+      "copy": [
+        "Before it becomes an aggregate, a road foundation or part of a concrete mix, the journey begins with raw rock. Its natural structure is the starting point for the processing stages that follow."
+      ],
+      "alt": "A single raw charcoal grey basalt boulder",
+      "fit": 0.78
+    },
+    {
+      "step": 2,
+      "slug": "quarry-sourcing",
+      "source": "OM GROUP SCENE 2 Basalt Quarry Excavator and Boulders.png",
+      "eyebrow": "The Source",
+      "heading": "It starts at the source.",
+      "copy": [
+        "Hard rock is obtained from the quarry and prepared for further handling. This first stage establishes the material that will move through the crushing and grading process.",
+        "For OM Group, this story connects to its wider aggregate operations, including the VSI stone crusher at Banda Wafoli."
+      ],
+      "links": [
+        {
+          "label": "Banda Wafoli VSI crusher",
+          "href": "/infrastructure/banda-wafoli-vsi-crusher"
+        }
+      ],
+      "alt": "Excavator working at a basalt quarry face beside large raw boulders"
+    },
+    {
+      "step": 3,
+      "slug": "extraction-handling",
+      "source": "OM GROUP SCENE 03 Excavator Loading Rock Haul Truck.png",
+      "eyebrow": "Material Handling",
+      "heading": "From the quarry to the next stage.",
+      "copy": [
+        "Heavy equipment handles and moves raw stone for processing. Careful material handling connects the source to the crushing operation, where large rock is reduced into more usable sizes."
+      ],
+      "alt": "Excavator loading raw basalt rock into a haul truck"
+    },
+    {
+      "step": 4,
+      "slug": "crushing",
+      "source": "OM GROUP SCENE 04 Industrial Rock Crushing Plant.png",
+      "eyebrow": "The Transformation",
+      "heading": "Raw stone, reduced to usable sizes.",
+      "copy": [
+        "Crushing breaks large rock into smaller, angular fragments. The resulting material becomes the feedstock for screening and separation into aggregate sizes suited to different construction requirements."
+      ],
+      "alt": "Industrial rock crushing plant with boulder feed and a discharge conveyor of crushed stone"
+    },
+    {
+      "step": 5,
+      "slug": "screening",
+      "source": "OM GROUP SCENE 05 Industrial Aggregate Screening Plant.png",
+      "eyebrow": "Size Separation",
+      "heading": "Different sizes. Distinct purposes.",
+      "copy": [
+        "After crushing, screening separates material into different particle size fractions. The size and distribution of these fractions help determine their suitability for different construction applications.",
+        "The resulting grades can be supplied for relevant uses according to the required material specification."
+      ],
+      "links": [
+        {
+          "label": "6mm",
+          "href": "/products/6mm-aggregate"
+        },
+        {
+          "label": "10mm",
+          "href": "/products/10mm-aggregate"
+        },
+        {
+          "label": "12.5mm",
+          "href": "/products/12mm-aggregate"
+        },
+        {
+          "label": "20mm",
+          "href": "/products/20mm-aggregate"
+        },
+        {
+          "label": "40mm",
+          "href": "/products/40mm-aggregate"
+        },
+        {
+          "label": "60mm",
+          "href": "/products/60mm-aggregate"
+        }
+      ],
+      "linksLabel": "Crushed stone aggregate grades",
+      "alt": "Vibrating aggregate screening plant discharging separate streams of graded stone"
+    },
+    {
+      "step": 6,
+      "slug": "quality-inspection",
+      "source": "OM GROUP SCENE 6 Aggregate Sieve Testing Equipment Still Life.png",
+      "eyebrow": "Grading and Inspection",
+      "heading": "Quality is in the detail.",
+      "copy": [
+        "A closer look at the material helps assess particle size distribution and grading. Sieve analysis is one method used to examine how aggregate particles are distributed across different sizes.",
+        "Inspection helps evaluate material consistency against the applicable requirements."
+      ],
+      "alt": "Gloved hand pouring an aggregate sample into a stack of testing sieves, with sample trays of different particle sizes",
+      "fit": 0.9
+    },
+    {
+      "step": 7,
+      "slug": "stockpiling-dispatch",
+      "source": "OM GROUP SCENE 7 Wheel Loader Loading a Gravel Dump Truck.png",
+      "eyebrow": "Material Readiness",
+      "heading": "Prepared for the next journey.",
+      "copy": [
+        "Processed aggregate is stored in stockpiles and handled according to dispatch requirements. Wheel loaders transfer material into delivery vehicles so that the required supply can move towards a construction site or batching facility."
+      ],
+      "alt": "Wheel loader tipping crushed aggregate from a stockpile into a heavy duty dump truck"
+    },
+    {
+      "step": 8,
+      "slug": "transportation",
+      "source": "OM GROUP SCENE 8 Heavy-Duty Dump Truck Loaded with Rocks.png",
+      "eyebrow": "Logistics",
+      "heading": "Moving material. Connecting projects.",
+      "copy": [
+        "Bulk transportation links the processing and storage stages with construction projects and concrete production facilities. OM Group's aggregate supply and logistics operations support material movement across Goa.",
+        "Delivery arrangements depend on the material, quantity, destination and project requirements."
+      ],
+      "links": [
+        {
+          "label": "Fleet & logistics",
+          "href": "/infrastructure/fleet-logistics"
+        }
+      ],
+      "alt": "Heavy duty tipper truck loaded with charcoal grey crushed aggregate"
+    },
+    {
+      "step": 9,
+      "slug": "ready-mix-concrete",
+      "source": "OM GROUP SCENE  9 Industrial Concrete Batching Plant and Mixer Truck.png",
+      "eyebrow": "Concrete Operations",
+      "heading": "Bringing the ingredients together.",
+      "copy": [
+        "Ready mix concrete is produced by proportioning aggregates, cement, water and other specified ingredients according to the required mix design. The batching process brings these materials together before the fresh concrete is dispatched to the construction site.",
+        "OM Group's RMC operations include batching plants at Kundaim and Thivim in Goa."
+      ],
+      "links": [
+        {
+          "label": "Ready mix concrete",
+          "href": "/products/ready-mix-concrete"
+        },
+        {
+          "label": "Kundaim plant",
+          "href": "/infrastructure/kundaim-rmc-plant"
+        },
+        {
+          "label": "Thivim plant",
+          "href": "/infrastructure/thivim-rmc-plant"
+        }
+      ],
+      "alt": "Concrete batching plant with aggregate hoppers, conveyor, cement silos and a transit mixer truck"
+    },
+    {
+      "step": 10,
+      "slug": "construction-application",
+      "source": "OM_Group_Scene_10_Construction_Transparent.png",
+      "eyebrow": "On the Ground",
+      "heading": "Materials put to work.",
+      "copy": [
+        "Construction materials serve different roles across a project. Suitable graded aggregates may support road base and foundation applications, while ready mix concrete is used in structural works according to the project design and specified requirements.",
+        "The material reaches its purpose when it becomes part of the construction taking shape on site."
+      ],
+      "links": [
+        {
+          "label": "GSB",
+          "href": "/products/granular-sub-base"
+        },
+        {
+          "label": "WMM",
+          "href": "/products/wmm"
+        },
+        {
+          "label": "Road base material",
+          "href": "/products/road-base-material"
+        }
+      ],
+      "alt": "Transit mixer pouring fresh concrete into a reinforced foundation while workers spread it, above layered aggregate base courses"
+    },
+    {
+      "step": 11,
+      "slug": "completed-infrastructure",
+      "source": "OM_Group_Scene_11_Infrastructure_Transparent.png",
+      "eyebrow": "The Outcome",
+      "heading": "The foundation of trust.",
+      "copy": [
+        "From the source to the finished structure, every stage plays a part in the larger construction journey. OM Group brings together material supply, processing, concrete operations and logistics to support the projects that shape Goa.",
+        "The final structure represents the purpose behind the process: helping turn construction requirements into the roads, buildings and infrastructure people depend on."
+      ],
+      "closing": "From the source to the structures that shape tomorrow.",
+      "cta": {
+        "primary": {
+          "label": "Explore Our Products",
+          "href": "#products"
+        },
+        "secondary": {
+          "label": "Request a Quote",
+          "href": "#contact"
+        }
+      },
+      "alt": "Completed concrete flyover bridge and curving highway beside finished buildings"
+    }
+  ]
+}
