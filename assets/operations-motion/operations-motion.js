@@ -1835,7 +1835,11 @@
     const marks = [['conc', RX + 80, 'CONCRETE'], ['wmm', RX + 290, 'WET MIX MACADAM'], ['gsb', RX + 500, 'GRANULAR SUB-BASE']];
     marks.forEach(([k, x, s]) => {
       const l = layers.find(q => q.k === k), y = GY + (l.y0 + l.y1) / 2, t0 = order.find(o => o[0] === k)[1] + 0.8;
-      act(7, M(b, `<path class="ln" d="M${x} ${F(y)}V${GY + 30}"/><circle class="ring-on" cx="${x}" cy="${F(y)}" r="4.5"/>`), { o: [[t0, 0], [t0 + 0.4, 1]] });
+      const labelY = GY + 48 + (TALL() && k === 'wmm' ? 34 : 0);
+      // Leave a clear breathing gap before every label so the connector never touches or
+      // visually cuts through the text, especially on the narrow/tall composition.
+      const lineY = labelY - 16;
+      act(7, M(b, `<path class="ln" d="M${x} ${F(y)}V${F(lineY)}"/><circle class="ring-on" cx="${x}" cy="${F(y)}" r="4.5"/>`), { o: [[t0, 0], [t0 + 0.4, 1]] });
       // phones: CONCRETE starts at its guide line (centred it would cross the left screen edge and be hidden)
       // (GRANULAR SUB-BASE likewise starts at its own guide line so the two top-row labels never touch)
       const ls = TALL() && k !== 'wmm';

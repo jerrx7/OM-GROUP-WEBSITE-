@@ -229,3 +229,32 @@ html.pst-pin .pst-progress{
   .pst-eyebrow{letter-spacing:.22em}
   .pst-ctas .btn{flex:1 1 100%;justify-content:center}
 }
+
+/* Small landscape tablets still use the native two-column scrolly story. The generic
+   <=900px stacking rules above are for portrait/short layouts and must not collapse
+   the sticky image column when the device is landscape. */
+@media (min-width:641px) and (max-width:900px) and (orientation:landscape){
+  html.pst-scrolly .pst-scenes{
+    display:grid;
+    grid-template-rows:repeat(11, auto);
+    grid-template-columns:minmax(0, 1fr) minmax(0, 1.1fr);
+    column-gap:clamp(24px, 4vw, 48px);
+  }
+  html.pst-scrolly .pst-scene{display:contents}
+  html.pst-scrolly .pst-figure{
+    grid-column:2;
+    grid-row:1 / span 11;
+    order:initial;
+    position:sticky;
+    top:calc(var(--pst-navh) + 12px);
+    height:calc(100vh - var(--pst-navh) - 72px);
+  }
+  html.pst-scrolly .pst-copy{
+    grid-column:1;
+    grid-row:var(--row);
+    max-width:600px;
+    padding:10vh 0 22vh;
+    border-top:1px solid var(--line);
+  }
+  html.pst-scrolly .pst-scene:first-child .pst-copy{padding-top:4vh}
+}

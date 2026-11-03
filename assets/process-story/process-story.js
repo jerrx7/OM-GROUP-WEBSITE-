@@ -1,6 +1,6 @@
 /* PROCESS STORY — scene engine for #process.
    Four modes, chosen per device:
-   - pin     (fine pointer, >= 960x600, motion allowed): the pinned two-column stage. Inside the
+   - pin     (fine pointer, >= 960x800, motion allowed): the pinned two-column stage. Inside the
              pinned range one deliberate wheel/trackpad gesture moves exactly one scene.
    - flow    (portrait phones and tablets, motion allowed): every scene is an ordinary stacked
              block, its image then its copy. Nothing is pinned; images and copy ease into place
@@ -30,7 +30,9 @@
   const N = scenes.length;
 
   const reduce = matchMedia('(prefers-reduced-motion: reduce)');
-  const roomy = matchMedia('(min-width: 960px) and (min-height: 600px)');
+  // Short landscape viewports do not have enough vertical room for the final copy, CTAs and
+  // progress rail to coexist safely inside the pinned stage. Keep those layouts in native scrolly mode.
+  const roomy = matchMedia('(min-width: 960px) and (min-height: 800px)');
   const finePointer = matchMedia('(pointer: fine)');
   const landscape = matchMedia('(orientation: landscape)');
 
@@ -50,6 +52,14 @@
   const smooth = (e0, e1, x) => { const t = clamp((x - e0) / (e1 - e0), 0, 1); return t * t * (3 - 2 * t); };
   const ease = p => (p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2);
   const pad = n => String(n).padStart(2, '0');
+  // `behavior: 'instant'` is not supported consistently across Safari/iOS. Temporarily
+  // disable CSS smooth scrolling and use the numeric overload for a genuinely immediate jump.
+  const jumpScroll = y => {
+    const previous = root.style.scrollBehavior;
+    root.style.scrollBehavior = 'auto';
+    window.scrollTo(0, y);
+    root.style.scrollBehavior = previous;
+  };
 
   let mode = 'stack', segPx = 1, shown = -1;
   // Transition state: dissolving from `from` to `to` with eased progress `t`; `want` is the scene
@@ -238,7 +248,7 @@
     const y = window.scrollY, first = sceneOffset(0), last = sceneOffset(N - 1);
     if (y <= first + 1 || y >= last - 1) return; // outside the scene range: natural page scrolling
     const goal = sceneOffset(want);
-    if (Math.abs(y - goal) > 1) window.scrollTo({ top: goal, behavior: 'instant' });
+    if (Math.abs(y - goal) > 1) jumpScroll(goal);
   }
 
   function onWheel(e) {
@@ -263,7 +273,7 @@
       e.preventDefault();
       cameFromOutside = false; acc = 0; holdUntil = time + ENTRY_HOLD;
       request(N - 1);
-      window.scrollTo({ top: last, behavior: 'instant' });
+      jumpScroll(last);
       return;
     }
     if (y < first - 1 || y > last + 1) { cameFromOutside = true; return; } // stage not pinned: native scroll
@@ -423,8 +433,8 @@
   // After a rotation between flow (portrait) and scrolly (landscape), bring back the scene that
   // was being read: the layouts differ, so the old scroll offset would land somewhere else.
   function anchorTo(k) {
-    if (mode === 'flow') { measureFlow(); window.scrollTo({ top: flowOffset(k), behavior: 'instant' }); measureFlow(); markActive(k, k); }
-    else if (mode === 'scrolly') { window.scrollTo({ top: Math.max(0, stepTops[k] - readingLine + 2), behavior: 'instant' }); measureScrolly(); jumpTo(k); }
+    if (mode === 'flow') { measureFlow(); jumpScroll(flowOffset(k)); measureFlow(); markActive(k, k); }
+    else if (mode === 'scrolly') { jumpScroll(Math.max(0, stepTops[k] - readingLine + 2)); measureScrolly(); jumpTo(k); }
   }
 
   function setMode() {
@@ -448,7 +458,7 @@
       const y = window.scrollY, inside = y >= sceneOffset(0) - 1 && y <= sceneOffset(N - 1) + 1;
       const keep = want;
       measurePin(); jumpTo(keep);
-      if (inside) window.scrollTo({ top: sceneOffset(keep), behavior: 'instant' });
+      if (inside) jumpScroll(sceneOffset(keep));
     } else if (mode === 'scrolly') {
       const w = window.innerWidth;
       if (w === lastWidth) { measureScrolly(); onScroll(); return; } // browser chrome only: just re-measure
@@ -458,7 +468,7 @@
       const r = section.getBoundingClientRect(), inside = r.top < window.innerHeight && r.bottom > 0;
       const keep = want;
       measureScrolly();
-      if (inside) { window.scrollTo({ top: stepTops[keep] - readingLine + 2, behavior: 'instant' }); measureScrolly(); }
+      if (inside) { jumpScroll(stepTops[keep] - readingLine + 2); measureScrolly(); }
       jumpTo(inside ? keep : scrollyScene());
     } else if (mode === 'flow') {
       // Images keep their aspect-ratio boxes, so a reflow only moves the scene offsets.
@@ -481,7 +491,7 @@
   function navigate(k) {
     k = clamp(k, 0, N - 1);
     request(k);
-    if (mode === 'pin') window.scrollTo({ top: sceneOffset(k), behavior: 'instant' });
+    if (mode === 'pin') jumpScroll(sceneOffset(k));
     // scrolly: bring that scene's heading to the reading line; the scroll itself selects the scene.
     else if (mode === 'scrolly') {
       const y = Math.max(0, stepTops[k] - readingLine + 2);

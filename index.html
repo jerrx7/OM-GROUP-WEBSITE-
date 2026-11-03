@@ -348,14 +348,14 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   border-bottom:1px solid transparent;
 }
 .nav.solid{
-  background:rgba(255,255,255,.83);
+  background:rgba(255,255,255,.73);
   backdrop-filter:saturate(140%) blur(12px);
   -webkit-backdrop-filter:saturate(140%) blur(12px);
   border-bottom:1px solid var(--line-soft);
   padding:12px 0;
   box-shadow:0 1px 0 rgba(20,20,22,.02), 0 10px 30px -20px rgba(20,20,22,.18);
 }
-body.dark .nav.solid{background:rgba(10,10,10,.88);border-bottom:1px solid rgba(255,255,255,.08)}
+body.dark .nav.solid{background:rgba(10,10,10,.83);border-bottom:1px solid rgba(255,255,255,.08)}
 .nav-row{display:flex;align-items:center;justify-content:space-between;gap:24px}
 .brand{display:flex;align-items:center;gap:0;padding:4px 0}
 .brand-logo{
@@ -2821,6 +2821,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                   <rect x="127" y="30" width="34" height="102" fill="url(#r-silo)"/>
                   <rect x="127" y="40" width="34" height="13" fill="url(#r-org)"/><rect x="127" y="100" width="34" height="8" fill="url(#r-org)"/>
                   <path d="M127 70h34M127 84h34M127 120h34" stroke="#141416" stroke-opacity=".07"/>
+                  <image href="assets/om-group-logo-full.png" x="134" y="66" width="20" height="16" preserveAspectRatio="xMidYMid meet" opacity=".88"/>
                   <ellipse cx="144" cy="30" rx="17" ry="4" fill="#F7F7F6" stroke="#C9CCD0" stroke-width=".6"/>
                   <path d="M127 24h34M128 24v6M136 24v6M144 24v6M152 24v6M160 24v6" stroke="#8A9099" stroke-width=".8"/>
                 </g>
@@ -2846,7 +2847,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                   <path d="M212 126h20l-6 12h-8z" fill="#B4B8BE"/>
                 </g>
                 <!-- transit mixer: reverses in under the tower -->
-                <g class="fx-drive" style="--dx:80px;--p:.62s">
+                <g class="fx-drive" style="--dx:80px;--p:.62s;display:none">
                   <rect x="196" y="191" width="114" height="7" rx="1.5" fill="#2B2E33"/>
                   <path d="M222 191v-6M262 191v-8" stroke="#5E646C" stroke-width="4"/>
                   <path d="M204 158L226 150C252 146 270 154 274 168C277 180 270 190 256 191L226 192C214 192 206 182 204 172Z" fill="url(#r-drum)"/>
@@ -2866,6 +2867,51 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                   <g class="fx-whl" style="--rot:510deg"><circle cx="224" cy="201" r="9" fill="#24272C"/><circle cx="224" cy="201" r="5" fill="url(#r-rim)"/><circle cx="224" cy="201" r="1.6" fill="#4A4F57"/><path d="M224 196.6v1.6M224 203.8v1.6M219.6 201h1.6M226.8 201h1.6" stroke="#6B7078" stroke-width=".9"/></g>
                   <g class="fx-whl" style="--rot:510deg"><circle cx="246" cy="201" r="9" fill="#24272C"/><circle cx="246" cy="201" r="5" fill="url(#r-rim)"/><circle cx="246" cy="201" r="1.6" fill="#4A4F57"/><path d="M246 196.6v1.6M246 203.8v1.6M241.6 201h1.6M248.8 201h1.6" stroke="#6B7078" stroke-width=".9"/></g>
                   <g class="fx-whl" style="--rot:510deg"><circle cx="296" cy="201" r="9" fill="#24272C"/><circle cx="296" cy="201" r="5" fill="url(#r-rim)"/><circle cx="296" cy="201" r="1.6" fill="#4A4F57"/><path d="M296 196.6v1.6M296 203.8v1.6M291.6 201h1.6M298.8 201h1.6" stroke="#6B7078" stroke-width=".9"/></g>
+                </g>
+                <!-- reference-matched transit mixer with a proper drum, cab, chassis and OM Group livery -->
+                <g class="fx-drive" style="--dx:80px;--p:.62s;display:none">
+                  <path d="M199 190H315Q319 190 321 195V201H199Z" fill="#25282D"/>
+                  <path d="M208 187L216 157Q220 149 230 146L263 143Q278 145 286 156L292 187Z" fill="url(#r-drum)" stroke="#25282D" stroke-opacity=".28" stroke-width="1"/>
+                  <path d="M218 156L276 149M211 170L289 163M207 183L292 177" stroke="#B5BAC0" stroke-width="1.2" opacity=".85"/>
+                  <g clip-path="url(#r-drumclip)"><path d="M218 138L207 194M238 138L227 194M258 138L247 194M278 138L267 194M298 138L287 194" stroke="#F15A29" stroke-width="7" stroke-opacity=".92"/></g>
+                  <path d="M209 188L218 157Q220 151 227 148M286 188L278 157Q276 150 267 146" fill="none" stroke="#7E858D" stroke-width="2"/>
+                  <path d="M214 189V177L224 170M286 189V176L276 169" fill="none" stroke="#555B63" stroke-width="3"/>
+                  <path d="M210 188H292" stroke="#C6CBD0" stroke-width="2"/>
+                  <path d="M292 184V162Q292 155 299 155H310L317 170V193H292Z" fill="url(#r-face)" stroke="#25282D" stroke-opacity=".3" stroke-width="1"/>
+                  <path d="M297 159H307L312 171H297Z" fill="url(#r-glass)" stroke="#20252A" stroke-width=".8"/>
+                  <path d="M298 174H313V184H298Z" fill="url(#r-glass)" stroke="#20252A" stroke-width=".7"/>
+                  <path d="M292 184H317" stroke="#F15A29" stroke-width="3"/>
+                  <image href="assets/om-group-logo-full.png" x="299" y="176" width="12" height="7" preserveAspectRatio="xMidYMid meet" opacity=".9"/>
+                  <path d="M199 191H316" stroke="#5E646C" stroke-width="3"/>
+                  <path d="M215 191V183M278 191V181M299 191V185" stroke="#555B63" stroke-width="3"/>
+                  <g class="fx-whl" style="--rot:510deg"><circle cx="224" cy="201" r="10" fill="#202328"/><circle cx="224" cy="201" r="6" fill="url(#r-rim)"/><circle cx="224" cy="201" r="2" fill="#555B63"/></g>
+                  <g class="fx-whl" style="--rot:510deg"><circle cx="252" cy="201" r="10" fill="#202328"/><circle cx="252" cy="201" r="6" fill="url(#r-rim)"/><circle cx="252" cy="201" r="2" fill="#555B63"/></g>
+                  <g class="fx-whl" style="--rot:510deg"><circle cx="302" cy="201" r="10" fill="#202328"/><circle cx="302" cy="201" r="6" fill="url(#r-rim)"/><circle cx="302" cy="201" r="2" fill="#555B63"/></g>
+                  <path d="M235 191Q237 181 247 181H258Q268 181 270 191M291 191Q293 182 302 182Q311 182 313 191" fill="none" stroke="#30343A" stroke-width="2.4"/>
+                  <path d="M315 190H321V195H316" fill="#F15A29"/><circle cx="316" cy="181" r="1.6" fill="#FFF3DD"/>
+                </g>
+                <!-- rebuilt transit mixer: balanced silhouette, articulated drum and branded cab -->
+                <g class="fx-drive" style="--dx:80px;--p:.62s;display:none">
+                  <path d="M130 195H313Q318 195 320 199V203H128Z" fill="#25282D"/>
+                  <path d="M144 190L151 158Q154 150 164 146L231 142Q247 143 259 154L274 190Z" fill="url(#r-drum)" stroke="#25282D" stroke-opacity=".35" stroke-width="1.2"/>
+                  <path d="M153 161L258 151M149 176L267 165M146 188L273 180" stroke="#A9AFB6" stroke-width="1.1"/>
+                  <path d="M164 145L151 192M190 143L180 191M217 142L208 191M244 147L235 191" stroke="#F15A29" stroke-width="8" stroke-opacity=".9"/>
+                  <path d="M151 190Q148 174 155 158M274 190Q270 167 255 154" fill="none" stroke="#6D747C" stroke-width="2.3"/>
+                  <path d="M150 191H275" stroke="#D1D4D7" stroke-width="2"/>
+                  <path d="M145 188L137 177L130 183L142 194" fill="#555B63"/>
+                  <path d="M273 193V158Q273 151 281 151H304Q311 151 314 158L320 174V199H273Z" fill="url(#r-face)" stroke="#25282D" stroke-opacity=".4" stroke-width="1.2"/>
+                  <path d="M280 156H299Q303 156 305 160L309 171H280Z" fill="url(#r-glass)" stroke="#20252A" stroke-width="1"/>
+                  <path d="M280 174H311V193H280Z" fill="#E5E7E8" stroke="#9AA0A8" stroke-width=".8"/>
+                  <path d="M282 177H307V188H282Z" fill="#FFFFFF" opacity=".5"/>
+                  <image href="assets/om-group-logo-full.png" x="286" y="178" width="22" height="9" preserveAspectRatio="xMidYMid meet" opacity=".95"/>
+                  <path d="M274 192H317" stroke="#F15A29" stroke-width="3.5"/>
+                  <path d="M133 195H319" stroke="#5B626A" stroke-width="3"/>
+                  <path d="M159 194V185M245 194V183M284 194V188" stroke="#555B63" stroke-width="3.4"/>
+                  <path d="M138 197Q141 185 153 185H167Q179 185 181 197M222 197Q224 184 238 184H252Q266 184 268 197M286 197Q288 186 301 186Q314 186 316 197" fill="none" stroke="#30343A" stroke-width="3"/>
+                  <g class="fx-whl" style="--rot:510deg"><circle cx="153" cy="201" r="11" fill="#202328"/><circle cx="153" cy="201" r="6.5" fill="url(#r-rim)"/><circle cx="153" cy="201" r="2" fill="#555B63"/></g>
+                  <g class="fx-whl" style="--rot:510deg"><circle cx="239" cy="201" r="11" fill="#202328"/><circle cx="239" cy="201" r="6.5" fill="url(#r-rim)"/><circle cx="239" cy="201" r="2" fill="#555B63"/></g>
+                  <g class="fx-whl" style="--rot:510deg"><circle cx="301" cy="201" r="11" fill="#202328"/><circle cx="301" cy="201" r="6.5" fill="url(#r-rim)"/><circle cx="301" cy="201" r="2" fill="#555B63"/></g>
+                  <path d="M313 191H321V197H316" fill="#F15A29"/><circle cx="316" cy="181" r="2" fill="#FFF3DD"/>
                 </g>
               </svg>
             </div></div>
@@ -2934,6 +2980,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                   <rect x="160" y="102" width="6" height="22" rx="1" fill="url(#c-org)"/><rect x="206" y="102" width="6" height="22" rx="1" fill="url(#c-org)"/>
                   <rect x="163" y="121" width="46" height="4" rx="1" fill="#8A9099"/>
                   <rect x="166" y="97" width="40" height="24" fill="url(#c-steel)"/>
+                  <image href="assets/om-group-logo-full.png" x="175" y="102" width="22" height="13" preserveAspectRatio="xMidYMid meet" opacity=".9"/>
                   <path d="M166 105h40M166 113h40" stroke="#141416" stroke-opacity=".08"/>
                   <rect x="163" y="93" width="46" height="4" rx="1" fill="#8A9099"/>
                   <path d="M165 77h42l-5 16h-32z" fill="url(#c-dark)"/>
@@ -3018,6 +3065,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <path d="M132 115v60M160 114v60M188 113v61M216 112v61M244 110v62M272 109v62" stroke="#141416" stroke-opacity=".14" stroke-width="2.2"/>
                     <path d="M130.6 115v60M158.6 114v60M186.6 113v61M214.6 112v61M242.6 110v62M270.6 109v62" stroke="#FFFFFF" stroke-opacity=".45"/>
                     <path d="M104 112L288 104Q296 104 296 112" fill="none" stroke="#EDEEF0" stroke-width="3" stroke-linecap="round"/>
+                    <image href="assets/om-group-logo-full.png" x="184" y="136" width="34" height="16" preserveAspectRatio="xMidYMid meet" opacity=".9"/>
                     <path d="M107 162L293 160L292.6 166L107.4 168Z" fill="url(#f-org)"/>
                     <path d="M108 178L292 176L291.6 172L107.6 174Z" fill="#141416" opacity=".15"/>
                     <circle cx="292" cy="176" r="3" fill="#3A3E45"/>
@@ -3116,840 +3164,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 <!-- OPERATIONS-MOTION:END -->
-
-<section class="sec sec-bone" id="products">
-  <div class="container">
-    <div class="sec-head fade-up">
-      <span class="eyebrow center">Products &amp; Services</span>
-      <h2 class="sec-title">What <span class="it">we deliver.</span></h2>
-      <p class="sec-sub">High performance construction materials for infrastructure, commercial, industrial, and large scale development projects.</p>
-      <span class="sec-rule"></span>
-      <a href="/products" class="ps-all">Browse the full product index <span aria-hidden="true">→</span></a>
-    </div>
-
-    <div class="ps-rail fade-up d1" id="psRail">
-      <button class="ps-card" type="button" data-cat="aggregates" aria-expanded="false">
-        <div class="ps-card-media">
-          <img src="img/products/agg-20mm.png" alt="Crushed Stone Aggregates" width="400" height="400" loading="lazy"/>
-        </div>
-        <div class="ps-card-body">
-          <h3>Crushed Stone Aggregates</h3>
-          <p>Precision graded aggregates for RCC structures, highways, infrastructure, and high load applications.</p>
-          <div class="ps-card-foot"><span>Explore Grades</span><span class="ps-arrow">→</span></div>
-        </div>
-      </button>
-      <button class="ps-card" type="button" data-cat="sand" aria-expanded="false">
-        <div class="ps-card-media">
-          <img src="img/products/m-sand.png" alt="Manufactured &amp; Washed Sand" width="400" height="400" loading="lazy"/>
-        </div>
-        <div class="ps-card-body">
-          <h3>Manufactured &amp; Washed Sand</h3>
-          <p>Engineered sand solutions with controlled grading and superior consistency for concrete, plastering and masonry.</p>
-          <div class="ps-card-foot"><span>Explore Grades</span><span class="ps-arrow">→</span></div>
-        </div>
-      </button>
-      <button class="ps-card" type="button" data-cat="rmc" aria-expanded="false">
-        <div class="ps-card-media">
-          <img src="assets/concrete.png" alt="Ready Mix Concrete" width="400" height="400" loading="lazy"/>
-        </div>
-        <div class="ps-card-body">
-          <h3>Ready Mix Concrete</h3>
-          <p>High performance ready mix concrete for structural durability and large scale infrastructure execution.</p>
-          <div class="ps-card-foot"><span>Explore Grades</span><span class="ps-arrow">→</span></div>
-        </div>
-      </button>
-      <button class="ps-card" type="button" data-cat="gsb" aria-expanded="false">
-        <div class="ps-card-media">
-          <img src="img/products/boulders.png" alt="GSB, Boulders &amp; Metal" width="400" height="400" loading="lazy"/>
-        </div>
-        <div class="ps-card-body">
-          <h3>GSB, Boulders &amp; Metal</h3>
-          <p>Robust foundational materials for road infrastructure, embankment stability and heavy duty construction.</p>
-          <div class="ps-card-foot"><span>Explore</span><span class="ps-arrow">→</span></div>
-        </div>
-      </button>
-    </div>
-
-    <div class="ps-panel-wrap" id="psPanelWrap">
-      <div class="ps-panel"><div class="ps-panel-inner" id="psPanelInner"></div></div>
-    </div>
-
-    <template id="tpl-aggregates">
-      <button class="ps-close" aria-label="Close">✕</button>
-      <div class="ps-panel-head">
-        <div>
-          <span class="ph-eyebrow">Division · Crushed Stone Aggregates</span>
-          <h3>Specification grade aggregates from <em>VSI processing.</em></h3>
-        </div>
-        <p class="ph-meta">Multiple sieve grades produced at our Banda Wafoli quarry for RCC, road base, paver and structural concrete applications across Goa.</p>
-      </div>
-      <div class="ps-items">
-        <div class="ps-item">
-          <div class="ps-item-img"><img src="img/products/agg-6mm.png" alt="6mm Crushed Stone Aggregate, fine grade for paver blocks and lightweight RCC" width="400" height="400" loading="lazy"/></div>
-          <div class="ps-item-body">
-            <span class="ps-item-tag">Grade · 6mm</span>
-            <h4 class="ps-item-name"><a href="/products/6mm-aggregate">6mm Aggregates</a></h4>
-            <p class="ps-item-desc">Fine grade crushed aggregates designed for precision concrete, paver blocks and finishing infrastructure works.</p>
-            <ul class="ps-specs">
-              <li><span>Size Range</span><b>4 to 6 mm</b></li>
-              <li><span>Shape</span><b>Angular</b></li>
-              <li><span>Surface</span><b>Rough Textured</b></li>
-              <li><span>Crushing</span><b>Machine Crushed</b></li>
-              <li><span>RCC Use</span><b>Light / Precast</b></li>
-              <li><span>Drainage</span><b>High</b></li>
-            </ul>
-            <div class="ps-apps"><b>Applications</b>Paver blocks · Interlocking tiles · Drainage systems · Lightweight RCC · Sidewalks</div>
-            <div class="ps-badges"><span class="ps-badge">IS Compliant</span><span class="ps-badge">Machine Crushed</span><span class="ps-badge">High Drainage</span></div>
-            <a href="/products/6mm-aggregate" class="ps-item-link" aria-label="View full details: 6mm Aggregates">View Full Details <span>→</span></a>
-          </div>
-        </div>
-        <div class="ps-item">
-          <div class="ps-item-img"><img src="img/products/agg-10mm.png" alt="10mm Crushed Stone Aggregate, VSI processed, for residential and commercial RCC" width="400" height="400" loading="lazy"/></div>
-          <div class="ps-item-body">
-            <span class="ps-item-tag">Grade · 10mm</span>
-            <h4 class="ps-item-name"><a href="/products/10mm-aggregate">10mm Aggregates</a></h4>
-            <p class="ps-item-desc">Versatile construction aggregate ideal for RCC works, residential construction and commercial concrete applications.</p>
-            <ul class="ps-specs">
-              <li><span>Size Range</span><b>8 to 10 mm</b></li>
-              <li><span>Shape</span><b>Cubical / Angular</b></li>
-              <li><span>Crushing</span><b>VSI Processed</b></li>
-              <li><span>Strength</span><b>High</b></li>
-              <li><span>RCC Use</span><b>Excellent</b></li>
-              <li><span>Water Absorption</span><b>Low</b></li>
-            </ul>
-            <div class="ps-apps"><b>Applications</b>RCC structures · Residential · Commercial · Concrete blocks · Precast · Flooring</div>
-            <div class="ps-badges"><span class="ps-badge">RCC Grade</span><span class="ps-badge">Low Absorption</span><span class="ps-badge">High Strength</span></div>
-            <a href="/products/10mm-aggregate" class="ps-item-link" aria-label="View full details: 10mm Aggregates">View Full Details <span>→</span></a>
-          </div>
-        </div>
-        <div class="ps-item">
-          <div class="ps-item-img"><img src="img/products/agg-20mm.png" alt="20mm Crushed Stone Aggregate, structural grade for bridges, highways and industrial foundations" width="400" height="400" loading="lazy"/></div>
-          <div class="ps-item-body">
-            <span class="ps-item-tag">Grade · 20mm</span>
-            <h4 class="ps-item-name"><a href="/products/20mm-aggregate">20mm Aggregates</a></h4>
-            <p class="ps-item-desc">Heavy duty aggregate for structural concrete, bridges, highways and industrial infrastructure.</p>
-            <ul class="ps-specs">
-              <li><span>Size Range</span><b>16 to 20 mm</b></li>
-              <li><span>Shape</span><b>Angular</b></li>
-              <li><span>Compression</span><b>High</b></li>
-              <li><span>Load Capacity</span><b>Heavy Duty</b></li>
-              <li><span>RCC Use</span><b>Structural Grade</b></li>
-              <li><span>Road Suitability</span><b>Excellent</b></li>
-            </ul>
-            <div class="ps-apps"><b>Applications</b>Bridges · Flyovers · Highways · Industrial foundations · High rises · Heavy RCC</div>
-            <div class="ps-badges"><span class="ps-badge">Structural Grade</span><span class="ps-badge">Heavy Load</span><span class="ps-badge">Highway Ready</span></div>
-            <a href="/products/20mm-aggregate" class="ps-item-link" aria-label="View full details: 20mm Aggregates">View Full Details <span>→</span></a>
-          </div>
-        </div>
-        <div class="ps-item">
-          <div class="ps-item-img"><img src="img/products/agg-12mm.png" alt="12.5mm Crushed Stone Aggregate, VSI processed, for general purpose RCC slabs and columns" width="400" height="400" loading="lazy"/></div>
-          <div class="ps-item-body">
-            <span class="ps-item-tag">Grade · 12.5mm</span>
-            <h4 class="ps-item-name"><a href="/products/12mm-aggregate">12.5mm Aggregates</a></h4>
-            <p class="ps-item-desc">Mid range structural aggregate optimised for general RCC, slabs and column concrete.</p>
-            <ul class="ps-specs">
-              <li><span>Size Range</span><b>10 to 12.5 mm</b></li>
-              <li><span>Shape</span><b>Cubical</b></li>
-              <li><span>Crushing</span><b>VSI Processed</b></li>
-              <li><span>Strength</span><b>High</b></li>
-              <li><span>RCC Use</span><b>General Purpose</b></li>
-            </ul>
-            <div class="ps-apps"><b>Applications</b>RCC slabs · Columns · Beams · Commercial concrete</div>
-            <div class="ps-badges"><span class="ps-badge">RCC Grade</span><span class="ps-badge">VSI Processed</span></div>
-            <a href="/products/12mm-aggregate" class="ps-item-link" aria-label="View full details: 12.5mm Aggregates">View Full Details <span>→</span></a>
-          </div>
-        </div>
-        <div class="ps-item">
-          <div class="ps-item-img"><img src="img/products/agg-40mm.png" alt="40mm Crushed Stone Aggregate, heavy duty grade for foundations, mass concrete and infrastructure" width="400" height="400" loading="lazy"/></div>
-          <div class="ps-item-body">
-            <span class="ps-item-tag">Grade · 40mm</span>
-            <h4 class="ps-item-name"><a href="/products/40mm-aggregate">40mm Aggregates</a></h4>
-            <p class="ps-item-desc">Large size crushed aggregate for heavy duty concrete, foundations, drainage and infrastructure applications.</p>
-            <ul class="ps-specs">
-              <li><span>Size Range</span><b>32 to 40 mm</b></li>
-              <li><span>Shape</span><b>Angular / Coarse</b></li>
-              <li><span>Crushing</span><b>Machine Crushed</b></li>
-              <li><span>Strength</span><b>High</b></li>
-              <li><span>Load Capacity</span><b>Heavy Duty</b></li>
-              <li><span>RCC Use</span><b>Heavy Structural / Mass Concrete</b></li>
-            </ul>
-            <div class="ps-apps"><b>Applications</b>Heavy foundations · Mass concrete · Large RCC works · Drainage layers · Infrastructure works</div>
-            <div class="ps-badges"><span class="ps-badge">Heavy Duty</span><span class="ps-badge">Large Aggregate</span><span class="ps-badge">Infrastructure</span></div>
-            <a href="/products/40mm-aggregate" class="ps-item-link" aria-label="View full details: 40mm Aggregates">View Full Details <span>→</span></a>
-          </div>
-        </div>
-        <div class="ps-item">
-          <div class="ps-item-img"><img src="img/products/agg-60mm.png" alt="60mm Crushed Stone Aggregate, large size grade for mass concrete, drainage and heavy infrastructure" width="400" height="400" loading="lazy"/></div>
-          <div class="ps-item-body">
-            <span class="ps-item-tag">Grade · 60mm</span>
-            <h4 class="ps-item-name"><a href="/products/60mm-aggregate">60mm Aggregates</a></h4>
-            <p class="ps-item-desc">Large size crushed stone aggregate for heavy duty infrastructure, drainage, mass concrete and specialised construction applications.</p>
-            <ul class="ps-specs">
-              <li><span>Size Range</span><b>50 to 60 mm</b></li>
-              <li><span>Shape</span><b>Angular / Coarse</b></li>
-              <li><span>Crushing</span><b>Machine Crushed</b></li>
-              <li><span>Strength</span><b>Very High</b></li>
-              <li><span>Load Capacity</span><b>Very High</b></li>
-              <li><span>RCC Use</span><b>Mass Concrete / Infrastructure</b></li>
-            </ul>
-            <div class="ps-apps"><b>Applications</b>Mass concrete · Heavy foundations · Drainage works · Infrastructure · Large scale construction</div>
-            <div class="ps-badges"><span class="ps-badge">Heavy Duty</span><span class="ps-badge">Large Size</span><span class="ps-badge">Infrastructure</span></div>
-            <a href="/products/60mm-aggregate" class="ps-item-link" aria-label="View full details: 60mm Aggregates">View Full Details <span>→</span></a>
-          </div>
-        </div>
-      </div>
-    </template>
-
-    <template id="tpl-sand">
-      <button class="ps-close" aria-label="Close">✕</button>
-      <div class="ps-panel-head">
-        <div>
-          <span class="ph-eyebrow">Division · Sand &amp; Fines</span>
-          <h3>Engineered sand solutions, <em>graded to IS 383.</em></h3>
-        </div>
-        <p class="ph-meta">Premium manufactured and washed sand produced through advanced crushing and screening, suited to concrete, plaster and masonry applications.</p>
-      </div>
-      <div class="ps-items cols-5">
-        <div class="ps-item">
-          <div class="ps-item-img"><img src="img/products/m-sand.png" alt="Manufactured Sand (M Sand), fine aggregate for structural concrete and RCC" width="400" height="400" loading="lazy"/></div>
-          <div class="ps-item-body">
-            <span class="ps-item-tag">Type · M Sand</span>
-            <h4 class="ps-item-name"><a href="/products/m-sand">Manufactured Sand</a></h4>
-            <p class="ps-item-desc">Manufactured sand graded as fine aggregate for concrete, RCC and masonry. Current grading information available on request.</p>
-            <ul class="ps-specs">
-              <li><span>Category</span><b>Fine Aggregate</b></li>
-              <li><span>Particle Size</span><b>Passing 4.75mm</b></li>
-              <li><span>Standard</span><b>IS 383:2016</b></li>
-              <li><span>Grading</span><b>Zones I to IV, on request</b></li>
-            </ul>
-            <div class="ps-apps"><b>Applications</b>RCC concrete · High rise · Commercial · Structural · Infrastructure</div>
-            <div class="ps-badges"><span class="ps-badge">IS 383:2016</span><span class="ps-badge">Fine Aggregate</span></div>
-            <a href="/products/m-sand" class="ps-item-link" aria-label="View full details: Manufactured Sand">View Full Details <span>→</span></a>
-          </div>
-        </div>
-        <div class="ps-item">
-          <div class="ps-item-img"><img src="assets/washed-sand.png" alt="Washed Sand, clean, uniform grain, processed to remove impurities for concrete batching" width="400" height="400" loading="lazy"/></div>
-          <div class="ps-item-body">
-            <span class="ps-item-tag">Type · Washed</span>
-            <h4 class="ps-item-name">Washed Sand</h4>
-            <p class="ps-item-desc">Clean washed sand processed to remove impurities and optimise consistency for premium construction applications.</p>
-            <ul class="ps-specs">
-              <li><span>Clay Content</span><b>Minimal</b></li>
-              <li><span>Moisture</span><b>Controlled</b></li>
-              <li><span>Purity</span><b>High</b></li>
-              <li><span>Grain Consistency</span><b>Uniform</b></li>
-            </ul>
-            <div class="ps-apps"><b>Applications</b>Concrete batching · Masonry · Infrastructure · Finishing</div>
-            <div class="ps-badges"><span class="ps-badge">Washed Material</span><span class="ps-badge">Clean Grade</span><span class="ps-badge">Uniform Texture</span></div>
-          </div>
-        </div>
-        <div class="ps-item">
-          <div class="ps-item-img"><img src="img/products/p-sand.png" alt="Plaster Sand (P Sand), manufactured by OM Group for internal and external wall plastering" width="400" height="400" loading="lazy"/></div>
-          <div class="ps-item-body">
-            <span class="ps-item-tag">Type · P Sand</span>
-            <h4 class="ps-item-name"><a href="/products/plaster-sand">Plaster Sand</a></h4>
-            <p class="ps-item-desc">Manufactured and supplied by OM Group, classified for plastering applications. Current grading information available on request.</p>
-            <ul class="ps-specs">
-              <li><span>Category</span><b>Plaster Grade Fine Aggregate</b></li>
-              <li><span>Standard</span><b>IS 1542:1992</b></li>
-              <li><span>Grading</span><b>On request</b></li>
-            </ul>
-            <div class="ps-apps"><b>Applications</b>Internal plastering · External walls · Ceiling plaster · Rendering</div>
-            <div class="ps-badges"><span class="ps-badge">IS 1542:1992</span><span class="ps-badge">Manufactured by OM Group</span></div>
-            <a href="/products/plaster-sand" class="ps-item-link" aria-label="View full details: Plaster Sand">View Full Details <span>→</span></a>
-          </div>
-        </div>
-        <div class="ps-item">
-          <div class="ps-item-img"><img src="assets/concrete-sand.png" alt="Concrete Sand, optimised particle distribution for high strength structural concrete batching" width="400" height="400" loading="lazy"/></div>
-          <div class="ps-item-body">
-            <span class="ps-item-tag">Type · Concrete</span>
-            <h4 class="ps-item-name"><a href="/products/concrete-sand">Concrete Sand</a></h4>
-            <p class="ps-item-desc">Optimised sand blend designed for high strength concrete and infrastructure grade batching.</p>
-            <ul class="ps-specs">
-              <li><span>Particle Distribution</span><b>Balanced</b></li>
-              <li><span>Strength Support</span><b>High</b></li>
-              <li><span>Workability</span><b>Excellent</b></li>
-              <li><span>Water Retention</span><b>Controlled</b></li>
-            </ul>
-            <div class="ps-apps"><b>Applications</b>Structural concrete · RCC batching · Industrial flooring · Foundations</div>
-            <div class="ps-badges"><span class="ps-badge">Structural Use</span><span class="ps-badge">High Strength</span><span class="ps-badge">RCC Compatible</span></div>
-            <a href="/products/concrete-sand" class="ps-item-link" aria-label="View full details: Concrete Sand">View Full Details <span>→</span></a>
-          </div>
-        </div>
-        <div class="ps-item">
-          <div class="ps-item-img"><img src="img/products/river-sand.png" alt="River Sand, naturally sourced fine aggregate for masonry, plastering and general construction" width="400" height="400" loading="lazy"/></div>
-          <div class="ps-item-body">
-            <span class="ps-item-tag">Type · River</span>
-            <h4 class="ps-item-name"><a href="/products/river-sand">River Sand</a></h4>
-            <p class="ps-item-desc">Naturally sourced fine aggregate selected for masonry, plastering and general construction applications. Clean, fine grained material with consistent texture and grading, subject to project requirements.</p>
-            <ul class="ps-specs">
-              <li><span>Category</span><b>Natural Fine Aggregate</b></li>
-              <li><span>Particle Size</span><b>Fine</b></li>
-              <li><span>Texture</span><b>Natural &amp; Fine</b></li>
-              <li><span>Purity</span><b>Clean Grade</b></li>
-              <li><span>Grading</span><b>Available as Required</b></li>
-            </ul>
-            <div class="ps-apps"><b>Applications</b>Masonry · Plastering · RCC Concrete · General Construction</div>
-            <div class="ps-badges"><span class="ps-badge">Natural Sand</span><span class="ps-badge">Fine Aggregate</span><span class="ps-badge">Construction Grade</span></div>
-            <a href="/products/river-sand" class="ps-item-link" aria-label="View full details: River Sand">View Full Details <span>→</span></a>
-          </div>
-        </div>
-      </div>
-    </template>
-
-    <template id="tpl-rmc">
-      <button class="ps-close" aria-label="Close">✕</button>
-      <div class="ps-panel-head">
-        <div>
-          <span class="ph-eyebrow">Division · Ready Mix Concrete</span>
-          <h3>High performance grades, <em>batched and delivered.</em></h3>
-        </div>
-        <p class="ph-meta">Produced at our Sabsol Qualitech plants with UltraTech Cement and delivered through an owned transit mixer fleet across Goa. <a href="/products/ready-mix-concrete" style="color:var(--accent);font-weight:600">View full RMC grade guide →</a></p>
-      </div>
-      <div class="ps-items cols-4">
-        <div class="ps-grade">
-          <div class="ps-grade-img"><img src="/img/products/om-group-rmc-m20-transparent.png" alt="M20 Ready Mix Concrete" width="1000" height="581" loading="lazy" decoding="async"/></div>
-          <div class="ps-grade-plate">
-            <div class="ps-grade-name">M20<em>MPa</em></div>
-            <div class="ps-grade-strength">Compressive <b>20 MPa</b></div>
-          </div>
-          <div class="ps-grade-body">
-            <p class="ps-item-desc">Standard structural concrete suitable for residential RCC and slab applications.</p>
-            <ul class="ps-specs">
-              <li><span>Approx PSI</span><b>2900</b></li>
-              <li><span>RCC Suitability</span><b>Excellent</b></li>
-              <li><span>Workability</span><b>High</b></li>
-            </ul>
-            <div class="ps-apps"><b>Use</b>Residential · Slabs · Footings · Beams · Columns</div>
-            <div class="ps-badges"><span class="ps-badge">RCC Grade</span><span class="ps-badge">Residential</span></div>
-            <a href="/products/ready-mix-concrete#m20" class="ps-item-link">View M20 Grade →</a>
-          </div>
-        </div>
-        <div class="ps-grade">
-          <div class="ps-grade-img"><img src="/img/products/om-group-rmc-m25-transparent.png" alt="M25 Ready Mix Concrete" width="1000" height="549" loading="lazy" decoding="async"/></div>
-          <div class="ps-grade-plate">
-            <div class="ps-grade-name">M25<em>MPa</em></div>
-            <div class="ps-grade-strength">Compressive <b>25 MPa</b></div>
-          </div>
-          <div class="ps-grade-body">
-            <p class="ps-item-desc">Enhanced structural concrete for commercial and mid rise construction.</p>
-            <ul class="ps-specs">
-              <li><span>Approx PSI</span><b>3600</b></li>
-              <li><span>Load Performance</span><b>High</b></li>
-              <li><span>Durability</span><b>Enhanced</b></li>
-            </ul>
-            <div class="ps-apps"><b>Use</b>Commercial · Mid rise · Structural RCC · Infrastructure</div>
-            <div class="ps-badges"><span class="ps-badge">Commercial</span><span class="ps-badge">High Durability</span></div>
-            <a href="/products/ready-mix-concrete#m25" class="ps-item-link">View M25 Grade →</a>
-          </div>
-        </div>
-        <div class="ps-grade">
-          <div class="ps-grade-img"><img src="/img/products/om-group-rmc-m30-transparent.png" alt="M30 Ready Mix Concrete" width="1000" height="598" loading="lazy" decoding="async"/></div>
-          <div class="ps-grade-plate">
-            <div class="ps-grade-name">M30<em>MPa</em></div>
-            <div class="ps-grade-strength">Compressive <b>30 MPa</b></div>
-          </div>
-          <div class="ps-grade-body">
-            <p class="ps-item-desc">Premium grade concrete for demanding structural and infrastructure environments.</p>
-            <ul class="ps-specs">
-              <li><span>Approx PSI</span><b>4350</b></li>
-              <li><span>Integrity</span><b>High</b></li>
-              <li><span>Industrial Use</span><b>Excellent</b></li>
-            </ul>
-            <div class="ps-apps"><b>Use</b>High rise · Industrial foundations · Large commercial · Infrastructure</div>
-            <div class="ps-badges"><span class="ps-badge">Infrastructure</span><span class="ps-badge">Industrial Use</span></div>
-            <a href="/products/ready-mix-concrete#m30" class="ps-item-link">View M30 Grade →</a>
-          </div>
-        </div>
-        <div class="ps-grade">
-          <div class="ps-grade-img"><img src="/img/products/om-group-rmc-m35-transparent.png" alt="M35 Ready Mix Concrete" width="1000" height="535" loading="lazy" decoding="async"/></div>
-          <div class="ps-grade-plate">
-            <div class="ps-grade-name">M35<em>MPa</em></div>
-            <div class="ps-grade-strength">Compressive <b>35 MPa</b></div>
-          </div>
-          <div class="ps-grade-body">
-            <p class="ps-item-desc">High strength concrete for heavy load and industrial infrastructure projects.</p>
-            <ul class="ps-specs">
-              <li><span>Approx PSI</span><b>5100</b></li>
-              <li><span>Heavy Load</span><b>Excellent</b></li>
-              <li><span>Durability</span><b>Superior</b></li>
-            </ul>
-            <div class="ps-apps"><b>Use</b>Bridges · Flyovers · Industrial · Commercial towers</div>
-            <div class="ps-badges"><span class="ps-badge">Heavy Duty</span><span class="ps-badge">Bridge Grade</span></div>
-            <a href="/products/ready-mix-concrete#m35" class="ps-item-link">View M35 Grade →</a>
-          </div>
-        </div>
-        <div class="ps-grade">
-          <div class="ps-grade-img"><img src="/img/products/om-group-rmc-m40-transparent.png" alt="M40 Ready Mix Concrete" width="1000" height="586" loading="lazy" decoding="async"/></div>
-          <div class="ps-grade-plate">
-            <div class="ps-grade-name">M40<em>MPa</em></div>
-            <div class="ps-grade-strength">Compressive <b>40 MPa</b></div>
-          </div>
-          <div class="ps-grade-body">
-            <p class="ps-item-desc">Advanced high strength concrete for premium infrastructure and critical structural applications.</p>
-            <ul class="ps-specs">
-              <li><span>Approx PSI</span><b>5800</b></li>
-              <li><span>Rating</span><b>Premium</b></li>
-              <li><span>Load Capacity</span><b>Extreme</b></li>
-            </ul>
-            <div class="ps-apps"><b>Use</b>Mega infrastructure · High load foundations · Bridges · Industrial mega projects</div>
-            <div class="ps-badges"><span class="ps-badge">Premium Grade</span><span class="ps-badge">Extreme</span></div>
-            <a href="/products/ready-mix-concrete#m40" class="ps-item-link">View M40 Grade →</a>
-          </div>
-        </div>
-        <div class="ps-grade">
-          <div class="ps-grade-img"><img src="/img/products/om-group-rmc-m45-transparent.png" alt="M45 Ready Mix Concrete" width="1000" height="535" loading="lazy" decoding="async"/></div>
-          <div class="ps-grade-plate">
-            <div class="ps-grade-name">M45<em>MPa</em></div>
-            <div class="ps-grade-strength">Compressive <b>45 MPa</b></div>
-          </div>
-          <div class="ps-grade-body">
-            <p class="ps-item-desc">Standard concrete grade toward the upper end of the range, for demanding commercial and industrial structures.</p>
-            <div class="ps-apps"><b>Use</b>Demanding commercial · Industrial · Special RCC work</div>
-            <div class="ps-badges"><span class="ps-badge">Design Mix</span><span class="ps-badge">On Request</span></div>
-            <a href="/products/ready-mix-concrete#m45" class="ps-item-link">View M45 Grade →</a>
-          </div>
-        </div>
-        <div class="ps-grade">
-          <div class="ps-grade-img"><img src="/img/products/om-group-rmc-m60-transparent.png" alt="M60 High Strength Ready Mix Concrete" width="1000" height="592" loading="lazy" decoding="async"/></div>
-          <div class="ps-grade-plate">
-            <div class="ps-grade-name">M60<em>MPa</em></div>
-            <div class="ps-grade-strength">Compressive <b>60 MPa</b></div>
-          </div>
-          <div class="ps-grade-body">
-            <p class="ps-item-desc">High strength concrete requiring performance based mix evaluation, supplied on request for specialised applications.</p>
-            <div class="ps-apps"><b>Use</b>Specialised high strength · Precast · Heavily loaded structures</div>
-            <div class="ps-badges"><span class="ps-badge">High Strength</span><span class="ps-badge">On Request</span></div>
-            <a href="/products/ready-mix-concrete#m60" class="ps-item-link">Discuss M60 →</a>
-          </div>
-        </div>
-        <div class="ps-chart-card">
-          <div class="ps-chart-img"><img src="assets/concrete.png" alt="Ready Mix Concrete production at OM Group Sabsol Qualitech batching plant, Goa" width="800" height="500" loading="lazy"/></div>
-          <div class="ps-chart-body">
-            <span class="ph-eyebrow">Production</span>
-            <h4>Batched fresh, <em>delivered on spec.</em></h4>
-            <p>Every cubic metre is produced at our Kundaim and Thivim plants with UltraTech Cement, graded aggregates and admixtures, then transported in fleet transit mixers to keep slump, strength and workability within tolerance from plant to pour.</p>m design mixes available on request.</p>
-          </div>
-        </div>
-      </div>
-    </template>
-
-    <template id="tpl-gsb">
-      <button class="ps-close" aria-label="Close">✕</button>
-      <div class="ps-panel-head">
-        <div>
-          <span class="ph-eyebrow">Division · GSB, Boulders &amp; Metal</span>
-          <h3>Foundational materials for <em>road &amp; heavy works.</em></h3>
-        </div>
-        <p class="ph-meta">Robust granular materials, natural boulders and construction metal for road infrastructure, embankment stability and heavy duty environments. <a href="/products/granular-sub-base" style="color:var(--accent);font-weight:600">View full GSB specification guide →</a> &nbsp;|&nbsp; <a href="/products/boulders" style="color:var(--accent);font-weight:600">View full boulder specification guide →</a> &nbsp;|&nbsp; <a href="/products/wmm" style="color:var(--accent);font-weight:600">View full WMM specification guide →</a> &nbsp;|&nbsp; <a href="/products/road-base-material" style="color:var(--accent);font-weight:600">Not sure which road material you need? →</a></p>
-      </div>
-      <div class="ps-items cols-4">
-        <div class="ps-item">
-          <div class="ps-item-img"><img src="img/products/gsb.png" alt="Granular Sub Base (GSB), highway grade, well graded for road foundation and pavement stability" width="400" height="400" loading="lazy"/></div>
-          <div class="ps-item-body">
-            <span class="ps-item-tag">Material · GSB</span>
-            <h4 class="ps-item-name"><a href="/products/granular-sub-base">Granular Sub Base</a></h4>
-            <p class="ps-item-desc">Granular sub base material for road foundations and pavement stability.</p>
-            <ul class="ps-specs">
-              <li><span>Distribution</span><b>Well Graded</b></li>
-              <li><span>Compaction</span><b>Excellent</b></li>
-              <li><span>Stability</span><b>High</b></li>
-              <li><span>Use</span><b>Highway Grade</b></li>
-            </ul>
-            <div class="ps-apps"><b>Applications</b>Highway sub base · Road construction · Pavement layers · Infrastructure foundations</div>
-            <div class="ps-badges"><span class="ps-badge">Highway Grade</span><span class="ps-badge">High Compaction</span></div>
-            <a href="/products/granular-sub-base" class="ps-item-link" aria-label="View full details: Granular Sub Base">View Full Details <span>→</span></a>
-          </div>
-        </div>
-        <div class="ps-item">
-          <div class="ps-item-img"><img src="img/products/boulders.png" alt="Natural Stone Boulders, heavy duty, for retaining walls, marine works and river protection" width="400" height="400" loading="lazy"/></div>
-          <div class="ps-item-body">
-            <span class="ps-item-tag">Material · Stone</span>
-            <h4 class="ps-item-name"><a href="/products/boulders">Boulder Supply</a></h4>
-            <p class="ps-item-desc">Heavy natural boulders for retaining structures, marine applications and large scale infrastructure support.</p>
-            <ul class="ps-specs">
-              <li><span>Size</span><b>Custom Sizes</b></li>
-              <li><span>Density</span><b>High</b></li>
-              <li><span>Load Stability</span><b>Excellent</b></li>
-              <li><span>Resistance</span><b>Strong</b></li>
-            </ul>
-            <div class="ps-apps"><b>Applications</b>Retaining walls · River protection · Reinforcement · Landscaping · Marine works</div>
-            <div class="ps-badges"><span class="ps-badge">Heavy Duty</span><span class="ps-badge">Natural Stone</span></div>
-            <a href="/products/boulders" class="ps-item-link" aria-label="View full details: Boulder Supply">View Full Details <span>→</span></a>
-          </div>
-        </div>
-        <div class="ps-item">
-          <div class="ps-item-img"><img src="assets/wmm.png" alt="Wet Mix Macadam (WMM), well graded, heavy duty road base for national highways and infrastructure" width="400" height="400" loading="lazy"/></div>
-          <div class="ps-item-body">
-            <span class="ps-item-tag">Material · WMM</span>
-            <h4 class="ps-item-name"><a href="/products/wmm">Wet Mix Macadam</a></h4>
-            <p class="ps-item-desc">High performance Wet Mix Macadam for superior road base strength, pavement stability and long lasting infrastructure performance under heavy traffic conditions.</p>
-            <ul class="ps-specs">
-              <li><span>Aggregate Gradation</span><b>Well Graded</b></li>
-              <li><span>Compaction Quality</span><b>Excellent</b></li>
-              <li><span>Load Bearing</span><b>Heavy Duty</b></li>
-              <li><span>Surface Stability</span><b>High</b></li>
-              <li><span>Drainage</span><b>Efficient</b></li>
-            </ul>
-            <div class="ps-apps"><b>Applications</b>National highways · Flexible pavement · Airport roads · Industrial corridors · Smart city infrastructure</div>
-            <div class="ps-badges"><span class="ps-badge">Highway Grade</span><span class="ps-badge">Heavy Load</span><span class="ps-badge">High Compaction</span><span class="ps-badge">Infrastructure Ready</span></div>
-            <a href="/products/wmm" class="ps-item-link" aria-label="View full details: Wet Mix Macadam">View Full Details <span>→</span></a>
-          </div>
-        </div>
-        <div class="ps-item">
-          <div class="ps-item-img"><img src="assets/road-base.png" alt="Road Base Material, specialist pavement stability aggregate for highway layers and infrastructure" width="400" height="400" loading="lazy"/></div>
-          <div class="ps-item-body">
-            <span class="ps-item-tag">Material · Base</span>
-            <h4 class="ps-item-name"><a href="/products/road-base-material">Road Base Material</a></h4>
-            <p class="ps-item-desc">Specialised road base material for pavement stability and long term infrastructure durability.</p>
-            <ul class="ps-specs">
-              <li><span>Stability</span><b>High</b></li>
-              <li><span>Compression</span><b>Excellent</b></li>
-              <li><span>Roadwork Use</span><b>Superior</b></li>
-            </ul>
-            <div class="ps-apps"><b>Applications</b>Road foundations · Highway layers · Infrastructure · Pavement systems</div>
-            <div class="ps-badges"><span class="ps-badge">Road Infra</span><span class="ps-badge">Base Layer</span></div>
-            <a href="/products/road-base-material" class="ps-item-link" aria-label="View full details: Road Base Material">View Full Details <span>→</span></a>
-          </div>
-        </div>
-      </div>
-    </template>
-
-    <div class="products-grid fade-up d1" style="display:none">
-      <div class="pcard">
-        <div class="pcard-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><polygon points="12,3 21,8 21,16 12,21 3,16 3,8" stroke-linejoin="round"/><polygon points="12,8 17,11 17,15 12,18 7,15 7,11" /></svg></div>
-        <h4>Crushed Stone Aggregates</h4>
-        <p>Multiple specification grades for RCC, road and structural use, from on site crushing.</p>
-      </div>
-      <div class="pcard">
-        <div class="pcard-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 19h18M5 19c0-3 3-5 7-5s7 2 7 5M9 11l3-5 3 5" stroke-linejoin="round" stroke-linecap="round"/><circle cx="8" cy="16" r=".7" fill="currentColor"/><circle cx="14" cy="17" r=".7" fill="currentColor"/><circle cx="11" cy="14" r=".7" fill="currentColor"/></svg></div>
-        <h4>Manufactured &amp; Washed Sand</h4>
-        <p>M Sand and washed sand graded to IS standards for masonry, plaster and concrete.</p>
-      </div>
-      <div class="pcard">
-        <div class="pcard-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="4" y="6" width="16" height="10" rx="1"/><path d="M8 6V4h8v2M4 12h16M9 16v3M15 16v3" stroke-linecap="round"/></svg></div>
-        <h4>Ready Mix Concrete</h4>
-        <p>Site delivered RMC produced with UltraTech Cement and fleet transit mixers.</p>
-      </div>
-      <div class="pcard" style="border-right:0">
-        <div class="pcard-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 20l4-9 4 5 3-4 7 8z" stroke-linejoin="round"/><circle cx="17" cy="6" r="2"/></svg></div>
-        <h4>GSB, Boulders &amp; Metal</h4>
-        <p>Granular Sub Base, boulders and construction metal for road and RCC works.</p>
-      </div>
-    </div>
-
-    <!-- venture card icon set: 24px grid, 1.6 stroke -->
-    <svg class="fx-sprite" aria-hidden="true" focusable="false">
-      <symbol id="fx-i-plant" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20.5h18"/><path d="M5 20.5v-12a2 2 0 0 1 4 0v12"/><path d="M11 20.5V6a2 2 0 0 1 4 0v14.5"/><path d="M17 20.5v-7h3.5v7"/><path d="M5 11.5h4M11 9.5h4"/></symbol>
-      <symbol id="fx-i-cement" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5h11l1.5 13a1 1 0 0 1-1 1.1H6a1 1 0 0 1-1-1.1z"/><path d="M8.5 6.5l1-3h5l1 3"/><path d="M8.5 12h7M8.5 15.5h7"/></symbol>
-      <symbol id="fx-i-mixer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="8.2" cy="10.2" rx="5.8" ry="3.6" transform="rotate(-20 8.2 10.2)"/><path d="M6.4 7.2l2.6 5.8"/><path d="M2.5 16h12.5"/><path d="M15 16V9.5h3l3 3.5V16h-1.4"/><path d="M8.2 16h2"/><circle cx="6" cy="18" r="1.8"/><circle cx="17.6" cy="18" r="1.8"/></symbol>
-      <symbol id="fx-i-rotor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 3.5h15l-3.5 5H8z"/><path d="M8 8.5h8v7.5H8z"/><path d="M8 12h8"/><path d="M9.5 16l-2.5 4.5M14.5 16l2.5 4.5"/><path d="M12 18v.5M12 20.5v.01"/></symbol>
-      <symbol id="fx-i-stones" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 20.5h19"/><path d="M3.4 20.5l1.5-4.6 3.9-1.9 3.5 2 .7 4.5"/><path d="M12 20.5l1-4.3 3.8-2 3.5 2 .6 4.3"/><path d="M7.8 14.4l1.3-4.4 3.5-1.9 3.4 2 .6 4"/></symbol>
-      <symbol id="fx-i-quarry" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 20h19"/><path d="M3.5 20 9.5 8.5l3.2 5 2.3-3 6 9.5"/><path d="M7.6 12.5h3.6M6 16h5.5M12.5 17h4.6"/></symbol>
-      <symbol id="fx-i-truck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 16.5V8h-11v8.5h1.9"/><path d="M13.5 11h3.6l3.4 3.6v1.9h-1.8"/><path d="M8.3 16.5h6.6"/><circle cx="6.4" cy="16.8" r="1.9"/><circle cx="16.8" cy="16.8" r="1.9"/></symbol>
-      <symbol id="fx-i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s6.5-5.8 6.5-11a6.5 6.5 0 0 0-13 0c0 5.2 6.5 11 6.5 11z"/><circle cx="12" cy="10" r="2.4"/></symbol>
-      <symbol id="fx-i-partner" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3.5 19.5a5.5 5.5 0 0 1 11 0"/><circle cx="16.8" cy="9.2" r="2.4"/><path d="M15.6 13.9a4.6 4.6 0 0 1 4.9 4.6"/></symbol>
-      <symbol id="fx-i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12h15M13.5 6l6 6-6 6"/></symbol>
-    </svg>
-
-    <div class="facilities">
-      <article class="facility" style="--fx-i:0">
-        <div class="fx-top">
-          <div class="fx-hero">
-            <span class="fx-rule" aria-hidden="true"></span>
-            <div class="facility-eyebrow">Core Venture</div>
-            <h3 class="fx-title">Sabsol Qualitech RMC at Kundaim &amp; Thivim.</h3>
-            <p class="fx-desc">High quality ready mix concrete for infrastructure and commercial projects across Goa.</p>
-            <div class="fx-art"><div class="fx-art-in">
-              <svg class="fx-svg" viewBox="76 14 244 200" width="244" height="200" role="img" aria-label="Illustration of a ready-mix concrete batching plant with cement silos, an aggregate conveyor and a transit mixer truck">
-                <defs>
-                  <linearGradient id="r-silo" x1="0" x2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".5" stop-color="#F0F0EF"/><stop offset=".82" stop-color="#D2D4D7"/><stop offset="1" stop-color="#B4B8BE"/></linearGradient>
-                  <linearGradient id="r-org" x1="0" x2="1"><stop offset="0" stop-color="#FF8A5E"/><stop offset=".5" stop-color="#F15A29"/><stop offset="1" stop-color="#C2411A"/></linearGradient>
-                  <linearGradient id="r-face" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E7E8E6"/></linearGradient>
-                  <linearGradient id="r-glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5A6570"/><stop offset="1" stop-color="#1F242A"/></linearGradient>
-                  <linearGradient id="r-drum" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".55" stop-color="#ECECEA"/><stop offset="1" stop-color="#B9BDC2"/></linearGradient>
-                  <linearGradient id="r-shade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".55"/><stop offset=".35" stop-color="#FFFFFF" stop-opacity="0"/><stop offset="1" stop-color="#1B1E22" stop-opacity=".26"/></linearGradient>
-                  <linearGradient id="r-rim" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EEF0F2"/><stop offset="1" stop-color="#8E949C"/></linearGradient>
-                  <radialGradient id="r-ground"><stop offset="0" stop-color="#141416" stop-opacity=".2"/><stop offset="1" stop-color="#141416" stop-opacity="0"/></radialGradient>
-                  <clipPath id="r-drumclip"><path d="M204 158L226 150C252 146 270 154 274 168C277 180 270 190 256 191L226 192C214 192 206 182 204 172Z"/></clipPath>
-                </defs>
-                <ellipse cx="166" cy="210" rx="156" ry="8" fill="url(#r-ground)"/>
-                <!-- cement silos -->
-                <g class="fx-p" style="--p:.14s">
-                  <path d="M97 132v76M123 132v76" stroke="#8A9099" stroke-width="2.4"/>
-                  <path d="M97 150 123 176M123 150 97 176M97 176 123 204M123 176 97 204M97 150h26M97 176h26" stroke="#A9AEB5" stroke-width=".9" fill="none"/>
-                  <path d="M95 132h30l-11 22h-8z" fill="url(#r-silo)"/><path d="M95 132h30l-11 22h-8z" fill="#1B1E22" opacity=".08"/>
-                  <rect x="106.5" y="154" width="7" height="6" fill="#5E646C"/>
-                  <rect x="95" y="50" width="30" height="82" fill="url(#r-silo)"/>
-                  <rect x="95" y="60" width="30" height="11" fill="url(#r-org)"/><rect x="95" y="104" width="30" height="7" fill="url(#r-org)"/>
-                  <path d="M95 84h30M95 94h30M95 120h30" stroke="#141416" stroke-opacity=".07"/>
-                  <ellipse cx="110" cy="50" rx="15" ry="3.5" fill="#F7F7F6" stroke="#C9CCD0" stroke-width=".6"/>
-                  <path d="M95 44h30M96 44v6M103 44v6M110 44v6M117 44v6M124 44v6" stroke="#8A9099" stroke-width=".8"/>
-                  <path d="M98 53v79M101 53v79" stroke="#A9AEB5" stroke-width=".6"/><path d="M99.5 53v79" stroke="#A9AEB5" stroke-width="3" stroke-dasharray=".6 3.4"/>
-                </g>
-                <g class="fx-p" style="--p:.24s">
-                  <path d="M165 132v76M191 132v76" stroke="#8A9099" stroke-width="2.4"/>
-                  <path d="M165 150 191 176M191 150 165 176M165 176 191 204M191 176 165 204M165 150h26M165 176h26" stroke="#A9AEB5" stroke-width=".9" fill="none"/>
-                  <path d="M163 132h30l-11 22h-8z" fill="url(#r-silo)"/><path d="M163 132h30l-11 22h-8z" fill="#1B1E22" opacity=".08"/>
-                  <rect x="174.5" y="154" width="7" height="6" fill="#5E646C"/>
-                  <rect x="163" y="46" width="30" height="86" fill="url(#r-silo)"/>
-                  <rect x="163" y="56" width="30" height="11" fill="url(#r-org)"/><rect x="163" y="104" width="30" height="7" fill="url(#r-org)"/>
-                  <path d="M163 82h30M163 92h30M163 120h30" stroke="#141416" stroke-opacity=".07"/>
-                  <ellipse cx="178" cy="46" rx="15" ry="3.5" fill="#F7F7F6" stroke="#C9CCD0" stroke-width=".6"/>
-                  <path d="M163 40h30M164 40v6M171 40v6M178 40v6M185 40v6M192 40v6" stroke="#8A9099" stroke-width=".8"/>
-                </g>
-                <g class="fx-p" style="--p:.34s">
-                  <path d="M129.5 132v76M158.5 132v76" stroke="#8A9099" stroke-width="2.4"/>
-                  <path d="M129.5 150 158.5 176M158.5 150 129.5 176M129.5 176 158.5 204M158.5 176 129.5 204M129.5 150h29M129.5 176h29" stroke="#A9AEB5" stroke-width=".9" fill="none"/>
-                  <path d="M127 132h34l-12 24h-10z" fill="url(#r-silo)"/><path d="M127 132h34l-12 24h-10z" fill="#1B1E22" opacity=".08"/>
-                  <rect x="140.5" y="156" width="7" height="6" fill="#5E646C"/>
-                  <rect x="127" y="30" width="34" height="102" fill="url(#r-silo)"/>
-                  <rect x="127" y="40" width="34" height="13" fill="url(#r-org)"/><rect x="127" y="100" width="34" height="8" fill="url(#r-org)"/>
-                  <path d="M127 70h34M127 84h34M127 120h34" stroke="#141416" stroke-opacity=".07"/>
-                  <ellipse cx="144" cy="30" rx="17" ry="4" fill="#F7F7F6" stroke="#C9CCD0" stroke-width=".6"/>
-                  <path d="M127 24h34M128 24v6M136 24v6M144 24v6M152 24v6M160 24v6" stroke="#8A9099" stroke-width=".8"/>
-                </g>
-                <!-- inclined aggregate conveyor -->
-                <g class="fx-p" style="--p:.46s;--dx:-14px;--dy:9px">
-                  <path d="M117 176v34M166.7 143v67" stroke="#8A9099" stroke-width="2"/>
-                  <path d="M67.3 209 209.3 115" stroke="#6B7078" stroke-width="1.1"/>
-                  <path d="M67.3 209L78.2 194.6L95.7 190.2L106.6 175.8L124.1 171.4L135 157L152.5 152.6L163.4 138.2L180.9 133.8L191.8 119.4L209.3 115" stroke="#8A9099" stroke-width=".9" fill="none"/>
-                  <path d="M64 204 206 110" stroke="#2E3237" stroke-width="3.6" stroke-linecap="round"/>
-                  <path class="fx-belt" d="M64 204 206 110" stroke="#6B7078" stroke-width="1.2" stroke-dasharray="3 5"/>
-                  <path d="M62.3 201.5 204.3 107.5" stroke="#F15A29" stroke-width="2.6" stroke-dasharray="14 3"/>
-                  <circle cx="64" cy="204" r="3.2" fill="#2E3237"/>
-                </g>
-                <!-- mixer tower -->
-                <g class="fx-p" style="--p:.52s">
-                  <path d="M202 126v84M242 126v84" stroke="#8A9099" stroke-width="2.4"/>
-                  <path d="M202 150 242 172M242 150 202 172M202 150h40" stroke="#A9AEB5" stroke-width=".9" fill="none"/>
-                  <rect x="198" y="96" width="48" height="30" fill="url(#r-face)"/>
-                  <rect x="198" y="96" width="48" height="30" fill="none" stroke="#141416" stroke-opacity=".1" stroke-width=".8"/>
-                  <rect x="195" y="92" width="54" height="4.5" rx="1" fill="#9AA0A8"/>
-                  <rect x="204" y="102" width="36" height="7" rx="1" fill="url(#r-glass)"/>
-                  <rect x="198" y="116" width="48" height="3" fill="url(#r-org)"/>
-                  <path d="M212 126h20l-6 12h-8z" fill="#B4B8BE"/>
-                </g>
-                <!-- transit mixer: reverses in under the tower -->
-                <g class="fx-drive" style="--dx:80px;--p:.62s">
-                  <rect x="196" y="191" width="114" height="7" rx="1.5" fill="#2B2E33"/>
-                  <path d="M222 191v-6M262 191v-8" stroke="#5E646C" stroke-width="4"/>
-                  <path d="M204 158L226 150C252 146 270 154 274 168C277 180 270 190 256 191L226 192C214 192 206 182 204 172Z" fill="url(#r-drum)"/>
-                  <g clip-path="url(#r-drumclip)"><g class="fx-drum"><path d="M160 140h7l-16 60h-7zM176 140h7l-16 60h-7zM192 140h7l-16 60h-7zM208 140h7l-16 60h-7zM224 140h7l-16 60h-7zM240 140h7l-16 60h-7zM256 140h7l-16 60h-7zM272 140h7l-16 60h-7zM288 140h7l-16 60h-7zM304 140h7l-16 60h-7z" fill="#F15A29" fill-opacity=".9"/></g></g>
-                  <path d="M204 158L226 150C252 146 270 154 274 168C277 180 270 190 256 191L226 192C214 192 206 182 204 172Z" fill="url(#r-shade)" stroke="#141416" stroke-opacity=".12" stroke-width=".8"/>
-                  <ellipse cx="204.5" cy="165" rx="3" ry="7.5" fill="#3A3E45"/>
-                  <path d="M201 170l-9 13 3 2 9-12z" fill="#8A9099"/>
-                  <path d="M276 199V166q0-4 4-4h19q4 0 6 4l6 18q1 2 1 5v10z" fill="url(#r-face)" stroke="#141416" stroke-opacity=".12" stroke-width=".8"/>
-                  <path d="M296 166.5h3.5q2.5 0 3.5 2.5l5 14H296z" fill="url(#r-glass)"/>
-                  <rect x="281" y="167" width="12" height="13" rx="1.2" fill="url(#r-glass)"/>
-                  <path d="M294 167v24" stroke="#141416" stroke-opacity=".1"/>
-                  <rect x="276" y="186" width="36" height="3" fill="url(#r-org)"/>
-                  <rect x="302" y="195" width="11" height="5" rx="1" fill="#3A3E45"/>
-                  <rect x="309" y="190.5" width="3" height="3" rx=".6" fill="#FFF3DD"/>
-                  <path d="M299 164l3-4" stroke="#3A3E45" stroke-width="1.2" stroke-linecap="round"/>
-                  <path d="M212 199q0-11 12-11h22q12 0 12 11M285 199a11 11 0 0 1 22 0" fill="none" stroke="#2B2E33" stroke-width="3"/>
-                  <g class="fx-whl" style="--rot:510deg"><circle cx="224" cy="201" r="9" fill="#24272C"/><circle cx="224" cy="201" r="5" fill="url(#r-rim)"/><circle cx="224" cy="201" r="1.6" fill="#4A4F57"/><path d="M224 196.6v1.6M224 203.8v1.6M219.6 201h1.6M226.8 201h1.6" stroke="#6B7078" stroke-width=".9"/></g>
-                  <g class="fx-whl" style="--rot:510deg"><circle cx="246" cy="201" r="9" fill="#24272C"/><circle cx="246" cy="201" r="5" fill="url(#r-rim)"/><circle cx="246" cy="201" r="1.6" fill="#4A4F57"/><path d="M246 196.6v1.6M246 203.8v1.6M241.6 201h1.6M248.8 201h1.6" stroke="#6B7078" stroke-width=".9"/></g>
-                  <g class="fx-whl" style="--rot:510deg"><circle cx="296" cy="201" r="9" fill="#24272C"/><circle cx="296" cy="201" r="5" fill="url(#r-rim)"/><circle cx="296" cy="201" r="1.6" fill="#4A4F57"/><path d="M296 196.6v1.6M296 203.8v1.6M291.6 201h1.6M298.8 201h1.6" stroke="#6B7078" stroke-width=".9"/></g>
-                </g>
-              </svg>
-            </div></div>
-          </div>
-        </div>
-        <ul class="facility-specs">
-          <li><span class="fx-ico"><svg aria-hidden="true" focusable="false"><use href="#fx-i-plant"/></svg></span><span>Plants</span><b>3 Modern Batching</b></li>
-          <li><span class="fx-ico"><svg aria-hidden="true" focusable="false"><use href="#fx-i-cement"/></svg></span><span>Cement Partner</span><b>UltraTech Cement</b></li>
-          <li><span class="fx-ico"><svg aria-hidden="true" focusable="false"><use href="#fx-i-mixer"/></svg></span><span>Delivery</span><b>Owned Transit Mixers</b></li>
-        </ul>
-        <div class="facility-foot">
-          <span class="fx-tag">Pan Goa Coverage</span>
-          <div class="fx-actions">
-            <button type="button" class="fx-cta" id="openRmcPlantSelectorBtn" aria-haspopup="dialog" aria-controls="rmcPlantModal"><span>Learn More</span><svg aria-hidden="true" focusable="false"><use href="#fx-i-arrow"/></svg></button>
-            <span class="fx-orb" aria-hidden="true"><svg><use href="#fx-i-arrow"/></svg><svg><use href="#fx-i-arrow"/></svg></span>
-          </div>
-        </div>
-      </article>
-
-      <article class="facility" style="--fx-i:1">
-        <div class="fx-top">
-          <div class="fx-hero">
-            <span class="fx-rule" aria-hidden="true"></span>
-            <div class="facility-eyebrow">Core Venture</div>
-            <h3 class="fx-title">VSI Stone Crusher at Banda Wafoli.</h3>
-            <p class="fx-desc">Multi grade aggregates from in house quarrying for consistent quality and supply.</p>
-            <div class="fx-art"><div class="fx-art-in">
-              <svg class="fx-svg" viewBox="64 46 256 172" width="256" height="172" role="img" aria-label="Illustration of a vertical shaft impactor stone crusher on a steel tower, with feed and product conveyors and a graded aggregate stockpile">
-                <defs>
-                  <linearGradient id="c-steel" x1="0" x2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".45" stop-color="#ECEDEE"/><stop offset=".85" stop-color="#C4C8CD"/><stop offset="1" stop-color="#A5AAB1"/></linearGradient>
-                  <linearGradient id="c-dark" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4A4F57"/><stop offset="1" stop-color="#2A2D32"/></linearGradient>
-                  <linearGradient id="c-motor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5E646C"/><stop offset="1" stop-color="#33373D"/></linearGradient>
-                  <linearGradient id="c-org" x1="0" x2="1"><stop offset="0" stop-color="#FF8A5E"/><stop offset=".5" stop-color="#F15A29"/><stop offset="1" stop-color="#C2411A"/></linearGradient>
-                  <linearGradient id="c-pile" x1="0" x2="1"><stop offset="0" stop-color="#D3CFC8"/><stop offset=".5" stop-color="#B3AFA8"/><stop offset="1" stop-color="#8A8680"/></linearGradient>
-                  <radialGradient id="c-ground"><stop offset="0" stop-color="#141416" stop-opacity=".2"/><stop offset="1" stop-color="#141416" stop-opacity="0"/></radialGradient>
-                  <pattern id="c-stones" width="16" height="14" patternUnits="userSpaceOnUse"><g fill="#5F5B55" fill-opacity=".24"><circle cx="2" cy="2" r=".9"/><circle cx="9.5" cy="4.2" r=".6"/><circle cx="13" cy="10.5" r=".8"/><circle cx="5" cy="9" r=".5"/><circle cx="11" cy="13" r=".45"/><circle cx="15" cy="6" r=".4"/></g><g fill="#FFFFFF" fill-opacity=".35"><circle cx="6" cy="5" r=".7"/><circle cx="14" cy="2.6" r=".5"/><circle cx="2.4" cy="12" r=".6"/><circle cx="9" cy="9.4" r=".45"/></g></pattern>
-                </defs>
-                <ellipse cx="160" cy="210" rx="158" ry="8" fill="url(#c-ground)"/>
-                <!-- secondary stockpile -->
-                <g class="fx-p fx-mound" style="--p:0s"><g opacity=".5">
-                  <path d="M222 210C240 192 262 168 282 165C290 164 296 167 302 172C312 182 318 196 322 210Z" fill="url(#c-pile)"/>
-                  <path d="M222 210C240 192 262 168 282 165C290 164 296 167 302 172C312 182 318 196 322 210Z" fill="url(#c-stones)"/>
-                </g></g>
-                <!-- feed conveyor into the crusher hopper -->
-                <g class="fx-p" style="--p:.3s;--dx:14px;--dy:10px"><g transform="translate(0 -12)">
-                  <path d="M288.7 147.9V222M244.6 116.4V222" stroke="#8A9099" stroke-width="2"/>
-                  <path d="M326.5 174.9 200.5 84.9" stroke="#6B7078" stroke-width="1.1"/>
-                  <path d="M326.5 174.9L317.4 161L301.3 156.9L292.2 143L276.1 138.9L267 125L250.9 120.9L241.8 107L225.7 102.9L216.6 89L200.5 84.9" stroke="#8A9099" stroke-width=".9" fill="none"/>
-                  <path d="M330 170 204 80" stroke="#2E3237" stroke-width="3.6" stroke-linecap="round"/>
-                  <path class="fx-belt" d="M330 170 204 80" stroke="#6B7078" stroke-width="1.2" stroke-dasharray="3 5"/>
-                  <path d="M331.7 167.6 205.7 77.6" stroke="#F15A29" stroke-width="2.6" stroke-dasharray="14 3"/>
-                  <circle cx="204" cy="80" r="3.4" fill="#2E3237"/>
-                </g></g>
-                <!-- VSI crusher tower -->
-                <g class="fx-p" style="--p:.1s">
-                  <path d="M154 142v68M186 142v68" stroke="#F15A29" stroke-width="3.2"/><path d="M218 142v68" stroke="#C2411A" stroke-width="3.2"/>
-                  <path d="M154 144 186 174M186 144 154 174M186 144 218 174M218 144 186 174M154 178 186 208M186 178 154 208M186 178 218 208M218 178 186 208" stroke="#3A3E45" stroke-opacity=".55" stroke-width=".9" fill="none"/>
-                  <rect x="148" y="173" width="76" height="3.2" fill="#2E3237"/>
-                  <path d="M148 165h76M150 165v8M162 165v8M174 165v8M198 165v8M210 165v8M222 165v8" stroke="#6B7078" stroke-width=".8"/>
-                  <path d="M144 128h84M145 128v10M157 128v10M215 128v10M227 128v10" stroke="#6B7078" stroke-width=".8"/>
-                  <rect x="144" y="138" width="84" height="5" rx="1" fill="#2E3237"/>
-                  <path d="M178 143h16l-3 12h-10z" fill="#4A4F57"/>
-                  <rect x="146" y="106" width="16" height="16" rx="2.5" fill="url(#c-motor)"/><path d="M149 109v10M152 109v10M155 109v10M158 109v10" stroke="#7A8089" stroke-width=".7"/>
-                  <rect x="210" y="106" width="16" height="16" rx="2.5" fill="url(#c-motor)"/><path d="M214 109v10M217 109v10M220 109v10M223 109v10" stroke="#7A8089" stroke-width=".7"/>
-                  <rect x="158" y="124" width="56" height="14" rx="1" fill="url(#c-dark)"/>
-                  <rect x="160" y="102" width="6" height="22" rx="1" fill="url(#c-org)"/><rect x="206" y="102" width="6" height="22" rx="1" fill="url(#c-org)"/>
-                  <rect x="163" y="121" width="46" height="4" rx="1" fill="#8A9099"/>
-                  <rect x="166" y="97" width="40" height="24" fill="url(#c-steel)"/>
-                  <path d="M166 105h40M166 113h40" stroke="#141416" stroke-opacity=".08"/>
-                  <rect x="163" y="93" width="46" height="4" rx="1" fill="#8A9099"/>
-                  <path d="M165 77h42l-5 16h-32z" fill="url(#c-dark)"/>
-                  <rect x="163" y="75" width="46" height="3" rx="1" fill="#23262B"/>
-                  <path d="M169 79h3l-3 12h-1z" fill="#FFFFFF" opacity=".12"/>
-                </g>
-                <!-- product conveyor to the stockpile -->
-                <g class="fx-p" style="--p:.4s;--dx:12px;--dy:9px">
-                  <path d="M147.4 171.5V210" stroke="#8A9099" stroke-width="2"/>
-                  <path d="M192.4 204.8 92.4 130.8" stroke="#6B7078" stroke-width="1.1"/>
-                  <path d="M192.4 204.8L186 192.6L172.4 190L166 177.8L152.4 175.2L146 163L132.4 160.4L126 148.2L112.4 145.6L106 133.4L92.4 130.8" stroke="#8A9099" stroke-width=".9" fill="none"/>
-                  <path d="M196 200 96 126" stroke="#2E3237" stroke-width="3.6" stroke-linecap="round"/>
-                  <path class="fx-belt" d="M196 200 96 126" stroke="#6B7078" stroke-width="1.2" stroke-dasharray="3 5"/>
-                  <path d="M197.8 197.6 97.8 123.6" stroke="#F15A29" stroke-width="2.6" stroke-dasharray="14 3"/>
-                  <circle cx="96" cy="126" r="3.4" fill="#2E3237"/>
-                </g>
-                <!-- graded aggregate stockpile -->
-                <g class="fx-p fx-mound" style="--p:.55s">
-                  <path d="M0 210C24 198 58 161 84 151Q90 148.5 96 151C122 161 154 196 186 210Z" fill="url(#c-pile)"/>
-                  <path d="M0 210C24 198 58 161 84 151Q90 148.5 96 151C122 161 154 196 186 210Z" fill="url(#c-stones)"/>
-                  <path d="M6 208C30 194 60 160 86 151.5C70 162 44 190 22 208Z" fill="#FFFFFF" opacity=".22"/>
-                  <path d="M14 210a4 2.6 0 0 1 8 0zM40 210a3 2 0 0 1 6 0zM120 210a4.5 3 0 0 1 9 0zM158 210a3.5 2.2 0 0 1 7 0zM172 210a3 2 0 0 1 6 0z" fill="#8C8882"/>
-                </g>
-                <g fill="#7E7A74">
-                  <circle class="fx-fall" style="--p:0s" cx="95" cy="129" r="1.3"/>
-                  <circle class="fx-fall" style="--p:-.3s;--dx:-4px" cx="96.5" cy="129" r="1"/>
-                  <circle class="fx-fall" style="--p:-.6s" cx="94" cy="129" r="1.2"/>
-                  <circle class="fx-fall" style="--p:-.9s;--dx:1px" cx="95.5" cy="129" r=".9"/>
-                  <circle class="fx-fall" style="--p:-1.2s;--dx:-3px" cx="94.5" cy="129" r="1.1"/>
-                  <circle class="fx-fall" style="--p:-.2s;--dy:9px" cx="203" cy="71" r="1"/>
-                  <circle class="fx-fall" style="--p:-.9s;--dy:9px;--dx:-1px" cx="204.5" cy="71" r=".9"/>
-                </g>
-              </svg>
-            </div></div>
-          </div>
-        </div>
-        <ul class="facility-specs">
-          <li><span class="fx-ico"><svg aria-hidden="true" focusable="false"><use href="#fx-i-rotor"/></svg></span><span>Type</span><b>Vertical Shaft Impactor</b></li>
-          <li><span class="fx-ico"><svg aria-hidden="true" focusable="false"><use href="#fx-i-stones"/></svg></span><span>Output</span><b>Multi grade Aggregates</b></li>
-          <li><span class="fx-ico"><svg aria-hidden="true" focusable="false"><use href="#fx-i-quarry"/></svg></span><span>Source</span><b>In house Quarrying</b></li>
-        </ul>
-        <div class="facility-foot">
-          <span class="fx-tag">Specification Grade</span>
-          <div class="fx-actions">
-            <a href="/infrastructure/banda-wafoli-vsi-crusher" class="fx-cta"><span>Learn More</span><svg aria-hidden="true" focusable="false"><use href="#fx-i-arrow"/></svg></a>
-            <span class="fx-orb" aria-hidden="true"><svg><use href="#fx-i-arrow"/></svg><svg><use href="#fx-i-arrow"/></svg></span>
-          </div>
-        </div>
-      </article>
-
-      <article class="facility" style="--fx-i:2">
-        <div class="fx-top">
-          <div class="fx-hero">
-            <span class="fx-rule" aria-hidden="true"></span>
-            <div class="facility-eyebrow">Core Venture</div>
-            <h3 class="fx-title">Fleet &amp; Logistics Across Goa.</h3>
-            <p class="fx-desc">Reliable transportation and logistics network for timely delivery across North &amp; South Goa.</p>
-            <div class="fx-art"><div class="fx-art-in">
-              <svg class="fx-svg fx-svg--whole" viewBox="16 78 244 138" width="244" height="138" role="img" aria-label="Illustration of a heavy-duty tipper truck carrying aggregate">
-                <defs>
-                  <linearGradient id="f-cab" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".7" stop-color="#F1F1F0"/><stop offset="1" stop-color="#DADCDE"/></linearGradient>
-                  <linearGradient id="f-glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5A6570"/><stop offset="1" stop-color="#1F242A"/></linearGradient>
-                  <linearGradient id="f-body" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D5D8DC"/><stop offset=".55" stop-color="#A3A8AF"/><stop offset="1" stop-color="#7F848B"/></linearGradient>
-                  <linearGradient id="f-org" x1="0" x2="1"><stop offset="0" stop-color="#FF8A5E"/><stop offset=".5" stop-color="#F15A29"/><stop offset="1" stop-color="#C2411A"/></linearGradient>
-                  <linearGradient id="f-tank" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F4F5F6"/><stop offset="1" stop-color="#9AA0A8"/></linearGradient>
-                  <linearGradient id="f-rim" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EEF0F2"/><stop offset="1" stop-color="#8E949C"/></linearGradient>
-                  <linearGradient id="f-pile" x1="0" x2="1"><stop offset="0" stop-color="#CFCBC4"/><stop offset=".5" stop-color="#B3AFA8"/><stop offset="1" stop-color="#8E8A84"/></linearGradient>
-                  <radialGradient id="f-ground"><stop offset="0" stop-color="#141416" stop-opacity=".24"/><stop offset="1" stop-color="#141416" stop-opacity="0"/></radialGradient>
-                  <pattern id="f-stones" width="16" height="14" patternUnits="userSpaceOnUse"><g fill="#5F5B55" fill-opacity=".24"><circle cx="2" cy="2" r=".9"/><circle cx="9.5" cy="4.2" r=".6"/><circle cx="13" cy="10.5" r=".8"/><circle cx="5" cy="9" r=".5"/><circle cx="11" cy="13" r=".45"/><circle cx="15" cy="6" r=".4"/></g><g fill="#FFFFFF" fill-opacity=".35"><circle cx="6" cy="5" r=".7"/><circle cx="14" cy="2.6" r=".5"/><circle cx="2.4" cy="12" r=".6"/><circle cx="9" cy="9.4" r=".45"/></g></pattern>
-                  <clipPath id="f-roadclip"><rect x="0" y="200" width="320" height="20"/></clipPath>
-                </defs>
-                <!-- understated road -->
-                <path d="M0 208.5h320" stroke="#141416" stroke-opacity=".07"/>
-                <g clip-path="url(#f-roadclip)"><g class="fx-road" fill="#141416" fill-opacity=".09"><rect x="-36" y="213" width="18" height="1.6"/><rect x="0" y="213" width="18" height="1.6"/><rect x="36" y="213" width="18" height="1.6"/><rect x="72" y="213" width="18" height="1.6"/><rect x="108" y="213" width="18" height="1.6"/><rect x="144" y="213" width="18" height="1.6"/><rect x="180" y="213" width="18" height="1.6"/><rect x="216" y="213" width="18" height="1.6"/><rect x="252" y="213" width="18" height="1.6"/><rect x="288" y="213" width="18" height="1.6"/></g></g>
-                <ellipse cx="164" cy="207" rx="150" ry="7.5" fill="url(#f-ground)"/>
-                <!-- tipper: drives in from the card edge and settles -->
-                <g class="fx-drive" style="--dx:150px;--p:.25s">
-                  <g class="fx-bob">
-                    <path d="M108 112C128 98 156 88 190 91C222 86 258 90 290 106Z" fill="url(#f-pile)"/>
-                    <path d="M108 112C128 98 156 88 190 91C222 86 258 90 290 106Z" fill="url(#f-stones)"/>
-                    <path d="M104 112L288 104Q296 104 296 112L292 176L108 178Z" fill="url(#f-body)"/>
-                    <path d="M132 115v60M160 114v60M188 113v61M216 112v61M244 110v62M272 109v62" stroke="#141416" stroke-opacity=".14" stroke-width="2.2"/>
-                    <path d="M130.6 115v60M158.6 114v60M186.6 113v61M214.6 112v61M242.6 110v62M270.6 109v62" stroke="#FFFFFF" stroke-opacity=".45"/>
-                    <path d="M104 112L288 104Q296 104 296 112" fill="none" stroke="#EDEEF0" stroke-width="3" stroke-linecap="round"/>
-                    <path d="M107 162L293 160L292.6 166L107.4 168Z" fill="url(#f-org)"/>
-                    <path d="M108 178L292 176L291.6 172L107.6 174Z" fill="#141416" opacity=".15"/>
-                    <circle cx="292" cy="176" r="3" fill="#3A3E45"/>
-                    <path d="M104 104H80L76 108L104 112Z" fill="#A9AEB5"/>
-                    <rect x="99.5" y="140" width="3.2" height="44" fill="#B8BCC2"/>
-                    <path d="M98 186V118Q98 112 92 112H54Q46 112 43 119L33 146Q30 152 30 158V182Q30 186 34 186Z" fill="url(#f-cab)" stroke="#141416" stroke-opacity=".12" stroke-width=".8"/>
-                    <path d="M46 118H60V146H36Z" fill="url(#f-glass)"/>
-                    <rect x="64" y="118" width="28" height="26" rx="2" fill="url(#f-glass)"/>
-                    <path d="M66 120H76L68 142H66Z" fill="#FFFFFF" opacity=".12"/>
-                    <path d="M62 116V184M96 150H62" stroke="#141416" stroke-opacity=".1" fill="none"/>
-                    <rect x="86" y="154" width="7" height="1.6" rx=".8" fill="#8A9099"/>
-                    <rect x="30" y="160" width="68" height="4" fill="url(#f-org)"/>
-                    <rect x="30" y="152" width="4" height="5" rx="1" fill="#FFF3DD"/>
-                    <rect x="30" y="166" width="5" height="14" fill="#2E3237"/>
-                    <path d="M44 124L38 121" stroke="#3A3E45" stroke-width="1.4" stroke-linecap="round"/>
-                    <rect x="34" y="117" width="3.6" height="11" rx="1" fill="#2B2E33"/>
-                    <rect x="36" y="183" width="262" height="9" fill="#2B2E33"/>
-                    <rect x="26" y="180" width="22" height="8" rx="1.5" fill="#2B2E33"/>
-                    <rect x="104" y="183" width="30" height="13" rx="4" fill="url(#f-tank)"/>
-                    <rect x="66" y="186" width="20" height="3" fill="#3A3E45"/>
-                    <rect x="284" y="190" width="3" height="13" rx="1" fill="#F15A29"/>
-                  </g>
-                  <g class="fx-whl" style="--rot:573deg"><g class="fx-spin"><circle cx="64" cy="192" r="15" fill="#1F2227"/><circle cx="64" cy="192" r="13.5" fill="none" stroke="#3A3E45" stroke-width="1.6" stroke-dasharray="2.2 2.2"/><circle cx="64" cy="192" r="11" fill="#2E3238"/><circle cx="64" cy="192" r="8" fill="url(#f-rim)"/><circle cx="64" cy="192" r="3" fill="#5E646C"/><g fill="#4A4F57"><circle cx="69.5" cy="192" r=".9"/><circle cx="66.75" cy="196.76" r=".9"/><circle cx="61.25" cy="196.76" r=".9"/><circle cx="58.5" cy="192" r=".9"/><circle cx="61.25" cy="187.24" r=".9"/><circle cx="66.75" cy="187.24" r=".9"/></g></g></g>
-                  <g class="fx-whl" style="--rot:573deg"><g class="fx-spin"><circle cx="222" cy="192" r="15" fill="#1F2227"/><circle cx="222" cy="192" r="13.5" fill="none" stroke="#3A3E45" stroke-width="1.6" stroke-dasharray="2.2 2.2"/><circle cx="222" cy="192" r="11" fill="#2E3238"/><circle cx="222" cy="192" r="8" fill="url(#f-rim)"/><circle cx="222" cy="192" r="3" fill="#5E646C"/><g fill="#4A4F57"><circle cx="227.5" cy="192" r=".9"/><circle cx="224.75" cy="196.76" r=".9"/><circle cx="219.25" cy="196.76" r=".9"/><circle cx="216.5" cy="192" r=".9"/><circle cx="219.25" cy="187.24" r=".9"/><circle cx="224.75" cy="187.24" r=".9"/></g></g></g>
-                  <g class="fx-whl" style="--rot:573deg"><g class="fx-spin"><circle cx="262" cy="192" r="15" fill="#1F2227"/><circle cx="262" cy="192" r="13.5" fill="none" stroke="#3A3E45" stroke-width="1.6" stroke-dasharray="2.2 2.2"/><circle cx="262" cy="192" r="11" fill="#2E3238"/><circle cx="262" cy="192" r="8" fill="url(#f-rim)"/><circle cx="262" cy="192" r="3" fill="#5E646C"/><g fill="#4A4F57"><circle cx="267.5" cy="192" r=".9"/><circle cx="264.75" cy="196.76" r=".9"/><circle cx="259.25" cy="196.76" r=".9"/><circle cx="256.5" cy="192" r=".9"/><circle cx="259.25" cy="187.24" r=".9"/><circle cx="264.75" cy="187.24" r=".9"/></g></g></g>
-                  <g class="fx-bob"><path d="M46 191a18 18 0 0 1 36 0M204 191a18 18 0 0 1 36 0M244 191a18 18 0 0 1 36 0" fill="none" stroke="#2B2E33" stroke-width="4"/></g>
-                </g>
-              </svg>
-            </div></div>
-          </div>
-        </div>
-        <ul class="facility-specs">
-          <li><span class="fx-ico"><svg aria-hidden="true" focusable="false"><use href="#fx-i-truck"/></svg></span><span>Vehicles</span><b>Trucks, Tippers &amp; JCBs</b></li>
-          <li><span class="fx-ico"><svg aria-hidden="true" focusable="false"><use href="#fx-i-pin"/></svg></span><span>Coverage</span><b>North &amp; South Goa</b></li>
-          <li><span class="fx-ico"><svg aria-hidden="true" focusable="false"><use href="#fx-i-partner"/></svg></span><span>Model</span><b>Vehicle Partnership</b></li>
-        </ul>
-        <div class="facility-foot">
-          <span class="fx-tag">Fleet Partner Program</span>
-          <div class="fx-actions">
-            <a href="/infrastructure/fleet-logistics" class="fx-cta"><span>Learn More</span><svg aria-hidden="true" focusable="false"><use href="#fx-i-arrow"/></svg></a>
-            <span class="fx-orb" aria-hidden="true"><svg><use href="#fx-i-arrow"/></svg><svg><use href="#fx-i-arrow"/></svg></span>
-          </div>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
 
 <section class="sec sec-bone" id="infrastructure">
   <div class="container">
@@ -4890,7 +4104,11 @@ const OM_COMPANIES = {
     const lead = 90;
     const turned = progress >= .5;   // has the back face been shown yet?
     const flipFrames = turned
-      ? [{ transform:'translateZ(70px) rotateY(-90deg)', offset:.5 }, { transform:'translateZ(0px) rotateY(0deg)' }]
+      ? [
+          { transform:'translateZ(0px) rotateY(-180deg)', offset:0 },
+          { transform:'translateZ(70px) rotateY(-90deg)', offset:.5 },
+          { transform:'translateZ(0px) rotateY(0deg)', offset:1 }
+        ]
       : [{ transform:'translateZ(0px) rotateY(0deg)' }];
     const flipDur = turned ? T.closeFlip : T.closeFlip * .6;
     const travelAt = lead + flipDur * (turned ? .38 : 0);

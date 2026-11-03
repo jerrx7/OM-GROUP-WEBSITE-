@@ -199,5 +199,11 @@ html:not(.opm-js) .opm-cap,html:not(.opm-js) .opm-cta{position:static;opacity:1;
   .opm-now{display:block;font-size:12px;letter-spacing:.06em;color:var(--ink);margin-top:6px}
   .opm-controls{flex-wrap:wrap}
 }
+/* Tablet viewports get a little more canvas without changing the phone composition. The
+   surrounding page container keeps its normal gutters; only the operations frame expands. */
+@media (min-width:641px) and (max-width:1100px){
+  .opm-pin > .container{padding-inline:16px}
+  .opm-stage,.opm-controls{max-width:100%}
+}
 @media (max-width:640px){ .opm-stage{border-radius:18px} .opm-chapters{gap:5px} }
 .opm-3d{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
