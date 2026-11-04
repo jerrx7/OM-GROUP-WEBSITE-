@@ -1,18 +1,10 @@
 /* PROCESS STORY — scene engine for #process.
-   Four modes, chosen per device:
-   - pin     (fine pointer, >= 960x800, motion allowed): the pinned two-column stage. Inside the
-             pinned range one deliberate wheel/trackpad gesture moves exactly one scene.
-   - flow    (portrait phones and tablets, motion allowed): every scene is an ordinary stacked
-             block, its image then its copy. Nothing is pinned; images and copy ease into place
-             as they arrive and images ease back once read past. No input is intercepted.
-   - scrolly (landscape phones and tablets, motion allowed): fully native scrolling. The image
-             stage is sticky beside the copy, and the scene whose heading reaches the reading
-             line becomes active. No input is intercepted.
+   One cinematic mode, chosen for every viewport:
+   - pin     (motion allowed): one sticky stage and one shared transition engine. Desktop, tablet
+             and mobile only change the stage geometry; they never change scene ownership.
    - stack   (reduced motion, or no JS): the plain stacked list from the static HTML.
-   In pin and scrolly, scene selection and the visual dissolve are separate: input sets the
-   wanted scene, and a time-based dissolve (same curves in both modes) always runs to
-   completion, so no image is ever left half-blurred. A dissolve waits until the incoming
-   image is loaded and decoded, so the stage is never blank. */
+   The active scene, image, copy, counter and progress rail all derive from the same transition.
+   A dissolve waits until the incoming image is loaded and decoded, so the stage is never blank. */
 (function () {
   const section = document.getElementById('process');
   if (!section) return;
@@ -30,11 +22,6 @@
   const N = scenes.length;
 
   const reduce = matchMedia('(prefers-reduced-motion: reduce)');
-  // Short landscape viewports do not have enough vertical room for the final copy, CTAs and
-  // progress rail to coexist safely inside the pinned stage. Keep those layouts in native scrolly mode.
-  const roomy = matchMedia('(min-width: 960px) and (min-height: 800px)');
-  const finePointer = matchMedia('(pointer: fine)');
-  const landscape = matchMedia('(orientation: landscape)');
 
   const SEG = 0.8;           // pin: viewport heights of track per scene (scrollbar, keyboard and touch scrolling)
   const END_REST = 0.5;      // pin: extra viewport heights on the final scene before the stage releases
@@ -43,7 +30,6 @@
   const GESTURE_GAP = 200;   // pin: ms without wheel input that resets the travel count
   const ENTRY_HOLD = 350;    // pin: ms the first scene holds when scrolling carries the page into the story
   const SETTLE_DELAY = 160;  // pin: ms of scroll inactivity before the page is re-aligned with the active scene
-  const HYSTERESIS = 40;     // scrolly/flow: px a scene must move back past the reading line before stepping back
   // Blur is the costliest part of the dissolve on phones; keep it softer there and on low-core devices.
   const LOW_POWER = (navigator.hardwareConcurrency || 8) <= 4;
   const blurMax = () => (mode === 'pin' ? 9 : LOW_POWER ? 4 : 6);
@@ -68,12 +54,7 @@
   // pin: wheel gesture state.
   let acc = 0, lastWheel = 0, lastDir = 0, lastAbs = 0, holdUntil = 0, cameFromOutside = false, coasting = false;
   let settleTimer = 0, touching = false;
-  // scrolly: document offsets of each scene heading, and the reading line within the viewport.
-  let stepTops = [], readingLine = 0, scrollyQueued = false;
-  // flow: document offsets of each scene block, and the line (from the viewport top) that selects one.
-  let sceneTops = [], flowLine = 0;
-  // pin and scrolly share one image stage driven by the dissolve engine; flow and stack do not.
-  const staged = () => mode === 'pin' || mode === 'scrolly';
+  const staged = () => mode === 'pin';
   const decoded = scenes.map(() => false);
   const cache = scenes.map(() => ({ live: null, img: '', copy: '' }));
   const tickCache = ticks.map(() => -1);
@@ -121,12 +102,12 @@
       }
       paint(k,
         `opacity:${o.toFixed(3)};transform:scale(${scale.toFixed(4)})` + (blur > 0.05 ? `;filter:blur(${blur.toFixed(2)}px)` : ''),
-        // In scrolly the copy is ordinary page content; only its emphasis (via .is-active) changes.
         pin ? `opacity:${co.toFixed(3)}` + (Math.abs(ty) > 0.05 ? `;transform:translate3d(0,${ty.toFixed(2)}px,0)` : '') : null);
     }
 
-    // Copy, counter and progress switch at the midpoint of the dissolve, with the text swap.
-    markActive(!moving || t >= 0.5 ? to : from, from + (to - from) * t);
+    // Keep the authoritative label/progress on the outgoing scene until the full dissolve is
+    // complete. This prevents a new counter or progress rail from appearing beside the old image.
+    markActive(moving ? from : to, moving ? from : to);
   }
 
   // The active scene (class, pill counter, aria-current) and the pill's tick fill up to v.
@@ -306,112 +287,63 @@
     if (!moving) navigate(to + dir);
   }
 
-  // Touchscreen laptops in pin mode: touch scrolling stays native; the page is aligned only
-  // after the finger lifts and momentum ends.
-  const onTouchStart = () => { touching = true; };
-  const onTouchEnd = () => { touching = false; onScroll(); };
+  // Touch devices use the same one-gesture/one-scene contract as the wheel engine. Native page
+  // scrolling is allowed only when the reader is leaving the story at either boundary.
+  let touchY = 0, touchX = 0;
+  const onTouchStart = e => {
+    if (e.touches && e.touches.length === 1) {
+      touching = true;
+      touchY = e.touches[0].clientY;
+      touchX = e.touches[0].clientX;
+    }
+  };
+  const onTouchMove = e => {
+    if (!touching || !e.touches || !e.touches.length) return;
+    const dy = e.touches[0].clientY - touchY;
+    const dx = e.touches[0].clientX - touchX;
+    if (Math.abs(dy) < 10 || Math.abs(dy) < Math.abs(dx)) return;
+    const y = window.scrollY, first = sceneOffset(0), last = sceneOffset(N - 1);
+    const dir = dy < 0 ? 1 : -1;
+    const inside = y >= first - 1 && y <= last + END_REST * window.innerHeight + 1;
+    const leaving = (dir > 0 && to === N - 1) || (dir < 0 && to === 0);
+    if (inside && !leaving) e.preventDefault();
+  };
+  const onTouchEnd = e => {
+    const point = e.changedTouches && e.changedTouches[0];
+    const dy = point ? point.clientY - touchY : 0;
+    const dx = point ? point.clientX - touchX : 0;
+    touching = false;
+    const y = window.scrollY, first = sceneOffset(0), last = sceneOffset(N - 1);
+    const inside = y >= first - 1 && y <= last + END_REST * window.innerHeight + 1;
+    if (inside && Math.abs(dy) >= 35 && Math.abs(dy) >= Math.abs(dx)) {
+      const dir = dy < 0 ? 1 : -1;
+      const leaving = (dir > 0 && to === N - 1) || (dir < 0 && to === 0);
+      if (!leaving) { e.preventDefault(); navigate(to + dir); }
+    }
+    onScroll();
+  };
 
   function setPinListeners(on) {
     const m = on ? 'addEventListener' : 'removeEventListener';
     window[m]('wheel', onWheel, { passive: false }); // the only non-passive listener, and only in pin mode
     window[m]('keydown', onKey);
     window[m]('touchstart', onTouchStart, { passive: true });
-    window[m]('touchend', onTouchEnd, { passive: true });
-    window[m]('touchcancel', onTouchEnd, { passive: true });
-  }
-
-  /* ---------- scrolly mode ---------- */
-
-  function measureScrolly() {
-    const y = window.scrollY, vh = window.innerHeight;
-    stepTops = steps.map(s => s.getBoundingClientRect().top + y);
-    readingLine = vh * 0.5;
-  }
-
-  function scrollyScene() {
-    const line = window.scrollY + readingLine;
-    let k = 0;
-    while (k < N - 1 && stepTops[k + 1] <= line) k++;
-    return k;
-  }
-
-  // A progress-pill jump scrolls smoothly past intermediate scenes; until it arrives, the stage
-  // keeps the chosen destination instead of dissolving through each scene on the way.
-  let navTarget = null;
-  function scrollyUpdate() {
-    scrollyQueued = false;
-    if (mode !== 'scrolly') return;
-    if (navTarget) {
-      if (Math.abs(window.scrollY - navTarget.y) > 4 && performance.now() < navTarget.until) return;
-      navTarget = null;
-    }
-    const line = window.scrollY + readingLine;
-    let k = want;
-    while (k < N - 1 && stepTops[k + 1] <= line) k++;
-    while (k > 0 && stepTops[k] > line + HYSTERESIS) k--;
-    if (k !== want) request(k);
-  }
-
-  /* ---------- flow mode ---------- */
-
-  // A scene becomes the current one when its block (image first) reaches a line a little above
-  // the middle of the screen, with hysteresis so a small finger movement cannot flick it back.
-  function measureFlow() {
-    const y = window.scrollY;
-    sceneTops = scenes.map(s => s.getBoundingClientRect().top + y);
-    flowLine = window.innerHeight * 0.45;
-  }
-
-  function flowUpdate() {
-    scrollyQueued = false;
-    if (mode !== 'flow') return;
-    const line = window.scrollY + flowLine;
-    let k = Math.max(0, shown);
-    while (k < N - 1 && sceneTops[k + 1] <= line) k++;
-    while (k > 0 && sceneTops[k] > line + HYSTERESIS) k--;
-    markActive(k, k);
-  }
-
-  // Document offset that puts scene k's block just below the fixed nav.
-  function flowOffset(k) {
-    return Math.max(0, sceneTops[k] - (parseFloat(getComputedStyle(section).getPropertyValue('--pst-navh')) || 70) - 8);
-  }
-
-  // Motion: each image and each block of copy gets .is-in once it is 8% inside the bottom of the
-  // screen (and loses it only when scrolled back below the screen, so it plays again next time).
-  // An image gets .is-out once its bottom has passed 35% from the top, i.e. the reader has moved
-  // on to its copy. The CSS transitions are time-based, so they always finish.
-  let revealIO = null, leaveIO = null;
-  function setFlowMotion(on) {
-    if (revealIO) { revealIO.disconnect(); leaveIO.disconnect(); revealIO = leaveIO = null; }
-    const parts = Array.from(section.querySelectorAll('.pst-figure, .pst-copy > *'));
-    parts.forEach(e => e.classList.remove('is-in', 'is-out'));
-    if (!on) return;
-    if (!('IntersectionObserver' in window)) { parts.forEach(e => e.classList.add('is-in')); return; }
-    revealIO = new IntersectionObserver(entries => entries.forEach(en => {
-      if (en.isIntersecting) en.target.classList.add('is-in');
-      else if (en.rootBounds && en.boundingClientRect.top >= en.rootBounds.bottom) en.target.classList.remove('is-in');
-    }), { rootMargin: '0px 0px -8% 0px' });
-    leaveIO = new IntersectionObserver(entries => entries.forEach(en => {
-      en.target.classList.toggle('is-out', !en.isIntersecting && !!en.rootBounds && en.boundingClientRect.bottom <= en.rootBounds.top);
-    }), { rootMargin: '-35% 0px 0px 0px' });
-    parts.forEach(e => revealIO.observe(e));
-    figures.forEach(f => leaveIO.observe(f));
+    window[m]('touchmove', onTouchMove, { passive: false });
+    window[m]('touchend', onTouchEnd, { passive: false });
+    window[m]('touchcancel', onTouchEnd, { passive: false });
   }
 
   /* ---------- mode switching ---------- */
 
   function currentMode() {
     if (reduce.matches) return 'stack';
-    if (roomy.matches && finePointer.matches) return 'pin';
-    return landscape.matches ? 'scrolly' : 'flow';
+    return 'pin';
   }
 
   function teardown() {
     cancelAnimationFrame(raf);
     clearTimeout(settleTimer);
     if (mode === 'pin') setPinListeners(false);
-    if (mode === 'flow') setFlowMotion(false);
     track.style.height = '';
     scenes.forEach((s, k) => {
       s.classList.remove('is-active', 'is-live');
@@ -426,22 +358,17 @@
 
   function enter() {
     if (mode === 'pin') { setPinListeners(true); measurePin(); jumpTo(sceneAtScroll()); settle(); }
-    else if (mode === 'scrolly') { lastWidth = window.innerWidth; measureScrolly(); jumpTo(scrollyScene()); }
-    else if (mode === 'flow') { measureFlow(); flowUpdate(); setFlowMotion(true); }
   }
 
-  // After a rotation between flow (portrait) and scrolly (landscape), bring back the scene that
-  // was being read: the layouts differ, so the old scroll offset would land somewhere else.
   function anchorTo(k) {
-    if (mode === 'flow') { measureFlow(); jumpScroll(flowOffset(k)); measureFlow(); markActive(k, k); }
-    else if (mode === 'scrolly') { jumpScroll(Math.max(0, stepTops[k] - readingLine + 2)); measureScrolly(); jumpTo(k); }
+    if (mode === 'pin') { measurePin(); jumpTo(k); jumpScroll(sceneOffset(k)); }
   }
 
   function setMode() {
     const next = currentMode();
     if (next !== mode) {
       const r = section.getBoundingClientRect(), inside = r.top < window.innerHeight && r.bottom > 0;
-      const keep = (mode === 'flow' || mode === 'scrolly') && inside && shown >= 0 ? shown : -1;
+      const keep = inside && shown >= 0 ? shown : -1;
       teardown();
       mode = next;
       root.classList.toggle('pst-pin', mode === 'pin');
@@ -449,7 +376,6 @@
       root.classList.toggle('pst-flow', mode === 'flow');
       enter();
       if (keep >= 0) anchorTo(keep);
-      lastWidth = window.innerWidth;
       return;
     }
     if (mode === 'pin') {
@@ -459,32 +385,13 @@
       const keep = want;
       measurePin(); jumpTo(keep);
       if (inside) jumpScroll(sceneOffset(keep));
-    } else if (mode === 'scrolly') {
-      const w = window.innerWidth;
-      if (w === lastWidth) { measureScrolly(); onScroll(); return; } // browser chrome only: just re-measure
-      // Rotation / width change: the copy reflows, so the same scroll offset would land on a
-      // different scene. Keep the scene being read and bring its heading back to the reading line.
-      lastWidth = w;
-      const r = section.getBoundingClientRect(), inside = r.top < window.innerHeight && r.bottom > 0;
-      const keep = want;
-      measureScrolly();
-      if (inside) { jumpScroll(stepTops[keep] - readingLine + 2); measureScrolly(); }
-      jumpTo(inside ? keep : scrollyScene());
-    } else if (mode === 'flow') {
-      // Images keep their aspect-ratio boxes, so a reflow only moves the scene offsets.
-      measureFlow(); onScroll();
     }
   }
-  let lastWidth = window.innerWidth;
-
   function onScroll() {
     if (mode === 'pin') {
       request(sceneAtScroll());
       clearTimeout(settleTimer);
       settleTimer = setTimeout(settle, SETTLE_DELAY);
-    } else if ((mode === 'scrolly' || mode === 'flow') && !scrollyQueued) {
-      scrollyQueued = true;
-      requestAnimationFrame(mode === 'flow' ? flowUpdate : scrollyUpdate);
     }
   }
 
@@ -492,14 +399,7 @@
     k = clamp(k, 0, N - 1);
     request(k);
     if (mode === 'pin') jumpScroll(sceneOffset(k));
-    // scrolly: bring that scene's heading to the reading line; the scroll itself selects the scene.
-    else if (mode === 'scrolly') {
-      const y = Math.max(0, stepTops[k] - readingLine + 2);
-      navTarget = { y, until: performance.now() + 2000 };
-      window.scrollTo({ top: y, behavior: 'smooth' });
-    }
-    // flow: scroll that scene's block to just below the nav; the scroll itself updates the pill.
-    else if (mode === 'flow') window.scrollTo({ top: flowOffset(k), behavior: 'smooth' });
+    // pin: align the shared stage to the selected scene.
   }
 
   ticks.forEach((a, k) => a.addEventListener('click', e => {
@@ -509,7 +409,6 @@
   }));
 
   // Keyboard users tabbing into a scene that is not on stage: bring that scene on stage.
-  // (In scrolly the copy is in normal flow, so the browser's own focus scrolling is enough.)
   scenes.forEach((s, k) => s.addEventListener('focusin', () => {
     if (mode === 'pin' && k !== to) navigate(k);
   }));
@@ -532,19 +431,13 @@
     warm.observe(section);
   }
 
-  // Copy reflows (web fonts, rotation, browser chrome, images arriving) move the scenes in scrolly and flow.
-  if ('ResizeObserver' in window) {
-    new ResizeObserver(() => {
-      if (mode === 'scrolly') { measureScrolly(); onScroll(); }
-      else if (mode === 'flow') { measureFlow(); onScroll(); }
-    }).observe(section);
-  }
-
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', setMode);
+  if (window.visualViewport) window.visualViewport.addEventListener('resize', setMode);
   window.addEventListener('load', setMode);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(setMode);
   // Back/forward cache restore: re-sync to the restored scroll position without animating.
   window.addEventListener('pageshow', e => { if (e.persisted) { teardown(); enter(); } });
-  [reduce, roomy, finePointer, landscape].forEach(mq => mq.addEventListener('change', setMode));
+  [reduce].forEach(mq => mq.addEventListener('change', setMode));
   setMode();
 })();
