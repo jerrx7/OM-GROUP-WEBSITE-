@@ -309,38 +309,54 @@
 
   // Touch devices use the same one-gesture/one-scene contract as the wheel engine. Native page
   // scrolling is allowed only when the reader is leaving the story at either boundary.
-  let touchY = 0, touchX = 0;
+  let touchY = 0, touchX = 0, touchConsumed = false, touchInside = false;
   const onTouchStart = e => {
-    if (e.touches && e.touches.length === 1) {
+    if (mode === 'pin' && e.touches && e.touches.length === 1) {
       touching = true;
+      touchConsumed = false;
       touchY = e.touches[0].clientY;
       touchX = e.touches[0].clientX;
+      const y = window.scrollY, first = sceneOffset(0), last = sceneOffset(N - 1);
+      touchInside = y >= first - 1 && y <= last + END_REST * window.innerHeight + 1;
     }
   };
   const onTouchMove = e => {
     if (!touching || !e.touches || !e.touches.length) return;
     const dy = e.touches[0].clientY - touchY;
     const dx = e.touches[0].clientX - touchX;
-    if (Math.abs(dy) < 10 || Math.abs(dy) < Math.abs(dx)) return;
-    const y = window.scrollY, first = sceneOffset(0), last = sceneOffset(N - 1);
+    if (touchConsumed) { e.preventDefault(); return; }
+    if (!touchInside || Math.abs(dy) < 18 || Math.abs(dy) < Math.abs(dx)) return;
     const dir = dy < 0 ? 1 : -1;
-    const inside = y >= first - 1 && y <= last + END_REST * window.innerHeight + 1;
     const leaving = (dir > 0 && to === N - 1) || (dir < 0 && to === 0);
-    if (inside && !leaving) e.preventDefault();
+    // Do not cancel the browser's gesture at either story boundary: the reader must
+    // still be able to leave the pinned section naturally.
+    if (leaving) return;
+    // From this point on this touch belongs to the story. Cancelling only after the
+    // intent threshold prevents taps, link presses, and tiny finger tremors from
+    // freezing page scroll on mobile Safari/Chrome.
+    touchConsumed = true;
+    e.preventDefault();
   };
   const onTouchEnd = e => {
     const point = e.changedTouches && e.changedTouches[0];
     const dy = point ? point.clientY - touchY : 0;
     const dx = point ? point.clientX - touchX : 0;
+    const consumed = touchConsumed;
+    const inside = touchInside;
     touching = false;
-    const y = window.scrollY, first = sceneOffset(0), last = sceneOffset(N - 1);
-    const inside = y >= first - 1 && y <= last + END_REST * window.innerHeight + 1;
-    if (inside && Math.abs(dy) >= 35 && Math.abs(dy) >= Math.abs(dx)) {
+    touchConsumed = false;
+    touchInside = false;
+    if (consumed && inside && Math.abs(dy) >= 35 && Math.abs(dy) >= Math.abs(dx)) {
       const dir = dy < 0 ? 1 : -1;
       const leaving = (dir > 0 && to === N - 1) || (dir < 0 && to === 0);
       if (!leaving) { e.preventDefault(); navigate(to + dir); }
     }
     onScroll();
+  };
+  const onTouchCancel = () => {
+    touching = false;
+    touchConsumed = false;
+    touchInside = false;
   };
 
   function setPinListeners(on) {
@@ -350,7 +366,7 @@
     window[m]('touchstart', onTouchStart, { passive: true });
     window[m]('touchmove', onTouchMove, { passive: false });
     window[m]('touchend', onTouchEnd, { passive: false });
-    window[m]('touchcancel', onTouchEnd, { passive: false });
+    window[m]('touchcancel', onTouchCancel, { passive: true });
   }
 
   /* ---------- mode switching ---------- */
@@ -410,6 +426,10 @@
   }
   function onScroll() {
     if (mode === 'pin') {
+      // A consumed touch is intentionally held by the scene engine. Ignoring the
+      // small native scroll delta here prevents the settle timer from fighting the
+      // gesture and snapping the reader back to the previous scene.
+      if (touching && touchConsumed) return;
       request(sceneAtScroll());
       clearTimeout(settleTimer);
       settleTimer = setTimeout(settle, SETTLE_DELAY);
