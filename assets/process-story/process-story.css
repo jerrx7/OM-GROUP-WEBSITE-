@@ -243,6 +243,11 @@ html.pst-pin .pst-progress{
 .pst-progress a[aria-current="step"] .pst-tick::after{background:var(--accent)}
 .pst-progress a:hover .pst-tick{background:var(--grey-2)}
 
+/* JS places the portrait rail after the active copy. Keep the CSS fallback compact too. */
+@media (max-width:959px) and (orientation:portrait){
+  html.pst-pin .pst-progress{bottom:auto;margin:0}
+}
+
 /* ---- responsive ---- */
 @media (max-width:1100px){
   .pst-intro{gap:56px}

@@ -16,6 +16,8 @@
   const steps = scenes.map(s => s.querySelector('.pst-step'));
   const figures = scenes.map(s => s.querySelector('.pst-figure'));
   const imgs = scenes.map(s => s.querySelector('.pst-figure img'));
+  const stage = section.querySelector('.pst-stage');
+  const progress = section.querySelector('.pst-progress');
   const ticks = Array.from(section.querySelectorAll('.pst-progress a'));
   const tickBars = ticks.map(a => a.querySelector('.pst-tick'));
   const countEl = section.querySelector('.pst-progress-num');
@@ -123,6 +125,24 @@
       const p = Math.round(clamp(v - k + 1, 0, 1) * 100) / 100;
       if (p !== tickCache[k]) { tickBars[k].style.setProperty('--p', p); tickCache[k] = p; }
     }
+    placeMobileProgress();
+  }
+
+  // Portrait compact layouts keep the rail immediately after the active copy. It remains an
+  // absolutely positioned child of the pinned stage, so it never becomes an independent scroll
+  // consumer or a second source of scene state.
+  function placeMobileProgress() {
+    if (!progress || !stage || mode !== 'pin' || window.innerWidth > 959 || !matchMedia('(orientation: portrait)').matches) {
+      if (progress) { progress.style.removeProperty('top'); progress.style.removeProperty('bottom'); }
+      return;
+    }
+    const copy = copies[shown >= 0 ? shown : to];
+    if (!copy) return;
+    const sr = stage.getBoundingClientRect(), cr = copy.getBoundingClientRect();
+    const h = progress.offsetHeight || 32;
+    const top = clamp(cr.bottom - sr.top + 12, 10, Math.max(10, stage.clientHeight - h - 10));
+    progress.style.top = `${Math.round(top)}px`;
+    progress.style.bottom = 'auto';
   }
 
   /* ---------- image loading ---------- */
@@ -351,6 +371,7 @@
       imgs[k].classList.remove('is-near');
       cache[k] = { live: null, img: '', copy: '' };
     });
+    if (progress) { progress.style.removeProperty('top'); progress.style.removeProperty('bottom'); }
     ticks.forEach(a => a.removeAttribute('aria-current'));
     tickCache.fill(-1);
     shown = -1; waiting = false; waitFor = -1;
