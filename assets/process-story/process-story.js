@@ -55,7 +55,7 @@
   let from = 0, to = 0, want = 0, t = 1, startTime = 0, raf = 0, waiting = false;
   // pin: wheel gesture state.
   let acc = 0, lastWheel = 0, lastDir = 0, lastAbs = 0, holdUntil = 0, cameFromOutside = false, coasting = false;
-  let settleTimer = 0, touching = false;
+  let settleTimer = 0, progressRaf = 0, touching = false;
   const staged = () => mode === 'pin';
   const decoded = scenes.map(() => false);
   const cache = scenes.map(() => ({ live: null, img: '', copy: '' }));
@@ -132,7 +132,8 @@
   // absolutely positioned child of the pinned stage, so it never becomes an independent scroll
   // consumer or a second source of scene state.
   function placeMobileProgress() {
-    if (!progress || !stage || mode !== 'pin' || window.innerWidth > 959 || !matchMedia('(orientation: portrait)').matches) {
+    const viewportWidth = Math.min(window.innerWidth, document.documentElement.clientWidth || window.innerWidth);
+    if (!progress || !stage || mode !== 'pin' || viewportWidth > 959 || !matchMedia('(orientation: portrait)').matches) {
       if (progress) { progress.style.removeProperty('top'); progress.style.removeProperty('bottom'); }
       return;
     }
@@ -143,6 +144,14 @@
     const top = clamp(cr.bottom - sr.top + 12, 10, Math.max(10, stage.clientHeight - h - 10));
     progress.style.top = `${Math.round(top)}px`;
     progress.style.bottom = 'auto';
+  }
+  function scheduleMobileProgress() {
+    cancelAnimationFrame(progressRaf);
+    progressRaf = requestAnimationFrame(() => {
+      // Wait one more frame so Safari has applied the image/font/layout change before
+      // measuring the copy. This avoids falling back to the stage's bottom anchor.
+      progressRaf = requestAnimationFrame(placeMobileProgress);
+    });
   }
 
   /* ---------- image loading ---------- */
@@ -160,7 +169,7 @@
       if (near && imgs[j].loading !== 'eager') imgs[j].loading = 'eager';
       imgs[j].fetchPriority = j === k ? 'high' : 'auto';
     }
-    if (!ahead) imgs[k].addEventListener('load', () => { if (staged()) prime(want); }, { once: true });
+    if (!ahead) imgs[k].addEventListener('load', () => { if (staged()) { prime(want); scheduleMobileProgress(); } }, { once: true });
   }
 
   // Resolves once image k is loaded and decoded (or has failed). There is deliberately no
@@ -388,13 +397,14 @@
       cache[k] = { live: null, img: '', copy: '' };
     });
     if (progress) { progress.style.removeProperty('top'); progress.style.removeProperty('bottom'); }
+    cancelAnimationFrame(progressRaf);
     ticks.forEach(a => a.removeAttribute('aria-current'));
     tickCache.fill(-1);
     shown = -1; waiting = false; waitFor = -1;
   }
 
   function enter() {
-    if (mode === 'pin') { setPinListeners(true); measurePin(); jumpTo(sceneAtScroll()); settle(); }
+    if (mode === 'pin') { setPinListeners(true); measurePin(); jumpTo(sceneAtScroll()); settle(); scheduleMobileProgress(); }
   }
 
   function anchorTo(k) {
@@ -413,6 +423,7 @@
       root.classList.toggle('pst-flow', mode === 'flow');
       enter();
       if (keep >= 0) anchorTo(keep);
+      scheduleMobileProgress();
       return;
     }
     if (mode === 'pin') {
@@ -422,6 +433,7 @@
       const keep = want;
       measurePin(); jumpTo(keep);
       if (inside) jumpScroll(sceneOffset(keep));
+      scheduleMobileProgress();
     }
   }
   function onScroll() {
