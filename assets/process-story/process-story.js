@@ -114,6 +114,7 @@
 
   // The active scene (class, pill counter, aria-current) and the pill's tick fill up to v.
   function markActive(now, v) {
+    const changed = now !== shown;
     if (now !== shown) {
       if (shown >= 0) { scenes[shown].classList.remove('is-active'); ticks[shown].removeAttribute('aria-current'); }
       shown = now;
@@ -121,6 +122,7 @@
       ticks[shown].setAttribute('aria-current', 'step');
       countEl.textContent = pad(shown + 1);
     }
+    if (changed) sizePortraitStage(shown);
     for (let k = 0; k < ticks.length; k++) {
       const p = Math.round(clamp(v - k + 1, 0, 1) * 100) / 100;
       if (p !== tickCache[k]) { tickBars[k].style.setProperty('--p', p); tickCache[k] = p; }
@@ -246,18 +248,25 @@
     const viewportWidth = Math.min(window.innerWidth, document.documentElement.clientWidth || window.innerWidth);
     const portrait = viewportWidth <= 959 && matchMedia('(orientation: portrait)').matches;
     if (portrait) {
-      // A phone does not need a full viewport-sized stage once the copy and rail are
-      // together. Size it from the longest scene so short scenes do not leave a large
-      // dead zone below the progress rail, while long scenes still have room for all
-      // text and actions.
-      const nav = 69;
-      const image = clamp(viewportWidth * 0.52, 150, 230);
-      const copy = Math.max(...copies.map(c => c.scrollHeight), 0);
-      stage.style.height = `${Math.max(540, nav + 12 + image + 8 + copy + 24 + 12)}px`;
+      sizePortraitStage(to);
     } else {
       stage.style.removeProperty('height');
     }
     track.style.height = (vh + (N - 1) * segPx + END_REST * vh) + 'px';
+  }
+
+  function sizePortraitStage(k) {
+    const viewportWidth = Math.min(window.innerWidth, document.documentElement.clientWidth || window.innerWidth);
+    if (viewportWidth > 959 || !matchMedia('(orientation: portrait)').matches) return;
+    const copy = copies[clamp(k, 0, N - 1)];
+    if (!copy) return;
+    const previous = stage.style.height;
+    stage.style.height = 'auto';
+    const copyHeight = copy.scrollHeight;
+    stage.style.height = previous;
+    const nav = 69;
+    const image = clamp(viewportWidth * 0.58, 170, 280);
+    stage.style.height = `${Math.max(540, nav + 12 + image + 12 + copyHeight + 24 + 12)}px`;
   }
 
   // Document scroll offset at which scene k is the settled scene.
