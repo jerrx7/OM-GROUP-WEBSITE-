@@ -134,16 +134,19 @@
   function placeMobileProgress() {
     const viewportWidth = Math.min(window.innerWidth, document.documentElement.clientWidth || window.innerWidth);
     if (!progress || !stage || mode !== 'pin' || viewportWidth > 959 || !matchMedia('(orientation: portrait)').matches) {
-      if (progress) { progress.style.removeProperty('top'); progress.style.removeProperty('bottom'); }
+      if (progress) {
+        progress.style.removeProperty('display');
+        progress.style.removeProperty('top');
+        progress.style.removeProperty('bottom');
+      }
       return;
     }
-    const copy = copies[shown >= 0 ? shown : to];
-    if (!copy) return;
-    const sr = stage.getBoundingClientRect(), cr = copy.getBoundingClientRect();
-    const h = progress.offsetHeight || 32;
-    const top = clamp(cr.bottom - sr.top + 12, 10, Math.max(10, stage.clientHeight - h - 10));
-    progress.style.top = `${Math.round(top)}px`;
-    progress.style.bottom = 'auto';
+    // Portrait phones use a deliberately quiet composition: image, scene copy,
+    // then the next page section. The rail was creating a false bottom anchor and
+    // a large empty area on iPhone Safari/Chrome, so it is not rendered here.
+    progress.style.display = 'none';
+    progress.style.removeProperty('top');
+    progress.style.removeProperty('bottom');
   }
   function scheduleMobileProgress() {
     cancelAnimationFrame(progressRaf);
@@ -250,8 +253,7 @@
       const nav = 69;
       const image = clamp(viewportWidth * 0.52, 150, 230);
       const copy = Math.max(...copies.map(c => c.scrollHeight), 0);
-      const rail = progress ? Math.max(progress.offsetHeight, 28) : 28;
-      stage.style.height = `${Math.max(560, nav + 12 + image + 8 + copy + 48 + rail + 12)}px`;
+      stage.style.height = `${Math.max(540, nav + 12 + image + 8 + copy + 24 + 12)}px`;
     } else {
       stage.style.removeProperty('height');
     }

@@ -194,7 +194,7 @@ html.pst-pin .pst-scene.is-live .pst-copy{will-change:opacity, transform, filter
   html.pst-pin .pst-stage{height:100svh;min-height:360px}
   html.pst-pin .pst-scenes{inset:var(--pst-nav) 0 0 0;padding:0}
   html.pst-pin .pst-scene{
-    grid-template-columns:1fr;grid-template-rows:minmax(0,34%) minmax(0,1fr);
+    grid-template-columns:1fr;grid-template-rows:minmax(0,38%) minmax(0,1fr);
     gap:8px;padding:12px 20px calc(60px + env(safe-area-inset-bottom, 0px));
     align-items:center;
   }
@@ -245,8 +245,9 @@ html.pst-pin .pst-progress{
 
 /* JS places the portrait rail after the active copy. Keep the CSS fallback compact too. */
 @media (max-width:959px) and (orientation:portrait){
-  html.pst-pin .pst-stage{height:min(100svh,720px);min-height:560px}
-  html.pst-pin .pst-progress{bottom:auto;margin:0}
+  html.pst-pin .pst-stage{height:min(100svh,720px);min-height:540px}
+  html.pst-pin .pst-scene{padding-bottom:24px}
+  html.pst-pin .pst-progress{display:none !important}
 }
 
 /* ---- responsive ---- */
