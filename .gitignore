@@ -14,3 +14,5 @@ uploads/
 
 # Local tooling (sharp, used by scripts/image-cutout.js)
 node_modules/
+.vercel
+.env*
