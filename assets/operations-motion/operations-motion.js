@@ -1267,7 +1267,7 @@
       const canvas = document.createElement('canvas'); canvas.className = 'opm-3d'; canvas.setAttribute('aria-hidden', 'true'); actSvg.after(canvas);
       const gen = ++techGen; techLayer = { canvas, api: null };
       const basePath = (document.querySelector('script[src*="operations-motion.js"]')?.src || '').replace(/[^/]+$/, '') || '/assets/operations-motion/';
-      const model = T3 === 'old' ? basePath + 'technician.glb' : T3 && T3 !== '1' ? T3 : basePath + 'technician-blender.glb'; // the Blender-built character in 3D
+      const model = T3 === 'old' ? basePath + 'technician.glb' : T3 && T3 !== '1' ? T3 : basePath + 'technician-blender.grip-fix.glb'; // corrected Blender-built character in 3D
       import(basePath + 'operations-tech3d.js').then(m => m.createTech3D({ canvas, url: model, atlas: model.replace(/[^/]+$/, 'technician-atlas.jpg'), ids: ['qa1', 'qa2'] })).then(api => {
         if (gen !== techGen) { try { api.dispose && api.dispose(); } catch (e) { /* superseded by a newer build */ } return; }   // (a rebuild happened while this one was loading)
         tech = api; techLayer.api = api; if (/[?&]opmdebug/.test(location.search)) window.__opmTech = api;

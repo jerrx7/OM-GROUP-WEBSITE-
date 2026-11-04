@@ -1453,6 +1453,20 @@ footer{background:var(--bone);color:var(--ink);padding:72px 0 36px;border-top:1p
   font-size:13px;line-height:1.65;color:var(--grey);max-width:38ch;
   padding-bottom:6px;
 }
+.ps-catalog-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.ps-catalog-link{
+  display:flex;align-items:center;justify-content:space-between;gap:18px;
+  min-height:76px;padding:16px 18px;background:var(--bone);
+  border:1px solid var(--line-soft);color:var(--ink);
+  transition:background .35s ease,border-color .35s ease,transform .35s ease;
+}
+.ps-catalog-link:hover{background:var(--white);border-color:var(--accent-line);transform:translateY(-2px)}
+.ps-catalog-link span:first-child{display:grid;gap:5px}
+.ps-catalog-link small{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.ps-catalog-link strong{font-size:15px;font-weight:500;letter-spacing:.01em}
+.ps-catalog-link .ps-catalog-arrow{font-size:20px;color:var(--accent);transition:transform .35s ease}
+.ps-catalog-link:hover .ps-catalog-arrow{transform:translateX(4px)}
+.ps-catalog-note{margin:24px 0 0;font-size:12px;line-height:1.7;color:var(--grey)}
 .ps-close{
   position:absolute;top:28px;right:28px;
   width:44px;height:44px;border:1px solid var(--line);background:var(--bone);
@@ -1592,6 +1606,32 @@ footer{background:var(--bone);color:var(--ink);padding:72px 0 36px;border-top:1p
 .ps-chart-body h4 em{font-style:italic;color:var(--accent)}
 .ps-chart-body p{font-size:14px;line-height:1.65;color:var(--grey);max-width:48ch}
 
+/* ============ MOST DEMANDED PRODUCTS — HOMEPAGE DISCOVERY ============ */
+.mpd{background:var(--white);padding:clamp(88px,10vw,144px) 0 clamp(96px,11vw,160px);border-top:1px solid var(--line-soft)}
+.mpd-head{display:grid;grid-template-columns:minmax(0,5fr) minmax(280px,4fr);gap:clamp(40px,8vw,120px);align-items:end;margin-bottom:52px}
+.mpd-head .sec-title{margin-top:20px;max-width:12ch}
+.mpd-lede{max-width:48ch;font-size:16px;line-height:1.75;color:var(--grey);margin:0 0 4px}
+.mpd-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.mpd-card{min-width:0;display:flex;background:var(--bone);border:1px solid var(--line);border-radius:14px;overflow:hidden;transition:transform .55s cubic-bezier(.2,.7,.2,1),border-color .35s ease,box-shadow .55s ease}
+.mpd-card-link{display:flex;flex-direction:column;width:100%;min-height:100%;color:inherit}
+.mpd-card-media{position:relative;aspect-ratio:1.55;background:linear-gradient(145deg,#fff 0%,#f6f3ee 100%);overflow:hidden;border-bottom:1px solid rgba(20,20,22,.07)}
+.mpd-card-media::after{content:"";position:absolute;inset:auto 18px 16px;height:1px;background:linear-gradient(90deg,transparent,var(--accent-line),transparent);opacity:.75}
+.mpd-card-media img{display:block;width:100%;height:100%;padding:18px 24px;object-fit:contain;mix-blend-mode:multiply;transition:transform 1s cubic-bezier(.2,.7,.2,1),filter .6s ease}
+.mpd-card-body{display:flex;flex:1;flex-direction:column;padding:24px 24px 22px}
+.mpd-card-cat{font-family:var(--sans);font-size:10px;letter-spacing:.2em;line-height:1.4;text-transform:uppercase;font-weight:700;color:var(--accent);margin-bottom:13px}
+.mpd-card h3{font-family:var(--serif);font-size:clamp(24px,2.1vw,31px);font-weight:500;letter-spacing:-.02em;line-height:1.08;color:var(--ink);margin:0 0 12px}
+.mpd-card h3 em{font-style:italic;color:var(--accent)}
+.mpd-card p{font-size:13.5px;line-height:1.62;color:var(--grey);margin:0;max-width:37ch}
+.mpd-card-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:auto;padding-top:24px;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--ink)}
+.mpd-card-arrow{display:grid;place-items:center;width:32px;height:32px;border:1px solid var(--line);border-radius:50%;font-size:17px;letter-spacing:0;font-weight:400;transition:background .35s ease,color .35s ease,border-color .35s ease,transform .45s cubic-bezier(.2,.7,.2,1)}
+.mpd-card:hover{border-color:var(--accent-line);transform:translateY(-5px);box-shadow:0 24px 55px -32px rgba(20,20,22,.28)}
+.mpd-card:hover .mpd-card-media img{transform:scale(1.055);filter:saturate(1.04)}
+.mpd-card:hover .mpd-card-arrow{background:var(--accent);border-color:var(--accent);color:var(--white);transform:translate(2px,-2px) rotate(-45deg)}
+.mpd-card-link:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:14px}
+@media (max-width:1100px){.mpd-head{gap:56px}.mpd-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}}
+@media (max-width:640px){.mpd{padding:76px 0 92px}.mpd-head{grid-template-columns:1fr;gap:24px;margin-bottom:36px}.mpd-head .sec-title{margin-top:16px;max-width:15ch}.mpd-lede{font-size:15px;line-height:1.7}.mpd-grid{grid-template-columns:1fr;gap:14px}.mpd-card-media{aspect-ratio:1.65}.mpd-card-media img{padding:16px 26px}.mpd-card-body{padding:22px 20px 20px}}
+@media (prefers-reduced-motion:reduce){.mpd-card,.mpd-card-media img,.mpd-card-arrow{transition:none}}
+
 @media (max-width:1180px){
   .ps-rail{grid-template-columns:repeat(2,1fr)}
   .ps-items,.ps-items.cols-4,.ps-items.cols-5{grid-template-columns:repeat(2,1fr)}
@@ -1601,6 +1641,7 @@ footer{background:var(--bone);color:var(--ink);padding:72px 0 36px;border-top:1p
 @media (max-width:680px){
   .ps-rail{grid-template-columns:1fr}
   .ps-items,.ps-items.cols-4,.ps-items.cols-5{grid-template-columns:1fr}
+  .ps-catalog-list{grid-template-columns:1fr}
   .ps-panel-head{flex-direction:column;align-items:flex-start;gap:16px}
   .ps-panel-inner{padding:32px 22px 40px}
   .ps-close{top:14px;right:14px;width:38px;height:38px}
@@ -2232,12 +2273,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 <!-- PROCESS-STORY:END -->
 
+<section class="mpd" id="most-demanded-products" aria-labelledby="most-demanded-products-title">
+  <div class="container">
+    <div class="mpd-head fade-up">
+      <div><span class="eyebrow">Our Product Portfolio</span><h2 class="sec-title" id="most-demanded-products-title">Our Most <span class="it">Demanded Products.</span></h2></div>
+      <p class="mpd-lede">From precision-graded aggregates and high-quality manufactured sand to ready-mix concrete, OM Group delivers dependable construction materials for infrastructure and development projects.</p>
+    </div>
+    <div class="mpd-grid" aria-label="Featured OM Group products">
+      <article class="mpd-card fade-up d1"><a class="mpd-card-link" href="/products/10mm-aggregate"><div class="mpd-card-media"><img src="img/products/agg-10mm.png" alt="10mm crushed stone aggregates" width="1254" height="1254" loading="lazy" decoding="async" /></div><div class="mpd-card-body"><span class="mpd-card-cat">Crushed Stone Aggregates</span><h3>10mm <em>Aggregates</em></h3><p>Crushed stone graded to a nominal 10mm size for RCC, precast and concrete work.</p><div class="mpd-card-foot"><span>Explore product</span><span class="mpd-card-arrow" aria-hidden="true">→</span></div></div></a></article>
+      <article class="mpd-card fade-up d2"><a class="mpd-card-link" href="/products/20mm-aggregate"><div class="mpd-card-media"><img src="img/products/agg-20mm.png" alt="20mm crushed stone aggregates" width="1254" height="1254" loading="lazy" decoding="async" /></div><div class="mpd-card-body"><span class="mpd-card-cat">Crushed Stone Aggregates</span><h3>20mm <em>Aggregates</em></h3><p>Crushed stone at 20mm nominal size for RCC slabs, beams, columns and ready-mix concrete.</p><div class="mpd-card-foot"><span>Explore product</span><span class="mpd-card-arrow" aria-hidden="true">→</span></div></div></a></article>
+      <article class="mpd-card fade-up d3"><a class="mpd-card-link" href="/products/granular-sub-base"><div class="mpd-card-media"><img src="img/products/gsb.png" alt="Granular Sub-Base road construction material" width="1402" height="1122" loading="lazy" decoding="async" /></div><div class="mpd-card-body"><span class="mpd-card-cat">Road Construction Materials</span><h3>GSB <em>Material</em></h3><p>Granular Sub-Base material for road foundations, pavement construction and infrastructure development.</p><div class="mpd-card-foot"><span>Explore product</span><span class="mpd-card-arrow" aria-hidden="true">→</span></div></div></a></article>
+      <article class="mpd-card fade-up d1"><a class="mpd-card-link" href="/products/m-sand"><div class="mpd-card-media"><img src="img/products/m-sand.png" alt="M-Sand manufactured sand" width="1402" height="1122" loading="lazy" decoding="async" /></div><div class="mpd-card-body"><span class="mpd-card-cat">Manufactured Sand</span><h3>M-<em>Sand</em></h3><p>Manufactured sand processed from quality stone aggregates for consistent grading and construction use.</p><div class="mpd-card-foot"><span>Explore product</span><span class="mpd-card-arrow" aria-hidden="true">→</span></div></div></a></article>
+      <article class="mpd-card fade-up d2"><a class="mpd-card-link" href="/products/plaster-sand"><div class="mpd-card-media"><img src="img/products/p-sand.png" alt="P-Sand plastering sand" width="1402" height="1122" loading="lazy" decoding="async" /></div><div class="mpd-card-body"><span class="mpd-card-cat">Plastering Sand</span><h3>P-<em>Sand</em></h3><p>Quality plaster sand designed for a consistent finish and reliable plastering applications.</p><div class="mpd-card-foot"><span>Explore product</span><span class="mpd-card-arrow" aria-hidden="true">→</span></div></div></a></article>
+      <article class="mpd-card fade-up d3"><a class="mpd-card-link" href="/products/ready-mix-concrete"><div class="mpd-card-media"><img src="img/products/om-group-ready-mix-concrete-card.webp" alt="Ready-Mix Concrete supplied by OM Group" width="560" height="335" loading="lazy" decoding="async" /></div><div class="mpd-card-body"><span class="mpd-card-cat">Ready-Mix Concrete</span><h3>Ready-Mix <em>Concrete</em></h3><p>Ready-Mix Concrete produced for dependable quality, consistency and efficient site delivery.</p><div class="mpd-card-foot"><span>Explore product</span><span class="mpd-card-arrow" aria-hidden="true">→</span></div></div></a></article>
+    </div>
+  </div>
+</section>
+
 <section class="sec sec-bone" id="products">
   <div class="container">
     <div class="sec-head fade-up">
       <span class="eyebrow center">Products &amp; Services</span>
-      <h2 class="sec-title">What <span class="it">we deliver.</span></h2>
-      <p class="sec-sub">High performance construction materials for infrastructure, commercial, industrial, and large scale development projects.</p>
+      <h2 class="sec-title">Explore <span class="it">Our Complete Product Range</span></h2>
+      <p class="sec-sub">Explore our comprehensive range of construction materials, engineered to support infrastructure, commercial and industrial development projects.</p>
       <span class="sec-rule"></span>
       <a href="/products" class="ps-all">Browse the full product index <span aria-hidden="true">→</span></a>
     </div>
@@ -2290,6 +2348,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
     <template id="tpl-aggregates">
+      <button class="ps-close" aria-label="Close">✕</button>
+      <div class="ps-panel-head">
+        <div><span class="ph-eyebrow">Division · Crushed Stone Aggregates</span><h3>Every grade for <em>every build.</em></h3></div>
+        <p class="ph-meta">Explore the available crushed stone aggregate grades and open the relevant product page for details.</p>
+      </div>
+      <div class="ps-catalog-list" aria-label="Crushed stone aggregate grades">
+        <a class="ps-catalog-link" href="/products/6mm-aggregate"><span><small>Grade · 6mm</small><strong>6mm Aggregates</strong></span><span class="ps-catalog-arrow" aria-hidden="true">→</span></a>
+        <a class="ps-catalog-link" href="/products/10mm-aggregate"><span><small>Grade · 10mm</small><strong>10mm Aggregates</strong></span><span class="ps-catalog-arrow" aria-hidden="true">→</span></a>
+        <a class="ps-catalog-link" href="/products/12mm-aggregate"><span><small>Grade · 12.5mm</small><strong>12.5mm Aggregates</strong></span><span class="ps-catalog-arrow" aria-hidden="true">→</span></a>
+        <a class="ps-catalog-link" href="/products/20mm-aggregate"><span><small>Grade · 20mm</small><strong>20mm Aggregates</strong></span><span class="ps-catalog-arrow" aria-hidden="true">→</span></a>
+        <a class="ps-catalog-link" href="/products/40mm-aggregate"><span><small>Grade · 40mm</small><strong>40mm Aggregates</strong></span><span class="ps-catalog-arrow" aria-hidden="true">→</span></a>
+        <a class="ps-catalog-link" href="/products/60mm-aggregate"><span><small>Grade · 60mm</small><strong>60mm Aggregates</strong></span><span class="ps-catalog-arrow" aria-hidden="true">→</span></a>
+      </div>
+    </template>
+    <template id="tpl-aggregates-legacy">
       <button class="ps-close" aria-label="Close">✕</button>
       <div class="ps-panel-head">
         <div>
@@ -2418,6 +2491,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <template id="tpl-sand">
       <button class="ps-close" aria-label="Close">✕</button>
       <div class="ps-panel-head">
+        <div><span class="ph-eyebrow">Division · Sand Products</span><h3>Sand for <em>the finish.</em></h3></div>
+        <p class="ph-meta">Browse OM Group’s available manufactured, plastering, washed and natural sand products.</p>
+      </div>
+      <div class="ps-catalog-list" aria-label="Sand products">
+        <a class="ps-catalog-link" href="/products/m-sand"><span><small>Product · Manufactured Sand</small><strong>M-Sand</strong></span><span class="ps-catalog-arrow" aria-hidden="true">→</span></a>
+        <a class="ps-catalog-link" href="/products/plaster-sand"><span><small>Product · Plastering Sand</small><strong>P-Sand</strong></span><span class="ps-catalog-arrow" aria-hidden="true">→</span></a>
+        <a class="ps-catalog-link" href="/products/river-sand"><span><small>Product · Natural Sand</small><strong>R-Sand</strong></span><span class="ps-catalog-arrow" aria-hidden="true">→</span></a>
+        <a class="ps-catalog-link" href="/products/washed-sand"><span><small>Product · Washed Sand</small><strong>Washed Sand</strong></span><span class="ps-catalog-arrow" aria-hidden="true">→</span></a>
+        <a class="ps-catalog-link" href="/products/concrete-sand"><span><small>Product · Concrete Sand</small><strong>Concrete Sand</strong></span><span class="ps-catalog-arrow" aria-hidden="true">→</span></a>
+      </div>
+    </template>
+    <template id="tpl-sand-legacy">
+      <button class="ps-close" aria-label="Close">✕</button>
+      <div class="ps-panel-head">
         <div>
           <span class="ph-eyebrow">Division · Sand &amp; Fines</span>
           <h3>Engineered sand solutions, <em>graded to IS 383.</em></h3>
@@ -2513,6 +2600,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </template>
 
     <template id="tpl-rmc">
+      <button class="ps-close" aria-label="Close">✕</button>
+      <div class="ps-panel-head">
+        <div><span class="ph-eyebrow">Division · Ready-Mix Concrete</span><h3>Concrete grades, <em>clearly organised.</em></h3></div>
+        <p class="ph-meta">Explore the existing Ready-Mix Concrete offering and documented grade guide.</p>
+      </div>
+      <div class="ps-catalog-list" aria-label="Ready-Mix Concrete products and grades">
+        <a class="ps-catalog-link" href="/products/ready-mix-concrete"><span><small>Product · Ready-Mix Concrete</small><strong>RMC Product Guide</strong></span><span class="ps-catalog-arrow" aria-hidden="true">→</span></a>
+        <a class="ps-catalog-link" href="/products/ready-mix-concrete#m20"><span><small>Grade · M20</small><strong>M20 Concrete</strong></span><span class="ps-catalog-arrow" aria-hidden="true">→</span></a>
+        <a class="ps-catalog-link" href="/products/ready-mix-concrete#m25"><span><small>Grade · M25</small><strong>M25 Concrete</strong></span><span class="ps-catalog-arrow" aria-hidden="true">→</span></a>
+        <a class="ps-catalog-link" href="/products/ready-mix-concrete#m30"><span><small>Grade · M30</small><strong>M30 Concrete</strong></span><span class="ps-catalog-arrow" aria-hidden="true">→</span></a>
+        <a class="ps-catalog-link" href="/products/ready-mix-concrete#m35"><span><small>Grade · M35</small><strong>M35 Concrete</strong></span><span class="ps-catalog-arrow" aria-hidden="true">→</span></a>
+        <a class="ps-catalog-link" href="/products/ready-mix-concrete#m40"><span><small>Grade · M40</small><strong>M40 Concrete</strong></span><span class="ps-catalog-arrow" aria-hidden="true">→</span></a>
+        <a class="ps-catalog-link" href="/products/ready-mix-concrete#m45"><span><small>Grade · M45</small><strong>M45 Concrete</strong></span><span class="ps-catalog-arrow" aria-hidden="true">→</span></a>
+        <a class="ps-catalog-link" href="/products/ready-mix-concrete#m60"><span><small>Grade · M60</small><strong>M60 Concrete</strong></span><span class="ps-catalog-arrow" aria-hidden="true">→</span></a>
+      </div>
+    </template>
+    <template id="tpl-rmc-legacy">
       <button class="ps-close" aria-label="Close">✕</button>
       <div class="ps-panel-head">
         <div>
@@ -2650,6 +2754,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </template>
 
     <template id="tpl-gsb">
+      <button class="ps-close" aria-label="Close">✕</button>
+      <div class="ps-panel-head">
+        <div><span class="ph-eyebrow">Division · Road Construction Materials</span><h3>Build the base, <em>move forward.</em></h3></div>
+        <p class="ph-meta">Explore the road construction materials currently available from OM Group.</p>
+      </div>
+      <div class="ps-catalog-list" aria-label="Road construction materials">
+        <a class="ps-catalog-link" href="/products/granular-sub-base"><span><small>Material · GSB</small><strong>Granular Sub-Base</strong></span><span class="ps-catalog-arrow" aria-hidden="true">→</span></a>
+        <a class="ps-catalog-link" href="/products/wmm"><span><small>Material · WMM</small><strong>Wet Mix Macadam</strong></span><span class="ps-catalog-arrow" aria-hidden="true">→</span></a>
+        <a class="ps-catalog-link" href="/products/boulders"><span><small>Material · Stone</small><strong>Boulders</strong></span><span class="ps-catalog-arrow" aria-hidden="true">→</span></a>
+        <a class="ps-catalog-link" href="/products/road-base-material"><span><small>Material · Road Base</small><strong>Road Base Material</strong></span><span class="ps-catalog-arrow" aria-hidden="true">→</span></a>
+      </div>
+    </template>
+    <template id="tpl-gsb-legacy">
       <button class="ps-close" aria-label="Close">✕</button>
       <div class="ps-panel-head">
         <div>
