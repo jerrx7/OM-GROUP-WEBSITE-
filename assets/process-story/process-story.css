@@ -245,6 +245,7 @@ html.pst-pin .pst-progress{
 
 /* JS places the portrait rail after the active copy. Keep the CSS fallback compact too. */
 @media (max-width:959px) and (orientation:portrait){
+  html.pst-pin .pst-stage{height:min(100svh,720px);min-height:560px}
   html.pst-pin .pst-progress{bottom:auto;margin:0}
 }
 

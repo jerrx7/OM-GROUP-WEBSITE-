@@ -240,6 +240,21 @@
   function measurePin() {
     const vh = window.innerHeight;
     segPx = SEG * vh;
+    const viewportWidth = Math.min(window.innerWidth, document.documentElement.clientWidth || window.innerWidth);
+    const portrait = viewportWidth <= 959 && matchMedia('(orientation: portrait)').matches;
+    if (portrait) {
+      // A phone does not need a full viewport-sized stage once the copy and rail are
+      // together. Size it from the longest scene so short scenes do not leave a large
+      // dead zone below the progress rail, while long scenes still have room for all
+      // text and actions.
+      const nav = 69;
+      const image = clamp(viewportWidth * 0.52, 150, 230);
+      const copy = Math.max(...copies.map(c => c.scrollHeight), 0);
+      const rail = progress ? Math.max(progress.offsetHeight, 28) : 28;
+      stage.style.height = `${Math.max(560, nav + 12 + image + 8 + copy + 48 + rail + 12)}px`;
+    } else {
+      stage.style.removeProperty('height');
+    }
     track.style.height = (vh + (N - 1) * segPx + END_REST * vh) + 'px';
   }
 
@@ -390,6 +405,7 @@
     clearTimeout(settleTimer);
     if (mode === 'pin') setPinListeners(false);
     track.style.height = '';
+    stage.style.removeProperty('height');
     scenes.forEach((s, k) => {
       s.classList.remove('is-active', 'is-live');
       imgs[k].style.cssText = ''; copies[k].style.cssText = '';
