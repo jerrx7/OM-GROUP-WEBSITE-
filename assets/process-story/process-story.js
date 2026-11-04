@@ -151,6 +151,16 @@
   // The wanted scene loads first, on its own; its neighbours follow once it has arrived, so on a
   // slow connection the image actually needed is not sharing bandwidth with three others.
   const loaded = k => imgs[k].complete && imgs[k].naturalWidth > 0;
+  function requestImage(k, priority) {
+    if (k < 0 || k >= N) return;
+    const img = imgs[k];
+    if (img.loading !== 'eager') img.loading = 'eager';
+    img.fetchPriority = priority || 'auto';
+  }
+  function warmFlowScenes(k) {
+    requestImage(k, 'high');
+    requestImage(k + 1, 'auto');
+  }
   function prime(k) {
     const ahead = loaded(k);
     for (let j = 0; j < N; j++) {
@@ -527,9 +537,22 @@
     const warm = new IntersectionObserver(entries => {
       if (!entries.some(en => en.isIntersecting)) return;
       if (staged()) prime(want);
+      else warmFlowScenes(0);
       warm.disconnect();
     }, { rootMargin: '150% 0px' });
     warm.observe(section);
+
+    // In portrait flow mode, request only the scene entering the preload window
+    // and its immediate successor. This avoids a burst of eleven full-resolution
+    // downloads while keeping the next visual ready before the reader arrives.
+    scenes.forEach((scene, k) => {
+      const near = new IntersectionObserver(entries => {
+        if (!entries.some(en => en.isIntersecting)) return;
+        warmFlowScenes(k);
+        near.disconnect();
+      }, { rootMargin: '500px 0px' });
+      near.observe(scene);
+    });
   }
 
   // Copy reflows (web fonts, rotation, browser chrome, images arriving) move the scenes in scrolly and flow.
