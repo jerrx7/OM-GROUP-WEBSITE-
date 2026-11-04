@@ -1,7 +1,10 @@
 /* ============ PROCESS STORY — From Raw Stone to Real Infrastructure ============
    Default (no JS, reduced motion): the 11 scenes are a normal stacked list.
    process-story.js adds one mode class:
-   - html.pst-pin: one sticky stage whose scenes cross-fade under shared scroll/touch control */
+   - html.pst-pin (roomy screens, fine pointer): one sticky two-column stage whose scenes
+     cross-fade under scroll control
+   - html.pst-flow (portrait phones/tablets): stacked image-then-copy blocks, sticky pill
+   - html.pst-scrolly (landscape phones/tablets): sticky image beside scrolling copy */
 
 .pst{
   --pst-nav:76px;
@@ -187,46 +190,6 @@ html.pst-pin .pst-figure img{
 html.pst-pin .pst-scene.is-live .pst-figure img,
 html.pst-pin .pst-scene.is-live .pst-copy{will-change:opacity, transform, filter}
 
-/* One pinned scene engine on compact screens too. Only the composition changes; text remains
-   inside the same stage as its image and never becomes an independent document-flow scene. */
-@media (max-width:959px){
-  html.pst-pin .pst{--pst-nav:69px}
-  html.pst-pin .pst-stage{height:100svh;min-height:360px}
-  html.pst-pin .pst-scenes{inset:var(--pst-nav) 0 0 0;padding:0}
-  html.pst-pin .pst-scene{
-    grid-template-columns:1fr;grid-template-rows:minmax(0,38%) minmax(0,1fr);
-    gap:8px;padding:12px 20px calc(60px + env(safe-area-inset-bottom, 0px));
-    align-items:center;
-  }
-  html.pst-pin .pst-figure{order:-1;align-self:stretch;min-height:0}
-  html.pst-pin .pst-figure img{width:100%;height:100%;max-height:none}
-  html.pst-pin .pst-copy{max-width:none;min-height:0;align-self:start}
-  html.pst-pin .pst-step{font-size:10px}
-  html.pst-pin .pst-eyebrow{letter-spacing:.16em}
-  html.pst-pin .pst-heading{font-size:clamp(24px,6.4vw,36px);line-height:1.04;margin:10px 0;max-width:18ch}
-  html.pst-pin .pst-text{font-size:clamp(12px,3.25vw,15px);line-height:1.48;max-width:56ch}
-  html.pst-pin .pst-text + .pst-text{margin-top:7px}
-  html.pst-pin .pst-links{gap:6px;margin-top:10px}
-  html.pst-pin .pst-links-label{font-size:9px;margin-bottom:0}
-  html.pst-pin .pst-links a{min-height:28px;padding:0 10px;font-size:11px}
-  html.pst-pin .pst-closing{margin-top:10px;padding-left:12px;font-size:17px}
-  html.pst-pin .pst-ctas{gap:7px;margin-top:12px}
-  html.pst-pin .pst-ctas .btn{min-height:38px;padding:0 14px;font-size:11px}
-  html.pst-pin .pst-progress{left:20px;right:20px;bottom:12px;justify-content:center;gap:8px}
-  html.pst-pin .pst-progress ol{gap:3px;max-width:calc(100vw - 92px)}
-  html.pst-pin .pst-progress a{width:clamp(10px,4.5vw,24px)}
-}
-
-@media (min-width:641px) and (max-width:959px){
-  html.pst-pin .pst-scene{
-    grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);grid-template-rows:1fr;
-    gap:28px;padding:20px 32px 78px;
-  }
-  html.pst-pin .pst-figure{order:initial}
-  html.pst-pin .pst-heading{font-size:clamp(28px,4.5vw,42px)}
-  html.pst-pin .pst-text{font-size:14px;line-height:1.58}
-}
-
 html.pst-pin .pst-progress{
   display:flex;align-items:center;gap:18px;
   position:absolute;left:var(--pst-gl);bottom:36px;z-index:2;
@@ -242,13 +205,6 @@ html.pst-pin .pst-progress{
 }
 .pst-progress a[aria-current="step"] .pst-tick::after{background:var(--accent)}
 .pst-progress a:hover .pst-tick{background:var(--grey-2)}
-
-/* JS places the portrait rail after the active copy. Keep the CSS fallback compact too. */
-@media (max-width:959px) and (orientation:portrait){
-  html.pst-pin .pst-stage{height:min(100svh,720px);min-height:540px}
-  html.pst-pin .pst-scene{padding-bottom:24px}
-  html.pst-pin .pst-progress{display:none !important}
-}
 
 /* ---- responsive ---- */
 @media (max-width:1100px){
