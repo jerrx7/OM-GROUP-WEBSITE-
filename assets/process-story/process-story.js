@@ -5,17 +5,26 @@
   const scenes=[...section.querySelectorAll('.pst-scene')], imgs=scenes.map(s=>s.querySelector('img'));
   const ticks=[...section.querySelectorAll('.pst-progress a')], bars=ticks.map(a=>a.querySelector('.pst-tick'));
   const count=section.querySelector('.pst-progress-num'), N=scenes.length, reduce=matchMedia('(prefers-reduced-motion: reduce)');
-  const DURATION=720, STEP=()=>Math.max(1,window.innerHeight-(parseFloat(getComputedStyle(section).getPropertyValue('--pst-nav'))||0));
+  const DURATION=900, STEP=()=>Math.max(1,window.innerHeight-(parseFloat(getComputedStyle(section).getPropertyValue('--pst-nav'))||0));
   let active=0, transition=false, timer=0, wheelAccum=0, wheelDir=0, lastWheel=0, lastAbs=0, lastGo=0, wheelArmed=true, touchStart=null, touchUsed=false,interacted=false;
   const clamp=(n,a,b)=>Math.max(a,Math.min(b,n)), pad=n=>String(n+1).padStart(2,'0');
   const sceneY=k=>track.getBoundingClientRect().top+window.scrollY+k*STEP();
   const jump=y=>{const old=root.style.scrollBehavior;root.style.scrollBehavior='auto';window.scrollTo(0,y);root.style.scrollBehavior=old};
   const inPresentation=()=>{const top=track.getBoundingClientRect().top,bottom=top+track.offsetHeight;return top<=1&&bottom-window.innerHeight>=-24};
   function mark(k){active=clamp(k,0,N-1);count.textContent=pad(active);scenes.forEach((s,i)=>s.classList.toggle('is-active',i===active));ticks.forEach((a,i)=>{a.toggleAttribute('aria-current',i===active);bars[i].style.setProperty('--p',i<=active?'1':'0')});section.dataset.activeScene=String(active+1)}
-  function preload(k){[k-1,k,k+1].forEach(i=>{if(i>=0&&i<N){imgs[i].loading='eager';imgs[i].decoding='async'}})}
-  function finish(from,to){scenes[from].classList.remove('is-active','is-leaving');setTimeout(()=>scenes[to].classList.remove('is-entering'),1100)}
+  function warm(k){[k,k+1,k+2,k-1].forEach((i,n)=>{if(i<0||i>=N)return;const im=imgs[i];im.loading='eager';im.decoding='async';if(n===0)im.fetchPriority='high';if(im.decode)im.decode().catch(()=>{})})}
+  const preload=warm;
+  // fetch every slide image ahead of the viewer (one after another, so the first ones are not starved) once the section is near
+  function warmAll(){let i=0;const next=()=>{if(i>=N)return;const im=imgs[i++];im.loading='eager';const done=()=>next();im.decode?im.decode().then(done,done):(im.complete?done():(im.onload=im.onerror=done))};next()}
+  function finish(from,to){
+    // the slide that left is done: clear every transition class so nothing can replay its fade-in later
+    scenes[from].classList.remove('is-active','is-leaving','is-entering','is-live');
+    // the new slide keeps its entrance animation running for 1.1 s, but only while it is still the active one
+    setTimeout(()=>{const c=scenes[to].classList;if(c.contains('is-active')&&!c.contains('is-leaving')){c.remove('is-entering','is-live')}},1500)}
   
-  function go(delta){if(transition||!delta)return false;const next=clamp(active+delta,0,N-1);if(next===active)return false;const from=active;transition=true;wheelArmed=false;lastGo=performance.now();preload(next);scenes[from].classList.add('is-leaving');scenes[next].classList.add('is-live','is-entering');mark(next);clearTimeout(timer);timer=setTimeout(()=>{finish(from,next);transition=false},DURATION);jump(sceneY(next));return true}
+  function go(delta){if(transition||!delta)return false;const next=clamp(active+delta,0,N-1);if(next===active)return false;const from=active;transition=true;wheelArmed=false;lastGo=performance.now();warm(next);const run=()=>{scenes[from].classList.add('is-leaving');scenes[next].classList.add('is-live','is-entering');mark(next);clearTimeout(timer);timer=setTimeout(()=>{finish(from,next);transition=false},DURATION);jump(sceneY(next))};const im=imgs[next];
+    // the fade only reads if the picture is there: hold the swap until the next image is decoded (at most 600 ms), so it never pops in after the fade
+    if(im.complete&&im.naturalWidth)run();else Promise.race([im.decode?im.decode().catch(()=>{}):Promise.resolve(),new Promise(r=>setTimeout(r,600))]).then(run);return true}
   function boundary(dir){if((dir<0&&active===0)||(dir>0&&active===N-1)){touchStart=null;return true}return false}
   function wheel(e){interacted=true;if(e.ctrlKey||!inPresentation()||!stage.contains(e.target))return;const dy=e.deltaY*(e.deltaMode===1?16:e.deltaMode===2?window.innerHeight:1);if(!dy||Math.abs(dy)<Math.abs(e.deltaX))return;const dir=Math.sign(dy),abs=Math.abs(dy),now=performance.now(),gap=now-lastWheel;lastWheel=now;const stream=gap<=90&&now-lastGo<1400;if(boundary(dir)){if(stream){e.preventDefault();lastAbs=abs;return}return}e.preventDefault();if(transition){lastAbs=abs;wheelDir=dir;return}if(!wheelArmed&&(gap>90||dir!==wheelDir||abs>lastAbs*1.6+8)){wheelArmed=true;wheelAccum=0}lastAbs=abs;wheelDir=dir;if(!wheelArmed)return;if(gap>180)wheelAccum=0;wheelAccum+=dy;const threshold=Math.max(36,Math.min(90,window.innerHeight*.06));if(Math.abs(wheelAccum)>=threshold){wheelAccum=0;go(dir)}}
   function touchStartHandler(e){interacted=true;if(!inPresentation()||!stage.contains(e.target)||e.touches.length!==1)return;touchStart={x:e.touches[0].clientX,y:e.touches[0].clientY};touchUsed=false}
@@ -27,6 +36,7 @@
   scenes.forEach((s,i)=>s.addEventListener('focusin',()=>{if(inPresentation()&&i!==active&&!transition){jump(sceneY(i));mark(i)}}));
   imgs.forEach((img,i)=>{img.loading=i<2?'eager':'lazy';img.decoding='async'});
   root.classList.add('pst-js','pst-pin');mark(0);preload(0);
+  if('IntersectionObserver' in window){const io=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){io.disconnect();warmAll()}},{rootMargin:'250% 0px'});io.observe(section)}else warmAll();
   if(!reduce.matches){window.addEventListener('wheel',wheel,{passive:false});window.addEventListener('touchstart',touchStartHandler,{passive:true});window.addEventListener('touchmove',touchMove,{passive:false});window.addEventListener('touchend',touchEnd,{passive:true});window.addEventListener('touchcancel',()=>{touchStart=null},{passive:true});window.addEventListener('keydown',key)}else root.classList.add('pst-reduced');
   window.addEventListener('scroll',sync,{passive:true});window.addEventListener('resize',()=>{if(inPresentation())jump(sceneY(active))});
 })();
