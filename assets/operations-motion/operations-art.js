@@ -1138,12 +1138,12 @@ window.OPM_ART = (function () {
     const glow = '<rect x="437" y="-98" width="48" height="44" rx="2" fill="url(#a-ovenglow)"/>';
     const graph = 'M519 -90Q528 -91 534 -97Q543 -104 555 -106';
     // the building: plinth, cladding, glazing, door, roof, signboard
-    const mull = [100, 178, 256, 334, 412, 490, 572].map(x => '<rect class="o" fill="#2c2e32" x="' + (x - 2.5) + '" y="-216" width="5" height="176"/>').join('');
+    const mull = [100, 572].map(x => '<rect class="o" fill="#2c2e32" x="' + (x - 2.5) + '" y="-216" width="5" height="176"/>').join('');
     const front = shadow(290, 660, 11) + '<rect class="o" fill="url(#a-conc)" x="0" y="' + FL + '" width="580" height="' + (-FL) + '"/>'
       + '<path class="o" fill="url(#a-corr)" fill-rule="evenodd" d="M0 ' + FL + 'V-236H100V' + FL + 'Z M18 ' + FL + 'V-150H84V' + FL + 'Z"/>'
       + '<rect class="o" fill="url(#a-corr)" x="98" y="-236" width="482" height="20"/><rect class="o" fill="url(#a-corr)" x="98" y="-40" width="482" height="' + (40 + FL) + '"/><rect class="o" fill="url(#a-corr)" x="572" y="-236" width="8" height="' + (236 + FL) + '"/>'
       + '<rect fill="#dfe9ef" fill-opacity=".14" x="100" y="-216" width="472" height="176"/>'
-      + '<path d="M130 -216L90 -40M150 -216L110 -40M300 -216L260 -40M318 -216L278 -40M470 -216L430 -40" stroke="#fff" stroke-opacity=".22" stroke-width="5"/>' + mull
+      + '<path d="M130 -216L90 -40M150 -216L110 -40M300 -216L260 -40M318 -216L278 -40M470 -216L430 -40" stroke="#fff" stroke-opacity=".12" stroke-width="5"/>' + mull
       + '<rect class="o" fill="url(#a-concV)" x="96" y="-42" width="480" height="5"/><rect class="o" fill="#2c2e32" x="96" y="-219" width="480" height="5"/>'
       + '<rect class="o" fill="#2c2e32" x="16" y="-152" width="70" height="' + (152 + FL) + '"/><rect fill="#c7d6df" fill-opacity=".55" x="21" y="-147" width="60" height="' + (127 + FL + 20) + '"/><path d="M34 -147L22 -40M48 -147L36 -40" stroke="#fff" stroke-opacity=".35" stroke-width="4"/><rect fill="#cfd2d6" x="70" y="-96" width="3" height="20" rx="1.5"/>'
       + '<rect class="o" fill="url(#a-steelH)" x="6" y="-164" width="92" height="8"/><path d="M12 -156L22 -146M92 -156L82 -146" stroke="#3a3c40" stroke-width="2"/>'

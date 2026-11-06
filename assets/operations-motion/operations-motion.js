@@ -1050,8 +1050,8 @@
     const surf20 = x => GY - P20.h * Math.pow(Math.max(0, 1 - Math.pow(Math.abs(x - P20.cx) / P20.hw, 1.25)), 1.08);
     const DIG = { A0: [3580, surf20(3580) - 9], A: [3576, surf20(3576) + 2.2], B: [3566, surf20(3566) + 2.6], C: [3571, surf20(3571) - 12] };
     const SC = { // the scoop aimed (w: 0 the arm's own pose, 1 aimed); alpha: its pitch (0 level, + tipped down)
-      w: [[0, 0], [0.58, 0], [0.66, 1, 's'], [1.22, 1], [1.3, 0, 's'], [1.8, 0]],
-      alpha: [[0, 10], [0.6, 20], [0.66, 32], [0.7, 34], [0.8, 26], [0.86, -6, 's'], [0.98, 6], [1.04, 8], [1.12, 60, 's'], [1.17, 60], [1.23, 14, 's'], [1.8, 14]],
+      w: [[0, 0], [0.46, 0], [0.66, 1, 's'], [1.22, 1], [1.3, 0, 's'], [1.8, 0]],
+      alpha: [[0, 10], [0.6, 20], [0.66, 32], [0.7, 34], [0.8, 26], [0.86, -6, 's'], [1.0, 6], [1.04, 8], [1.12, 60, 's'], [1.17, 60], [1.23, 14, 's'], [1.8, 14]],
     };
     const LOADT = [0.72, 0.734, 0.748, 0.762, 0.776, 0.79], POUR = [1.07, 1.08, 1.09, 1.1, 1.11, 1.12], FALL = 0.045, OVER_LIP = 13;
     function scoopPlan(t) {
@@ -1060,7 +1060,7 @@
       if (t >= 0.66 && t < 0.7) p = seg(DIG.A0, DIG.A, 0.66, 0.7);
       else if (t >= 0.7 && t < 0.8) p = seg(DIG.A, DIG.B, 0.7, 0.8);
       else if (t >= 0.8 && t < 0.86) p = seg(DIG.B, DIG.C, 0.8, 0.86);
-      else if (t >= 0.86) { p = DIG.C; over = ease(clamp((t - 0.86) / 0.12, 0, 1)); arc = 8 * Math.sin(Math.PI * over); }
+      else if (t >= 0.86) { p = DIG.C; over = ease(clamp((t - 0.86) / 0.18, 0, 1)); arc = 8 * Math.sin(Math.PI * over); }
       return { w, alpha, p, over, arc, lift: OVER_LIP };
     }
     // how many stones are in the scoop, each one's fall into the bucket (0–1), how many lie in the bucket
@@ -1252,6 +1252,7 @@
       out.bucket = P.bucket && P.bucket.at ? { mode: 'free', at: P.bucket.at, tilt: P.bucket.tilt || 0, lat: BLAT, heapN: SS && t < 1.15 ? SS.landed : heapN, grip: t < 0.63 || (t >= 1.5 && t < 1.56) }
         : { mode: 'hand', sway: P.sway || 0, heapN, toGround: t < 1.8 ? toGround : 0, at: BKT, lat: BLAT };
       out.scoop = shown(rig.scoop) ? 'hand' : shown(rig.holster) ? 'belt' : 'none';
+      out.tau = t;
       if (SS) { out.loadN = SS.loadN; out.pour = SS.pour; out.scoopTo = P.scoopTo; } else out.loadN = 0;
       return out;
     }

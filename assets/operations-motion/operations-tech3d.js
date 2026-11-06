@@ -152,10 +152,12 @@ function makeScoop() {
 // finger last on the working hand; the reverse on the support hand, which hooks with its little finger first) and each joint has its
 // own range; at rest the fingers lie in a natural cascade, never in one fixed curl.
 const OPEN_J = [74, 96, 60], OPEN_T = [38, 34, 40];
-const REST_C = { Thumb: 1.25, Index: 1, Middle: 1, Ring: 1, Pinky: 1 };   // resting: a compact, relaxed closed fist (nothing protrudes)
+const THUMB_CURL = 1.55;   // the baked thumb stands out from the glove: tuck it against the curled fingers
+const FIST_CURL = 1.1;   // the baked glove is only loosely closed: curl the fingers past it (x the baked pose) so the fist is compact and no finger stands out
+const REST_C = { Thumb: THUMB_CURL, Index: 1, Middle: 1, Ring: 1, Pinky: 1 };   // resting: a compact, relaxed closed fist (nothing protrudes)
 const LAG = [{ Thumb: 0.16, Index: 0, Middle: 0.05, Ring: 0.1, Pinky: 0.15 }, { Thumb: 0.12, Index: 0.14, Middle: 0.09, Ring: 0.04, Pinky: 0 }];
 // neutral wrist: the hand's direction may deviate from the forearm's by at most WRIST_MAX (degrees); the arm does the moving
-const WRIST_MAX = 9;
+const WRIST_MAX = 9, WRIST_SCOOP = 90;   // holding the scoop, the wrist follows the planned tilt (the hand turns with the handle, so the fingers stay closed round it)
 const limitDir = (d, ref, deg) => { const a = d.angleTo(ref), m = deg * D2R; if (a <= m) return d; const ax = ref.clone().cross(d); if (ax.lengthSq() < 1e-9) return d; return ref.clone().applyAxisAngle(ax.normalize(), m); };
 const sstep = x => { x = clamp(x, 0, 1); return x * x * (3 - 2 * x); };
 function fingers(P, s, g, sec, who) {
@@ -163,7 +165,7 @@ function fingers(P, s, g, sec, who) {
     const lag = LAG[who][F.name], c = sstep((g - lag) / (1 - lag)), rest = REST_C[F.name];
     // closure 0..1: from the resting cascade (a faint life in it) to the grip
     const sway = 0;
-    const cl = F.name === "Thumb" ? 1.25 : clamp(rest + sway + (1 - rest) * c, 0, 1), range = F.name === 'Thumb' ? OPEN_T : OPEN_J;
+    const cl = F.name === "Thumb" ? THUMB_CURL : FIST_CURL * clamp(rest + sway + (1 - rest) * c, 0, 1), range = F.name === 'Thumb' ? OPEN_T : OPEN_J;
     F.chain.forEach((j, ji) => { const a = (1 - cl) * range[ji] * D2R; j.b.quaternion.copy(new THREE.Quaternion().setFromAxisAngle(j.ax, a)).multiply(j.bq); });
   }
 }
@@ -302,7 +304,7 @@ export async function createTech3D({ canvas, url, atlas, ids }) {
     // the scoop aimed at a point (Q.scoopTo, blended in by w): its bowl on the 20 mm pile's surface — a point of
     // the 2D world, at the depth of his reach — or its lip over the bucket's mouth; alpha: the scoop's pitch (0
     // level, + tipped down), in his chest's frame. The left hand is solved from it, so the scoop stays in the fist.
-    const BELT_UP = 1.1, BELT_OUT = 0.85;   // belt clip: above the hip joint, out from the thigh (x hand length)
+    const BELT_UP = 1.1, BELT_OUT = 0.85, HANG_FOLLOW = 0.12, CARRY_ALPHA = 35, CARRY_MAX = 50, STOW_T = 1.375, STOW_D = 0.4;   // belt clip: above the hip joint, out from the thigh (x hand length)
     const GRIP_OBL = 20, GF = 0.3, GN = 0.0;   // handle ~20 deg off the curl axis (a real power grip), through the fist: GF along the fingers, GN toward the palm (x hand length)
     const BOWL = 15.6, LIP = 22, sT = Q.scoop === 'hand' && Q.scoopTo && Q.scoopTo.w > 0 ? Q.scoopTo : null;
     let wristT = null, hT = 0, Tb = null, aV = null;
@@ -327,13 +329,14 @@ export async function createTech3D({ canvas, url, atlas, ids }) {
       const pole = V(sg * 0.3, -0.2, -1).applyQuaternion(Rq), base = sh.clone().add(rel);
       twoBone(up, lo, hand, tgt, pole);
       const h = hd * D2R, want = V(0, -Math.cos(h), -Math.sin(h)).applyQuaternion(Rq);
-      let fdir = limitDir(want, wpos(hand).sub(wpos(lo)).normalize(), WRIST_MAX);
+      const wMax = s === 'L' && sT ? WRIST_MAX + (WRIST_SCOOP - WRIST_MAX) * sT.w : WRIST_MAX;
+      let fdir = limitDir(want, wpos(hand).sub(wpos(lo)).normalize(), wMax);
       // the scoop's bowl target is solved again for the hand's real direction, so the wrist stays straight and the bowl still reaches
       if (s === 'L' && wristT) for (let it = 0; it < 3; it++) {
         const nP = ortho(V(-1, 0, 0).applyQuaternion(Rq), fdir);
         const w2 = Tb.clone().addScaledVector(aV, -BOWL).addScaledVector(fdir, -P.rest.handLen * GF).addScaledVector(nP, -P.rest.handLen * GN);
         twoBone(up, lo, hand, base.clone().lerp(w2, sT.w), pole);
-        fdir = limitDir(want.clone().lerp(fdir, 0.0).normalize(), wpos(hand).sub(wpos(lo)).normalize(), WRIST_MAX);
+        fdir = limitDir(want.clone().lerp(fdir, 0.0).normalize(), wpos(hand).sub(wpos(lo)).normalize(), wMax);
       }
       const nIn = ortho(V(-sg, 0, 0).applyQuaternion(Rq), fdir);
       setWorldQuat(hand, basisTurn(P.rest.handF[s], P.rest.handN[s], fdir, nIn).multiply(P.rest.handQ[s]));
@@ -365,25 +368,47 @@ export async function createTech3D({ canvas, url, atlas, ids }) {
     const loadN = Q.loadN !== undefined ? Q.loadN : Q.load ? 4 : 0, pour = Q.pour || [];
     P.scoop.userData.load.visible = loadN > 0;
     P.scoop.userData.load.children.forEach((c, i) => { c.visible = i < loadN && !(pour[i] > 0); });
-    if (Q.scoop === 'hand') {
+    // hand -> belt: when he clips the scoop on (Q.tau 1.375) it travels from the fist to the belt over STOW_D of story time, so it
+    // never jumps; once clipped it stays on the same hip (the one nearest the camera at that moment) and hangs mostly by gravity
+    const handPose = () => {
       // the handle lies along the fist's own curl axis (index knuckle to little finger), so the fingers close round it
       const hd = P.B.L.arm[2], f = P.fdirL || wpos(P.B.L.arm[3]).sub(wpos(hd)).normalize(), nIn = P.nInL || V(1, 0, 0);
       let ax = wpos(P.B.L.arm[4]).sub(wpos(P.B.L.arm[5])).normalize(); if (ax.dot(V(0, 0, 1).applyQuaternion(Rq)) < 0) ax.negate();
-      P.scoop.position.copy(wpos(hd).addScaledVector(f, P.rest.handLen * GF).addScaledVector(nIn, P.rest.handLen * GN));
-      if (P.aV && P.sw > 0) ax = ax.clone().lerp(P.aV, P.sw).normalize();   // the scoop keeps its planned pitch; the hand only follows the forearm
-      P.scoop.quaternion.copy(basisTurn(V(1, 0, 0), V(0, 1, 0), ax, ortho(V(0, 1, 0), ax)));
-    } else if (Q.scoop === 'belt') {
-      // clipped to the belt on his near hip and hanging along the outside of that thigh: it follows the leg, never the world
-      const [lu, ll] = (wpos(P.B.L.leg[0]).z >= wpos(P.B.R.leg[0]).z ? P.B.L : P.B.R).leg;
-      const hip = wpos(lu), knee = wpos(ll), dir = knee.clone().sub(hip).normalize();
-      const out = V(0, 0, 1), open = ortho(out, dir);
-      P.scoop.position.copy(hip.clone().addScaledVector(V(0, 1, 0), P.rest.handLen * BELT_UP).addScaledVector(out, P.rest.handLen * BELT_OUT));
-      P.scoop.quaternion.copy(basisTurn(V(1, 0, 0), V(0, 1, 0), dir, open));
+      const pos = wpos(hd).addScaledVector(f, P.rest.handLen * GF).addScaledVector(nIn, P.rest.handLen * GN);
+      // carried (not yet aimed at the pile): the scoop rests tipped forward and down, not bolt upright; the tilt stays within a real grip angle of the fist
+      const sw = P.sw || 0, fwB = V(0, 0, 1).applyQuaternion(Rq), cal = CARRY_ALPHA * D2R;
+      const carry = fwB.clone().multiplyScalar(Math.cos(cal)).addScaledVector(UP, -Math.sin(cal));
+      ax = ax.clone().lerp(limitDir(carry, ax, CARRY_MAX), 1 - sw).normalize();
+      if (P.aV && sw > 0) ax = ax.clone().lerp(P.aV, sw).normalize();   // the scoop keeps its planned pitch; the hand only follows the forearm
+      return { pos, q: basisTurn(V(1, 0, 0), V(0, 1, 0), ax, ortho(V(0, 1, 0), ax)) };
+    };
+    const beltPose = () => {
+      if (!P.beltSide) P.beltSide = wpos(P.B.L.leg[0]).z >= wpos(P.B.R.leg[0]).z ? 'L' : 'R';
+      const S = P.B[P.beltSide], hip = wpos(S.leg[0]), legDir = wpos(S.leg[1]).sub(hip).normalize();
+      const lat = wpos(P.B.L.leg[0]).sub(wpos(P.B.R.leg[0])).normalize(), out = P.beltSide === 'L' ? lat : lat.clone().negate();
+      const dir = V(0, -1, 0).lerp(legDir, HANG_FOLLOW).normalize();   // hangs from the clip: mostly plumb, leaning a little with the thigh
+      return { pos: hip.clone().addScaledVector(V(0, 1, 0), P.rest.handLen * BELT_UP).addScaledVector(out, P.rest.handLen * BELT_OUT), q: basisTurn(V(1, 0, 0), V(0, 1, 0), dir, ortho(out, dir)) };
+    };
+    let stowS = 1;
+    if (Q.scoop !== 'belt') P.beltSide = null;
+    if (Q.scoop === 'hand') {
+      const h = handPose(); P.scoop.position.copy(h.pos); P.scoop.quaternion.copy(h.q); stowS = 0;
+      // remember where the fist holds it, in his hips' frame: the hand-over to the belt starts from exactly this pose
+      const hb = P.B.hips; hb.updateWorldMatrix(true, false); const inv = hb.matrixWorld.clone().invert();
+      P.heldPose = { pos: h.pos.clone().applyMatrix4(inv), q: wquat(hb).invert().multiply(h.q) };
+    }
+    else if (Q.scoop === 'belt') {
+      const bp = beltPose(); stowS = Q.tau !== undefined ? sstep((Q.tau - STOW_T) / STOW_D) : 1;
+      if (stowS < 1 && P.heldPose) {
+        const hb = P.B.hips; hb.updateWorldMatrix(true, false); const hp = P.heldPose.pos.clone().applyMatrix4(hb.matrixWorld), hq = wquat(hb).multiply(P.heldPose.q);
+        P.scoop.position.copy(hp.lerp(bp.pos, stowS)); P.scoop.quaternion.copy(hq.slerp(bp.q, stowS));
+      }
+      else { P.scoop.position.copy(bp.pos); P.scoop.quaternion.copy(bp.q); }
     }
     // hands: two independent controllers. LEFT is the working hand (it holds the scoop and drives it), RIGHT is the support hand (it
     // hooks the bucket bail, otherwise rests lightly curled and steadies). Each eases toward its own target at its own pace.
     const now = performance.now(), dt = P.gt === null ? 1 : Math.min((now - P.gt) / 1000, 0.5); P.gt = now;
-    const tgtL = Q.scoop === 'hand' ? 1 : 0;
+    const tgtL = Q.scoop === 'hand' || (Q.scoop === 'belt' && stowS < 0.25) ? 1 : 0;   // the fist lets go once the scoop is most of the way to the belt
     const tgtR = grip || (bk.mode === 'hand') ? 1 : 0;
     const ease1 = (v, tg, tau) => (dt >= 0.5 ? tg : v + (tg - v) * (1 - Math.exp(-dt / tau)));
     P.gs.L = ease1(P.gs.L, tgtL, 0.14); P.gs.R = ease1(P.gs.R, tgtR, 0.22);
