@@ -1610,7 +1610,8 @@ footer{background:var(--bone);color:var(--ink);padding:72px 0 36px;border-top:1p
 /* ============ MOST DEMANDED PRODUCTS — HOMEPAGE DISCOVERY ============ */
 .mpd{background:var(--white);padding:clamp(88px,10vw,144px) 0 clamp(96px,11vw,160px);border-top:1px solid var(--line-soft)}
 .mpd-head{display:grid;grid-template-columns:minmax(0,5fr) minmax(280px,4fr);gap:clamp(40px,8vw,120px);align-items:end;margin-bottom:52px}
-.mpd-head .sec-title{margin-top:20px;max-width:12ch}
+.mpd-head .sec-title{margin-top:20px;max-width:none}
+.mpd-head .sec-title .it{display:block;white-space:nowrap}
 .mpd-lede{max-width:48ch;font-size:16px;line-height:1.75;color:var(--grey);margin:0 0 4px}
 .mpd-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
 .mpd-card{min-width:0;display:flex;background:var(--bone);border:1px solid var(--line);border-radius:14px;overflow:hidden;transition:transform .55s cubic-bezier(.2,.7,.2,1),border-color .35s ease,box-shadow .55s ease}
@@ -1630,7 +1631,7 @@ footer{background:var(--bone);color:var(--ink);padding:72px 0 36px;border-top:1p
 .mpd-card:hover .mpd-card-arrow{background:var(--accent);border-color:var(--accent);color:var(--white);transform:translate(2px,-2px) rotate(-45deg)}
 .mpd-card-link:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:14px}
 @media (max-width:1100px){.mpd-head{gap:56px}.mpd-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}}
-@media (max-width:640px){.mpd{padding:76px 0 92px}.mpd-head{grid-template-columns:1fr;gap:24px;margin-bottom:36px}.mpd-head .sec-title{margin-top:16px;max-width:15ch}.mpd-lede{font-size:15px;line-height:1.7}.mpd-grid{grid-template-columns:1fr;gap:14px}.mpd-card-media{aspect-ratio:1.65}.mpd-card-media img{padding:16px 26px}.mpd-card-body{padding:22px 20px 20px}}
+@media (max-width:640px){.mpd{padding:76px 0 92px}.mpd-head{grid-template-columns:1fr;gap:24px;margin-bottom:36px}.mpd-head .sec-title{margin-top:16px;max-width:none}.mpd-lede{font-size:15px;line-height:1.7}.mpd-grid{grid-template-columns:1fr;gap:14px}.mpd-card-media{aspect-ratio:1.65}.mpd-card-media img{padding:16px 26px}.mpd-card-body{padding:22px 20px 20px}}
 @media (prefers-reduced-motion:reduce){.mpd-card,.mpd-card-media img,.mpd-card-arrow{transition:none}}
 
 @media (max-width:1180px){
