@@ -20,7 +20,10 @@
   let active=0, transition=false, timer=0, wheelAccum=0, wheelDir=0, lastWheel=0, lastAbs=0, lastGo=0, wheelArmed=true, touchStart=null, touchUsed=false,interacted=false;
   const clamp=(n,a,b)=>Math.max(a,Math.min(b,n)), pad=n=>String(n+1).padStart(2,'0');
   const sceneY=k=>track.getBoundingClientRect().top+window.scrollY+k*STEP();
-  const jump=y=>{const old=root.style.scrollBehavior;root.style.scrollBehavior='auto';window.scrollTo(0,y);root.style.scrollBehavior=old};
+  const jump=y=>{if(window.omScrollJump){window.omScrollJump(y);return}const old=root.style.scrollBehavior;root.style.scrollBehavior='auto';window.scrollTo(0,y);root.style.scrollBehavior=old};
+  // glide (smooth scrolling on) or native smooth scroll (off): used for exits and link navigation, never for scene steps
+  const glide=y=>{if(window.omScrollTo)window.omScrollTo(y);else window.scrollTo({top:y,behavior:'smooth'})};
+  window.omStoryOwns=n=>!reduce.matches&&inPresentation()&&stage.contains(n);
   const inPresentation=()=>{const top=track.getBoundingClientRect().top,bottom=top+track.offsetHeight;return top<=1&&bottom-stage.offsetHeight>=-24};
   function reconcile(){scenes.forEach((s,i)=>{if(i===active||i===curFrom)return;s.classList.remove('is-active','is-leaving','is-entering','is-live')})}
   function mark(k){active=clamp(k,0,N-1);count.textContent=pad(active);scenes.forEach((s,i)=>s.classList.toggle('is-active',i===active));ticks.forEach((a,i)=>{a.toggleAttribute('aria-current',i===active);bars[i].style.setProperty('--p',i<=active?'1':'0')});section.dataset.activeScene=String(active+1);reconcile()}
@@ -46,12 +49,12 @@
   function settle(){if(inPresentation()){const k=clamp(Math.round(-track.getBoundingClientRect().top/STEP()),0,N-1);mark(k);cleanScenes();jump(sceneY(k))}else restPos()}
   function endNav(){nav=false;clearTimeout(navT);clearTimeout(settleT);settle();
     // a long trip can shift the layout a little: land exactly on the section the link pointed to
-    if(navHash){const t=document.querySelector(navHash);navHash='';if(t){const y=t.getBoundingClientRect().top+window.scrollY-60;if(Math.abs(y-window.scrollY)>6&&!inPresentation())window.scrollTo({top:y,behavior:'smooth'})}}}
+    if(navHash){const t=document.querySelector(navHash);navHash='';if(t){const y=t.getBoundingClientRect().top+window.scrollY-60;if(Math.abs(y-window.scrollY)>6&&!inPresentation())glide(y)}}}
   function startNav(){nav=true;touchStart=null;clearTimeout(navT);navT=setTimeout(endNav,6000);clearTimeout(settleT);settleT=setTimeout(endNav,450)}
   window.addEventListener('click',e=>{const t=e.target.closest&&e.target.closest('a[href],button,[role=button]');if(t&&!t.closest('.pst-progress')){startNav();const h=t.getAttribute&&t.getAttribute('href');navHash=h&&h.length>1&&h[0]==='#'?h:''}},true);
   window.addEventListener('hashchange',startNav);window.addEventListener('popstate',startNav);
   // a returning visitor who keeps flicking through gets out of the section instead of stepping through every slide
-  function skipOut(dir){startNav();const r=track.getBoundingClientRect(),y=dir>0?r.top+window.scrollY+track.offsetHeight:section.getBoundingClientRect().top+window.scrollY-8;window.scrollTo({top:y,behavior:'smooth'})}
+  function skipOut(dir){startNav();const r=track.getBoundingClientRect(),y=dir>0?r.top+window.scrollY+track.offsetHeight:section.getBoundingClientRect().top+window.scrollY-8;glide(y)}
   function boundary(dir){if((dir<0&&active===0)||(dir>0&&active===N-1)){touchStart=null;return true}return false}
   function wheel(e){interacted=true;if(nav&&e.isTrusted){nav=false;clearTimeout(settleT)}if(e.ctrlKey||!inPresentation()||!stage.contains(e.target))return;const dy=e.deltaY*(e.deltaMode===1?16:e.deltaMode===2?window.innerHeight:1);if(!dy||Math.abs(dy)<Math.abs(e.deltaX))return;const dir=Math.sign(dy),abs=Math.abs(dy),now=performance.now(),gap=now-lastWheel;lastWheel=now;const stream=gap<=90&&now-lastGo<1400;if(boundary(dir)){if(stream){e.preventDefault();lastAbs=abs;return}return}e.preventDefault();if(transition){lastAbs=abs;wheelDir=dir;return}if(!wheelArmed&&(gap>90||dir!==wheelDir||abs>lastAbs*1.6+8)){wheelArmed=true;wheelAccum=0}lastAbs=abs;wheelDir=dir;if(!wheelArmed)return;if(gap>180)wheelAccum=0;wheelAccum+=dy;const threshold=Math.max(36,Math.min(90,window.innerHeight*.06));if(Math.abs(wheelAccum)>=threshold){wheelAccum=0;go(dir)}}
   function touchStartHandler(e){interacted=true;if(nav){nav=false;clearTimeout(settleT)}if(!inPresentation()||!stage.contains(e.target)||e.touches.length!==1)return;touchStart={x:e.touches[0].clientX,y:e.touches[0].clientY};touchUsed=false}

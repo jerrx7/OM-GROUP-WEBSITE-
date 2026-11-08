@@ -200,9 +200,10 @@
 
   /* ---- actions ---- */
   function go(h) {
-    if (h === '#top') { window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
+    var to = function (y) { if (window.omScrollTo) window.omScrollTo(y); else window.scrollTo({ top: y, behavior: 'smooth' }); };
+    if (h === '#top') { to(0); return; }
     var t = document.querySelector(h); if (!t) return;
-    window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 60, behavior: 'smooth' });
+    to(t.getBoundingClientRect().top + window.scrollY - 60);
   }
   function act(a) {
     if (a === 'quote') { var q = document.getElementById('requestQuoteBtn'); if (q) q.click(); return true; }

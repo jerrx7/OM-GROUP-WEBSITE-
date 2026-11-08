@@ -3628,7 +3628,7 @@ document.querySelectorAll('.count').forEach(el => counterIO.observe(el));
     if(closeBtn) closeBtn.addEventListener('click', close);
     setTimeout(()=>{
       const top = wrap.getBoundingClientRect().top + window.scrollY - 90;
-      window.scrollTo({top, behavior:'smooth'});
+      (window.omScrollTo ? window.omScrollTo(top) : window.scrollTo({top, behavior:'smooth'}));
     }, 200);
   }
   rail.querySelectorAll('.ps-card').forEach(card=>{
@@ -3713,7 +3713,7 @@ document.querySelectorAll('.count').forEach(el => counterIO.observe(el));
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
   a.addEventListener('click', (e)=>{
     const id = a.getAttribute('href');
-    if(id.length > 1){ const target = document.querySelector(id); if(target){ e.preventDefault(); const y = target.getBoundingClientRect().top + window.scrollY - 60; window.scrollTo({top:y, behavior:'smooth'}); } }
+    if(id.length > 1){ const target = document.querySelector(id); if(target){ e.preventDefault(); const y = target.getBoundingClientRect().top + window.scrollY - 60; (window.omScrollTo ? window.omScrollTo(y) : window.scrollTo({top:y, behavior:'smooth'})); } }
   });
 });
 
@@ -4059,7 +4059,7 @@ const OM_COMPANIES = {
     active = { card, btn, data };
 
     // stop any in-flight smooth scroll (nav link, scroll-behavior) so the measured slot can't drift under the overlay
-    window.scrollTo({ top: window.scrollY, left: window.scrollX, behavior: 'instant' });
+    if (window.omScrollJump) window.omScrollJump(window.scrollY); else window.scrollTo({ top: window.scrollY, left: window.scrollX, behavior: 'instant' });
     const r = card.getBoundingClientRect();
     render(data);
     const clone = card.cloneNode(true);
@@ -5258,5 +5258,6 @@ const OM_COMPANIES = {
 </script>
 <script src="assets/mega-nav.js" defer></script>
 <script src="/assets/motion.js" defer></script>
+<script src="/assets/smooth-scroll.js" defer></script>
 </body>
 </html>
