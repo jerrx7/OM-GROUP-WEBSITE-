@@ -37,8 +37,9 @@
     // the new slide keeps its entrance animation running for 1.1 s, but only while it is still the active one
     setTimeout(()=>{const c=scenes[to].classList;if(c.contains('is-active')&&!c.contains('is-leaving')){c.remove('is-entering','is-live')}reconcile()},EXIT)}
   
-  function go(delta){if(transition||!delta)return false;const next=clamp(active+delta,0,N-1);if(next===active)return false;
-    if(fast){const n=performance.now();adv=adv.filter(a=>n-a.t<2600&&a.d===delta);adv.push({t:n,d:delta});if(adv.length>=3){adv=[];skipOut(delta);return true}}
+  function go(delta,viaTouch){if(transition||!delta)return false;const next=clamp(active+delta,0,N-1);if(next===active)return false;
+    // returning visitors on a mouse wheel can flick out of the section; a finger swipe always steps exactly one slide (three quick swipes used to throw the whole story off the screen)
+    if(fast&&!viaTouch){const n=performance.now();adv=adv.filter(a=>n-a.t<2600&&a.d===delta);adv.push({t:n,d:delta});if(adv.length>=3){adv=[];skipOut(delta);return true}}
     if(next===N-1)markSeen();const from=active;curFrom=from;transition=true;wheelArmed=false;lastGo=performance.now();warm(next);const run=()=>{scenes[from].classList.add('is-leaving');scenes[next].classList.add('is-live','is-entering');mark(next);clearTimeout(timer);timer=setTimeout(()=>{finish(from,next);transition=false},DURATION);jump(sceneY(next))};const im=imgs[next];
     // the fade only reads if the picture is there: hold the swap until the next image is decoded (at most 600 ms), so it never pops in after the fade
     if(im.complete&&im.naturalWidth)run();else Promise.race([im.decode?im.decode().catch(()=>{}):Promise.resolve(),new Promise(r=>setTimeout(r,600))]).then(run);return true}
@@ -67,8 +68,8 @@
     // only a fresh swipe that starts on the first/last slide and points out of the story is left to normal page scrolling
     if(boundary(d))return;
     if(e.cancelable)e.preventDefault();
-    if(!transition&&Math.abs(dy)>=34&&Math.abs(dy)>=Math.abs(dx)){touchUsed=true;go(d)}}
-  function touchEnd(e){if(!touchStart)return;const dy=e.changedTouches[0].clientY-touchStart.y;touchStart=null;if(touchUsed||Math.abs(dy)<42||transition)return;const dir=dy<0?1:-1;if(boundary(dir))return;go(dir)}
+    if(!transition&&Math.abs(dy)>=34&&Math.abs(dy)>=Math.abs(dx)){touchUsed=true;go(d,true)}}
+  function touchEnd(e){if(!touchStart)return;const dy=e.changedTouches[0].clientY-touchStart.y;touchStart=null;if(touchUsed||Math.abs(dy)<42||transition)return;const dir=dy<0?1:-1;if(boundary(dir))return;go(dir,true)}
   function key(e){interacted=true;if(!inPresentation()||e.altKey||e.ctrlKey||e.metaKey)return;const dir=e.key==='ArrowDown'||e.key==='PageDown'||e.key===' '?1:e.key==='ArrowUp'||e.key==='PageUp'?-1:0;if(!dir)return;if(boundary(dir))return;e.preventDefault();go(dir)}
   function sync(){if(nav){clearTimeout(settleT);settleT=setTimeout(endNav,160)}if(transition||touchStart||(!nav&&performance.now()-lastGo<700))return;const top=track.getBoundingClientRect().top,step=STEP();if(inPresentation()){const k=clamp(Math.round(-top/step),0,N-1);if(k!==active){if(interacted&&!nav)jump(sceneY(active));else mark(k)}}else restPos()}
   ticks.forEach((a,i)=>a.addEventListener('click',e=>{e.preventDefault();if(i===active||transition)return;const from=active;curFrom=from;jump(sceneY(i));preload(i);scenes[from].classList.add('is-leaving');scenes[i].classList.add('is-entering','is-live');mark(i);setTimeout(()=>finish(from,i),DURATION)}));

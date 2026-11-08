@@ -117,6 +117,16 @@ const PRODUCTS = [
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const pad = (n) => String(n).padStart(2, '0');
+// Text is split into words at build time (static HTML, still plain readable text for search engines and screen readers):
+// titles rise out of a mask word by word, descriptions flow in word by word.
+const maskWords = (text, start = 0) => text.split(' ').map((w, i) => `<span class="sw"><span class="swi" style="--w:${start + i}">${esc(w)}</span></span>`).join(' ');
+const fadeWords = (text) => {
+  // chunks end at punctuation (, ; .) or after 5 words: about 4-6 spans per description keeps the DOM light but still flows in
+  const chunks = []; let cur = [];
+  text.split(' ').forEach((w) => { cur.push(w); if (/[,;.]$/.test(w) || cur.length >= 5) { chunks.push(cur.join(' ')); cur = []; } });
+  if (cur.length) chunks.push(cur.join(' '));
+  return chunks.map((c, i) => `<span class="dw" style="--k:${i}">${esc(c)}</span>`).join(' ');
+};
 const SIZES = '(max-width:767px) 92vw, (max-width:1199px) 46vw, 600px';
 
 function picture(p, index) {
@@ -141,17 +151,17 @@ function product(p, index, total) {
 <article class="sc${flip ? ' sc--flip' : ''}" id="${p.slug === 'ready-mix-concrete' ? 'rmc' : p.slug}" data-n="${n}" aria-labelledby="sc-h-${p.slug}">
   <div class="sc-wrap"><div class="sc-in">
     <div class="sc-text">
-      <p class="sc-label" style="--i:0">Product <b>${pad(n)}</b> / ${esc(cat.name)}</p>
-      <h2 class="sc-title" id="sc-h-${p.slug}" style="--i:1">${esc(p.name)}</h2>
-      <p class="sc-desc" style="--i:2">${esc(p.desc)}</p>
-      <div class="sc-apps" style="--i:3"><span>Applications</span><ul>${p.apps.map((a) => `<li>${esc(a)}</li>`).join('')}</ul></div>
-      <dl class="sc-specs" style="--i:4">${p.specs.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>
-      <div class="sc-cta" style="--i:5">
-        <a class="btn btn-accent" href="${p.quote}" aria-label="Request a quote for ${esc(p.name)}">Request a Quote <span class="btn-arrow" aria-hidden="true">→</span></a>
-        <a class="sc-link" href="${detail}" aria-label="Explore specifications and FAQs for ${esc(p.name)}">Explore Specifications &amp; FAQs <span aria-hidden="true">→</span></a>
+      <p class="sc-label" data-r="label">Product <b>${pad(n)}</b> / ${esc(cat.name)}</p>
+      <h2 class="sc-title" id="sc-h-${p.slug}" data-r="words">${maskWords(p.name)}</h2>
+      <p class="sc-desc" data-r="desc">${fadeWords(p.desc)}</p>
+      <div class="sc-apps" data-r="apps"><span>Applications</span><ul>${p.apps.map((a, k) => `<li style="--i:${k}">${esc(a)}</li>`).join('')}</ul></div>
+      <dl class="sc-specs" data-r="specs">${p.specs.map(([k, v], r) => `<div style="--i:${r}"><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>
+      <div class="sc-cta" data-r="cta">
+        <a class="btn btn-accent" style="--i:0" href="${p.quote}" aria-label="Request a quote for ${esc(p.name)}">Request a Quote <span class="btn-arrow" aria-hidden="true">→</span></a>
+        <a class="sc-link" style="--i:1" href="${detail}" aria-label="Explore specifications and FAQs for ${esc(p.name)}">Explore Specifications &amp; FAQs <span aria-hidden="true">→</span></a>
       </div>
     </div>
-    <div class="sc-media"><div class="sc-stage${pic.ratio}">${pic.html}</div></div>
+    <div class="sc-media" data-r="media"><div class="sc-stage${pic.ratio}">${pic.html}</div></div>
   </div></div>
 </article>`;
 }
@@ -160,13 +170,13 @@ function chapter(catKey) {
   const c = CATS[catKey];
   const count = PRODUCTS.filter((p) => p.cat === catKey).length;
   return `
-<div class="sc-chapter" id="${c.id}"><div class="sc-wrap"><div class="sc-chapter-in"><b>${c.key}</b><span>${esc(c.name)}</span><span>${count} ${count === 1 ? 'material' : 'materials'}</span></div></div></div>`;
+<div class="sc-chapter" id="${c.id}"><div class="sc-wrap"><div class="sc-chapter-in" data-r="chapter"><b>${c.key}</b><span>${esc(c.name)}</span><span>${count} ${count === 1 ? 'material' : 'materials'}</span></div></div></div>`;
 }
 
 function body() {
   const nav = Object.keys(CATS).map((k) => {
     const count = PRODUCTS.filter((p) => p.cat === k).length;
-    return `<a href="#${CATS[k].id}"><span class="cn-k">${CATS[k].key}</span><b>${esc(CAT_NAV_LABEL[k])}</b><span class="cn-ar" aria-hidden="true">↓</span><em>${count} ${count === 1 ? 'material' : 'materials'}</em></a>`;
+    return `<a href="#${CATS[k].id}" data-r="item" style="--i:${Object.keys(CATS).indexOf(k)}"><span class="cn-k">${CATS[k].key}</span><b>${esc(CAT_NAV_LABEL[k])}</b><span class="cn-ar" aria-hidden="true">↓</span><em>${count} ${count === 1 ? 'material' : 'materials'}</em></a>`;
   }).join('\n        ');
 
   let showcase = '';
@@ -211,10 +221,10 @@ function body() {
   <div class="sc-wrap">
     <div class="sc-intro-grid">
       <div>
-        <span class="eyebrow">The OM Group Material Collection</span>
-        <h2 id="collectionTitle">Every material has a purpose.</h2>
+        <span class="eyebrow" data-r="label">The OM Group Material Collection</span>
+        <h2 id="collectionTitle" data-r="words">${maskWords('Every material has a purpose.')}</h2>
       </div>
-      <p class="lede">Explore our range of construction materials, each selected, processed or supplied to meet the demands of residential construction, commercial development and large-scale infrastructure.</p>
+      <p class="lede" data-r="desc">${fadeWords('Explore our range of construction materials, each selected, processed or supplied to meet the demands of residential construction, commercial development and large-scale infrastructure.')}</p>
     </div>
     <nav class="sc-catnav" aria-label="Product categories">
         ${nav}
@@ -225,20 +235,52 @@ function body() {
 <div class="sc-collection no-motion">${showcase}
 </div>
 <script>
-/* Showcase entrance. Modules already in view stay as they are (no hide-then-show flash); the rest start hidden and
-   reveal once as they approach. Opacity and transform only, ordinary page scrolling, no listeners on scroll. */
+/* Cinematic entrance. Each marked piece (label, title, description, applications, spec rules, buttons, product, chapter line)
+   reveals on its OWN as it scrolls into view, so the sequence cascades with the scroll instead of popping in as one block.
+   Pieces already on screen are left alone (no hide-then-show flash). The product waits until its picture is decoded, and
+   pictures are fetched ~2.5 screens ahead. Opacity and transform only, no scroll listeners, no scroll hijacking.
+   Load cost: setup runs when the browser is idle (only below-the-fold pieces are touched, so nothing can flash) and all positions are
+   read in ONE pass before any class is written, so it never forces repeated layouts. */
 (function(){
-  var mods = document.querySelectorAll('.sc');
+  document.addEventListener('touchstart', function(){}, { passive: true }); // lets :active press effects work on iOS Safari
+  if (!('IntersectionObserver' in window)) return;
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!('IntersectionObserver' in window) || reduce || !mods.length) return;
-  var vh = window.innerHeight || document.documentElement.clientHeight;
-  var io = new IntersectionObserver(function(es){
-    es.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
-  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
-  Array.prototype.forEach.call(mods, function(m){
-    if (m.getBoundingClientRect().top < vh * 0.85) return; // already on screen
-    m.classList.add('sc-pending');
-    io.observe(m);
+  var pending = function(f){ (window.requestIdleCallback || function(g){ setTimeout(g, 120); })(f, { timeout: 600 }); };
+  pending(function(){
+    var mods = document.querySelectorAll('.sc');
+    var ahead = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var m = e.target, i = m.querySelector('.sc-stage img');
+        if (i) i.loading = 'eager';
+        ahead.unobserve(m);
+      });
+    }, { rootMargin: '0px 0px 250% 0px' });
+    Array.prototype.forEach.call(mods, function(m){ ahead.observe(m); });
+    if (reduce) return;
+    var els = document.querySelectorAll('[data-r]');
+    if (!els.length) return;
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) { io.unobserve(e.target); reveal(e.target); } });
+    }, { threshold: 0, rootMargin: (window.matchMedia && matchMedia('(pointer: coarse)').matches) ? '0px 0px 20% 0px' : '0px 0px 10% 0px' });
+    function show(el){
+      el.classList.add('sc-on');
+      // once the entrance has finished, drop the animation state so hover and focus effects behave normally again
+      setTimeout(function(){ el.classList.remove('sc-r'); }, 3200);
+    }
+    function reveal(el){
+      var i = el.getAttribute('data-r') === 'media' ? el.querySelector('img') : null;
+      if (i && !(i.complete && i.naturalWidth)) { i.loading = 'eager'; (i.decode ? i.decode().catch(function(){}) : Promise.resolve()).then(function(){ show(el); }); setTimeout(function(){ show(el); }, 1000); }
+      else show(el);
+    }
+    var tops = [], k;
+    for (k = 0; k < els.length; k++) tops.push(els[k].getBoundingClientRect().top); // single read pass
+    for (k = 0; k < els.length; k++) {                                                // then writes
+      if (tops[k] < vh * 0.92) continue; // already on screen
+      els[k].classList.add('sc-r');
+      io.observe(els[k]);
+    }
   });
 })();
 </script>

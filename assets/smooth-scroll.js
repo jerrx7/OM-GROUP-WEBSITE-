@@ -1,8 +1,9 @@
 /* OM Group: site-wide smooth scrolling.
    Lenis 1.3.27 (assets/vendor/lenis/lenis.min.js, loaded by this file only when it will be used), configured like the reference site:
    lerp .09, smoothWheel, syncTouch false: exactly what trylexsis.com ships, on every device. Mouse wheel and trackpad glide through
-   Lenis; fingers on phones and tablets keep the device's own momentum scrolling (the reference does the same). Anchor links glide
-   everywhere. Off for visitors who prefer reduced motion. Set window.OM_TOUCH_SYNC = true before this script to experiment with
+   Lenis; fingers on phones and tablets keep the device's own momentum scrolling (the reference does the same) and those devices
+   skip Lenis entirely. Anchor links glide
+   on devices with a mouse or trackpad. Starts right after the page is parsed. Off for visitors who prefer reduced motion. Set window.OM_TOUCH_SYNC = true before this script to experiment with
    finger-synced smoothing (not used: it feels different from the reference and costs main-thread time).
    Hand-offs that keep the rest of the site working:
    - The pinned process story owns the wheel and finger swipes while it is presenting (window.omStoryOwns, set by process-story.js).
@@ -14,18 +15,22 @@
 (function () {
   if (!document.body || !window.matchMedia) return;
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var touchOnly = matchMedia('(hover: none) and (pointer: coarse)').matches;
+  // Phones and other touch-only devices keep the browser's own finger scrolling, exactly like the reference site, so they do not
+  // download or run Lenis at all (zero load cost there). Anything with a mouse or trackpad (desktop, laptop, iPad + keyboard) gets it.
+  if (!matchMedia('(any-pointer: fine)').matches) return;
   function load() {
     if (window.Lenis) return start();
     var tag = document.createElement('script');
     tag.src = '/assets/vendor/lenis/lenis.min.js';
+    tag.async = true;
+    if ('fetchPriority' in tag) tag.fetchPriority = 'high'; // 19 KB: must not queue behind the page's big images
     tag.onload = start;
     document.head.appendChild(tag);
   }
-  // never compete with page loading: fetch and start Lenis only once the page has loaded and the browser is idle.
-  // Until then (usually well under a second) scrolling is the browser's own, so nothing ever waits on this file.
-  var idle = function () { (window.requestIdleCallback || function (f) { setTimeout(f, 200); })(load, { timeout: touchOnly ? 2500 : 1200 }); };
-  if (document.readyState === 'complete') idle(); else window.addEventListener('load', idle, { once: true });
+  // Start as soon as the page is parsed (not after the full load event, which on the heavy homepage or a slow connection can be
+  // many seconds away, or never): a short idle wait keeps it out of the critical path, so it never delays rendering or input.
+  // The script is async/low priority and tiny (19 KB, cached for a year of visits), so first paint and LCP are untouched.
+  (window.requestIdleCallback || function (f) { setTimeout(f, 60); })(load, { timeout: 350 });
 
   function start() {
   if (!window.Lenis || window.lenis && window.lenis.scrollTo) return;
