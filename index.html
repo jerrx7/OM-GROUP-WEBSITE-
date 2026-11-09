@@ -487,6 +487,31 @@ body.dark .hero-grid{
 .btn-ghost{background:transparent;color:var(--accent);border-color:var(--accent)}
 .btn-ghost:hover{background:var(--accent-soft)}
 .btn-arrow{font-size:14px;letter-spacing:0;font-weight:400}
+/* ---- hero buttons (Explore Our Products, Get in Touch): premium hover ----
+   The opening animation puts .rv on these buttons, which replaces their transition list and forces transform:none, so the old hover
+   never showed. The hover below uses the separate translate / scale properties and lists the opening's own transitions unchanged. */
+.hero-ctas .btn{position:relative;overflow:hidden;isolation:isolate;-webkit-tap-highlight-color:transparent}
+.hero-ctas .btn .btn-arrow{display:inline-block}
+.hero-ctas .btn::before,.hero-ctas .btn::after{content:"";position:absolute;pointer-events:none}
+.hero-ctas .btn-ghost::before{inset:0;z-index:-1;background:var(--accent);transform:scaleX(0);transform-origin:right center}
+.hero-ctas .btn-accent::after{top:0;bottom:0;left:0;width:55%;background:linear-gradient(105deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.3) 50%,rgba(255,255,255,0) 100%);transform:translateX(-140%) skewX(-18deg)}
+.hero-ctas .btn:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+@media(prefers-reduced-motion:no-preference){
+  /* the first two entries are the opening's own (unchanged); the rest are the hover */
+  .hero-ctas .btn{transition:opacity .9s var(--rv-ease) var(--d,0ms),transform .9s var(--rv-ease) var(--d,0ms),translate .5s var(--rv-ease),scale .5s var(--rv-ease),background .45s ease,color .45s ease,border-color .45s ease,box-shadow .6s var(--rv-ease)}
+  .hero-ctas .btn .btn-arrow{transition:transform .55s var(--rv-ease)}
+  .hero-ctas .btn-ghost::before{transition:transform .6s var(--rv-ease)}
+  @media(hover:hover) and (pointer:fine){
+    .rv-in .hero-ctas .btn:hover{transform:none}
+    .hero-ctas .btn:hover{translate:0 -2px;scale:1.012}
+    .hero-ctas .btn:hover .btn-arrow{transform:translateX(5px)}
+    .hero-ctas .btn-accent:hover{background:var(--accent-deep);box-shadow:0 24px 46px -20px rgba(241,90,41,.62),0 6px 14px -6px rgba(241,90,41,.38)}
+    .hero-ctas .btn-accent:hover::after{transform:translateX(260%) skewX(-18deg);transition:transform 1s var(--rv-ease)}
+    .hero-ctas .btn-ghost:hover{background:transparent;color:var(--white);box-shadow:0 20px 38px -22px rgba(241,90,41,.55)}
+    .hero-ctas .btn-ghost:hover::before{transform:scaleX(1);transform-origin:left center}
+  }
+  .hero-ctas .btn:active{translate:0 0;scale:.985;box-shadow:0 8px 18px -10px rgba(241,90,41,.5)}
+}
 
 /* ============ MARQUEE ============ */
 .marquee{
