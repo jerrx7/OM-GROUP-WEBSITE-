@@ -87,6 +87,12 @@ const PRODUCTS = [
     apps: ['RCC & concrete', 'RMC', 'Masonry mortar', 'Plaster'],
     specs: [['Sourcing', 'Through verified suppliers'], ['Subject to', 'Availability and applicable regulations'], ['Documentation', 'Source documentation on request']],
     quote: Q('Sand', 'R-Sand (River Sand)') },
+  { cat: 'sand', name: 'Washed Sand', slug: 'washed-sand', img: ['washed-sand', 1000, 821],
+    alt: 'Washed sand, a stream of grey sand pouring into a pile, supplied by OM Group in Goa',
+    desc: 'Washed sand supplied by OM Group as a product in its own right, for concrete, masonry and general construction across North and South Goa, with current specifications confirmed against the project requirement.',
+    apps: ['Concrete & RCC', 'Masonry mortar', 'Blockwork & precast', 'General construction'],
+    specs: [['Category', 'Sand / fine aggregate'], ['Supply', 'North & South Goa'], ['Availability', 'Confirmed against the project requirement']],
+    quote: Q('Sand', 'W-Sand (Wash Sand)') },
 
   { cat: 'rmc', name: 'Ready-Mix Concrete (RMC)', slug: 'ready-mix-concrete', img: ['ready-mix-concrete', 1000, 606],
     alt: 'Freshly mixed ready-mix concrete supplied by OM Group from its Kundaim and Thivim plants in Goa',

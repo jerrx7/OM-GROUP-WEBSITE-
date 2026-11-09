@@ -225,6 +225,11 @@ html.lenis-scrolling .sc-stage{pointer-events:none}
   .sc-guide{flex-direction:column;align-items:flex-start}
   .sc-hero .cta-row{max-width:none}
 }
+/* --- phone, portrait only: the product comes first, then its name, description, applications, specifications and buttons.
+   This is layout order only (same markup, nothing duplicated). Landscape phones, tablets and desktop keep their own layouts. --- */
+@media (max-width:767px) and (orientation:portrait){
+  .sc-in,.sc--flip .sc-in{grid-template-areas:"media" "text"}
+}
 @media (max-width:640px){.net-grid{grid-template-columns:1fr}}
 @media (max-width:560px){.sc-hero .cta-row{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:420px){

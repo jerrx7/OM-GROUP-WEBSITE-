@@ -174,6 +174,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             "position": 15,
             "name": "Boulders",
             "url": "https://www.omgroupco.com/products/boulders"
+          },
+          {
+            "@type": "ListItem",
+            "position": 16,
+            "name": "Washed Sand",
+            "url": "https://www.omgroupco.com/products/washed-sand"
           }
         ]
       }
@@ -702,6 +708,11 @@ html.lenis-scrolling .sc-stage{pointer-events:none}
   .sc-guide{flex-direction:column;align-items:flex-start}
   .sc-hero .cta-row{max-width:none}
 }
+/* --- phone, portrait only: the product comes first, then its name, description, applications, specifications and buttons.
+   This is layout order only (same markup, nothing duplicated). Landscape phones, tablets and desktop keep their own layouts. --- */
+@media (max-width:767px) and (orientation:portrait){
+  .sc-in,.sc--flip .sc-in{grid-template-areas:"media" "text"}
+}
 @media (max-width:640px){.net-grid{grid-template-columns:1fr}}
 @media (max-width:560px){.sc-hero .cta-row{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:420px){
@@ -846,7 +857,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <nav class="sc-catnav" aria-label="Product categories">
         <a href="#aggregates" data-r="item" style="--i:0"><span class="cn-k">A</span><b>Crushed Stone Aggregates</b><span class="cn-ar" aria-hidden="true">↓</span><em>6 materials</em></a>
-        <a href="#sand" data-r="item" style="--i:1"><span class="cn-k">B</span><b>Manufactured &amp; Natural Sand</b><span class="cn-ar" aria-hidden="true">↓</span><em>4 materials</em></a>
+        <a href="#sand" data-r="item" style="--i:1"><span class="cn-k">B</span><b>Manufactured &amp; Natural Sand</b><span class="cn-ar" aria-hidden="true">↓</span><em>5 materials</em></a>
         <a href="#ready-mix-concrete" data-r="item" style="--i:2"><span class="cn-k">C</span><b>Ready-Mix Concrete</b><span class="cn-ar" aria-hidden="true">↓</span><em>1 material</em></a>
         <a href="#road-materials" data-r="item" style="--i:3"><span class="cn-k">D</span><b>Road &amp; Infrastructure Materials</b><span class="cn-ar" aria-hidden="true">↓</span><em>3 materials</em></a>
     </nav>
@@ -951,7 +962,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="sc-media" data-r="media"><div class="sc-stage r43"><picture><source type="image/avif" srcset="/img/products/showcase/60mm-aggregate-560.avif 560w, /img/products/showcase/60mm-aggregate-1000.avif 1000w" sizes="(max-width:767px) 92vw, (max-width:1199px) 46vw, 600px" /><source type="image/webp" srcset="/img/products/showcase/60mm-aggregate-560.webp 560w, /img/products/showcase/60mm-aggregate-1000.webp 1000w" sizes="(max-width:767px) 92vw, (max-width:1199px) 46vw, 600px" /><img src="/img/products/showcase/60mm-aggregate-1000.webp" alt="60mm crushed stone aggregate, very large angular grey stones, supplied by OM Group in Goa" width="1000" height="625" loading="lazy" decoding="async" /></picture></div></div>
   </div></div>
 </article>
-<div class="sc-chapter" id="sand"><div class="sc-wrap"><div class="sc-chapter-in" data-r="chapter"><b>B</b><span>Manufactured &amp; Natural Sand</span><span>4 materials</span></div></div></div>
+<div class="sc-chapter" id="sand"><div class="sc-wrap"><div class="sc-chapter-in" data-r="chapter"><b>B</b><span>Manufactured &amp; Natural Sand</span><span>5 materials</span></div></div></div>
 <article class="sc" id="m-sand" data-n="7" aria-labelledby="sc-h-m-sand">
   <div class="sc-wrap"><div class="sc-in">
     <div class="sc-text">
@@ -1016,11 +1027,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="sc-media" data-r="media"><div class="sc-stage"><picture><source type="image/avif" srcset="/img/products/showcase/river-sand-560.avif 560w, /img/products/showcase/river-sand-884.avif 884w" sizes="(max-width:767px) 92vw, (max-width:1199px) 46vw, 600px" /><source type="image/webp" srcset="/img/products/showcase/river-sand-560.webp 560w, /img/products/showcase/river-sand-884.webp 884w" sizes="(max-width:767px) 92vw, (max-width:1199px) 46vw, 600px" /><img src="/img/products/showcase/river-sand-884.webp" alt="River Sand, naturally sourced golden sand falling into a pile, arranged by OM Group in Goa" width="884" height="737" loading="lazy" decoding="async" /></picture></div></div>
   </div></div>
 </article>
-<div class="sc-chapter" id="ready-mix-concrete"><div class="sc-wrap"><div class="sc-chapter-in" data-r="chapter"><b>C</b><span>Ready-Mix Concrete</span><span>1 material</span></div></div></div>
-<article class="sc" id="rmc" data-n="11" aria-labelledby="sc-h-ready-mix-concrete">
+<article class="sc" id="washed-sand" data-n="11" aria-labelledby="sc-h-washed-sand">
   <div class="sc-wrap"><div class="sc-in">
     <div class="sc-text">
-      <p class="sc-label" data-r="label">Product <b>11</b> / Ready-Mix Concrete</p>
+      <p class="sc-label" data-r="label">Product <b>11</b> / Manufactured &amp; Natural Sand</p>
+      <h2 class="sc-title" id="sc-h-washed-sand" data-r="words"><span class="sw"><span class="swi" style="--w:0">Washed</span></span> <span class="sw"><span class="swi" style="--w:1">Sand</span></span></h2>
+      <p class="sc-desc" data-r="desc"><span class="dw" style="--k:0">Washed sand supplied by OM</span> <span class="dw" style="--k:1">Group as a product in</span> <span class="dw" style="--k:2">its own right,</span> <span class="dw" style="--k:3">for concrete,</span> <span class="dw" style="--k:4">masonry and general construction across</span> <span class="dw" style="--k:5">North and South Goa,</span> <span class="dw" style="--k:6">with current specifications confirmed against</span> <span class="dw" style="--k:7">the project requirement.</span></p>
+      <div class="sc-apps" data-r="apps"><span>Applications</span><ul><li style="--i:0">Concrete &amp; RCC</li><li style="--i:1">Masonry mortar</li><li style="--i:2">Blockwork &amp; precast</li><li style="--i:3">General construction</li></ul></div>
+      <dl class="sc-specs" data-r="specs"><div style="--i:0"><dt>Category</dt><dd>Sand / fine aggregate</dd></div><div style="--i:1"><dt>Supply</dt><dd>North &amp; South Goa</dd></div><div style="--i:2"><dt>Availability</dt><dd>Confirmed against the project requirement</dd></div></dl>
+      <div class="sc-cta" data-r="cta">
+        <a class="btn btn-accent" style="--i:0" href="/?category=Sand&subcategory=W-Sand%20(Wash%20Sand)#contact" aria-label="Request a quote for Washed Sand">Request a Quote <span class="btn-arrow" aria-hidden="true">→</span></a>
+        <a class="sc-link" style="--i:1" href="/products/washed-sand" aria-label="Explore specifications and FAQs for Washed Sand">Explore Specifications &amp; FAQs <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+    <div class="sc-media" data-r="media"><div class="sc-stage"><picture><source type="image/avif" srcset="/img/products/showcase/washed-sand-560.avif 560w, /img/products/showcase/washed-sand-1000.avif 1000w" sizes="(max-width:767px) 92vw, (max-width:1199px) 46vw, 600px" /><source type="image/webp" srcset="/img/products/showcase/washed-sand-560.webp 560w, /img/products/showcase/washed-sand-1000.webp 1000w" sizes="(max-width:767px) 92vw, (max-width:1199px) 46vw, 600px" /><img src="/img/products/showcase/washed-sand-1000.webp" alt="Washed sand, a stream of grey sand pouring into a pile, supplied by OM Group in Goa" width="1000" height="821" loading="lazy" decoding="async" /></picture></div></div>
+  </div></div>
+</article>
+<div class="sc-chapter" id="ready-mix-concrete"><div class="sc-wrap"><div class="sc-chapter-in" data-r="chapter"><b>C</b><span>Ready-Mix Concrete</span><span>1 material</span></div></div></div>
+<article class="sc sc--flip" id="rmc" data-n="12" aria-labelledby="sc-h-ready-mix-concrete">
+  <div class="sc-wrap"><div class="sc-in">
+    <div class="sc-text">
+      <p class="sc-label" data-r="label">Product <b>12</b> / Ready-Mix Concrete</p>
       <h2 class="sc-title" id="sc-h-ready-mix-concrete" data-r="words"><span class="sw"><span class="swi" style="--w:0">Ready-Mix</span></span> <span class="sw"><span class="swi" style="--w:1">Concrete</span></span> <span class="sw"><span class="swi" style="--w:2">(RMC)</span></span></h2>
       <p class="sc-desc" data-r="desc"><span class="dw" style="--k:0">Concrete produced under controlled batching</span> <span class="dw" style="--k:1">and mixing conditions and delivered</span> <span class="dw" style="--k:2">to site in a fresh</span> <span class="dw" style="--k:3">state for placement.</span></p>
       <div class="sc-apps" data-r="apps"><span>Applications</span><ul><li style="--i:0">Foundations</li><li style="--i:1">Slabs, columns &amp; beams</li><li style="--i:2">Residential</li><li style="--i:3">Commercial &amp; infrastructure</li></ul></div>
@@ -1034,10 +1061,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div></div>
 </article>
 <div class="sc-chapter" id="road-materials"><div class="sc-wrap"><div class="sc-chapter-in" data-r="chapter"><b>D</b><span>Road &amp; Infrastructure Materials</span><span>3 materials</span></div></div></div>
-<article class="sc sc--flip" id="granular-sub-base" data-n="12" aria-labelledby="sc-h-granular-sub-base">
+<article class="sc" id="granular-sub-base" data-n="13" aria-labelledby="sc-h-granular-sub-base">
   <div class="sc-wrap"><div class="sc-in">
     <div class="sc-text">
-      <p class="sc-label" data-r="label">Product <b>12</b> / Road &amp; Infrastructure Materials</p>
+      <p class="sc-label" data-r="label">Product <b>13</b> / Road &amp; Infrastructure Materials</p>
       <h2 class="sc-title" id="sc-h-granular-sub-base" data-r="words"><span class="sw"><span class="swi" style="--w:0">Granular</span></span> <span class="sw"><span class="swi" style="--w:1">Sub-Base</span></span> <span class="sw"><span class="swi" style="--w:2">(GSB)</span></span></h2>
       <p class="sc-desc" data-r="desc"><span class="dw" style="--k:0">A specified blend of graded</span> <span class="dw" style="--k:1">granular material that forms the</span> <span class="dw" style="--k:2">sub-base layer beneath a road’s</span> <span class="dw" style="--k:3">base course and surface.</span></p>
       <div class="sc-apps" data-r="apps"><span>Applications</span><ul><li style="--i:0">Highways &amp; state roads</li><li style="--i:1">Rural &amp; urban roads</li><li style="--i:2">Industrial roads</li><li style="--i:3">Site development</li></ul></div>
@@ -1050,10 +1077,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="sc-media" data-r="media"><div class="sc-stage r43"><picture><source type="image/avif" srcset="/img/products/showcase/granular-sub-base-560.avif 560w, /img/products/showcase/granular-sub-base-1000.avif 1000w" sizes="(max-width:767px) 92vw, (max-width:1199px) 46vw, 600px" /><source type="image/webp" srcset="/img/products/showcase/granular-sub-base-560.webp 560w, /img/products/showcase/granular-sub-base-1000.webp 1000w" sizes="(max-width:767px) 92vw, (max-width:1199px) 46vw, 600px" /><img src="/img/products/showcase/granular-sub-base-1000.webp" alt="Granular Sub-Base (GSB), a graded granular road material pile supplied by OM Group in Goa" width="1000" height="610" loading="lazy" decoding="async" /></picture></div></div>
   </div></div>
 </article>
-<article class="sc" id="wmm" data-n="13" aria-labelledby="sc-h-wmm">
+<article class="sc sc--flip" id="wmm" data-n="14" aria-labelledby="sc-h-wmm">
   <div class="sc-wrap"><div class="sc-in">
     <div class="sc-text">
-      <p class="sc-label" data-r="label">Product <b>13</b> / Road &amp; Infrastructure Materials</p>
+      <p class="sc-label" data-r="label">Product <b>14</b> / Road &amp; Infrastructure Materials</p>
       <h2 class="sc-title" id="sc-h-wmm" data-r="words"><span class="sw"><span class="swi" style="--w:0">Wet</span></span> <span class="sw"><span class="swi" style="--w:1">Mix</span></span> <span class="sw"><span class="swi" style="--w:2">Macadam</span></span> <span class="sw"><span class="swi" style="--w:3">(WMM)</span></span></h2>
       <p class="sc-desc" data-r="desc"><span class="dw" style="--k:0">The crushed,</span> <span class="dw" style="--k:1">graded aggregate used in Wet</span> <span class="dw" style="--k:2">Mix Macadam for road and</span> <span class="dw" style="--k:3">infrastructure projects,</span> <span class="dw" style="--k:4">produced at OM Group’s own</span> <span class="dw" style="--k:5">crushing operation.</span></p>
       <div class="sc-apps" data-r="apps"><span>Applications</span><ul><li style="--i:0">National &amp; state highways</li><li style="--i:1">Rural roads</li><li style="--i:2">Industrial roads</li><li style="--i:3">Large civil infrastructure</li></ul></div>
@@ -1066,10 +1093,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="sc-media" data-r="media"><div class="sc-stage r43"><picture><source type="image/avif" srcset="/img/products/showcase/wmm-560.avif 560w, /img/products/showcase/wmm-1000.avif 1000w" sizes="(max-width:767px) 92vw, (max-width:1199px) 46vw, 600px" /><source type="image/webp" srcset="/img/products/showcase/wmm-560.webp 560w, /img/products/showcase/wmm-1000.webp 1000w" sizes="(max-width:767px) 92vw, (max-width:1199px) 46vw, 600px" /><img src="/img/products/showcase/wmm-1000.webp" alt="Crushed, graded aggregate for Wet Mix Macadam supplied by OM Group for road projects in Goa" width="1000" height="644" loading="lazy" decoding="async" /></picture></div></div>
   </div></div>
 </article>
-<article class="sc sc--flip" id="boulders" data-n="14" aria-labelledby="sc-h-boulders">
+<article class="sc" id="boulders" data-n="15" aria-labelledby="sc-h-boulders">
   <div class="sc-wrap"><div class="sc-in">
     <div class="sc-text">
-      <p class="sc-label" data-r="label">Product <b>14</b> / Road &amp; Infrastructure Materials</p>
+      <p class="sc-label" data-r="label">Product <b>15</b> / Road &amp; Infrastructure Materials</p>
       <h2 class="sc-title" id="sc-h-boulders" data-r="words"><span class="sw"><span class="swi" style="--w:0">Construction</span></span> <span class="sw"><span class="swi" style="--w:1">Boulders</span></span></h2>
       <p class="sc-desc" data-r="desc"><span class="dw" style="--k:0">Construction,</span> <span class="dw" style="--k:1">pitching,</span> <span class="dw" style="--k:2">soling,</span> <span class="dw" style="--k:3">gabion and project-specific boulders,</span> <span class="dw" style="--k:4">with material selected against application,</span> <span class="dw" style="--k:5">size and project requirements.</span></p>
       <div class="sc-apps" data-r="apps"><span>Applications</span><ul><li style="--i:0">Construction</li><li style="--i:1">Pitching</li><li style="--i:2">Soling</li><li style="--i:3">Gabion</li><li style="--i:4">Protection &amp; retaining</li></ul></div>
