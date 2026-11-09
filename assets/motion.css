@@ -100,6 +100,14 @@
   .hero-product .fade-up:nth-child(n+5),.legal-header .fade-up:nth-child(n+5){transition-delay:660ms}
   /* the image / facility plate keeps a short delay, so its hover response is not sluggish */
   .hero-product .hero-grid>.fade-up{transition-delay:140ms}
+  /* hero heading: the words come in one after another with a slow fade, the same gesture as the homepage heading (motion.js splits the
+     words). Until it has, the heading waits invisible; if scripts never run, it simply appears after 2 s, so it can never stay hidden. */
+  @keyframes hwFallback{to{opacity:1}}
+  .hero-product h1:not(.hw-split),.legal-header h1:not(.hw-split),.sc-hero .sc-h1:not(.hw-split){opacity:0;animation:hwFallback .01s linear 2s forwards}
+  .hw{display:inline-block;opacity:0;transform:translate3d(0,.3em,0);transition:opacity 1.5s cubic-bezier(.33,0,.2,1) calc(var(--hb,220ms) + var(--wi,0) * 80ms),transform 1.5s cubic-bezier(.22,.8,.24,1) calc(var(--hb,220ms) + var(--wi,0) * 80ms)}
+  .hw-go .hw{opacity:1;transform:none}
+  .hw-split.fade-up{opacity:1;transform:none;filter:none}
+  .sc-hero .sc-h1.hw-split .hw{transform:none}              /* /products: the heading already rises as a whole, so its words only fade */
   /* scrolling away from the hero: no entrance delay on the way out */
   .hero-product .fade-up.in.m-out-u,.hero-product .fade-up.in.m-out-d,.legal-header .fade-up.in.m-out-u,.legal-header .fade-up.in.m-out-d{transition-delay:0s}
 }

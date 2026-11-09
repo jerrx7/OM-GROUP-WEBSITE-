@@ -177,8 +177,35 @@
     els.forEach(function (el, i) { if (tops[i] > vh * 0.9) el.style.transitionDelay = '0ms'; });
   }
 
+  // hero heading: split into words that fade in one after another (the homepage heading's gesture, slower and softer).
+  // The heading stays invisible until this has run (see motion.css), so there is no flash of the finished heading.
+  function heroHeading() {
+    $$('.hero-product h1,.legal-header h1,.sc-hero .sc-h1').forEach(function (h) {
+      if (h.classList.contains('hw-split') || h.querySelector('img,svg,button,input') || h.textContent.trim().split(/\s+/).length > 22) return;
+      var vh = window.innerHeight || root.clientHeight, inView = h.getBoundingClientRect().top < vh * 0.9, i = 0;
+      (function walk(n) { Array.prototype.slice.call(n.childNodes).forEach(function (c) {
+        if (c.nodeType === 3) {
+          var f = document.createDocumentFragment();
+          c.textContent.split(/(\s+)/).forEach(function (p) { if (!p) return;
+            if (/^\s+$/.test(p)) f.appendChild(document.createTextNode(' '));
+            else { var s = document.createElement('span'); s.className = 'hw'; s.style.setProperty('--wi', i++); s.textContent = p; f.appendChild(s); } });
+          c.replaceWith(f);
+        } else if (c.nodeType === 1 && c.tagName !== 'BR') walk(c);
+      }); })(h);
+      h.style.transition = 'none';                                   // the heading itself must not fade a second time
+      h.style.setProperty('--hb', inView ? '220ms' : '0ms');         // heading scrolled into view later: no waiting
+      h.classList.add('hw-split');
+      void h.offsetWidth;
+      requestAnimationFrame(function () { h.style.transition = ''; });
+      var go = function () { h.classList.add('hw-go'); };
+      if (inView) requestAnimationFrame(function () { requestAnimationFrame(go); });
+      else { var io = new IntersectionObserver(function (es) { if (es.some(function (e) { return e.isIntersecting; })) { io.disconnect(); go(); } }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }); io.observe(h); }
+    });
+  }
+
   function start() {
     try {
+      heroHeading();
       heroDelays();
       build();
       if (!tagged.length && HOME === false) { watchLegacy(); return; }
