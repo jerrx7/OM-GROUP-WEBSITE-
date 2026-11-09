@@ -50,15 +50,18 @@
 .mega-n{font-size:10.5px;color:var(--grey);letter-spacing:.1em;margin-right:6px;font-weight:600}
 
 .mega-feat{display:flex}
-.mega-feat-card{position:relative;display:flex;flex-direction:column;width:100%;border-radius:16px;overflow:hidden;background:#141416;color:#fff;text-decoration:none;
+.mega-feat-card{position:relative;display:flex;flex-direction:column;width:100%;border-radius:16px;overflow:hidden;color:#fff;text-decoration:none;
   /* a real edge at every zoom level: a 1px ring (not a hairline border that vanishes when the page is zoomed out) plus a soft lift */
-  box-shadow:0 0 0 1px rgba(20,20,22,.16),0 1px 2px rgba(20,20,22,.10),0 18px 34px -20px rgba(20,20,22,.45)}
+  box-shadow:0 0 0 1px rgba(20,20,22,.12),0 1px 2px rgba(20,20,22,.10),0 18px 34px -20px rgba(20,20,22,.45)}
 /* the picture takes whatever height the card has left, so a tall card is filled by the image, never by an empty dark gap */
-.mega-feat-img{position:relative;flex:1 0 200px;overflow:hidden;background:#E6DECF}
-.mega-feat-img::after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 -1px 0 rgba(255,255,255,.10),inset 0 0 0 1px rgba(20,20,22,.06)}
+/* The card itself has no dark background: the picture and the text panel each carry their own colour and overscan the card by 1px, and the
+   card clips them. So there is never a dark layer behind the picture edge that could peek out as a line, whatever the page scale or the
+   sub-pixel position (on 125% / 150% displays that sliver rendered as a bold, flickering line down the right side of the card). */
+.mega-feat-img{position:relative;flex:1 0 200px;overflow:hidden;background:#E6DECF;margin:-1px -1px -1px}
+.mega-feat-img::after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 -1px 0 rgba(255,255,255,.10)}
 .mega-feat-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transform:scale(1);transition:transform .7s cubic-bezier(.22,.8,.24,1)}
 .mega-feat-card:hover .mega-feat-img img{transform:scale(1.035)}
-.mega-feat-body{display:flex;flex-direction:column;gap:8px;padding:20px 22px 22px;flex:1}
+.mega-feat-body{position:relative;display:flex;flex-direction:column;gap:8px;padding:20px 23px 22px;margin:0 -1px;background:#141416;flex:1}
 .mega-lab{font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;color:#fff;opacity:.92}
 .mega-fh{font-family:var(--serif);font-size:25px;line-height:1.12;font-weight:500;color:#fff;letter-spacing:-.005em}
 .mega-fd{font-size:13px;line-height:1.5;color:rgba(255,255,255,.72)}
