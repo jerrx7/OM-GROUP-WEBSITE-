@@ -77,3 +77,42 @@
   .rv-soft .rv-w{transform:translate3d(0,9px,0);transition-duration:.9s}
   .rv-in .rv-soft .rv-w,.rv-in .rv-soft.rv-w{transform:none}
 }
+
+/* ================= PAGE TRANSITIONS AND HERO SEQUENCE (one place, every page that loads this file) =================
+   1) Moving between pages: a cross-document view transition. The page you are leaving stays fully visible and opaque underneath while the
+      next page dissolves in over it, so the screen is never blank or white. Nothing is stored (no cookie, storage or session flag): a first
+      visit, a refresh and a back/forward move all behave the same. Browsers without support just navigate normally and get the fallback
+      at the bottom (assets/motion.js). Visitors who prefer reduced motion get neither.
+   2) Arriving: the hero of product, infrastructure and legal pages builds in a short staggered sequence (eyebrow, heading, description,
+      buttons; the image leads when it sits above the text on narrow screens). These pages already reveal their hero with .fade-up; this
+      only re-times it, so the scroll reveals further down the page are untouched. The homepage and /products keep their own openings. */
+@media (prefers-reduced-motion:no-preference){
+  @view-transition{navigation:auto}
+  ::view-transition-old(root){animation:none;mix-blend-mode:normal}
+  ::view-transition-new(root){animation:omPageIn .45s cubic-bezier(.22,.8,.24,1) both;mix-blend-mode:normal}
+  @keyframes omPageIn{from{opacity:0}to{opacity:1}}
+
+  .hero-product .fade-up,.legal-header .fade-up{transition-duration:1s,1.15s,1s}
+  .hero-product .fade-up:nth-child(1),.legal-header .fade-up:nth-child(1){transition-delay:100ms}
+  .hero-product .fade-up:nth-child(2),.legal-header .fade-up:nth-child(2){transition-delay:220ms}
+  .hero-product .fade-up:nth-child(3),.legal-header .fade-up:nth-child(3){transition-delay:380ms}
+  .hero-product .fade-up:nth-child(4),.legal-header .fade-up:nth-child(4){transition-delay:540ms}
+  .hero-product .fade-up:nth-child(n+5),.legal-header .fade-up:nth-child(n+5){transition-delay:660ms}
+  /* the image / facility plate keeps a short delay, so its hover response is not sluggish */
+  .hero-product .hero-grid>.fade-up{transition-delay:140ms}
+  /* scrolling away from the hero: no entrance delay on the way out */
+  .hero-product .fade-up.in.m-out-u,.hero-product .fade-up.in.m-out-d,.legal-header .fade-up.in.m-out-u,.legal-header .fade-up.in.m-out-d{transition-delay:0s}
+}
+@media (prefers-reduced-motion:no-preference) and (max-width:900px){
+  /* the image sits above the text here, so it arrives first and the text follows it down the screen */
+  .hero-product .hero-grid>.fade-up{transition-delay:60ms}
+  .hero-product .hero-grid>div>.fade-up:nth-child(1){transition-delay:260ms}
+  .hero-product .hero-grid>div>.fade-up:nth-child(2){transition-delay:360ms}
+  .hero-product .hero-grid>div>.fade-up:nth-child(3){transition-delay:500ms}
+  .hero-product .hero-grid>div>.fade-up:nth-child(4){transition-delay:640ms}
+  .hero-product .hero-grid>div>.fade-up:nth-child(n+5){transition-delay:760ms}
+}
+/* fallback for browsers without view transitions: motion.js adds .om-leave to <html> for ~0.2 s before following an internal link */
+@media (prefers-reduced-motion:no-preference){
+  html.om-leave body>*:not(.nav):not(script):not(style):not(link){opacity:0;transition:opacity .2s ease}
+}

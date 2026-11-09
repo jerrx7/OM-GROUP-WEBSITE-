@@ -2,6 +2,31 @@
    One engine for every page. It tags existing content (it never replaces it), observes it once with IntersectionObserver,
    and animates transform / opacity only. Content stays visible if scripts fail or the visitor prefers reduced motion.
    Excluded: the pinned #process story scenes, the #operations scroll engine, the 3D company cards, modals, nav and the map stage. */
+
+/* ---- leaving a page: fallback only ----
+   Browsers with cross-document view transitions (Chrome, Edge, Safari 18.2+) dissolve between pages in CSS alone (see motion.css) and
+   this block does nothing there. Every other browser fades the page content out for 0.2 s before following an internal link; the next
+   page then builds in with its own entrance. No state is kept, so it behaves the same on a first visit, a refresh or back/forward. */
+(function () {
+  'use strict';
+  if (window.__omLeave) return; window.__omLeave = true;
+  if ('PageSwapEvent' in window) return;                                            // native transition is in charge
+  if (window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  var root = document.documentElement;
+  document.addEventListener('click', function (e) {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    var a = e.target && e.target.closest ? e.target.closest('a[href]') : null; if (!a) return;
+    if ((a.target && a.target !== '_self') || a.hasAttribute('download') || a.hasAttribute('data-no-transition')) return;
+    var u; try { u = new URL(a.href, location.href); } catch (err) { return; }
+    if ((u.protocol !== 'http:' && u.protocol !== 'https:') || u.origin !== location.origin) return;
+    if (u.pathname === location.pathname && u.search === location.search) return;   // same page (anchors, in-page links)
+    e.preventDefault(); root.classList.add('om-leave');
+    setTimeout(function () { location.assign(u.href); }, 210);
+    setTimeout(function () { root.classList.remove('om-leave'); }, 3000);            // navigation was cancelled: show the page again
+  });
+  window.addEventListener('pageshow', function () { root.classList.remove('om-leave'); });   // back/forward from the cache
+})();
+
 (function () {
   'use strict';
   if (window.__omMotion) return; window.__omMotion = true;
@@ -145,8 +170,16 @@
     });
   }, { threshold: 0, rootMargin: '-6% 0px -6% 0px' });
 
+  // hero pieces that start below the fold (a phone shows the image first) reveal on scroll, so they must not wait out the entrance stagger
+  function heroDelays() {
+    var els = $$('.hero-product .fade-up,.legal-header .fade-up'), vh = window.innerHeight || root.clientHeight;
+    var tops = els.map(function (el) { return el.getBoundingClientRect().top; });            // single read pass
+    els.forEach(function (el, i) { if (tops[i] > vh * 0.9) el.style.transitionDelay = '0ms'; });
+  }
+
   function start() {
     try {
+      heroDelays();
       build();
       if (!tagged.length && HOME === false) { watchLegacy(); return; }
       root.classList.add('m-js');

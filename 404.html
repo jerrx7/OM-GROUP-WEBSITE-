@@ -127,6 +127,8 @@ footer a:hover{color:var(--accent)}
   .btn:hover,.notfound-cta:hover{transform:none !important}
 }
 </style>
+<style>/* page transition: same dissolve as the rest of the site (the shared rules live in /assets/motion.css, which this page does not load) */
+@media (prefers-reduced-motion:no-preference){@view-transition{navigation:auto}::view-transition-old(root){animation:none;mix-blend-mode:normal}::view-transition-new(root){animation:omPageIn .45s cubic-bezier(.22,.8,.24,1) both;mix-blend-mode:normal}@keyframes omPageIn{from{opacity:0}to{opacity:1}}}</style>
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
