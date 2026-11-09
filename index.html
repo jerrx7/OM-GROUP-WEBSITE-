@@ -2006,6 +2006,10 @@ footer{background:var(--bone);color:var(--ink);padding:72px 0 36px;border-top:1p
   .rv-in .rv,.rv-in .rv-w,.rv.rv-in{opacity:1;transform:none}
   .rv-l::before,.rv-l-t::before{transform:scaleX(0);transform-origin:left center;transition:transform .8s var(--rv-ease) var(--d,0ms)}
   .rv-in .rv-l::before,.rv-in .rv-l-t::before{transform:none}
+  /* headline accent: "Trust." arrives in ink with its word, then slowly ignites to brand orange once it has landed (same ink-to-orange as the Products headline).
+     The script adds .rv-ign, so with no JS or reduced motion the word is simply orange from the start. */
+  .hero h1 em.rv-ign{color:var(--ink)}
+  .hero-content.rv-in h1 em.rv-ign{color:var(--accent);transition:color 2.4s ease 1.2s}
   .about-quote.rv-v{border-left:0;position:relative}
   .about-quote.rv-v::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--accent);transform:scaleY(0);transform-origin:top center;transition:transform 1s var(--rv-ease)}
   .rv-in .about-quote.rv-v::before{transform:none}
@@ -2066,7 +2070,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="hero-grid"></div>
   <div class="container hero-content">
     <span class="eyebrow hero-eyebrow fade-up"><span class="hero-eyebrow-t"><span>Industrial Conglomerate</span><i aria-hidden="true"> · </i><span>Estd. Goa, India</span></span></span>
-    <h1 class="fade-up d1">The Foundation of <em style="color:#F15A29;font-style:italic;font-weight:500">Trust.</em></h1>
+    <h1 class="fade-up d1">The Foundation of <em>Trust.</em></h1>
     <p class="hero-sub fade-up d2">A conglomerate of ten companies delivering construction aggregates, ready mix concrete and heavy machinery, engineered to support the projects that shape a state.</p>
     <div class="hero-ctas fade-up d3">
       <a href="/products" class="btn btn-accent">Explore Our Products <span class="btn-arrow">→</span></a>
@@ -3559,7 +3563,7 @@ document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
     const eb=$('.hero-eyebrow',hc), h1=$('h1',hc), sub=$('.hero-sub',hc), ctas=$('.hero-ctas',hc);
     [eb,h1,sub,ctas].forEach(host);
     if(eb){ eb.classList.add('rv-l'); eb.style.setProperty('--d','0ms'); $$('.hero-eyebrow-t > span',eb).forEach((s,i)=>rv(s,280+i*110)); }
-    if(h1) split(h1,520,95);
+    if(h1){ split(h1,520,95); const acc=$('em',h1); if(acc) acc.classList.add('rv-ign'); }
     if(sub){ sub.classList.add('rv-soft'); split(sub,1200,26); }
     if(ctas) $$('.btn',ctas).forEach((b,i)=>rv(b,1480+i*130));
     void hc.offsetWidth;   // commit the hidden start states while transitions are still off, so nothing fades out before it fades in

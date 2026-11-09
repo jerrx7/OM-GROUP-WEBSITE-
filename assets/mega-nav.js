@@ -47,12 +47,12 @@
       f: { img: 'feat-about', pos: '50% 40%', lab: 'The OM Group Story', hd: 'Powering Goa’s Infrastructure Since Day One.', d: 'A diversified group delivering construction materials, concrete, logistics and heavy machinery across Goa.', cta: 'Discover Our Story', h: '#about' } },
     companies: { label: 'Companies', href: '#companies',
       c1: { h: 'Division 01 · Aggregates Trading', compact: true, items: [
-        { n: '01', t: 'OM Transport', d: 'Heavy haul logistics for aggregates, sand and construction metal.', a: 'company:om-transport', h: '#companies', logo: L('om-transport-v3') },
-        { n: '02', t: 'Om Enterprises', d: 'Bulk aggregates trading for residential and commercial site supply.', a: 'company:om-enterprises', h: '#companies', logo: L('om-enterprises') },
-        { n: '03', t: 'Maharudra Infrastructure', d: 'Site grade aggregates and structural fill for infrastructure projects.', a: 'company:maharudra', h: '#companies', logo: L('maharudra') },
-        { n: '04', t: 'Swastik Enterprises', d: 'Sourcing partner for sand, GSB and construction metal.', a: 'company:swastik', h: '#companies', logo: L('swastik') },
-        { n: '05', t: 'Corestone Solutions', d: 'Specialist supply of crushed stone grades to RCC contractors.', a: 'company:corestone', h: '#companies', logo: L('corestone') },
-        { n: '06', t: 'Om Minerals & Logistics', d: 'Mineral sourcing and logistics partner for project supply.', a: 'company:om-minerals', h: '#companies', logo: L('om-minerals') }] },
+        { t: 'OM Transport', d: 'Heavy haul logistics for aggregates, sand and construction metal.', a: 'company:om-transport', h: '#companies', logo: L('om-transport-v3') },
+        { t: 'Om Enterprises', d: 'Bulk aggregates trading for residential and commercial site supply.', a: 'company:om-enterprises', h: '#companies', logo: L('om-enterprises') },
+        { t: 'Maharudra Infrastructure', d: 'Site grade aggregates and structural fill for infrastructure projects.', a: 'company:maharudra', h: '#companies', logo: L('maharudra') },
+        { t: 'Swastik Enterprises', d: 'Sourcing partner for sand, GSB and construction metal.', a: 'company:swastik', h: '#companies', logo: L('swastik') },
+        { t: 'Corestone Solutions', d: 'Specialist supply of crushed stone grades to RCC contractors.', a: 'company:corestone', h: '#companies', logo: L('corestone') },
+        { t: 'Om Minerals & Logistics', d: 'Mineral sourcing and logistics partner for project supply.', a: 'company:om-minerals', h: '#companies', logo: L('om-minerals') }] },
       c2: { h: 'Division 02 · Core Ventures', items: [
         { t: 'Sabsol Qualitech Industries LLP', k: 'Manufacturing · RMC + Crushing', d: 'Two modern RMC batching plants and a VSI stone crusher delivering specification grade materials.', a: 'company:sabsol-qualitech', h: '#companies', logo: L('sabsol-qualitech-v2') },
         { t: 'Sabsol Heavy Machines LLP', k: 'Equipment · Leasing & Operations', d: 'Owner operated JCBs, transit mixers, tippers and heavy equipment for project operations.', a: 'company:sabsol-heavy', h: '#companies', logo: L('sabsol-heavy-v2') }],
