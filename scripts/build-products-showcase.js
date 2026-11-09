@@ -209,7 +209,7 @@ function body() {
 <section class="sc-hero no-motion" aria-labelledby="pageTitle">
   <div class="sc-wrap"><div class="sc-hero-grid">
     <div>
-      <span class="eyebrow sc-rise" style="--i:0">Products · Goa</span>
+      <span class="eyebrow"><span class="eb-t">Products · Goa</span></span>
       <h1 class="sc-h1 sc-rise" id="pageTitle" style="--i:1">Construction Materials. <em>Engineered for Every Project.</em></h1>
     </div>
     <div>
@@ -227,7 +227,7 @@ function body() {
   <div class="sc-wrap">
     <div class="sc-intro-grid">
       <div>
-        <span class="eyebrow" data-r="label">The OM Group Material Collection</span>
+        <span class="eyebrow" data-r="eyebrow"><span class="eb-t">The OM Group Material Collection</span></span>
         <h2 id="collectionTitle" data-r="words">${maskWords('Every material has a purpose.')}</h2>
       </div>
       <p class="lede" data-r="desc">${fadeWords('Explore our range of construction materials, each selected, processed or supplied to meet the demands of residential construction, commercial development and large-scale infrastructure.')}</p>
