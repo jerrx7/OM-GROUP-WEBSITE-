@@ -27,6 +27,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="canonical" href="https://www.omgroupco.com/" />
 <meta name="theme-color" content="#F15A29" />
 <link rel="preload" href="assets/om-group-logo-header.png" as="image" fetchpriority="high" />
+<link rel="preload" as="image" type="image/webp" media="not all and (max-width:1024px) and (orientation:portrait)" href="img/hero/hero-quarry-1672.webp" imagesrcset="img/hero/hero-quarry-800.webp 800w, img/hero/hero-quarry-1200.webp 1200w, img/hero/hero-quarry-1672.webp 1672w" imagesizes="100vw" fetchpriority="high" />
+<link rel="preload" as="image" type="image/webp" media="(max-width:1024px) and (orientation:portrait)" href="img/hero/m/hero-m-quarry-720.webp" imagesrcset="img/hero/m/hero-m-quarry-480.webp 480w, img/hero/m/hero-m-quarry-720.webp 720w, img/hero/m/hero-m-quarry-852.webp 852w" imagesizes="100vw" fetchpriority="high" />
 <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
 <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
 <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
@@ -415,43 +417,64 @@ body.dark .brand-text .tag{color:#C8C8C8}
 .drawer a span{color:var(--accent);font-family:var(--sans);font-size:11px;letter-spacing:.22em;margin-right:14px}
 
 /* ============ HERO ============ */
+/* The photo has a calm, empty sky on the left (for the copy) and the plant + gravel on the right/bottom.
+   It is drawn as the largest 16:9 box that fits the hero, pinned bottom-right, so zooming or resizing never crops the plant;
+   spare room above/left is filled with the sky colour and the photo's top/left edges fade into it. Up to 1024px wide the photo becomes a band
+   under the copy so it can never sit behind a letter or button. */
 .hero{
+  --hero-sky:#F1EFF3;--hero-veil:250,247,245;--hero-band:min(78vw,560px);
   position:relative;min-height:100vh;
   display:flex;flex-direction:column;
-  background:var(--white);overflow:hidden;
+  background:var(--hero-sky);overflow:hidden;
 }
-.hero-bg{
-  position:absolute;inset:0;z-index:0;
-  background:
-    radial-gradient(ellipse 70% 60% at 80% 30%, rgba(241,90,41,.10), transparent 60%),
-    radial-gradient(ellipse 60% 60% at 10% 80%, rgba(241,90,41,.05), transparent 70%),
-    radial-gradient(ellipse 100% 70% at 50% 100%, rgba(30,42,71,.04), transparent 60%),
-    linear-gradient(180deg,#FFFFFF 0%, #FAF8F3 100%);
-}
-body.dark .hero-bg{
-  background:
-    radial-gradient(ellipse 70% 60% at 80% 30%, rgba(241,90,41,.18), transparent 60%),
-    radial-gradient(ellipse 60% 60% at 10% 80%, rgba(241,90,41,.08), transparent 70%),
-    linear-gradient(180deg,#0A0A0A 0%, #050505 100%);
-}
+.hero-bg{position:absolute;inset:0;z-index:0;container-type:size;pointer-events:none}
+.hero-photo{display:block;position:absolute;right:0;bottom:0;width:min(max(62cqw,calc(100cqw - 380px)),calc(100cqh * 1672 / 941));aspect-ratio:1672/941;opacity:.74;
+  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 24%),linear-gradient(90deg,transparent 0,#000 18%);
+  -webkit-mask-composite:source-in;
+  mask-image:linear-gradient(180deg,transparent 0,#000 24%),linear-gradient(90deg,transparent 0,#000 18%);
+  mask-composite:intersect}
+/* slideshow: slides are stacked; the next one dissolves in over the current one (which stays fully opaque beneath), so there is never a dip or a cut.
+   The photo is deliberately subdued (opacity above) so the copy stays the focus. */
+.hero-slide{position:absolute;inset:0;display:block;opacity:0;z-index:0}
+.hero-slide.is-cur{opacity:1;z-index:1}
+.hero-slide.is-in{opacity:1;z-index:2;transition:opacity 2.8s cubic-bezier(.4,0,.16,1)}
+.hero-slide img{display:block;width:100%;height:100%;object-fit:cover;object-position:right bottom;user-select:none;transform-origin:74% 100%}
+@keyframes heroDrift{from{transform:scale(1.055)}to{transform:scale(1)}}
+@media(prefers-reduced-motion:no-preference){.hero-slide.drift img{animation:heroDrift 13s cubic-bezier(.16,.7,.2,1) both}}
+/* soft white veil: strongest behind the copy, almost gone over the plant, so the photo reads crisp and premium on the right */
 .hero-bg::after{
   content:"";position:absolute;inset:0;
-  background-image:
-    radial-gradient(circle at 20% 30%, rgba(20,20,22,.02), transparent 50%);
-  pointer-events:none;
+  background:linear-gradient(90deg,rgba(var(--hero-veil),.9) 0%,rgba(var(--hero-veil),.82) 26%,rgba(var(--hero-veil),.6) 46%,rgba(var(--hero-veil),.34) 62%,rgba(var(--hero-veil),.12) 80%,rgba(var(--hero-veil),.03) 100%);
 }
-.hero-grid{
-  position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.4;
-  background-image:
-    linear-gradient(to right, rgba(20,20,22,.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(20,20,22,.04) 1px, transparent 1px);
-  background-size:80px 80px;
-  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%, #000 30%, transparent 80%);
+body.dark .hero{--hero-sky:#0A0A0A;--hero-veil:10,10,10}
+/* soft landing into the next section now that the ticker no longer sits under the hero */
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:84px;z-index:2;pointer-events:none;background:linear-gradient(180deg,rgba(250,248,243,0),var(--bone))}
+@media(max-width:1024px){
+  .hero{background:linear-gradient(180deg,#FCFAF9 0,var(--hero-sky) calc(100% - var(--hero-band)),var(--hero-sky) 100%)}
+  .hero-bg{transform:none!important}
+  .hero-photo{width:100%;height:var(--hero-band);aspect-ratio:auto;
+    -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 30%);mask-image:linear-gradient(180deg,transparent 0,#000 30%);
+    -webkit-mask-composite:source-over;mask-composite:add}
+  .hero-slide img{object-position:76% bottom}
+  .hero-bg::after{background:linear-gradient(180deg,rgba(var(--hero-veil),0) 0%,rgba(var(--hero-veil),.1) 100%);top:auto;height:var(--hero-band)}
+  .hero .hero-content{padding-top:120px;padding-bottom:calc(var(--hero-band) * .7)}
 }
-body.dark .hero-grid{
-  background-image:
-    linear-gradient(to right, rgba(255,255,255,.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,.04) 1px, transparent 1px);
+
+/* ===== Portrait phones & tablets (iPhone / Android, iOS / Android): dedicated portrait photos =====
+   The photo is a full-width block under the copy. Its sky fades into the page behind the copy, a vertical veil keeps the headline, paragraph and
+   buttons fully readable wherever the two meet, and the dissolve is slower so a change is felt rather than seen. */
+@media(max-width:1024px) and (orientation:portrait){
+  .hero{--hero-band:max(120vw,min(165vw,78vh))}
+  .hero{background:rgb(var(--hero-veil))}
+  @supports(height:1svh){.hero{--hero-band:max(120vw,min(165vw,78svh))}}
+  .hero-photo{opacity:.84;
+    -webkit-mask-image:linear-gradient(180deg,transparent 0,rgba(0,0,0,.5) 16%,#000 38%);mask-image:linear-gradient(180deg,transparent 0,rgba(0,0,0,.5) 16%,#000 38%)}
+  .hero-slide img{object-position:50% 100%}
+  .hero-bg::after{background:linear-gradient(180deg,rgba(var(--hero-veil),.94) 0%,rgba(var(--hero-veil),.7) 24%,rgba(var(--hero-veil),.3) 48%,rgba(var(--hero-veil),.06) 74%,rgba(var(--hero-veil),0) 100%)}
+  .hero .hero-content{padding-bottom:calc(var(--hero-band) * .56)}
+  @media(min-width:641px){.hero .hero-content{padding-bottom:calc(var(--hero-band) * .8)}}
+  .hero-slide.is-in{transition-duration:3.8s}
+  .hero-slide.drift img{animation-duration:16s}
 }
 .hero-content{
   position:relative;z-index:5;
@@ -513,31 +536,32 @@ body.dark .hero-grid{
   .hero-ctas .btn:active{translate:0 0;scale:.985;box-shadow:0 8px 18px -10px rgba(241,90,41,.5)}
 }
 
-/* ============ MARQUEE ============ */
+/* ============ MARQUEE (ticker) ============ */
+/* Sits under "Fleet Highlights" on the bone Infrastructure section. It has no fill and no solid rules: a faint warm glow, hairlines that
+   dissolve toward both ends (with a touch of brand orange at the centre), and names that glide in from / out into the same fade. */
 .marquee{
-  background:#F8F6F1;color:#292725;
-  height:60px;overflow:hidden;position:relative;
-  /* the names glide in from, and out into, a soft fade at both edges */
-  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 14%,#000 86%,transparent 100%);
-          mask-image:linear-gradient(90deg,transparent 0,#000 14%,#000 86%,transparent 100%);
+  --mq-ink:rgba(20,20,22,.64);--mq-line:rgba(20,20,22,.15);--mq-glow:rgba(241,90,41,.05);
+  position:relative;overflow:hidden;height:68px;margin-top:64px;color:var(--mq-ink);
+  background:linear-gradient(180deg,rgba(241,90,41,0) 0%,var(--mq-glow) 50%,rgba(241,90,41,0) 100%);
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 16%,#000 84%,transparent 100%);
+          mask-image:linear-gradient(90deg,transparent 0,#000 16%,#000 84%,transparent 100%);
 }
 /* hairlines top and bottom (drawn outward from the centre when the ticker arrives) */
-.marquee::before,.marquee::after{content:"";position:absolute;left:0;right:0;height:1px;background:#E8E3DA;z-index:2;pointer-events:none}
+.marquee::before,.marquee::after{content:"";position:absolute;left:0;right:0;height:1px;z-index:2;pointer-events:none;
+  background:linear-gradient(90deg,transparent 0,var(--mq-line) 24%,rgba(241,90,41,.34) 50%,var(--mq-line) 76%,transparent 100%)}
 .marquee::before{top:0}.marquee::after{bottom:0}
-body.dark .marquee{background:var(--bone-2)}
-body.dark .marquee::before,body.dark .marquee::after{background:rgba(255,255,255,.1)}
+body.dark .marquee{--mq-ink:rgba(255,255,255,.7);--mq-line:rgba(255,255,255,.16);--mq-glow:rgba(241,90,41,.08)}
 .marquee-track{display:flex;align-items:center;height:100%;width:max-content;animation:marq 64s linear infinite;will-change:transform}
 .marquee:hover .marquee-track{animation-play-state:paused}
 .marquee-item{
   display:inline-flex;align-items:center;gap:clamp(36px,5.4vw,72px);padding:0 clamp(18px,2.8vw,40px);
   font-size:clamp(11px,.9vw + 7px,12.5px);letter-spacing:clamp(2.8px,.3vw + 1.9px,4px);text-transform:uppercase;
-  color:#292725;font-weight:500;white-space:nowrap;
+  color:var(--mq-ink);font-weight:500;white-space:nowrap;
   transition:color .5s ease;
 }
 .marquee-item:hover{color:#FF5E29}
-body.dark .marquee-item{color:var(--white)}
 .marquee-dot{width:5px;height:5px;background:#FF5E29;transform:rotate(45deg);flex:0 0 auto;box-shadow:0 0 0 4px rgba(255,94,41,.10)}
-@media(max-width:640px){.marquee{height:54px;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 11%,#000 89%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 11%,#000 89%,transparent 100%)}}
+@media(max-width:640px){.marquee{height:54px;margin-top:44px;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 11%,#000 89%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 11%,#000 89%,transparent 100%)}}
 @media (prefers-reduced-motion:no-preference){
   .marquee::before,.marquee::after{transform:scaleX(0);transition:transform 1.6s cubic-bezier(.22,1,.36,1)}
   .marquee .marquee-track{opacity:0;transition:opacity 1.4s ease .35s}
@@ -2091,8 +2115,31 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </aside>
 
 <section class="hero" id="top">
-  <div class="hero-bg" id="heroBg" style="transform: translate3d(0px, 55.5556px, 0px); background-size: auto; background-position: center bottom"></div>
-  <div class="hero-grid"></div>
+  <div class="hero-bg" id="heroBg" aria-hidden="true">
+    <div class="hero-photo" id="heroPhoto">
+    <picture class="hero-slide is-cur">
+      <source media="(max-width:1024px) and (orientation:portrait)" type="image/webp" srcset="img/hero/m/hero-m-quarry-480.webp 480w, img/hero/m/hero-m-quarry-720.webp 720w, img/hero/m/hero-m-quarry-852.webp 852w" sizes="100vw">
+      <source type="image/webp" srcset="img/hero/hero-quarry-800.webp 800w, img/hero/hero-quarry-1200.webp 1200w, img/hero/hero-quarry-1672.webp 1672w" sizes="100vw">
+      <img src="img/hero/hero-quarry-1672.webp" width="1672" height="941" alt="" decoding="async" fetchpriority="high">
+    </picture>
+    <picture class="hero-slide">
+      <source media="(max-width:1024px) and (orientation:portrait)" type="image/webp" data-srcset="img/hero/m/hero-m-excavator-480.webp 480w, img/hero/m/hero-m-excavator-720.webp 720w, img/hero/m/hero-m-excavator-941.webp 941w">
+      <img data-srcset="img/hero/hero-excavator-800.webp 800w, img/hero/hero-excavator-1200.webp 1200w, img/hero/hero-excavator-1672.webp 1672w" data-src="img/hero/hero-excavator-1672.webp" width="1672" height="941" alt="" decoding="async">
+    </picture>
+    <picture class="hero-slide">
+      <source media="(max-width:1024px) and (orientation:portrait)" type="image/webp" data-srcset="img/hero/m/hero-m-fleet-480.webp 480w, img/hero/m/hero-m-fleet-720.webp 720w, img/hero/m/hero-m-fleet-941.webp 941w">
+      <img data-srcset="img/hero/hero-fleet-800.webp 800w, img/hero/hero-fleet-1200.webp 1200w, img/hero/hero-fleet-1672.webp 1672w" data-src="img/hero/hero-fleet-1672.webp" width="1672" height="941" alt="" decoding="async">
+    </picture>
+    <picture class="hero-slide">
+      <source media="(max-width:1024px) and (orientation:portrait)" type="image/webp" data-srcset="img/hero/m/hero-m-rmc-480.webp 480w, img/hero/m/hero-m-rmc-720.webp 720w, img/hero/m/hero-m-rmc-941.webp 941w">
+      <img data-srcset="img/hero/hero-rmc-800.webp 800w, img/hero/hero-rmc-1200.webp 1200w, img/hero/hero-rmc-1672.webp 1672w" data-src="img/hero/hero-rmc-1672.webp" width="1672" height="941" alt="" decoding="async">
+    </picture>
+    <picture class="hero-slide">
+      <source media="(max-width:1024px) and (orientation:portrait)" type="image/webp" data-srcset="img/hero/m/hero-m-construction-480.webp 480w, img/hero/m/hero-m-construction-720.webp 720w, img/hero/m/hero-m-construction-941.webp 941w">
+      <img data-srcset="img/hero/hero-construction-800.webp 800w, img/hero/hero-construction-1200.webp 1200w, img/hero/hero-construction-1672.webp 1672w" data-src="img/hero/hero-construction-1672.webp" width="1672" height="941" alt="" decoding="async">
+    </picture>
+    </div>
+  </div>
   <div class="container hero-content">
     <span class="eyebrow hero-eyebrow fade-up"><span class="hero-eyebrow-t"><span>Industrial Conglomerate</span><i aria-hidden="true"> · </i><span>Estd. Goa, India</span></span></span>
     <h1 class="fade-up d1">The Foundation of <em>Trust.</em></h1>
@@ -2103,10 +2150,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
 </section>
-
-<div class="marquee" aria-hidden="true">
-  <div class="marquee-track" id="marqueeTrack" style="flex-direction: row"></div>
-</div>
 
 <section class="about sec-bone" id="about">
   <div class="container">
@@ -3402,6 +3445,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="fleet-item"><div class="fleet-num"><span class="count" data-to="15">0</span><span class="plus">+</span></div><div class="fleet-lab">Transit Mixers</div></div>
       <div class="fleet-item"><div class="fleet-num"><span class="count" data-to="30">0</span><span class="plus">+</span></div><div class="fleet-lab">Tippers &amp; Haulers</div></div>
     </div>
+  </div>
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track" id="marqueeTrack" style="flex-direction: row"></div>
   </div>
 </section>
 
@@ -5288,5 +5334,39 @@ const OM_COMPANIES = {
 <script src="assets/mega-nav.js" defer></script>
 <script src="/assets/motion.js" defer></script>
 <script src="/assets/smooth-scroll.js" defer></script>
+<script>
+/* hero slideshow: slow, Apple-style cross-dissolve between the operations photos (aggregates, loading, fleet, RMC, construction) */
+(function(){
+  var box=document.getElementById('heroPhoto'); if(!box) return;
+  var slides=[].slice.call(box.querySelectorAll('.hero-slide')); if(slides.length<2) return;
+  if(window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  var HOLD=7200, FADE=2900, cur=0, busy=false, onScreen=true, timer=0;
+  function load(s){
+    var im=s.querySelector('img'); if(!im) return Promise.resolve();
+    if(im.getAttribute('data-src')){ [].forEach.call(s.querySelectorAll('source[data-srcset]'),function(so){ so.srcset=so.getAttribute('data-srcset'); so.sizes='100vw'; so.removeAttribute('data-srcset'); }); im.srcset=im.getAttribute('data-srcset'); im.sizes='100vw'; im.src=im.getAttribute('data-src'); im.removeAttribute('data-src'); im.removeAttribute('data-srcset'); }
+    return (im.decode ? im.decode() : Promise.resolve()).catch(function(){});
+  }
+  function schedule(){ clearTimeout(timer); timer=setTimeout(go,HOLD); }
+  function go(){
+    if(busy) return;
+    if(!onScreen||document.hidden){ schedule(); return; }
+    var n=(cur+1)%slides.length, a=slides[cur], b=slides[n]; busy=true;
+    load(b).then(function(){
+      b.classList.add('drift'); void b.offsetWidth; b.classList.add('is-in');
+      var fin=false;
+      function end(){ if(fin) return; fin=true; b.removeEventListener('transitionend',tend);
+        b.classList.add('is-cur'); b.classList.remove('is-in');
+        a.classList.remove('is-cur','drift'); cur=n; busy=false;
+        load(slides[(n+1)%slides.length]); schedule(); }
+      function tend(e){ if(e.target===b && e.propertyName==='opacity') end(); }
+      b.addEventListener('transitionend',tend); setTimeout(end,((parseFloat(getComputedStyle(b).transitionDuration)||FADE/1000)*1000)+500);
+    });
+  }
+  function start(){ load(slides[1]).then(schedule); }
+  if(document.readyState==='complete') (window.requestIdleCallback||setTimeout)(start); else addEventListener('load',function(){ (window.requestIdleCallback||setTimeout)(start); });
+  document.addEventListener('visibilitychange',function(){ if(!document.hidden && !busy) schedule(); });
+  if('IntersectionObserver' in window){ new IntersectionObserver(function(es){ onScreen=es[0].isIntersecting; },{threshold:0}).observe(box.closest('.hero')||box); }
+})();
+</script>
 </body>
 </html>
