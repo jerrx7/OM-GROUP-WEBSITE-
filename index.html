@@ -2050,7 +2050,10 @@ footer{background:var(--bone);color:var(--ink);padding:72px 0 36px;border-top:1p
   :root{--rv-ease:cubic-bezier(.22,.8,.24,1)}
   .rv-host.fade-up{opacity:1;transform:none;transition:none}
   .rv,.rv-w{opacity:0;transform:translate3d(0,24px,0);transition:opacity .9s var(--rv-ease) var(--d,0ms),transform .9s var(--rv-ease) var(--d,0ms)}
-  .rv-w{display:inline-block;transition-duration:1s}
+  /* each word is its own animated layer. WebKit clips a composited layer to the word's box, and Cormorant's glyphs (the hook of "f", italic "T")
+     overhang that box, so they were cut off until the transition ended and then popped in. Padding enlarges the layer to cover the ink; the equal
+     negative margins cancel it, so line breaks and positions are exactly as before. */
+  .rv-w{display:inline-block;transition-duration:1s;padding:.14em .2em;margin:-.14em -.2em}
   .rv-scale{transform:scale(.82);transform-origin:left center}
   .rv-in .rv,.rv-in .rv-w,.rv.rv-in{opacity:1;transform:none}
   .rv-l::before,.rv-l-t::before{transform:scaleX(0);transform-origin:left center;transition:transform .8s var(--rv-ease) var(--d,0ms)}
@@ -3639,7 +3642,19 @@ document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
     if(ctas) $$('.btn',ctas).forEach((b,i)=>rv(b,1480+i*130));
     void hc.offsetWidth;   // commit the hidden start states while transitions are still off, so nothing fades out before it fades in
     document.documentElement.classList.remove('rv-pre');
-    requestAnimationFrame(()=>requestAnimationFrame(()=>setTimeout(()=>hc.classList.add('rv-in'),120)));
+    const go=()=>requestAnimationFrame(()=>requestAnimationFrame(()=>setTimeout(()=>hc.classList.add('rv-in'),120)));
+    /* the words stay hidden until the headline/body fonts have loaded (capped at 2.2s so a slow font host can never hold the page back) */
+    if(document.fonts && document.fonts.load){
+      Promise.race([
+        Promise.all([
+          document.fonts.load('500 40px "Cormorant Garamond"','The Foundation of'),
+          document.fonts.load('italic 500 40px "Cormorant Garamond"','Trust.'),
+          document.fonts.load('400 18px Inter','A conglomerate of ten companies'),
+          document.fonts.load('600 12px Inter','EXPLORE OUR PRODUCTS GET IN TOUCH INDUSTRIAL CONGLOMERATE')
+        ]),
+        new Promise(r=>setTimeout(r,2200))
+      ]).then(go,go);
+    } else go();
   }
   const ag=$('.about-grid');
   if(ag){
