@@ -398,6 +398,9 @@ body.dark .brand-text .tag{color:#C8C8C8}
 }
 .nav-links a:hover{color:var(--accent)}
 .nav-links a:hover::after{right:0}
+.nav-links a{white-space:nowrap}
+/* seven menu items: on the narrowest desktop widths (just above the 1100px drawer switch) tighten the spacing so they stay on one line */
+@media(min-width:1101px) and (max-width:1240px){.nav-links{gap:22px}.nav-links a{letter-spacing:.14em}}
 .nav-cta{
   border:1px solid var(--accent);color:var(--accent);
   padding:10px 20px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;
@@ -2100,6 +2103,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="#about">About</a>
       <a href="#companies">Companies</a>
       <a href="#products">Products</a>
+      <a href="/applications">Applications</a>
       <a href="#infrastructure">Infrastructure</a>
       <a href="#contact">Contact</a>
       <a href="#careers">Join Us</a>
@@ -2113,9 +2117,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <a href="#about"><span>01</span>About</a>
   <a href="#companies"><span>02</span>Companies</a>
   <a href="#products"><span>03</span>Products</a>
-  <a href="#infrastructure"><span>04</span>Infrastructure</a>
-  <a href="#contact"><span>05</span>Contact</a>
-  <a href="#careers"><span>06</span>Join Us</a>
+  <a href="/applications"><span>04</span>Applications</a>
+  <a href="#infrastructure"><span>05</span>Infrastructure</a>
+  <a href="#contact"><span>06</span>Contact</a>
+  <a href="#careers"><span>07</span>Join Us</a>
 </aside>
 
 <section class="hero" id="top">

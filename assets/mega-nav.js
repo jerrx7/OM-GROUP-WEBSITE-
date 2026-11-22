@@ -71,6 +71,20 @@
         { t: 'GSB', h: '/products/granular-sub-base' }, { t: 'M Sand', h: '/products/m-sand' },
         { t: 'P Sand', h: '/products/plaster-sand' }, { t: 'RMC', h: '/products/ready-mix-concrete' }] },
       f: { img: 'feat-products', pos: '50% 50%', lab: 'Product Spotlight', hd: 'Materials That Build With Confidence.', d: 'Consistent grading, reliable supply and specification focused construction materials across Goa.', cta: 'Explore All Products', h: '#products' } },
+    applications: { label: 'Applications', href: '/applications',
+      c1: { h: 'Application Guides', items: [
+        { t: 'Aggregate Applications', d: 'Where 6mm to 60mm crushed stone and construction boulders are used, and how to choose a size.', h: '/applications/20mm-aggregates', p: 'th-crushed' },
+        { t: 'Sand Applications', d: 'M-Sand, River, Concrete, Plaster and Washed Sand in concrete, masonry and plastering.', h: '/applications/m-sand', p: 'th-sand' },
+        { t: 'Ready Mix Concrete Applications', d: 'RMC for foundations, RCC slabs, beams, columns and infrastructure.', h: '/applications/ready-mix-concrete', p: 'th-rmc' },
+        { t: 'Road Construction Applications', d: 'GSB, WMM and Hot Mix Asphalt layers for highways, industrial and rural roads.', h: '/applications/granular-sub-base', p: 'th-gsb' }] },
+      c2: { h: 'Popular Guides', plain: true, two: true, items: [
+        { t: '10mm Aggregates', h: '/applications/10mm-aggregates' }, { t: '20mm Aggregates', h: '/applications/20mm-aggregates' },
+        { t: '6mm Aggregates', h: '/applications/6mm-aggregates' }, { t: '12.5mm Aggregates', h: '/applications/12-5mm-aggregates' },
+        { t: '40mm Aggregates', h: '/applications/40mm-aggregates' }, { t: '60mm Aggregates', h: '/applications/60mm-aggregates' },
+        { t: 'M Sand', h: '/applications/m-sand' }, { t: 'P Sand', h: '/applications/plaster-sand' },
+        { t: 'RMC', h: '/applications/ready-mix-concrete' }, { t: 'GSB', h: '/applications/granular-sub-base' },
+        { t: 'WMM', h: '/applications/wet-mix-macadam' }, { t: 'Hot Mix Asphalt', h: '/applications/hot-mix-asphalt' }] },
+      f: { img: 'feat-applications', pos: '50% 50%', lab: 'Application Guides', hd: 'Know Your Product. Understand Its Application.', d: 'Where each aggregate, sand, concrete and road material is used, and how to choose the right one for your project.', cta: 'Explore All Applications', h: '/applications' } },
     infrastructure: { label: 'Infrastructure', href: '#infrastructure',
       c1: { h: 'Our Locations', items: [
         { t: 'Kundaim', d: 'RMC batching plant and heavy machinery operations base.', h: '/infrastructure/kundaim-rmc-plant', i: 'pin' },
@@ -102,7 +116,7 @@
         { t: 'Logistics', h: '#careers' }, { t: 'Industrial Operations', h: '#careers' }] },
       f: { img: 'feat-careers', pos: '50% 45%', lab: 'Careers at OM Group', hd: 'Build Your Future With Us.', d: 'Be part of the teams shaping Goa’s infrastructure.', cta: 'Apply Now', a: 'careers', h: '#careers' } }
   };
-  var ORDER = ['about', 'companies', 'products', 'infrastructure', 'contact', 'careers'];
+  var ORDER = ['about', 'companies', 'products', 'applications', 'infrastructure', 'contact', 'careers'];
 
   /* ---- helpers ---- */
   var exists = function (h) { return h.charAt(0) !== '#' || h === '#top' || !!document.getElementById(h.slice(1)); };
