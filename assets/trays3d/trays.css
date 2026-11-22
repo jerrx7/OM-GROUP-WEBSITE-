@@ -1,0 +1,20 @@
+/* OM GROUP · "Single-sized vs graded 12.5 mm" sample trays (12.5mm aggregates page, grade lab).
+   A rendered still of two white trays of fractured stone (Cycles, scripts/stonepile3d/build-trays.py) on the same drafting-paper stage as the other figures, with an
+   SVG layer on top: the two dashed highlight rings (switched by the A / B buttons, .z-single / .z-graded) and the captions. One frame: viewBox 0 20 1000 520. */
+.tr3d{position:relative}
+.tr3d-stage{position:relative;aspect-ratio:1000 / 520;border-radius:24px;overflow:hidden;
+  background:
+    radial-gradient(120% 90% at 88% 0%, #ffffff 0%, rgba(255,255,255,0) 58%),
+    linear-gradient(90deg, rgba(20,20,22,.03) 1px, transparent 1px) 0 0 / 2.5% 4.4444%,
+    linear-gradient(0deg, rgba(20,20,22,.03) 1px, transparent 1px) 0 0 / 2.5% 4.4444%,
+    linear-gradient(180deg, #fcfaf6 0%, #f6f2ea 100%);
+  box-shadow:0 0 0 1px var(--line, rgba(20,20,22,.08)), 0 50px 90px -70px rgba(20,20,22,.45);-webkit-tap-highlight-color:transparent}
+.tr3d-img{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:fill;opacity:0;transform:translateY(8px);transition:opacity .9s ease, transform 1.1s cubic-bezier(.2,.7,.2,1)}
+.tr3d.is-in .tr3d-img,.tr3d:not(.is-js) .tr3d-img{opacity:1;transform:none}
+.tr3d-ann{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.tr3d-cap text{font-family:var(--sans,"Inter",system-ui,sans-serif);text-anchor:middle}
+.tr3d-cap .t{font-size:21px;font-weight:700;letter-spacing:.12em;fill:#26282c}
+.tr3d-cap .s{font-size:15.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;fill:#74777c}
+@media (max-width:899px){.tr3d-stage{border-radius:18px}}
+@media (max-width:640px){.tr3d-cap .t{font-size:25px}.tr3d-cap .s{font-size:18px}}
+@media (prefers-reduced-motion:reduce){.tr3d-img{transition:none;opacity:1;transform:none}}

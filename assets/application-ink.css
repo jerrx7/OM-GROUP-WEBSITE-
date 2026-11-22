@@ -1,0 +1,6 @@
+/* OM GROUP · headline accent "ignite": ink to brand orange, slowly (see application-ink.js). Applies only while the script has armed the word. */
+@media (prefers-reduced-motion:no-preference){
+  html body em.ink-arm{color:var(--ink);text-shadow:0 0 0 rgba(241,90,41,0);transition:none}
+  html body em.ink-arm.ink-on{color:var(--accent);animation:inkGlow 3.4s ease-out var(--ink-d,.15s) both;transition:color 2.6s cubic-bezier(.4,0,.2,1) var(--ink-d,.15s)}
+}
+@keyframes inkGlow{0%{text-shadow:0 0 0 rgba(241,90,41,0)}45%{text-shadow:0 0 .55em rgba(241,90,41,.34)}100%{text-shadow:0 0 0 rgba(241,90,41,0)}}

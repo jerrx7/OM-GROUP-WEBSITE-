@@ -1,0 +1,49 @@
+/* Washed Sand application page: small additions on top of the shared application, Concrete Sand and 3D scene styles */
+
+/* the one sentence the whole page rests on */
+.wsd-credo{margin:26px 0 8px;padding:22px 26px;background:#fff;border:1px solid rgba(20,20,22,.09);border-left:4px solid var(--accent,#f15a29);border-radius:0 18px 18px 0;box-shadow:0 30px 56px -46px rgba(20,20,22,.5);max-width:880px}
+.wsd-credo span{display:block;font:700 11.5px/1 Inter,system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-ink,#c4410f);margin-bottom:10px}
+.wsd-credo p{margin:0;font:500 clamp(20px,2.2vw,28px)/1.3 "Cormorant Garamond",Georgia,serif;color:#141416}
+
+/* what washing can and cannot do */
+.wsd-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:34px 0 8px}
+.wsd-col{background:#fff;border:1px solid rgba(20,20,22,.09);border-radius:20px;padding:22px 24px 14px}
+.wsd-col h3{margin:0 0 10px;font:600 clamp(20px,2vw,26px)/1.15 "Cormorant Garamond",Georgia,serif;color:#141416}
+.wsd-col.yes{border-top:4px solid var(--accent,#f15a29)}.wsd-col.no{border-top:4px solid #8d8f94;background:#f7f6f2}
+@media (max-width:760px){.wsd-two{grid-template-columns:1fr}}
+
+/* washing and screening, side by side: two Blender stills (img/applications/washed-sand/wvs-*) with the page's own labels on top */
+.wsd-wv3{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:780px;margin:10px 0 4px;container-type:inline-size}
+.wv-pn{position:relative;margin:0;aspect-ratio:1480 / 1080;border-radius:16px;overflow:hidden;background:radial-gradient(120% 90% at 50% 38%,#fff 0%,#f4f3ef 70%,#ecebe6 100%);border:1.5px solid rgba(20,20,22,.14);transition:opacity .3s,border-color .3s,box-shadow .3s}
+.wv-pn picture,.wv-pn img{position:absolute;inset:0;display:block;width:100%;height:100%}
+.wv-pn img{object-fit:cover}
+.wv-t{position:absolute;left:4%;top:4.5%;padding:.55em .9em;border-radius:999px;background:rgba(255,255,255,.9);font:700 clamp(9px,2.5cqw,12px)/1 Inter,system-ui,sans-serif;letter-spacing:.14em;color:#4a4b50;box-shadow:0 0 0 1px rgba(20,20,22,.06)}
+.wv-o{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.wv-ar{fill:none;stroke:var(--accent,#f15a29);stroke-width:8;stroke-linecap:round;stroke-linejoin:round}
+.wv-lb{position:absolute;transform:translate(-50%,-50%);background:rgba(255,255,255,.95);color:#141416;border-radius:999px;padding:.42em .95em;font:600 clamp(10px,2.4cqw,13px)/1 Inter,system-ui,sans-serif;white-space:nowrap;box-shadow:0 6px 16px -8px rgba(0,0,0,.45),0 0 0 1px rgba(20,20,22,.06)}
+.wv-jn{position:absolute;left:50%;top:50%;width:30px;height:30px;transform:translate(-50%,-50%);fill:none;stroke:var(--accent,#f15a29);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;opacity:0;transition:opacity .3s;filter:drop-shadow(0 3px 6px rgba(0,0,0,.25))}
+.wv-jn circle{stroke:none}
+.wsd-wv3[data-f=wash] .wv-w,.wsd-wv3[data-f=screen] .wv-s,.wsd-wv3[data-f=both] .wv-pn{border-color:var(--accent,#f15a29);box-shadow:0 0 0 1px var(--accent,#f15a29) inset}
+.wsd-wv3[data-f=wash] .wv-s,.wsd-wv3[data-f=screen] .wv-w{opacity:.5}.wsd-wv3[data-f=both] .wv-jn{opacity:1}
+@media (max-width:560px){.wsd-wv3{grid-template-columns:1fr;gap:12px}.wv-jn{left:50%;top:calc(50% + 0px);transform:translate(-50%,-50%) rotate(90deg)}.wsd-wv3[data-f=wash] .wv-s,.wsd-wv3[data-f=screen] .wv-w{opacity:.62}}
+
+/* cross-section widgets (screed, bedding, filter): Blender stills (img/applications/washed-sand/x3-*) with the page's labels and highlight on top */
+.wsd-x3{position:relative;display:block;width:100%;max-width:780px;margin:10px 0 4px;aspect-ratio:2080 / 990;border-radius:16px;overflow:hidden;background:radial-gradient(120% 100% at 50% 40%,#fff 0%,#f6f4ef 62%,#eeece6 100%);box-shadow:0 26px 50px -40px rgba(20,20,22,.5),0 0 0 1px rgba(20,20,22,.06);container-type:inline-size}
+.wsd-x3 picture,.wsd-x3 img{position:absolute;inset:0;display:block;width:100%;height:100%}
+.wsd-x3 img{object-fit:cover}
+.wx-o{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.wx-o .hl{fill:rgba(241,90,41,.10);stroke:var(--accent,#f15a29);stroke-width:7;stroke-linejoin:round;opacity:0;transition:opacity .3s}
+.wx-flow{fill:none;stroke:#4f9ccf;stroke-width:9;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:22 18;filter:drop-shadow(0 2px 3px rgba(255,255,255,.6))}.wx-flow.wx-head{stroke-dasharray:none}
+.wx-lb{position:absolute;transform:translate(-50%,-50%);background:rgba(255,255,255,.95);color:#141416;border-radius:999px;padding:.4em .9em;font:600 clamp(9px,1.9cqw,13px)/1 Inter,system-ui,sans-serif;white-space:nowrap;box-shadow:0 6px 16px -8px rgba(0,0,0,.45),0 0 0 1px rgba(20,20,22,.06)}
+.wsd-x3[data-f=sub] .hz-sub,.wsd-x3[data-f=screed] .hz-screed,.wsd-x3[data-f=finish] .hz-finish,.wsd-x3[data-f=joint] .hz-joint,.wsd-x3[data-f=pipe] .hz-bed,.wsd-x3[data-f=util] .hz-bed,.wsd-x3[data-f=pave] .hz-pave,.wsd-x3[data-f=soil] .hz-soil,.wsd-x3[data-f=filter] .hz-filter{opacity:1}
+.wsd-x3[data-f=joint] .hz-joint{fill:rgba(241,90,41,.28)}.wsd-x3[data-f=path] .wx-flow{stroke:var(--accent,#f15a29)}
+@media (max-width:560px){.wx-lb{padding:.38em .7em}}
+
+/* a grading picture: before and after */
+.wsd-grade{display:block;width:100%;max-width:560px;height:auto;margin:8px 0 2px}
+.wsd-grade .gl{stroke:rgba(20,20,22,.12);stroke-width:1}.wsd-grade .ax{font:600 10.5px/1 Inter,system-ui,sans-serif;fill:#6b6c70}.wsd-grade .ax.t{font-size:11px}
+.wsd-grade polyline{fill:none;stroke-width:3;stroke-linejoin:round}.wsd-grade polyline.b{stroke:#8d8f94;stroke-dasharray:6 5}.wsd-grade polyline.a{stroke:var(--accent,#f15a29)}
+.wsd-grade circle.bd{fill:#8d8f94}.wsd-grade circle.ad{fill:var(--accent,#f15a29)}
+.wsd-grade[data-f=before] .g-a,.wsd-grade[data-f=after] .g-b{display:none}
+
+/* three cross-sections for the uses that are easy to over-claim */

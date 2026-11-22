@@ -1,0 +1,49 @@
+/* large concrete placement: 3D cross-section figure (assets/application-pour3d.js). Labels are real SVG text over the canvas. */
+.ap40-p3{margin:22px 0 0}
+.p3-stage{position:relative;aspect-ratio:1774/887;border-radius:22px;overflow:hidden;background:linear-gradient(180deg,#fdfcfa 0%,#f3f0e9 100%);box-shadow:0 40px 70px -40px rgba(0,0,0,.7)}
+.p3-poster,.p3-grid,.p3-cv,.p3-svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.p3-poster{object-fit:cover;transition:opacity .01s linear .7s}
+.p3-grid{background-image:linear-gradient(rgba(20,20,22,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(20,20,22,.055) 1px,transparent 1px);background-size:3.1% 6.2%;opacity:0;pointer-events:none}
+.p3-run .p3-grid{opacity:1}
+.p3-cv{opacity:0;transition:opacity .5s var(--ease)}
+.ap40-p3.p3-on .p3-cv{opacity:1}
+.ap40-p3.p3-on .p3-poster{opacity:0}
+.p3-svg{pointer-events:none}
+.p3-t{font:600 19px/1 Inter,system-ui,sans-serif;letter-spacing:.2em;fill:#2a2c30}
+.p3-rule{stroke:#8b8b90;stroke-width:1.3;fill:none}
+.p3-ldr{stroke:#ff5e29;stroke-width:2.1;fill:none;stroke-dasharray:1}
+.p3-dot{fill:#ff5e29;stroke:#fff;stroke-width:2}
+.p3-lc{fill:#fff;stroke:#2a2c30;stroke-width:2.6}
+.p3-ln{font:700 27px Inter,system-ui,sans-serif;fill:#17181b}
+.p3-chip{display:none}
+.p3-chip circle{fill:#ff5e29;stroke:#fff;stroke-width:5}
+.p3-chip text{fill:#fff;font:700 64px Inter,system-ui,sans-serif;text-anchor:middle}
+.p3-disc text{font:500 21px Inter,system-ui,sans-serif;letter-spacing:.22em;fill:#f7f0e6}
+.p3-dl{stroke:rgba(255,255,255,.55);stroke-width:1.3}
+.p3-run .p3-lab{opacity:0}
+.p3-run .ldr{stroke-dashoffset:1}
+.p3-ctl{position:absolute;left:14px;top:14px;display:none;gap:8px}
+.ap40-p3.p3-on .p3-ctl{display:flex}
+.p3-btn{font:600 12px/1 Inter,system-ui,sans-serif;letter-spacing:.04em;color:#fff;background:rgba(20,20,22,.74);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:9px 15px;cursor:pointer;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);transition:background .25s}
+.p3-btn:hover{background:#ff5e29}
+.p3-btn:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.ap40-p3 figcaption{margin-top:14px;font-size:13.5px;line-height:1.65;color:#cfcbc2}
+.p3-legend{display:none;list-style:none;margin:12px 0 0;padding:0;gap:8px 16px;flex-wrap:wrap;font-size:13px;color:#e6e2da}
+.p3-legend b{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;margin-right:8px;border-radius:50%;background:#ff5e29;color:#fff;font-size:12px}
+.p3-discm{display:none}
+@media (max-width:900px){
+  .p3-stage{border-radius:16px}
+  .p3-t,.p3-rule,.p3-layers{display:none}
+  .p3-chip{display:block}
+  .p3-dot{r:13}
+  .p3-ldr{stroke-width:4}
+  .p3-disc{display:none}
+  .p3-legend{display:flex}
+  .p3-discm{display:block;margin:12px 0 0;font-size:11px;letter-spacing:.14em;font-weight:600;color:#f1e9dc}
+  .p3-ctl{left:8px;top:8px}.p3-btn{padding:7px 11px;font-size:11px}
+}
+
+.ap125-dark .ap20-step button[aria-selected="true"] b{background:var(--accent);color:#fff}
+/* no-flicker swap */
+.p3-poster{z-index:1;pointer-events:none}.p3-grid,.p3-svg,.p3-ctl{z-index:2}
+.ap40-p3.p3-on .p3-cv{transition:none}.ap40-p3.p3-on .p3-poster{opacity:0;transition:opacity .5s ease}

@@ -1,0 +1,359 @@
+/* OM GROUP · Application page template (TEMPORARY TEST BUILD, local only).
+   Loaded AFTER /assets/applications.css (tokens, header, buttons, FAQ, quote band, footer).
+   Written to be reused by the other 14 application pages: every class is prefixed ap-. */
+
+html{scroll-padding-top:132px}
+:root{--scroll-offset:132px} /* header 72px + jump bar 48px + air; used by smooth-scroll.js for in-page anchors */
+
+/* ---------- breadcrumb ---------- */
+.ap-crumb{font-size:12.5px;color:var(--grey-2);margin-bottom:26px}
+.ap-crumb ol{display:flex;flex-wrap:wrap}
+.ap-crumb li+li::before{content:"›";margin:0 8px;opacity:.55}
+.ap-crumb a:hover{color:var(--accent-ink)}
+.ap-crumb [aria-current]{color:var(--ink);font-weight:600}
+
+/* ---------- hero: split layout, product cutout straight on the page ---------- */
+.ap-hero{padding:112px 0 56px;background:var(--white);overflow:hidden}
+.ap-hero-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:40px 56px;align-items:center}
+.ap-hero h1{font-size:clamp(36px,4.5vw,64px);line-height:1.04;letter-spacing:-.02em;margin-bottom:24px}
+.ap-hero h1 em,.ap-h2 em{color:var(--accent);font-style:italic;font-weight:500}
+.ap-hero p{font-size:16.5px;color:var(--grey);line-height:1.8;max-width:600px;margin-bottom:14px}
+.ap-hero p.ap-hero-lead{font-size:18px;color:var(--ink);line-height:1.7}
+.ap-hero .cta-row{margin-top:30px}
+.ap-hero-media{display:flex;justify-content:center}
+.ap-hero-media img{width:100%;max-width:560px;height:auto;filter:drop-shadow(0 28px 26px rgba(20,20,22,.18))}
+
+/* ---------- jump bar ---------- */
+.ap-toc{position:sticky;top:72px;z-index:50;background:rgba(255,255,255,.94);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.ap-toc ul{display:flex;gap:26px;overflow-x:auto;padding:0 32px;max-width:var(--wrap);margin:0 auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.ap-toc ul::-webkit-scrollbar{display:none}
+.ap-toc a{display:block;white-space:nowrap;padding:15px 0 13px;font-size:12.5px;font-weight:600;letter-spacing:.02em;color:var(--grey);border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
+.ap-toc a:hover{color:var(--ink)}
+.ap-toc a.on{color:var(--ink);border-bottom-color:var(--accent)}
+
+/* ---------- sections ---------- */
+.ap-sec{padding:104px 0}
+.ap-sec--bone{background:var(--bone)}
+.ap-h2{font-size:clamp(30px,3.8vw,54px);line-height:1.07;letter-spacing:-.016em;margin-bottom:22px}
+.ap-h3{font-size:clamp(24px,2.5vw,34px);line-height:1.15;letter-spacing:-.01em;margin:64px 0 16px}
+.ap-h4{font-family:var(--sans);font-size:17px;font-weight:600;line-height:1.4;margin-bottom:8px;letter-spacing:0}
+.ap-kicker{font-size:11px;letter-spacing:.3em;text-transform:uppercase;font-weight:600;color:var(--accent-ink);margin-bottom:14px}
+.ap-prose .ap-kicker{font-size:11px;letter-spacing:.3em;color:var(--accent-ink);line-height:1.5;margin-bottom:14px;max-width:none}
+.ap-lede{font-size:18px;color:var(--ink);line-height:1.75;max-width:760px;margin-bottom:16px}
+.ap-prose p{font-size:16.5px;color:var(--grey);line-height:1.85;max-width:720px;margin-bottom:16px}
+.ap-prose p:last-child{margin-bottom:0}
+.ap-prose strong,.ap-lede strong{color:var(--ink);font-weight:600}
+.ap-prose a,.ap-link{color:var(--accent-ink);border-bottom:1px solid var(--accent-line)}
+.ap-prose a:hover,.ap-link:hover{border-bottom-color:currentColor}
+.ap-list{margin:6px 0 18px;max-width:720px}
+.ap-list li{position:relative;padding:7px 0 7px 22px;font-size:16px;color:var(--grey);line-height:1.7}
+.ap-list li::before{content:"";position:absolute;left:2px;top:17px;width:7px;height:7px;background:var(--accent);border-radius:1px}
+.ap-note{max-width:760px;margin-top:22px;padding:16px 20px;border-left:3px solid var(--accent-ink);background:var(--bone);font-size:15.5px;line-height:1.75;color:var(--ink)}
+.ap-sec--bone .ap-note{background:#fff}
+.ap-note b{font-weight:700}
+.ap-cta-row{margin-top:34px}
+mark.todo{display:inline-block;margin:4px 0}
+
+/* ---------- two-column helper ---------- */
+.ap-split{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:48px 64px;align-items:center}
+.ap-split--top{align-items:start}
+.ap-fig img{width:100%;height:auto}
+.ap-fig figcaption{margin-top:12px;font-size:12.5px;color:var(--grey-2);line-height:1.6}
+.ap-fig--shadow img{filter:drop-shadow(0 22px 22px rgba(20,20,22,.16))}
+
+/* ---------- four-stage production sequence ---------- */
+.ap-stages{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0 28px;margin-top:34px;counter-reset:stage}
+.ap-stage{position:relative;padding-top:34px;counter-increment:stage}
+.ap-stage::before{content:"";position:absolute;left:0;right:-28px;top:9px;height:1px;background:var(--accent-line)}
+.ap-stage:last-child::before{right:0}
+.ap-stage::after{content:"";position:absolute;left:0;top:3px;width:13px;height:13px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 5px #fff}
+.ap-sec--bone .ap-stage::after{box-shadow:0 0 0 5px var(--bone)}
+.ap-stage .ap-stage-img{height:170px;display:flex;align-items:flex-end;justify-content:center;margin-bottom:18px}
+.ap-stage .ap-stage-img img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;filter:drop-shadow(0 12px 12px rgba(20,20,22,.14))}
+.ap-stage-n{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--accent-ink);font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1;display:block;margin-bottom:2px}
+.ap-stage p{font-size:15px;color:var(--grey);line-height:1.7}
+.ap-small{font-size:13px;color:var(--grey-2);margin-top:22px;max-width:720px}
+
+/* nominal-size graphic */
+.ap-nominal{width:100%;height:auto;max-width:640px}
+.ap-nominal text{font-family:var(--sans)}
+
+/* ---------- tables ---------- */
+.ap-tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:2px;background:#fff;margin:24px 0 6px}
+.ap-tbl-wrap:focus-visible{outline-offset:-3px}
+.ap-tbl{width:100%;min-width:560px;border-collapse:collapse}
+.ap-tbl caption{text-align:left;padding:16px 20px;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--grey-2);font-weight:700;border-bottom:1px solid var(--line)}
+.ap-tbl th,.ap-tbl td{padding:15px 20px;text-align:left;font-size:15px;line-height:1.6;border-bottom:1px solid rgba(20,20,22,.06);vertical-align:top}
+.ap-tbl thead th{background:var(--bone);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--grey);font-weight:700}
+.ap-tbl tbody th{font-weight:600;color:var(--ink)}
+.ap-tbl td{color:var(--grey)}
+.ap-tbl tr:last-child th,.ap-tbl tr:last-child td{border-bottom:0}
+.ap-tbl tbody tr:hover{background:var(--accent-soft)}
+
+/* ---------- role-in-concrete / why-size items ---------- */
+.ap-roles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 36px;margin-top:26px;counter-reset:role}
+.ap-roles li{counter-increment:role;padding:22px 0;border-top:1px solid var(--line);font-size:16px;font-weight:500;color:var(--ink);line-height:1.5}
+.ap-roles li::before{content:counter(role,decimal-leading-zero);display:block;font-family:var(--serif);font-style:italic;font-size:20px;color:var(--accent-ink);margin-bottom:4px;font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1}
+/* numbered "why" items: an even grid of tiles, each with number, title and text stacked. They used to be rows with the title in one half and the text in the other,
+   which left a hole under every short title. An odd last tile spans both columns and sets its two paragraphs side by side. */
+.ap-whys{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(16px,1.8vw,26px);margin-top:clamp(28px,3.4vw,48px)}
+.ap-why{display:flex;flex-direction:column;padding:clamp(26px,2.8vw,42px);border:1px solid var(--line);border-radius:20px;background:var(--bone);transition:border-color .5s var(--ease),box-shadow .6s var(--ease)}
+.ap-sec--bone .ap-why{background:#fff}
+.ap-whys>.ap-why:last-child:nth-child(odd){grid-column:1/-1}
+.ap-why h3{font-size:clamp(23px,2.1vw,30px);line-height:1.15;letter-spacing:-.01em;margin:0 0 clamp(12px,1.2vw,16px)}
+.ap-why h3 span{display:flex;align-items:center;gap:14px;font-family:var(--serif);font-style:italic;font-size:20px;color:var(--accent-ink);margin-bottom:clamp(14px,1.4vw,20px);font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1}
+.ap-why h3 span::after{content:"";flex:1;height:1px;background:var(--line)}
+.ap-why p{font-size:15.5px;color:var(--grey);line-height:1.8;max-width:none;margin-bottom:12px}
+.ap-why p:last-child{margin-bottom:0}
+@media (min-width:900px){.ap-whys>.ap-why:last-child:nth-child(odd)>div{column-count:2;column-gap:clamp(36px,5vw,72px)}.ap-whys>.ap-why:last-child:nth-child(odd)>div>p{break-inside:avoid}}
+@media (hover:hover) and (pointer:fine){.ap-why:hover{border-color:rgba(194,63,14,.32);box-shadow:0 26px 56px -36px rgba(20,20,22,.34)}}
+.ap-why strong{color:var(--ink);font-weight:600}
+
+/* ---------- application blocks (alternating) ---------- */
+/* ---------- application chapters ----------
+   A wide photograph opens as you scroll (CSS scroll-driven animation, see the motion block), the text sits beneath it.
+   Nothing is pinned and nothing slides sideways. */
+.ap-app{display:block;padding:0 0 clamp(72px,9vw,136px)}
+.ap-sec .ap-app:first-of-type{margin-top:56px}
+.ap-app:last-of-type{padding-bottom:24px}
+.ap-app-media{position:relative}
+.ap-photo{position:relative;margin:0;aspect-ratio:3/2;--rad:22px;border-radius:var(--rad);overflow:hidden;isolation:isolate;background:#d9d4c8;transform-origin:50% 50%;box-shadow:0 56px 90px -46px rgba(20,20,22,.55),0 16px 34px -20px rgba(20,20,22,.30)}
+.ap-photo::after{content:"";position:absolute;inset:0;z-index:1;border-radius:inherit;pointer-events:none;background:linear-gradient(180deg,rgba(14,14,16,0) 56%,rgba(14,14,16,.42) 100%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09)}
+.ap-photo-in{position:absolute;inset:0;overflow:hidden;transition:transform 1.6s var(--ease)}
+.ap-photo picture{display:block;width:100%;height:100%}
+.ap-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 50%}
+.ap-photo-cap{position:absolute;z-index:2;left:24px;right:24px;bottom:22px;display:flex;pointer-events:none}
+.ap-photo-cap span{padding:9px 15px;border-radius:999px;font-size:13px;font-weight:500;letter-spacing:.01em;line-height:1.35;color:#fff;background:rgba(20,20,22,.34);-webkit-backdrop-filter:blur(14px) saturate(1.3);backdrop-filter:blur(14px) saturate(1.3);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16)}
+@media (hover:hover) and (pointer:fine){.ap-photo:hover .ap-photo-in{transform:scale(1.03)}}
+.ap-app-body{display:block;margin-top:clamp(36px,4.6vw,66px)}
+.ap-app-n{display:block;font-family:var(--serif);font-style:italic;font-size:clamp(54px,6vw,88px);line-height:.9;letter-spacing:-.02em;color:var(--accent);margin-bottom:14px;font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1}
+.ap-app h3{font-size:clamp(30px,3.3vw,50px);line-height:1.06;letter-spacing:-.016em;margin-bottom:0}
+.ap-app p{font-size:16.5px;color:var(--grey);line-height:1.85;max-width:620px;margin-bottom:14px}
+.ap-app-text>*:last-child{margin-bottom:0}
+.ap-app .ap-label{font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--grey-2);margin:18px 0 4px}
+.ap-app .ap-list{margin-top:0}
+.ap-app .ap-note{margin-top:18px;max-width:620px}
+.ap-app--text{padding-top:clamp(56px,7vw,96px);border-top:1px solid var(--line)}
+
+
+/* ---------- 10mm vs 20mm ---------- */
+.ap-vs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 56px;margin:36px 0 12px;position:relative;align-items:end}
+.ap-vs::after{content:"vs";position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);font-family:var(--serif);font-style:italic;font-size:28px;color:var(--accent-ink)}
+.ap-vs figure{text-align:center}
+.ap-vs img{width:100%;max-width:380px;height:auto;margin:0 auto;filter:drop-shadow(0 20px 20px rgba(20,20,22,.16))}
+.ap-vs figcaption{margin-top:14px;font-size:15.5px;font-weight:600}
+.ap-vs figcaption small{display:block;font-weight:400;font-size:13px;color:var(--grey-2)}
+.ap-qa{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 40px;margin-top:40px}
+.ap-qa div{padding-top:22px;border-top:1px solid var(--line)}
+.ap-qa p{font-size:15.5px;color:var(--grey);line-height:1.8}
+
+/* ---------- industries ---------- */
+.ap-ind{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0 36px;margin-top:30px}
+.ap-ind li{padding-top:22px;border-top:1px solid var(--line)}
+.ap-ind p{font-size:15.5px;color:var(--grey);line-height:1.75}
+
+/* ---------- quality / procurement ---------- */
+.ap-check{counter-reset:chk;max-width:760px;margin:18px 0;border-top:1px solid var(--line)}
+.ap-check li{counter-increment:chk;display:grid;grid-template-columns:48px minmax(0,1fr);gap:14px;padding:15px 0;border-bottom:1px solid rgba(20,20,22,.06);font-size:16px;color:var(--ink);line-height:1.6}
+.ap-check li::before{content:counter(chk,decimal-leading-zero);font-family:var(--serif);font-style:italic;font-size:22px;line-height:1.2;color:var(--accent-ink);font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1}
+
+/* ---------- six-step selection guide ---------- */
+.ap-steps{counter-reset:stp;max-width:820px;margin-top:30px}
+.ap-steps li{counter-increment:stp;position:relative;display:grid;grid-template-columns:64px minmax(0,1fr);gap:18px;padding:0 0 34px}
+.ap-steps li::before{content:counter(stp);display:flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;border:1.5px solid var(--accent);font-family:var(--serif);font-size:20px;font-weight:600;color:var(--accent-ink);background:#fff;position:relative;z-index:1;font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1}
+.ap-steps li::after{content:"";position:absolute;left:20px;top:44px;bottom:2px;width:1.5px;background:var(--accent-line)}
+.ap-steps li:last-child::after{display:none}
+.ap-steps li:last-child{padding-bottom:0}
+.ap-steps h4{margin:6px 0 4px}
+.ap-steps p{font-size:15.5px;color:var(--grey);line-height:1.75}
+
+/* ---------- contact lines in the quote band ---------- */
+.ap-contact{display:flex;flex-wrap:wrap;gap:10px 32px;margin:26px 0 4px;font-size:15px}
+.ap-contact a{color:#fff;border-bottom:1px solid rgba(255,255,255,.35)}
+.ap-contact a:hover{border-bottom-color:#fff}
+
+/* ---------- related materials ---------- */
+.ap-rel{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:34px 14px;margin-top:34px}
+.ap-rel a{display:block;text-align:center;border-radius:6px;-webkit-tap-highlight-color:transparent}
+.ap-rel a:focus-visible{outline:3px solid var(--ink);outline-offset:6px}
+.ap-rel .stg{display:flex;align-items:flex-end;justify-content:center;aspect-ratio:5/4}
+.ap-rel .stg picture{display:flex;align-items:flex-end;justify-content:center;width:100%;height:100%}
+.ap-rel img{width:var(--w,78%);max-height:100%;height:auto;object-fit:contain;filter:drop-shadow(0 8px 8px rgba(20,20,22,.14));transition:transform .45s var(--ease),filter .45s var(--ease)}
+.ap-rel .nm{display:block;margin-top:12px;font-size:14px;font-weight:500}
+@media (hover:hover) and (pointer:fine){.ap-rel a:hover img,.ap-rel a:focus-visible img{transform:translateY(-10px) scale(1.1);filter:drop-shadow(0 20px 18px rgba(20,20,22,.22))}}
+.ap-rel-links{display:flex;flex-wrap:wrap;gap:12px 28px;margin-top:40px;font-size:15px}
+
+/* ---------- references ---------- */
+.ap-refs{max-width:820px;margin-top:20px;border-top:1px solid var(--line)}
+.ap-refs li{padding:14px 0;border-bottom:1px solid rgba(20,20,22,.06);font-size:15px;color:var(--grey);line-height:1.65}
+.ap-refs strong{color:var(--ink);font-weight:600}
+.ap-refs a{color:var(--accent-ink);border-bottom:1px solid var(--accent-line)}
+
+/* ---------- reveal: armed by script for blocks below the fold; with no script everything is visible.
+   Declared transitions live on the revealed state only (see the products-page performance notes). ---------- */
+.rv{opacity:0;transform:translateY(26px)}
+.rv.rv-on{opacity:1;transform:none;transition:opacity .85s var(--ease),transform .95s var(--ease)}
+/* photo: the frame is wiped open from the top while the picture settles from a slight zoom */
+.rv.rv-photo{opacity:1;transform:none;clip-path:inset(0 0 100% 0 round 22px)}
+.rv.rv-photo.rv-on{clip-path:inset(0 0 0 0 round 22px);transition:clip-path 1.15s var(--ease)}
+.rv-photo .ap-photo-in{transform:scale(1.05)}
+.rv-photo.rv-on .ap-photo-in{transform:none;transition:transform 1.7s var(--ease)}
+.rv-photo .ap-photo-cap{opacity:0;transform:translateY(10px)}
+.rv-photo.rv-on .ap-photo-cap{opacity:1;transform:none;transition:opacity .9s var(--ease) .75s,transform .9s var(--ease) .75s}
+/* text column: children rise one after another */
+.rv.rv-stagger{opacity:1;transform:none}
+.rv-stagger>*{opacity:0;transform:translateY(22px)}
+.rv-stagger.rv-on>*{opacity:1;transform:none;transition:opacity .8s var(--ease) calc(var(--si,0)*70ms + 160ms),transform .9s var(--ease) calc(var(--si,0)*70ms + 160ms)}
+.rv-stagger.rv-on>*:nth-child(2){--si:1}.rv-stagger.rv-on>*:nth-child(3){--si:2}.rv-stagger.rv-on>*:nth-child(4){--si:3}.rv-stagger.rv-on>*:nth-child(5){--si:4}.rv-stagger.rv-on>*:nth-child(6){--si:5}.rv-stagger.rv-on>*:nth-child(7){--si:6}.rv-stagger.rv-on>*:nth-child(n+8){--si:7}
+/* production sequence: the connecting line draws, the dots pop, the pictures rise */
+.ap-stages.rv{opacity:1;transform:none}
+.ap-stages.rv .ap-stage::before{transform:scaleX(0);transform-origin:left}
+.ap-stages.rv .ap-stage::after{transform:scale(0)}
+.ap-stages.rv .ap-stage>*{opacity:0;transform:translateY(22px)}
+.ap-stages.rv-on .ap-stage::before{transform:none;transition:transform .9s var(--ease) calc(var(--k,0)*.2s)}
+.ap-stages.rv-on .ap-stage::after{transform:none;transition:transform .6s cubic-bezier(.34,1.56,.64,1) calc(var(--k,0)*.2s + .1s)}
+.ap-stages.rv-on .ap-stage>*{opacity:1;transform:none;transition:opacity .8s var(--ease) calc(var(--k,0)*.2s + .25s),transform .9s var(--ease) calc(var(--k,0)*.2s + .25s)}
+.ap-stage:nth-child(2){--k:1}.ap-stage:nth-child(3){--k:2}.ap-stage:nth-child(4){--k:3}
+
+/* ---------- premium motion layer (everything here is progressive enhancement) ---------- */
+.ap-progress{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:linear-gradient(90deg,var(--accent),#FF8C63);transform:scaleX(0);transform-origin:left;pointer-events:none}
+.ap-hero-media picture{display:block}
+.btn{position:relative;overflow:hidden;isolation:isolate;transition:background .25s ease,color .25s ease,border-color .25s ease,transform .35s var(--ease),box-shadow .35s var(--ease)}
+.btn::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.3) 50%,transparent 70%);transform:translateX(-130%);transition:transform .8s var(--ease);pointer-events:none}
+@media (hover:hover) and (pointer:fine){
+  .btn:hover{transform:translateY(-2px);box-shadow:0 14px 28px -12px rgba(194,63,14,.55)}
+  .btn-ghost:hover{box-shadow:0 14px 28px -14px rgba(20,20,22,.35)}
+  .btn:hover::after{transform:translateX(130%)}
+}
+.btn:active{transform:translateY(0) scale(.985)}
+.ap-kicker::before{content:"";display:inline-block;width:32px;height:1px;margin-right:14px;vertical-align:middle;background:currentColor;transform-origin:left}
+@media (prefers-reduced-motion:no-preference){
+  /* animated FAQ: height eases open where the browser supports ::details-content */
+  .faq details{interpolate-size:allow-keywords}
+  .faq details::details-content{block-size:0;overflow:hidden;transition:block-size .5s var(--ease),content-visibility .5s allow-discrete}
+  .faq details[open]::details-content{block-size:auto}
+  .faq summary{transition:color .25s ease,padding .35s var(--ease)}
+  .faq summary:hover{color:var(--accent-ink)}
+  .faq-icon::before,.faq-icon::after{transition:transform .45s var(--ease)}
+}
+@supports (animation-timeline: view()){
+  @media (prefers-reduced-motion:no-preference){
+    /* all of these are driven by scroll position: no script, no stuck states */
+    /* chapter photograph: opens from a card to full width as it rises, the picture settles from a slow zoom, the frame eases back as it leaves */
+    @keyframes apFrameIn{from{scale:.9;border-radius:calc(var(--rad)*2.4);box-shadow:0 0 0 0 rgba(20,20,22,0),0 0 0 0 rgba(20,20,22,0)}to{scale:1;border-radius:var(--rad);box-shadow:0 56px 90px -46px rgba(20,20,22,.55),0 16px 34px -20px rgba(20,20,22,.30)}}
+    @keyframes apFrameOut{from{transform:none}to{transform:scale(.945) translateY(-1.5%)}}
+    @keyframes apImgSettle{0%{transform:scale(1.06)}50%,100%{transform:scale(1)}}
+    @keyframes apCapIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+    @keyframes apRuleDraw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+    @keyframes apHeadIn{from{transform:translateY(34px)}to{transform:none}}
+    @keyframes apLeadIn{from{transform:translateY(22px)}to{transform:none}}
+    @keyframes apHeroOut{from{transform:none}to{transform:translateY(46px) scale(.955)}}
+    /* one named timeline on the (untransformed) wrapper drives everything inside it: the picture's own overflow:hidden frame is a scroll container, so view() on the img itself would never move */
+    .ap-app-media{view-timeline:--apChapter block}
+    .ap-photo{animation:apFrameIn linear both,apFrameOut linear both;animation-timeline:--apChapter,--apChapter;animation-range:entry 0% cover 36%,exit 12% exit 100%}
+    .ap-photo img{animation:apImgSettle linear both;animation-timeline:--apChapter;animation-range:entry 0% exit 100%}
+    .ap-photo-cap{animation:apCapIn linear both;animation-timeline:--apChapter;animation-range:entry 60% cover 48%}
+    .ap-kicker::before{animation:apRuleDraw linear both;animation-timeline:view();animation-range:entry 10% entry 80%}
+    .ap-sec .ap-h2{animation:apHeadIn linear both;animation-timeline:view();animation-range:entry 5% entry 55%}
+    .ap-sec .ap-prose>.ap-lede{animation:apLeadIn linear both;animation-timeline:view();animation-range:entry 8% entry 60%}
+    .ap-hero-media{animation:apHeroOut linear both;animation-timeline:scroll(root);animation-range:0 70vh}
+  }
+}
+
+/* ---------- opening (transform only, headline never hidden) ---------- */
+@media (prefers-reduced-motion:no-preference){
+  @keyframes apRise{from{transform:translateY(24px)}to{transform:none}}
+  @keyframes apSettle{from{transform:translateY(18px) scale(.97)}to{transform:none}}
+  .ap-hero .ap-crumb{animation:apRise .8s var(--ease) both}
+  .ap-hero h1{animation:apRise 1.05s var(--ease) .06s both}
+  .ap-hero p{animation:apRise 1.05s var(--ease) .16s both}
+  .ap-hero .cta-row{animation:apRise 1.05s var(--ease) .26s both}
+  .ap-hero-media img{animation:apSettle 1.4s var(--ease) .1s both}
+}
+
+/* ---------- breakpoints ---------- */
+@media (max-width:1079px){
+  .ap-stages{grid-template-columns:repeat(2,minmax(0,1fr));gap:40px 28px}
+  .ap-stage::before{right:-28px}
+  .ap-stage:nth-child(2n)::before{right:0}
+  .ap-roles{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ap-ind{grid-template-columns:repeat(2,minmax(0,1fr));gap:30px 36px}
+  .ap-qa{grid-template-columns:minmax(0,1fr);gap:28px}
+  .ap-rel{grid-template-columns:repeat(3,minmax(0,1fr));gap:44px 20px}
+}
+@media (min-width:1080px){
+  .ap-rel{grid-template-columns:repeat(6,minmax(0,1fr));gap:48px 18px}
+}
+@media (max-width:899px){
+  .ap-sec{padding:72px 0}
+  .ap-hero{padding-top:96px}
+  .ap-hero-grid,.ap-split,.ap-app,.ap-app--text,.ap-whys{grid-template-columns:minmax(0,1fr)}
+  .ap-hero-media{order:-1}
+  .ap-hero-media img{max-width:420px}
+  .ap-app{padding-bottom:64px}
+  .ap-app-body{grid-template-columns:minmax(0,1fr);gap:22px}
+  .ap-photo{aspect-ratio:3/2;--rad:16px}
+  .ap-photo-cap{left:14px;right:14px;bottom:14px}
+  .ap-photo-cap span{font-size:12.5px;padding:8px 13px}
+  .ap-why{padding:26px 22px;border-radius:18px}
+  .ap-h3{margin-top:52px}
+  .ap-toc ul{padding:0 20px;gap:22px}
+}
+@media (max-width:639px){
+  .ap-rel{grid-template-columns:repeat(2,minmax(0,1fr));gap:36px 12px}
+  .ap-rel li:last-child{grid-column:1/-1;width:calc(50% - 6px);justify-self:center}
+}
+@media (max-width:767px){
+  .ap-hero{padding-top:88px}
+  .ap-hero-media img{max-width:300px}
+  .ap-vs{gap:12px 10px}
+  .ap-vs::after{font-size:22px;top:30%}
+  .ap-vs figcaption{font-size:14px}
+  .ap-stages{grid-template-columns:minmax(0,1fr)}
+  .ap-stage::before{right:0!important}
+  .ap-roles{grid-template-columns:minmax(0,1fr)}
+  .ap-ind{grid-template-columns:minmax(0,1fr)}
+  .ap-steps li{grid-template-columns:52px minmax(0,1fr);gap:12px}
+  .ap-check li{grid-template-columns:40px minmax(0,1fr)}
+  .ap-tbl th,.ap-tbl td{padding:13px 14px;font-size:14.5px}
+  /* comparison table: one block per criterion */
+  .ap-cmp-wrap{overflow:visible;border:0;background:transparent}
+  .ap-cmp{min-width:0}
+  .ap-cmp thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .ap-cmp tbody,.ap-cmp tr,.ap-cmp th,.ap-cmp td{display:block}
+  .ap-cmp caption{display:block;padding:0 0 14px;border:0}
+  .ap-cmp tr{background:#fff;border:1px solid var(--line);border-radius:2px;margin-bottom:12px;padding:6px 0}
+  .ap-cmp tbody th{padding:12px 14px 4px;border:0;font-size:15.5px}
+  .ap-cmp td{display:grid;grid-template-columns:64px minmax(0,1fr);gap:10px;border:0;padding:6px 14px}
+  .ap-cmp td::before{content:attr(data-label);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink);padding-top:3px}
+  .ap-cmp tbody tr:hover{background:#fff}
+}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1!important;transform:none!important}}
+
+@media print{*{animation:none!important;transition:none!important}.rv,.rv-stagger>*,.rv-photo,.rv-photo .ap-photo-in{opacity:1!important;transform:none!important;clip-path:none!important;filter:none!important}.ap-toc,.sticky-bar,.leave-veil{display:none!important}}
+
+/* ---------- nominal size: three technical panels ---------- */
+.ap-arts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin-top:40px}
+.ap-art-card{display:flex;flex-direction:column;padding:16px 16px 22px;border:1px solid var(--line);border-radius:8px;background:linear-gradient(180deg,#fff 0%,var(--bone) 100%);transition:transform .5s var(--ease),box-shadow .5s var(--ease),border-color .5s var(--ease)}
+.ap-art{display:block;width:100%;height:auto;margin-bottom:18px}
+.ap-art text{font-family:var(--sans)}
+.ap-art-txt{margin-top:auto;padding-top:16px;border-top:1px solid var(--line)}
+.ap-art-n{display:block;font-family:var(--serif);font-style:italic;font-size:20px;line-height:1.1;color:var(--accent-ink);margin-bottom:2px;font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1}
+.ap-art-txt p{font-size:15px;color:var(--grey);line-height:1.7}
+@media (hover:hover) and (pointer:fine){.ap-art-card:hover{transform:translateY(-6px);box-shadow:0 26px 40px -24px rgba(20,20,22,.28);border-color:rgba(241,90,41,.35)}}
+@media (max-width:1079px){.ap-arts{grid-template-columns:minmax(0,1fr);gap:20px}}
+@media (min-width:640px) and (max-width:1079px){
+  .ap-art-card{flex-direction:row;align-items:center;gap:32px;padding:20px 28px 20px 20px}
+  .ap-art{flex:0 0 54%;width:54%;margin:0}
+  .ap-art-txt{margin:0;padding:0 0 0 32px;border-top:0;border-left:1px solid var(--line)}
+  .ap-art-txt p{font-size:16px}
+}
+@media (max-width:639px){.ap-arts{max-width:520px}}
+/* the stagger reveal also applies to the panels' own children, so they lift together: keep the cards themselves still */
+.ap-arts.rv-stagger>.ap-art-card{will-change:auto}
+
+/* ---------- supply in Goa: the map is the picture ---------- */
+.ap-split--map{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px 72px}
+.ap-map{margin:0;width:100%;max-width:600px;justify-self:center;align-self:center}
+.ap-map img{width:100%;height:auto;display:block}
+@media (max-width:899px){.ap-split--map{grid-template-columns:minmax(0,1fr)}.ap-map{max-width:520px}}

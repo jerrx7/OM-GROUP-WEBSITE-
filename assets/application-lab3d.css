@@ -1,0 +1,32 @@
+/* laboratory test stations: 3D equipment cards (shared by the 20mm and 40mm application pages; the drawing is assets/application-lab3d.js) */
+.ap-lab3d{grid-template-columns:repeat(12,minmax(0,1fr));gap:16px;margin-top:30px}
+.ap-lab3d .ap20-st{grid-column:span 3}
+.ap-lab3d .ap20-st:nth-child(n+5){grid-column:span 4}
+.ap20-st.l3{height:100%;display:flex;flex-direction:column;justify-content:flex-start;align-items:stretch;--ty:0px;--rx:0deg;--ry:0deg;position:relative;padding:10px 10px 20px;border-radius:24px;border:1px solid var(--line);background:linear-gradient(180deg,#fff 0%,#fbf9f5 100%);transform:perspective(1000px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(var(--ty));transform-style:flat;will-change:transform;transition:border-color .4s var(--ease),box-shadow .5s var(--ease),transform .35s var(--ease),background .5s var(--ease)}
+.ap20-st.l3 .l3-media{display:block;position:relative;aspect-ratio:5/4;margin:0;padding:0;border-radius:16px;overflow:hidden;background:radial-gradient(120% 95% at 50% 28%,#fff 0%,#f7f3ec 58%,#eee8dc 100%);letter-spacing:0;text-transform:none;font-size:0}
+.ap20-st.l3 .l3-media img,.ap20-st.l3 .l3-media canvas{position:absolute;inset:0;width:100%;height:100%;display:block;background:none;border-radius:0;object-fit:contain}
+.ap20-st.l3 .l3-cv{opacity:0;transition:opacity .6s var(--ease)}
+.ap20-st.l3.l3-on .l3-cv{opacity:1}
+.ap20-st.l3.l3-on .l3-media img{opacity:0;transition:opacity .01s linear .7s}
+.ap20-st.l3 strong{margin:14px 8px 0;font-size:clamp(18px,1.55vw,22px);font-weight:600;letter-spacing:-.005em}
+.ap20-st.l3 .l3-sub{margin:5px 8px 0;font-size:11.5px;letter-spacing:.13em}
+.ap20-st.l3::after{content:"";display:block;width:30px;height:3px;margin:13px 8px 0;border-radius:2px;background:var(--accent);transition:width .5s var(--ease)}
+.ap20-st.l3[aria-pressed="true"]{--ty:-4px;border-color:var(--accent);background:linear-gradient(180deg,#fff 0%,#fff6f0 100%);box-shadow:0 0 0 1px var(--accent),0 30px 50px -30px rgba(241,90,41,.55),0 12px 26px -18px rgba(20,20,22,.25)}
+.ap20-st.l3[aria-pressed="true"]::after{width:46px}
+@media (hover:hover){.ap20-st.l3:hover{--ty:-4px;border-color:rgba(241,90,41,.6);box-shadow:0 26px 44px -30px rgba(20,20,22,.4)}.ap20-st.l3[aria-pressed="true"]:hover{border-color:var(--accent)}}
+.l3-js .ap-lab3d:not(.l3-in) .ap20-st.l3{opacity:0}
+.l3-js .ap-lab3d.l3-in .ap20-st.l3{animation:l3Rise .9s var(--ease) calc(var(--i,0)*95ms) backwards}
+@keyframes l3Rise{from{opacity:0;transform:perspective(1000px) translateY(26px) scale(.975)}to{opacity:1;transform:perspective(1000px) translateY(0) scale(1)}}
+@media (prefers-reduced-motion:reduce){.l3-js .ap-lab3d:not(.l3-in) .ap20-st.l3{opacity:1}.l3-js .ap-lab3d.l3-in .ap20-st.l3{animation:none}.ap20-st.l3{transition:none;transform:none}}
+@media (max-width:1023px){.ap-lab3d .ap20-st,.ap-lab3d .ap20-st:nth-child(n+5){grid-column:span 4}.ap-lab3d .ap20-st:nth-child(n+4){grid-column:span 3}}
+@media (max-width:640px){
+  .ap-lab3d{gap:10px}
+  .ap-lab3d .ap20-st,.ap-lab3d .ap20-st:nth-child(n+4){grid-column:span 6;padding:8px 8px 16px;border-radius:20px}
+  .ap-lab3d .ap20-st:nth-child(7){grid-column:span 12}
+  .ap-lab3d .ap20-st:nth-child(7) .l3-media{aspect-ratio:2.1/1}
+  .ap20-st.l3 .l3-media{border-radius:13px}
+  .ap20-st.l3 strong{margin:11px 5px 0;font-size:17px}.ap20-st.l3 .l3-sub{margin:4px 5px 0;font-size:10.5px;letter-spacing:.1em}.ap20-st.l3::after{margin:11px 5px 0}
+}
+/* no-flicker swap */
+.ap20-st.l3 .l3-media img{z-index:1;pointer-events:none}
+.ap20-st.l3.l3-on .l3-cv{transition:none}.ap20-st.l3.l3-on .l3-media img{opacity:0;transition:opacity .5s ease}

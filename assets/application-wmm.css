@@ -1,0 +1,92 @@
+/* Wet Mix Macadam application page: additions on top of the shared application, Concrete Sand and 3D scene styles.
+   TEMPORARY local build: part of the unpublished applications set. */
+
+/* sections rendered from the specification */
+.wmd-flow{max-width:760px}.wmd-flow>.wmd-item{margin-top:26px}.wmd-flow .ap-h4{margin:0 0 8px}
+.wmd-grid{display:block;columns:330px 3;column-gap:16px;margin-top:30px;max-width:1136px}
+.wmd-grid>*{break-inside:avoid;-webkit-column-break-inside:avoid;page-break-inside:avoid;margin:0 0 16px}
+.wmd-grid:not(:has(>:nth-child(3))){display:grid;columns:auto;grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr));gap:16px}
+.wmd-grid:not(:has(>:nth-child(3)))>*{margin:0}
+.wmd-card{background:#f7f6f2;border:1px solid rgba(20,20,22,.08);border-radius:18px;padding:22px 24px;position:relative}
+.wmd-card .ap-h4{margin:0 0 10px;font-size:clamp(19px,1.6vw,22px)}.wmd-card p{margin:0 0 10px;font-size:15.5px;line-height:1.65;color:#35363a}.wmd-card p:last-child{margin-bottom:0}.wmd-card .ap-list{margin:6px 0 10px}
+.wmd-n{display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:26px;padding:0 9px;margin:0 0 12px;border-radius:999px;background:rgba(241,90,41,.12);color:var(--accent-ink,#c4410f);font:700 12px/1 Inter,system-ui,sans-serif;letter-spacing:.1em}
+.wmd-card .psd-warn{margin:12px 0 0;font-size:14.5px}
+.wmd-answers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 34px;margin-top:26px}@media (max-width:900px){.wmd-answers{grid-template-columns:1fr}}
+.wmd-six{display:block;columns:320px 3;column-gap:34px;margin-top:34px;max-width:1136px}
+.wmd-six>*{break-inside:avoid;margin:0 0 22px}.wmd-six h3{margin:0 0 6px}.wmd-six p{margin:0 0 8px;font-size:15.5px;line-height:1.65;color:#35363a}
+.wmd-two{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:30px;max-width:1136px}.wmd-col{background:#f7f6f2;border-radius:16px;padding:16px 20px}.wmd-col.rm{background:rgba(241,90,41,.07);border:1px solid rgba(241,90,41,.22)}
+.wmd-col b{display:block;font:700 11.5px/1 Inter,system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#4a4b50;margin-bottom:10px}.wmd-col .ap-list{margin:0}
+@media (max-width:640px){.wmd-two{grid-template-columns:1fr}}
+.psd-warn{margin:14px 0 26px;padding:14px 18px;border-left:4px solid var(--accent,#f15a29);background:rgba(241,90,41,.07);border-radius:0 12px 12px 0;font-size:15px;line-height:1.55;color:#141416}
+.ap-photo-cap{max-width:100%}.wmd-reveal .s3d-banner{margin-top:6px}
+
+/* the standards-update call-out */
+.wmd-std{margin:24px 0 30px;padding:22px 26px;background:#141416;color:#fff;border-radius:20px;max-width:960px}
+.wmd-std .tag{display:inline-block;margin:0 0 10px;font:700 10.5px/1 Inter,system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--accent,#f15a29)}
+.wmd-std h3{margin:0 0 10px;font:600 clamp(26px,3vw,38px)/1.1 "Cormorant Garamond",Georgia,serif;color:#fff}.wmd-std p{margin:0 0 10px;font-size:15.5px;line-height:1.6;color:rgba(255,255,255,.88)}.wmd-std p:last-child{margin:0}.wmd-std strong{color:#fff}.wmd-std em{color:rgba(255,255,255,.95)}
+
+/* grading charts */
+.wmg{display:block;width:100%;max-width:680px;height:auto;margin:8px 0 14px}
+.wmg .g{stroke:rgba(20,20,22,.1);stroke-width:1}.wmg .g.v{stroke:rgba(20,20,22,.07)}.wmg .ax{font:500 10.5px/1 Inter,system-ui,sans-serif;fill:#6b6c70}.wmg .ax.t{font-weight:600;fill:#4a4b50;letter-spacing:.02em}
+.wmg polygon.m{fill:rgba(74,75,80,.2);stroke:#4a4b50;stroke-width:2;stroke-linejoin:round}.wmg polygon.i{fill:rgba(241,90,41,.18);stroke:var(--accent,#f15a29);stroke-width:2;stroke-linejoin:round}
+.wmg .fine{fill:rgba(44,134,201,.07);stroke:rgba(44,134,201,.3);stroke-dasharray:4 4}.wmg .note{font:700 10px/1 Inter,system-ui,sans-serif;letter-spacing:.06em;fill:#2c6c9e}
+.wmg text.lg{font:700 12px/1 Inter,system-ui,sans-serif;stroke:none}.wmg text.lg.m{fill:#4a4b50}.wmg text.lg.i{fill:var(--accent-ink,#c4410f)}
+.wmd-gr .ap-tbl-wrap{margin:10px 0 12px}.wmd-gr .s3d-read p{max-width:70ch}
+/* the three sieves */
+.wmd-sv{max-width:700px;margin:10px 0 6px}.wms{display:block;width:100%;height:auto}
+.wms .rim{fill:#a9abb0;stroke:#6b6c70}.wms .body{fill:#c8cacd;stroke:#6b6c70;stroke-width:1}.wms .rim.top{fill:#d8dadd}.wms .mesh{stroke:none}.wms .hl{fill:none;stroke:var(--accent,#f15a29);stroke-width:3}
+.wms .t1{font:700 15px/1 Inter,system-ui,sans-serif;fill:#141416}.wms .t2{font:500 12px/1 Inter,system-ui,sans-serif;fill:#4a4b50}.wms .t3{font:700 11px/1 Inter,system-ui,sans-serif;letter-spacing:.08em;fill:var(--accent-ink,#c4410f)}
+/* two lab figures side by side */
+.wmd-lab2{display:grid;grid-template-columns:1fr;gap:34px}
+/* approach sequences */
+.wmd-seq{margin:20px 0 6px;max-width:900px}.wmd-seq ol{list-style:none;display:flex;flex-wrap:wrap;gap:8px 4px;margin:8px 0 0;padding:0;counter-reset:s}
+.wmd-seq li{counter-increment:s;position:relative;padding:9px 16px 9px 34px;background:#fff;border:1px solid rgba(20,20,22,.14);border-radius:999px;font:600 13px/1.2 Inter,system-ui,sans-serif;color:#2b2c30}
+.wmd-seq li::before{content:counter(s);position:absolute;left:9px;top:50%;transform:translateY(-50%);width:18px;height:18px;border-radius:50%;background:var(--accent,#f15a29);color:#fff;font:700 10.5px/18px Inter,system-ui,sans-serif;text-align:center}
+/* production boundary and the journey */
+.wmb{display:block;width:100%;max-width:660px;height:auto;margin:4px 0 12px}.wmb .om{fill:rgba(241,90,41,.14);stroke:var(--accent,#f15a29);stroke-width:1.5}.wmb .ot{fill:rgba(20,20,22,.05);stroke:rgba(20,20,22,.16)}
+.wmb .zt{font:700 9.4px/1 Inter,system-ui,sans-serif;letter-spacing:.08em;fill:#4a4b50}.wmb .nd{fill:#fff;stroke:rgba(20,20,22,.4);stroke-width:2}.wmb .nd.om{stroke:var(--accent,#f15a29)}.wmb .nd.on{fill:var(--accent,#f15a29);stroke:#fff}
+.wmb .bl{font:600 9.2px/1 Inter,system-ui,sans-serif;fill:#6b6c70}.wmb .bl.on{fill:var(--accent-ink,#c4410f);font-weight:700}
+.wmd-journey .s3d-step{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+/* drying timeline */
+.wmd-dry{max-width:700px;margin:12px 0 4px}.wmt{display:block;width:100%;height:auto}
+.wmt .rail{fill:none;stroke:rgba(20,20,22,.2);stroke-width:4;stroke-linecap:round}.wmt .rail.on{stroke:var(--accent,#f15a29)}.wmt .nd{fill:#fff;stroke:rgba(20,20,22,.4);stroke-width:2.4}.wmt .nd.hot{fill:var(--accent,#f15a29);stroke:#fff}
+.wmt .bl{font:600 11.5px/1 Inter,system-ui,sans-serif;fill:#4a4b50}.wmt .bl.on{fill:var(--accent-ink,#c4410f);font-weight:700}.wmt .ref{font:600 10.5px/1 Inter,system-ui,sans-serif;fill:#6b6c70}
+/* field report template */
+.wmd-rep{max-width:300px}.wmr{display:block;width:100%;height:auto}.wmr .pp{fill:#fff;stroke:rgba(20,20,22,.2);stroke-width:1.4}.wmr .ti{font:700 7.6px/1 Inter,system-ui,sans-serif;letter-spacing:.05em;fill:#6b6c70}
+.wmr .rw{fill:#f4f2ec}.wmr .fl{font:600 9.6px/1 Inter,system-ui,sans-serif;fill:#4a4b50}.wmr .vl{stroke:#a9a69d;stroke-width:1}
+/* OMC and MDD visualiser */
+.wmd-omc{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:30px;align-items:center;margin:10px 0 0;padding:22px;background:#faf8f3;border:1px solid rgba(20,20,22,.08);border-radius:22px}
+@media (max-width:900px){.wmd-omc{grid-template-columns:1fr;padding:16px}}
+.wmo{display:block;width:100%;height:auto}.wmo .zone{fill:rgba(20,20,22,.04)}.wmo .zone.wet{fill:rgba(44,134,201,.08)}.wmo .zone.dry{fill:rgba(201,160,90,.12)}
+.wmo .ax-l{stroke:#8d8f94;stroke-width:1.4}.wmo .curve{fill:none;stroke:#2b2c30;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}.wmo .zt{font:700 10.5px/1 Inter,system-ui,sans-serif;letter-spacing:.1em;fill:#6b6c70}
+.wmo .pk{stroke:rgba(20,20,22,.3);stroke-dasharray:4 4}.wmo .pkd{fill:#2b2c30}.wmo .pt{font:700 11px/1 Inter,system-ui,sans-serif;fill:#2b2c30}.wmo .mk{stroke:var(--accent,#f15a29);stroke-width:2;stroke-dasharray:3 4}.wmo .dot{fill:var(--accent,#f15a29);stroke:#fff;stroke-width:3}
+.wmo .ax.t,.wmo text.ax{font:600 11px/1 Inter,system-ui,sans-serif;fill:#4a4b50}
+.wmd-omc .s3d-read{border-top:1px solid rgba(20,20,22,.12)}.wmd-omc .s3d-read p{min-height:3.4em}
+/* the five product cards */
+.wmd-prods{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:18px;margin:30px 0 0;padding:0;max-width:1136px}
+.wmd-prods>li{flex:1 1 300px;max-width:calc((100% - 36px)/3);min-width:min(100%,260px)}
+@media (max-width:760px){.wmd-prods>li{max-width:100%}}
+.wmd-prod{display:flex;flex-direction:column;height:100%;background:#fff;border:1px solid rgba(20,20,22,.1);border-radius:20px;padding:20px 22px}
+.wmd-prod .stg{display:flex;align-items:center;justify-content:center;height:170px;margin-bottom:14px;overflow:hidden}.wmd-prod .stg picture{display:flex;align-items:center;justify-content:center;width:100%;height:100%}.wmd-prod .stg img{height:100%;width:auto;max-width:100%;object-fit:contain}
+.wmd-prod .ap-h4{margin:0 0 6px}.wmd-prod p{margin:0 0 10px;font-size:15px;line-height:1.6;color:#35363a;flex:1}.wmd-prod .ap-link{margin-top:auto}
+.wmd-claim{margin:34px 0 14px;max-width:880px;font:600 clamp(24px,2.8vw,36px)/1.2 "Cormorant Garamond",Georgia,serif;color:#141416;padding:20px 26px;border-left:5px solid var(--accent,#f15a29);background:rgba(241,90,41,.06);border-radius:0 18px 18px 0}
+/* quote builder */
+.wmd-build .csd-build-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))}
+.wmd-cmp .kv,.wmd-qc .kv,.wmd-sel .s3d-read ol{max-width:760px}
+.wmd-lab2 .s3d-box .s3d-grid{grid-template-columns:minmax(0,1fr)}
+@media (min-width:1100px){.wmd-lab2{grid-template-columns:1fr 1fr}.wmd-lab2 .s3d-box .s3d-ctl{padding-top:8px}}
+
+/* long column names (e.g. Information, Percentage by weight passing) stack above the value on phones instead of colliding with it */
+@media (max-width:760px){.ap-cmp td{grid-template-columns:minmax(0,1fr)!important;gap:2px!important}.ap-cmp td::before{padding-top:0!important}}
+
+/* masonry columns dealt by application-fill.js (shortest column first); the CSS columns above are the no-script fallback */
+.wmd-grid.mas,.wmd-six.mas{display:flex;columns:auto;gap:16px;align-items:stretch}
+.wmd-six.mas{gap:34px}
+.wmd-grid.stack{grid-template-columns:1fr!important}
+.wmd-grid.rowg,.wmd-six.rowg{display:grid;columns:auto;gap:16px;align-items:stretch}
+.wmd-six.rowg{gap:22px 34px;align-items:start}
+.wmd-grid.rowg>*,.wmd-six.rowg>*{margin:0}
+.mas-col{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:16px}
+.wmd-grid.mas .mas-col>:last-child{flex:1 1 auto}
+.wmd-six.mas .mas-col{gap:22px}
+.wmd-grid.mas .mas-col>*,.wmd-six.mas .mas-col>*{margin:0}

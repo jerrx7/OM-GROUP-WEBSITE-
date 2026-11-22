@@ -1,0 +1,44 @@
+/* OM GROUP · application pages: progressive orange text wipe (see application-wipe.js). Local build, not deployed.
+   Everything here is keyed on classes / elements that the script adds at run time, so with no JS, reduced motion, print or a forced-colour
+   theme the callouts look exactly as they were written. */
+
+/* the position of the soft edge inside each word (px from the word's left) is --wf-e; --wf-p (0..1) is the block's progress and is not inherited,
+   so updating it only restyles the block itself, not every word in it */
+@property --wf-p{syntax:'<number>';inherits:false;initial-value:0}
+
+wf-w{display:inline}
+
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  /* one word = one carrier. The glyphs are painted with a gradient: orange behind the edge, a short brighter ember at the edge, quiet grey ahead of it.
+     The padding / negative margin pair grows the painted box so italic overhangs are not clipped while the layout stays exactly as it was. */
+  .wf-live wf-w{
+    padding:.14em .2em;margin:-.14em -.2em;
+    -webkit-text-fill-color:transparent;color:transparent;
+    background-image:linear-gradient(90deg,
+      var(--wf-fill) calc(var(--wf-e,-999px) - var(--wf-f,40px) * .5),
+      var(--wf-hot)  calc(var(--wf-e,-999px) - var(--wf-f,40px) * .1),
+      var(--wf-base) calc(var(--wf-e,-999px) + var(--wf-f,40px) * .5));
+    background-repeat:no-repeat;
+    -webkit-background-clip:text;background-clip:text;
+  }
+  .wf-live wf-w::selection{-webkit-text-fill-color:#fff;color:#fff;background:var(--wf-fill)}
+}
+
+/* the three colour sets. Big serif takeaways use the deeper site orange (the same fill as the homepage About wipe); the small notes use the
+   deepest ("small text") orange so they stay readable once filled. On dark sections the brand orange and a lighter ember. */
+.wf-quote{--wf-fill:var(--accent-deep,#D94817);--wf-hot:#FF7A45;--wf-base:#a59d90;--wf-bar0:#dcd5c9}
+.wf-note{--wf-fill:var(--accent-ink,#C23F0E);--wf-hot:#EE6733;--wf-base:#8f887b;--wf-bar0:#e3dccf}
+.wf-quote.wf-dark{--wf-fill:var(--accent,#F15A29);--wf-hot:#FFB08A;--wf-base:#6d685f;--wf-bar0:#4a463f}
+.wf-note.wf-dark{--wf-fill:#FF8C63;--wf-hot:#FFC2A6;--wf-base:#7a756c;--wf-bar0:#4a463f}
+
+/* the rule on the left warms up with the text; the small label above a takeaway settles from a softer tone */
+@supports (color:color-mix(in srgb,red 50%,blue)){
+  .ap6-takeaway.wf-live,.ap-note.wf-live,.psd-warn.wf-live{
+    border-left-color:color-mix(in srgb,var(--wf-fill) calc(18% + 82% * var(--wf-p)),var(--wf-bar0));
+  }
+}
+.ap6-takeaway.wf-live>span{opacity:calc(.55 + .45 * var(--wf-p))}
+
+@media print,(forced-colors:active){
+  .wf-live wf-w{-webkit-text-fill-color:currentColor;color:inherit;background:none;padding:0;margin:0}
+}

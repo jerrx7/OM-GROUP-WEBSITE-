@@ -1,0 +1,74 @@
+/* Ready-Mix Concrete application page: small additions on top of the shared application, Concrete Sand, Plaster Sand and 3D scene styles */
+
+/* the plant / site boundary: ten steps on a line */
+.rmd-bound{display:block;width:100%;max-width:600px;height:auto;margin:6px 0 10px}
+.rmd-bound .pr{fill:rgba(20,20,22,.05);stroke:rgba(20,20,22,.14)}.rmd-bound .st{fill:rgba(241,90,41,.12);stroke:var(--accent,#f15a29);stroke-width:1.5}
+.rmd-bound .zt{font:700 9.5px/1 Inter,system-ui,sans-serif;letter-spacing:.08em;fill:#4a4b50}
+.rmd-bound .nd{fill:#fff;stroke:rgba(20,20,22,.4);stroke-width:2}.rmd-bound .nd.on{fill:var(--accent,#f15a29);stroke:#fff}
+.rmd-bound .bl{font:600 9.5px/1 Inter,system-ui,sans-serif;fill:#6b6c70}.rmd-bound .bl.on{fill:var(--accent-ink,#c4410f);font-weight:700}
+
+/* RMC against site-mixed: two columns in a panel */
+.rmd-two{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:6px}
+.rmd-col{background:#f7f6f2;border-radius:14px;padding:14px 16px}.rmd-col.rm{background:rgba(241,90,41,.07);border:1px solid rgba(241,90,41,.22)}
+.rmd-col b{display:block;font:700 11.5px/1 Inter,system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#4a4b50;margin-bottom:8px}.rmd-col p{margin:0}
+@media (max-width:640px){.rmd-two{grid-template-columns:1fr}}
+
+/* a large pour in plan */
+.rmd-pour{display:block;width:100%;max-width:560px;height:auto;margin:8px 0 2px}
+.rmd-pour .sl{fill:#e6e3dc;stroke:#a9a69d;stroke-width:1.4}.rmd-pour .st{fill:#d4d0c7;fill-opacity:.55;stroke:none}.rmd-pour .nm{font:700 20px/1 Inter,system-ui,sans-serif;fill:#6b6c70}
+.rmd-pour .jt{fill:none;stroke:#8d8f94;stroke-dasharray:5 5;stroke-width:2}.rmd-pour .ac rect{fill:#fff;stroke:#8d8f94}.rmd-pour text{font:600 11px/1 Inter,system-ui,sans-serif;fill:#4a4b50}
+.rmd-pour .ac path{fill:none;stroke:#8d8f94;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}.rmd-pour .pu circle{fill:#fff;stroke:#8d8f94;stroke-width:2}.rmd-pour .pu path{fill:none;stroke:#8d8f94;stroke-width:3}
+.rmd-pour .vo path{fill:none;stroke:#8d8f94;stroke-width:1.6}.rmd-pour .cr circle{fill:#8d8f94}
+.rmd-pour[data-f=seq] .st{fill:var(--accent,#f15a29);fill-opacity:.2}.rmd-pour[data-f=acc] .ac rect,.rmd-pour[data-f=acc] .ac path{stroke:var(--accent,#f15a29)}
+.rmd-pour[data-f=pump] .pu circle,.rmd-pour[data-f=pump] .pu path{stroke:var(--accent,#f15a29)}.rmd-pour[data-f=joint] .jt{stroke:var(--accent,#f15a29);stroke-width:3}
+.rmd-pour[data-f=vol] .vo path{stroke:var(--accent,#f15a29);stroke-width:3}.rmd-pour[data-f=crew] .cr circle{fill:var(--accent,#f15a29)}
+
+/* a thick pour: warm core, cooler faces */
+
+/* a retaining wall in section */
+
+/* self-compacting concrete: a flow between bars */
+
+/* M60: the on-request grade, stated apart */
+.rmd-m60{margin:26px 0 22px;padding:22px 26px;background:#141416;color:#fff;border-radius:20px;max-width:860px}
+.rmd-m60 span{display:block;font:600 clamp(32px,4vw,52px)/1 "Cormorant Garamond",Georgia,serif;color:var(--accent,#f15a29);margin-bottom:10px}.rmd-m60 p{margin:0;font-size:16px;line-height:1.55;color:rgba(255,255,255,.88)}.rmd-m60 strong{color:#fff}
+
+/* the delivery ticket explorer */
+.rmd-tk{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:22px;align-items:start;margin-top:8px}
+.rmd-tkt{display:block;width:100%;height:auto}.rmd-tkt .pp{fill:#fff;stroke:rgba(20,20,22,.2);stroke-width:1.4}.rmd-tkt .ti{font:700 8.4px/1 Inter,system-ui,sans-serif;letter-spacing:.06em;fill:#6b6c70}
+.rmd-tkt .rw{fill:#f4f2ec}.rmd-tkt .rw.site{fill:#eef2f4}.rmd-tkt .fl{font:600 9.4px/1 Inter,system-ui,sans-serif;fill:#4a4b50}.rmd-tkt .vl{font:600 9.4px/1 Inter,system-ui,sans-serif;fill:#a9a69d}
+.rmd-tkt g.on .rw{fill:rgba(241,90,41,.16);stroke:var(--accent,#f15a29);stroke-width:1.6}.rmd-tkt g.on .fl{fill:var(--accent-ink,#c4410f)}
+@media (max-width:760px){.rmd-tk{grid-template-columns:1fr}.rmd-tkt{max-width:300px}}
+
+/* the site-readiness checklist: tick boxes that are easy to hit on a phone */
+.rmd-chk{list-style:none;margin:12px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.rmd-chk label{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;background:#f7f6f2;border:1px solid rgba(20,20,22,.1);border-radius:12px;min-height:44px;cursor:pointer;font-size:15px;line-height:1.35}
+.rmd-chk input{width:22px;height:22px;flex:none;margin:1px 0 0;accent-color:var(--accent,#f15a29)}.rmd-chk label:has(input:checked){background:rgba(241,90,41,.08);border-color:rgba(241,90,41,.3)}.rmd-chk label:has(input:checked) span{text-decoration:line-through;color:#6b6c70}
+@media (max-width:640px){.rmd-chk{grid-template-columns:1fr}}
+
+/* problem diagnosis chips and a blank result panel */
+.rmd-lbl{font:700 11.5px/1 Inter,system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#6b6c70;margin:14px 0 6px}
+.rmd-chips{display:flex;flex-wrap:wrap;gap:8px;margin:0}.rmd-chips span{padding:6px 12px;background:#fff;border:1px solid rgba(20,20,22,.16);border-radius:999px;font:600 12.5px/1 Inter,system-ui,sans-serif;color:#4a4b50}
+.rmd-blank{margin-top:16px;max-width:340px;padding:16px 18px;background:#fff;border:1px solid rgba(20,20,22,.14);border-radius:12px}.rmd-blank b{display:block;font:700 11px/1 Inter,system-ui,sans-serif;letter-spacing:.12em;color:#6b6c70;margin-bottom:12px}
+.rmd-blank dl{display:grid;grid-template-columns:auto 1fr;gap:10px 14px;margin:0;font:500 12.5px/1.2 Inter,system-ui,sans-serif;color:#6b6c70}.rmd-blank dd{margin:0;border-bottom:1px solid rgba(20,20,22,.22);min-height:16px}
+.psd-warn{margin:14px 0 26px;padding:14px 18px;border-left:4px solid var(--accent,#f15a29);background:rgba(241,90,41,.07);border-radius:0 12px 12px 0;font-size:15px;line-height:1.55;color:#141416}
+.rmd-chk li{list-style:none;padding:0;margin:0}.rmd-chk li::before,.rmd-chk li::marker{content:none;display:none}
+
+/* retaining wall, SCC and mass-concrete widgets: Blender stills (img/applications/ready-mix-concrete/rx3-*) with the page's labels and highlights on top */
+.rx3{position:relative;display:block;width:100%;max-width:780px;margin:10px 0 4px;aspect-ratio:2080 / 990;border-radius:16px;overflow:hidden;background:radial-gradient(120% 100% at 50% 40%,#fff 0%,#f6f4ef 62%,#eeece6 100%);box-shadow:0 26px 50px -40px rgba(20,20,22,.5),0 0 0 1px rgba(20,20,22,.06);container-type:inline-size}
+.rx3 picture,.rx3 img{position:absolute;inset:0;display:block;width:100%;height:100%}.rx3 img{object-fit:cover}
+.rx-o{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.rx-o .ov{opacity:0;transition:opacity .3s}.rx-lb.ov{opacity:0;transition:opacity .3s}
+.rx-o .hl{fill:rgba(241,90,41,.10);stroke:var(--accent,#f15a29);stroke-width:7;stroke-linejoin:round}
+.rx-o .jt{fill:none;stroke:var(--accent,#f15a29);stroke-width:12;stroke-linecap:round}
+.rx-o .ar{fill:none;stroke-width:10;stroke-linecap:round;stroke-linejoin:round}.rx-o .ar.wh{stroke:#fff;stroke-width:22;opacity:.85}
+.rx-o .ar-dk{stroke:#2e2f33}.rx-o .ar-bl{stroke:#2f86c4}.rx-o .ar-or{stroke:var(--accent,#f15a29)}
+.rx-o .fl{fill:none;stroke:rgba(255,255,255,.8);stroke-width:12;stroke-linecap:round;filter:drop-shadow(0 2px 3px rgba(0,0,0,.35));transition:stroke .3s}
+.rx-o .rg{fill:rgba(241,90,41,.10);stroke:var(--accent,#f15a29);stroke-width:7}.rx-o .pp{fill:none;stroke:#4f9ccf;stroke-width:9;stroke-linecap:round;stroke-dasharray:22 16}.rx-o .ly{fill:none;stroke:var(--accent,#f15a29);stroke-width:8;stroke-dasharray:26 18;stroke-linecap:round}
+.rx-o .heat{opacity:.8;transition:opacity .3s}
+.rx-lb{position:absolute;transform:translate(-50%,-50%);background:rgba(255,255,255,.95);color:#141416;border-radius:999px;padding:.4em .9em;font:600 clamp(9px,1.9cqw,13px)/1 Inter,system-ui,sans-serif;white-space:nowrap;box-shadow:0 6px 16px -8px rgba(0,0,0,.45),0 0 0 1px rgba(20,20,22,.06)}
+.rx3[data-f=load] .ov-load,.rx3[data-f=water] .ov-water,.rx3[data-f=joint] .ov-joint,.rx3[data-f=reinf] .ov-reinf,.rx3[data-f=drain] .ov-drain,.rx3[data-f=found] .ov-found,.rx3[data-f=back] .ov-back,
+.rx3[data-f=pass] .ov-pass,.rx3[data-f=seg] .ov-seg,.rx3[data-f=heat] .ov-heat,.rx3[data-f=ctrl] .ov-ctrl,.rx3[data-f=mon] .ov-mon,.rx3[data-f=seq] .ov-seq{opacity:1}
+.rx3[data-f=fill] .fl1,.rx3[data-f=fill] .fl2,.rx3[data-f=pass] .fl1,.rx3[data-f=ret] .fl1,.rx3[data-f=stab] .fl2{stroke:var(--accent,#f15a29)}
+.rx3[data-f=grad] .heat{opacity:1}
+@media (max-width:560px){.rx-lb{padding:.38em .7em}}

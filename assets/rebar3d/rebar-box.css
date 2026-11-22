@@ -1,0 +1,26 @@
+/* OM GROUP · "Aggregate between reinforcement bars" box (10 mm aggregates page, rebar lab). Script: rebar3d/rebar-box.js.
+   A studio stage (grid wall and polished floor, the empty Cycles studio as its background) holding: the Cycles still (loading state and
+   no-WebGL fallback), the live three.js canvas, and the annotation layer (zones for the six considerations, leader lines, pill labels).
+   Poster, canvas and annotations share one frame (the reference card, 1465 x 903 units). */
+.rb3d{position:relative}
+.rb3d-stage{position:relative;aspect-ratio:1465 / 903;border-radius:24px;overflow:hidden;background:#f7f4ee url(/assets/3d/rebar-box-studio.webp) center / 100% 100% no-repeat;
+  box-shadow:0 0 0 1px var(--line, rgba(20,20,22,.08)), 0 50px 90px -70px rgba(20,20,22,.4);-webkit-tap-highlight-color:transparent}
+.rb3d-poster{position:absolute;inset:0;transition:opacity .6s ease}
+.rb3d-poster img{display:block;width:100%;height:100%;object-fit:cover}
+.rb3d.is-js .rb3d-poster{opacity:0}
+.rb3d.is-js.is-poster .rb3d-poster{opacity:1}
+.rb3d.is-js.is-3d .rb3d-poster{opacity:0;transition-delay:.3s}
+.rb3d-cv{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;transition:opacity .5s ease}
+.rb3d.is-3d .rb3d-cv{opacity:1}
+.rb3d:not(.is-js) .rb3d-cv{display:none}
+.rb3d-ann{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.rb3d-lab{opacity:var(--rb-l, 1);transition:opacity .3s linear}
+.rb3d-pill rect{fill:#fffdf9;stroke:#FF5E29;stroke-width:2.4;filter:drop-shadow(0 7px 11px rgba(120,60,20,.13))}
+.rb3d-pill text{font-family:var(--sans,"Inter",system-ui,sans-serif);font-size:36px;font-weight:500;fill:#2a2c30;letter-spacing:-.005em}
+.rb3d-pill .a{fill:#F2541A;font-weight:700}
+.rb3d-pill .s{font-size:31px;font-weight:400;fill:#33363b}
+.rb3d-ln{fill:none;stroke:#FF5E29;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round}
+.rb3d-dot{fill:#FF5E29;stroke:#fff;stroke-width:3}
+.rb3d-ring{fill:none;stroke:#FF5E29;stroke-width:3.4}
+@media (max-width:899px){.rb3d-stage{border-radius:18px}}
+@media (prefers-reduced-motion:reduce){.rb3d-poster,.rb3d-cv,.rb3d-lab{transition:none}}

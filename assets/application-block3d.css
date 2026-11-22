@@ -1,0 +1,52 @@
+/* OM GROUP · Hollow concrete block anatomy (6mm aggregates page). Script: application-block3d.js.
+   A studio stage (warm white, soft light falloff, no horizon) holding: the Cycles poster (shown first, and for no-JS /
+   no-WebGL visitors), the live three.js canvas, and the annotation layer (SVG leader lines + HTML labels). */
+.hb3d{--hb-or:#FF5E29;margin:clamp(8px,2vw,24px) 0 clamp(64px,8vw,120px);max-width:900px}
+.hb3d-stage{position:relative;aspect-ratio:16 / 9;border-radius:24px;overflow:hidden;container-type:inline-size;
+  background:
+    radial-gradient(70% 62% at 50% 46%, #fdfdfc 0%, rgba(253,253,252,0) 72%),
+    linear-gradient(180deg, #f6f5f2 0%, #f1f0ec 52%, #e9e7e2 100%);
+  box-shadow:0 0 0 1px var(--line, rgba(20,20,22,.08)), 0 50px 90px -70px rgba(20,20,22,.4);
+  -webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+/* stage 1 of the reveal: the studio light comes up */
+.hb3d-stage::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(55% 48% at 44% 40%, rgba(255,255,255,.9), rgba(255,255,255,0) 70%);opacity:1;transition:opacity 1s ease}
+.hb3d.is-js:not(.is-in) .hb3d-stage::before{opacity:0}
+
+/* poster: positioned by the script on the same frame as the live block (CSS default = no-JS) */
+.hb3d-poster{position:absolute;inset:0;transition:opacity .6s ease}
+.hb3d-poster img{position:absolute;left:4%;top:24%;width:92%;height:auto;max-width:none;display:block}
+.hb3d.is-js .hb3d-poster{opacity:0}
+.hb3d.is-poster .hb3d-poster{opacity:1}
+.hb3d.is-swap .hb3d-poster{opacity:0;transition-delay:.35s}
+
+.hb3d-cv{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;transition:opacity .7s ease}
+.hb3d.is-3d.is-in .hb3d-cv{opacity:1}
+.hb3d.is-poster:not(.is-swap) .hb3d-cv{opacity:0}
+.hb3d-stage.can-turn{cursor:grab;touch-action:pan-y}
+.hb3d-stage.is-drag{cursor:grabbing}
+
+/* annotation layer */
+.hb3d-lines{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.hb3d-ln{fill:none;stroke:var(--hb-or);stroke-width:1.6;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:0}
+.hb3d-dot{fill:var(--hb-or);stroke:#fff;stroke-width:2.2px;filter:drop-shadow(0 1px 2px rgba(20,20,22,.28))}
+.hb3d-tags{list-style:none;margin:0;padding:0}
+.hb3d-tag{position:absolute;left:0;top:0;white-space:nowrap;pointer-events:none;will-change:transform,opacity;
+  font-family:var(--sans,"Inter",system-ui,sans-serif);font-weight:600;letter-spacing:-.005em;line-height:1;color:#fff;
+  font-size:clamp(12.5px,2.05cqi,18.5px);padding:.52em .9em .56em;border-radius:.6em;background:var(--hb-or);
+  box-shadow:0 8px 18px -10px rgba(214,70,20,.75),0 1px 0 rgba(255,255,255,.18) inset}
+/* no script: the labels have no projection to sit on, so the caption carries them */
+.hb3d:not(.is-js) .hb3d-tags,.hb3d:not(.is-js) .hb3d-lines{display:none}
+
+.hb3d figcaption{margin-top:14px;font-size:12.5px;color:var(--grey-2,#6b6b6b);line-height:1.6;max-width:760px}
+
+@media (max-width:600px){
+  .hb3d-stage{aspect-ratio:1 / 1.02;border-radius:18px}
+  .hb3d-poster img{left:4%;top:31%;width:92%}
+  .hb3d-dot{stroke-width:2px}
+  .hb3d-ln{stroke-width:1.4}
+  .hb3d-tag{font-size:13px}
+}
+@media (prefers-reduced-motion:reduce){
+  .hb3d-poster,.hb3d-cv,.hb3d-stage::before{transition:none}
+}

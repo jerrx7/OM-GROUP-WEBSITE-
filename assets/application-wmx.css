@@ -1,0 +1,32 @@
+/* OM GROUP - Wet Mix Macadam page: the photoreal road-works and laboratory stills that replaced the real-time 3D widgets (scripts/wmm3d). */
+.wmx .wmx-stage{position:relative;overflow:hidden;aspect-ratio:2/1!important;max-height:none!important;background:#e9e6df}
+.wmx .wmx-stage[data-ar="lab"]{aspect-ratio:1.6/1!important;background:radial-gradient(120% 90% at 50% 0%,#fffefc 0%,#f6f3ed 70%,#efebe3 100%)}
+.wmx-defs{position:absolute;width:0;height:0}
+.wmx-view,.wmx-l,.wmx-pair{position:absolute;inset:0}
+.wmx-view[hidden]{display:none}
+.wmx-zoom{position:absolute;inset:0;transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.wmx-view picture,.wmx-l picture,.wmx-zoom picture{display:block;position:absolute;inset:0}
+.wmx-view img,.wmx-l img,.wmx-zoom img{display:block;width:100%;height:100%;object-fit:cover}
+.wmx-fx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+/* the Blender motion loops lie over the stills and fade in once they are running */
+.wmx-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity .35s;pointer-events:none;background:transparent}
+.wmx-vid.on{opacity:1}
+.wmx-n[hidden]{display:none}
+/* the compaction crossfade: loose below, compacted above, opacity follows the slider */
+.wmx-l1{opacity:var(--c,0)}
+/* markers */
+.wmx-n{position:absolute;z-index:3;transform:translate(-50%,-50%);width:26px;height:26px;border-radius:50%;background:var(--accent,#F15A29);color:#fff;font:700 12px/26px Inter,system-ui,sans-serif;text-align:center;box-shadow:0 0 0 3px rgba(255,255,255,.88),0 6px 16px rgba(10,10,12,.4);pointer-events:none}
+/* segregation: the half that is not selected is veiled */
+.wmx .wmx-dim{opacity:0;transition:opacity .4s}
+.wmx[data-view="uniform"] .wmx-dimS,.wmx[data-view="seg"] .wmx-dimU{opacity:1}
+/* legend swatches for the length / width / thickness bars */
+.wmx-bar{display:inline-block;width:22px;height:4px;border-radius:2px;background:var(--c);margin:0 12px 0 2px;vertical-align:middle}
+.wmx .s3d-legend{display:block}
+.wmx .s3d-legend li{display:flex;align-items:center;gap:10px;margin:0 0 8px}
+.wmx .s3d-legend li[hidden]{display:none}
+@media (max-width:640px){.wmx-n{width:18px;height:18px;font:700 10px/18px Inter,system-ui,sans-serif;box-shadow:0 0 0 2px rgba(255,255,255,.88),0 4px 10px rgba(10,10,12,.4)}}
+@media (prefers-reduced-motion:reduce){.wmx-zoom{transition:none}.wmx-vid{display:none}}
+
+/* load-distribution figure (GSB): the orange wedge follows the tyre and can be switched off */
+.wmx-wedge{transition:opacity .45s}
+.wmx[data-stress="false"] .wmx-wedge{opacity:0}

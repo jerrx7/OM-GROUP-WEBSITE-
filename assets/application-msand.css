@@ -1,0 +1,59 @@
+/* M-Sand application page: small additions on top of the shared application styles and the 3D scene styles */
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+/* grading chart (drawn from the same data as the bars and the table) */
+.msg-chart{margin:26px 0 0}
+.msg-svg{display:block;width:100%;height:auto;background:#fff;border-radius:18px;border:1px solid rgba(20,20,22,.1);box-shadow:0 28px 54px -42px rgba(20,20,22,.45)}
+.msg-svg .g{stroke:rgba(20,20,22,.08);stroke-width:1}.msg-svg .g.v{stroke-dasharray:2 4}
+.msg-svg .ax{font:600 11px/1 Inter,system-ui,sans-serif;fill:#6b6c70}.msg-svg .ax.t{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;fill:#85868b}
+.msg-svg .oth{fill:none;stroke:#bdbdc2;stroke-width:1.6;stroke-linejoin:round}
+.msg-svg .zl{font:600 11px/1 Inter,system-ui,sans-serif;fill:#9a9ba0}.msg-svg .zl.on{fill:#d9480f}
+.msg-svg .band{fill:rgba(241,90,41,.18);stroke:#f15a29;stroke-width:1.2;stroke-dasharray:4 3;stroke-linejoin:round}
+.msg-svg .sel{fill:none;stroke:#f15a29;stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round}
+.msg-svg .dot{fill:#fff;stroke:#f15a29;stroke-width:2}
+.msg-chart figcaption{margin-top:10px;font-size:13px;line-height:1.65;color:#6b6c70}
+[data-grading-table] td.is-sel{background:#fff3ec;color:#16171a;font-weight:700;box-shadow:inset 0 -2px 0 #f15a29}
+/* explorers without 3D (application selector, quality check) */
+.ex-box{margin-top:30px}
+.ex-box .ex-ctl{display:block;max-width:980px}
+.ex-box .s3d-seg{margin-bottom:22px}
+.ex-box .ex-read{border-top:0;padding-top:0}
+.ex-box .ex-read>[data-when].on{background:#fff;border:1px solid rgba(20,20,22,.09);border-radius:22px;padding:clamp(20px,3vw,34px);box-shadow:0 30px 60px -46px rgba(20,20,22,.45)}
+.ex-box .ex-read h4{font-size:clamp(24px,2.6vw,32px)}
+.ex-box .ex-read .kv{grid-template-columns:minmax(96px,150px) 1fr;gap:10px 22px;margin:14px 0 20px}
+.ex-box .ex-read .btn{margin-top:2px}
+@media (max-width:720px){.ex-box .ex-read .kv{grid-template-columns:1fr;gap:2px}.ex-box .ex-read .kv dd{margin-bottom:10px}}
+/* dark chapters: the same panels read on the dark ground */
+.ap125-dark .ap-tbl-wrap{background:rgba(255,255,255,.03)}
+.ap125-dark .s3d-read .ap-link{color:#ff8a5c}
+.ap125-dark .s3d-seg button[aria-pressed=false]{color:#f1efe9}
+/* a few long callout labels */
+.ap6-std.ap60-long{grid-template-columns:minmax(0,1fr)}
+[data-labs]{margin-top:44px}
+/* dark chapters: the stage-step pills and the explorer panels (the older rule left near-white text on a white pill) */
+.ap125-dark .s3d-step button{background:rgba(255,255,255,.06);color:#f1efe9;border-color:rgba(255,255,255,.22)}
+.ap125-dark .s3d-step button:hover{border-color:#f15a29}
+.ap125-dark .s3d-step button b{background:rgba(255,255,255,.14);color:#f1efe9}
+.ap125-dark .s3d-step button[aria-pressed=true]{background:#f1efe9;color:#16171a;border-color:#f1efe9}
+.ap125-dark .s3d-step button[aria-pressed=true] b{background:#f15a29;color:#fff}
+.ap125-dark .ex-box .ex-read>[data-when].on{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.14);box-shadow:none}
+.ap125-dark .ex-box .ex-read .btn{margin-top:6px}
+/* grading chart, redesigned: a quiet grid, one key along the top, name tags set where the lines are furthest apart */
+.msg-svg.mg2{background:linear-gradient(180deg,#fff 0%,#fcfbf8 100%)}
+.mg2 .mg-grid{stroke:rgba(20,20,22,.07);stroke-width:1}.mg2 .mg-grid.base{stroke:rgba(20,20,22,.22)}
+.mg2 .mg-tick{stroke:rgba(20,20,22,.28);stroke-width:1}
+.mg2 .mg-ax{font:600 11px/1 Inter,system-ui,sans-serif;fill:#74757a}
+.mg2 .mg-cap{font:600 10.5px/1 Inter,system-ui,sans-serif;fill:#85868b;letter-spacing:.09em;text-transform:uppercase}
+.mg2 .mg-key{font:600 11.5px/1 Inter,system-ui,sans-serif;fill:#4a4b50}
+.mg2 .mg-oth{fill:none;stroke:#c3c4c9;stroke-width:1.5;stroke-linejoin:round;stroke-linecap:round}
+.mg2 .mg-oth.key,.mg2 .mg-sel.key{stroke-width:2.4}
+.mg2 .mg-sel{fill:none;stroke:#f15a29;stroke-width:3;stroke-linejoin:round;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:0}
+.mg2 .mg-sel.key{stroke-dasharray:none}
+.mg2 .mg-band{fill:url(#mgBand);stroke:#f15a29;stroke-opacity:.55;stroke-width:1;stroke-dasharray:4 3;stroke-linejoin:round}
+.mg2 .mg-dot{fill:#fff;stroke:#f15a29;stroke-width:2.4;filter:drop-shadow(0 1px 1.5px rgba(241,90,41,.35))}
+.mg2 .mg-tag rect{fill:#fff;stroke:#cfd0d5;stroke-width:1}.mg2 .mg-tag text{font:700 10.5px/1 Inter,system-ui,sans-serif;fill:#85868b}
+.mg2 .mg-tag.on rect{fill:#f15a29;stroke:#f15a29}.mg2 .mg-tag.on text{fill:#fff}
+@media (prefers-reduced-motion:no-preference){
+  .mg2 .mg-sel{animation:mgDraw .8s cubic-bezier(.3,.7,.2,1) both}.mg2 .mg-band{animation:mgFade .7s ease both}.mg2 .mg-dot{animation:mgPop .4s cubic-bezier(.3,1.4,.4,1) both}
+  @keyframes mgDraw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}@keyframes mgFade{from{opacity:0}to{opacity:1}}@keyframes mgPop{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:scale(1)}}
+}
+@media (max-width:640px){.mg2 .mg-ax{font-size:12px}.mg2 .mg-key{font-size:12px}.mg2 .mg-cap{font-size:11px}.mg2 .mg-tag text{font-size:11.5px}}

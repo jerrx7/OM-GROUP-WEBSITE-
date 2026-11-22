@@ -1,0 +1,39 @@
+/* TEMPORARY TEST: About-section progressive text wipe.
+   Not a final fix. To remove: delete this folder (assets/about-wipe-test/) and the TEMP-TEST:ABOUT-WIPE block in index.html.
+   Everything here is keyed on classes that wipe.js adds at runtime, so with no JS (or reduced motion) the page looks exactly as before. */
+
+/* the wipe's own orange: the site's deeper tone (--accent-deep #D94817), so the scroll fill reads as a separate layer from the brand-orange label, side rule and links around it.
+   One line to change it. */
+:root{--wf-orange:var(--accent-deep,#D94817)}
+
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  /* one word = one carrier. Its glyphs are painted with a gradient whose hard-ish edge sits at --wf-e (px from the word's left),
+     so the orange is poured into the real letterforms, not laid over them. */
+  .wf-w{
+    -webkit-text-fill-color:transparent;
+    color:transparent;
+    background-image:linear-gradient(90deg,
+      var(--wf-fill,var(--wf-orange)) calc(var(--wf-e,-999px) - var(--wf-f,36px) / 2),
+      var(--wf-base,#8a8378)       calc(var(--wf-e,-999px) + var(--wf-f,36px) / 2));
+    background-repeat:no-repeat;
+    -webkit-background-clip:text;background-clip:text;
+  }
+}
+/* words this test creates itself (the stat numbers). Same padding/negative-margin trick the site's own .rv-w uses: the painted box grows
+   to cover italic overhangs (hook of the f, the final stroke of the y) while layout stays exactly as before. */
+.wf-own{display:inline-block;padding:.14em .2em;margin:-.14em -.2em}
+
+/* muted warm greys on the warm off-white. Values are ~3:1 against #FAF8F3 (large text) so the unfilled state is still readable. */
+.wf-head{--wf-base:#9a9285;--wf-fill:var(--wf-orange)}
+.wf-copy{--wf-base:#8a8378;--wf-fill:var(--wf-orange)}
+.wf-num{--wf-base:#c8c1b4;--wf-fill:var(--wf-orange)}
+body.dark .wf-head{--wf-base:#5f5a52}
+body.dark .wf-copy{--wf-base:#6a655c}
+body.dark .wf-num{--wf-base:#4a463f}
+
+/* stat labels go muted grey -> strong ink, descriptions fade up from a soft grey. Driven by --wf-lp / --wf-dp (0..1) set by the scroll timeline.
+   color-mix keeps this theme-aware; a browser without it simply keeps the original colours. */
+.about-stats.wf-live{--wf-from:#aaa398}
+body.dark .about-stats.wf-live{--wf-from:#5e5a53}
+.about-stats.wf-live .lab{color:color-mix(in srgb,var(--ink) calc(var(--wf-lp,0) * 100%),var(--wf-from))}
+.about-stats.wf-live .desc{color:color-mix(in srgb,var(--grey) calc((.35 + .65 * var(--wf-dp,0)) * 100%),transparent)}

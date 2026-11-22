@@ -1,0 +1,68 @@
+/* RCC members figure (20mm page): live 3D slab / beam / column (assets/rcc3d/rcc-members.js). Text, legend and tabs are real HTML; the dimension lines and
+   the highlight ring are an SVG overlay in stage units (700 x 500) projected from the 3D anchors. */
+.ap20-rcc{display:block;margin-top:clamp(44px,6vw,84px)}
+.ap20-rcc-head{max-width:760px;margin:0 0 clamp(20px,3vw,32px)}
+.ap20-rcc-head h3{font-size:clamp(26px,2.8vw,40px);line-height:1.1;letter-spacing:-.012em;margin:0 0 10px}
+.ap20-rcc-head .ap-kicker{margin-bottom:12px}
+.ap20-rcc-text{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:12px clamp(28px,5vw,72px);align-items:start;margin-top:clamp(28px,4vw,48px)}
+.ap20-rcc-text .ap-check{margin:0}
+
+.rcc3d{position:relative;margin:0;padding:clamp(14px,2.2vw,26px) clamp(14px,2.4vw,30px) clamp(10px,1.6vw,18px);border-radius:24px;overflow:hidden;
+  background:linear-gradient(180deg,#fdfcfa 0%,#f6f3ed 100%);box-shadow:0 40px 70px -46px rgba(20,20,22,.45),0 0 0 1px rgba(20,20,22,.07)}
+.rcc3d::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(20,20,22,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(20,20,22,.04) 1px,transparent 1px);background-size:32px 32px;pointer-events:none}
+.rcc3d > *{position:relative}
+.rcc3d-tabs{margin:0 0 clamp(6px,1.4vw,14px)!important}
+.rcc3d-body{display:grid;grid-template-columns:minmax(0,1fr) clamp(200px,24%,280px);gap:clamp(8px,2vw,28px);align-items:center}
+
+/* stage: poster + shadow + live canvas + overlay all share one 700 x 500 frame, so they line up exactly */
+.rcc3d-stage{position:relative;aspect-ratio:700/500;width:100%;max-width:900px;margin:0 auto;user-select:none}
+.rcc3d-poster,.rcc3d-shadow,.rcc3d-cv,.rcc3d-ov{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
+.rcc3d-poster{object-fit:fill;opacity:1;transition:opacity .35s ease}
+.rcc3d-shadow{object-fit:fill;opacity:0;transition:opacity .35s ease}
+.rcc3d-cv{opacity:0;transition:opacity .5s ease}
+.rcc3d.is-3d .rcc3d-cv{opacity:1}
+.rcc3d.is-3d .rcc3d-poster{opacity:0;transition:opacity .01s linear .55s}
+.rcc3d.is-3d .rcc3d-shadow{opacity:.75}
+.rcc3d.is-swap .rcc3d-cv,.rcc3d.is-swap .rcc3d-ov,.rcc3d.is-swap .rcc3d-shadow,.rcc3d.is-swap .rcc3d-poster{opacity:0;transition-duration:.18s}
+.rcc3d-ov{overflow:visible;opacity:0;transition:opacity .35s ease}
+.rcc3d.is-in .rcc3d-ov{opacity:1}
+.rcc3d.is-swap .rcc3d-ov{opacity:0}
+
+/* dimension lines draw themselves; letters and the ring follow */
+.rcc3d-dim path{fill:none;stroke:#FF5E29;stroke-width:2.6;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1}
+.rcc3d-dim .ext{stroke-width:1.6;opacity:.6}
+.rcc3d-dim .lbl{font:700 31px/1 Inter,system-ui,sans-serif;fill:#FF5E29;opacity:0}
+.rcc3d.is-drawn .rcc3d-dim path{stroke-dashoffset:0;transition:stroke-dashoffset .7s cubic-bezier(.3,.7,.2,1) calc(var(--i) * .16s + .05s)}
+.rcc3d.is-drawn .rcc3d-dim .lbl{opacity:1;transition:opacity .45s ease calc(var(--i) * .16s + .5s)}
+.rcc3d-ring{fill:none;stroke:#FF5E29;stroke-width:2.6;opacity:0;transform-box:fill-box;transform-origin:center;transform:scale(1.25)}
+.rcc3d.is-drawn .rcc3d-ring{opacity:1;transform:scale(1);transition:opacity .5s ease .85s,transform .6s cubic-bezier(.2,.8,.2,1) .85s}
+.rcc3d.is-drawn.is-3d .rcc3d-ring,.rcc3d.is-drawn.is-poster .rcc3d-ring{animation:rcc3d-pulse 3.4s ease-in-out 2.2s infinite}
+@keyframes rcc3d-pulse{0%,100%{stroke-opacity:1}50%{stroke-opacity:.55}}
+
+/* legend */
+.rcc3d-side{align-self:center;padding:4px 0 0}
+.rcc3d-leg{list-style:none;margin:0;padding:0;display:grid;gap:clamp(12px,1.8vw,22px)}
+.rcc3d-leg li{display:grid;grid-template-columns:12px 22px 1fr;align-items:center;gap:10px}
+.rcc3d-leg i{display:block;width:11px;height:11px;border-radius:50%;background:#FF5E29}
+.rcc3d-leg b{font:700 clamp(20px,2.1vw,26px)/1 Inter,system-ui,sans-serif;color:#16171a}
+.rcc3d-leg span{font:600 clamp(12px,1.2vw,13.5px)/1.2 Inter,system-ui,sans-serif;letter-spacing:.13em;text-transform:uppercase;color:#55565b}
+.rcc3d-note{margin:clamp(14px,2vw,24px) 0 0;padding-top:clamp(12px,1.6vw,18px);border-top:1px solid rgba(20,20,22,.14);font:500 14px/1.7 Inter,system-ui,sans-serif;color:#55565b;letter-spacing:.01em}
+.rcc3d figcaption{margin:clamp(6px,1vw,12px) 0 0;font-size:12.5px;line-height:1.6;color:var(--grey-2)}
+
+@media (max-width:900px){
+  .ap20-rcc-text{grid-template-columns:1fr}
+}
+@media (max-width:700px){
+  .rcc3d{border-radius:18px}
+  .rcc3d-body{grid-template-columns:1fr;gap:6px}
+  .rcc3d-leg{grid-template-columns:repeat(3,auto);justify-content:space-between;gap:8px}
+  .rcc3d-leg li{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px}
+  .rcc3d-leg span{flex-basis:100%;font-size:11px;letter-spacing:.1em}
+  .rcc3d-note{margin-top:12px;font-size:13px}
+}
+@media (prefers-reduced-motion:reduce){
+  .rcc3d *{transition:none!important;animation:none!important}
+  .rcc3d.is-in .rcc3d-dim path{stroke-dashoffset:0}
+  .rcc3d.is-in .rcc3d-dim .lbl,.rcc3d.is-in .rcc3d-ring{opacity:1;transform:none}
+}
+@media print{.rcc3d-cv{display:none}.rcc3d-poster{opacity:1!important}.rcc3d-shadow{display:none}}

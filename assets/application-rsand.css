@@ -1,0 +1,33 @@
+/* River Sand application page: small additions on top of the shared application, M-Sand and 3D scene styles */
+/* the sieve ruler in the 75 micron / 150 micron explorer */
+.rsr{display:block;width:100%;max-width:560px;height:auto;margin:6px 0 18px;overflow:visible}
+.rsr .rail{stroke:rgba(20,20,22,.28);stroke-width:2;fill:none;stroke-linecap:round}
+.rsr .nd{fill:#fff;stroke:rgba(20,20,22,.4);stroke-width:2}.rsr .nd.hot{fill:var(--accent);stroke:#fff;stroke-width:3}
+.rsr text{font:700 11.5px/1 Inter,system-ui,sans-serif;fill:#6b6c70;letter-spacing:.03em}.rsr text.hot{fill:var(--accent-ink);font-size:14px}
+.rsr .br{stroke:var(--accent);stroke-width:2.4;fill:none;stroke-linecap:round}
+.rsr text.cap{font:600 11px/1 Inter,system-ui,sans-serif;fill:var(--accent-ink);letter-spacing:.02em}
+/* the supply journey line */
+.rsj{display:block;width:100%;max-width:560px;height:auto;margin:2px 0 18px;overflow:visible}
+.rsj .rail{stroke:rgba(255,255,255,.22);stroke-width:2.4;fill:none;stroke-linecap:round}
+.rsj .rail.on{stroke:var(--accent);stroke-width:3.4;stroke-dasharray:600;animation:rsjdraw .7s cubic-bezier(.2,.7,.2,1) both}
+.rsj .nd{fill:#2b2c30;stroke:rgba(255,255,255,.35);stroke-width:2}.rsj .nd.on{fill:var(--accent);stroke:#fff;stroke-width:2.4}.rsj .nd.hot{stroke:#fff;stroke-width:3.4}
+@keyframes rsjdraw{from{stroke-dashoffset:600}to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){.rsj .rail.on{animation:none}}
+/* general cross-section drawings (screed, trench) */
+.ap-fig-svg{margin:0}
+.rsx{display:block;width:100%;height:auto;background:#fff;border:1px solid rgba(20,20,22,.1);border-radius:18px;box-shadow:0 28px 54px -42px rgba(20,20,22,.45)}
+.rsx .lb text{font:600 11.5px/1 Inter,system-ui,sans-serif;fill:#2b2c30}.rsx .lb path{stroke:#2b2c30;stroke-width:1.2;fill:none}
+.rsx .cap{font:500 10.5px/1 Inter,system-ui,sans-serif;fill:#6b6c70}
+.rsx .ar{stroke:var(--accent);stroke-width:2.2;fill:none;stroke-linecap:round}
+.ap-fig-svg figcaption{margin-top:10px;font-size:13px;line-height:1.65;color:#6b6c70}
+/* fineness modulus: three steps */
+.rsr-flow{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:24px 0 0;padding:0;counter-reset:rf}
+.rsr-flow li{position:relative;background:#fff;border:1px solid rgba(20,20,22,.09);border-radius:20px;padding:22px 22px 24px;box-shadow:0 30px 60px -48px rgba(20,20,22,.4)}
+.rsr-flow li+li::before{content:"";position:absolute;left:-18px;top:50%;width:18px;height:2px;background:var(--accent)}
+.rsr-flow b{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;font:700 13px/1 Inter,system-ui,sans-serif;margin-bottom:10px}
+.rsr-flow h4{font-size:19px;margin:0 0 6px}.rsr-flow p{font-size:14.5px;line-height:1.65;color:#4a4b50;margin:0}
+@media (max-width:760px){.rsr-flow{grid-template-columns:1fr}.rsr-flow li+li::before{left:50%;top:-18px;width:2px;height:18px}}
+/* on a phone the still of a wide scene (the formation row, the eight dishes, the jar and sieve) is shown whole, not cropped to the portrait frame */
+@media (max-width:640px){.s3d-poster{object-fit:contain}}
+/* nine audiences: three across on wide screens so the last row is not left with one item */
+@media (min-width:1000px){#supply-goa .ap-ind{grid-template-columns:repeat(3,minmax(0,1fr))}}

@@ -1,0 +1,26 @@
+/* 60mm application page: small additions on top of the shared application styles */
+.ap60-answer{margin:0 0 8px;max-width:78ch;border-left:4px solid var(--accent,#F15A29);padding:20px 24px 12px;background:#fff;border-radius:0 16px 16px 0;box-shadow:0 22px 44px -32px rgba(20,20,22,.42)}
+.ap60-q{margin:0 0 10px;font:700 11px/1 Inter,system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--accent,#F15A29)}
+.ap60-answer p{margin:0 0 12px;color:#35363a;line-height:1.75}
+.ap60-answer strong{color:#16171a}
+/* the 3D controls on the dark chapters */
+.ap125-dark .s3d-lbl{color:#a9aab0}
+.ap125-dark .s3d-seg button{background:rgba(255,255,255,.06);color:#f1efe9;border-color:rgba(255,255,255,.22)}
+.ap125-dark .s3d-seg button:hover{border-color:#f15a29}
+.ap125-dark .s3d-seg button[aria-pressed=true]{background:#f1efe9;color:#16171a;border-color:#f1efe9}
+.ap125-dark .s3d-read{border-top-color:rgba(255,255,255,.18)}
+.ap125-dark .s3d-read h4{color:#fff}
+.ap125-dark .s3d-read p,.ap125-dark .s3d-read ul,.ap125-dark .s3d-read dd{color:#dcdbd6}
+.ap125-dark .s3d-read dt{color:#a9aab0}
+.ap125-dark .s3d-read .tag{color:#ff8a5c}.ap125-dark .s3d-read .tag.warn{color:#ff9a8f}
+.ap125-dark .s3d-note{background:rgba(255,255,255,.06);color:#d1d1d6;border-left-color:#f15a29}
+.ap125-dark .s3d-fig figcaption{color:#a9aab0}
+.ap125-dark .s3d-legend{color:#e4e2dc}
+.ap125-dark .s3d-range{filter:none}
+.ap125-dark .s3d-play,.ap125-dark .s3d-step button{color:#f1efe9}
+/* a figure that is always followed by its text on small screens: keep a little air between them */
+@media (max-width:1000px){.s3d-ctl{margin-top:4px}}
+.s3d-plain .s3d-hint,.s3d-plain .s3d-tools{display:none}
+/* a callout whose label is a sentence, not a standard number */
+.ap6-std.ap60-long{grid-template-columns:minmax(0,1fr)}
+.ap6-std.ap60-long b{white-space:normal;font-size:clamp(22px,2.4vw,30px);line-height:1.15}

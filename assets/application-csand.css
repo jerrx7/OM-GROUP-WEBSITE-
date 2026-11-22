@@ -1,0 +1,124 @@
+/* Concrete Sand application page: small additions on top of the shared application, M-Sand, River Sand and 3D scene styles */
+
+/* two terms, one relationship: the material and the application */
+.csd-pair{display:grid;grid-template-columns:minmax(0,1fr) 84px minmax(0,1fr);align-items:center;gap:0;margin:30px 0 14px}
+.csd-card{margin:0;background:#fff;border:1px solid rgba(20,20,22,.09);border-radius:22px;overflow:hidden;box-shadow:0 34px 64px -48px rgba(20,20,22,.5)}
+.csd-img{aspect-ratio:16/10;background:#e9e6df}.csd-img picture,.csd-img img{display:block;width:100%;height:100%;object-fit:cover}
+.csd-card figcaption{padding:16px 20px 20px}.csd-card figcaption b{display:block;font:600 clamp(22px,2.4vw,30px)/1.1 "Cormorant Garamond",Georgia,serif;letter-spacing:.04em;color:#141416;margin:6px 0 4px}
+.csd-card figcaption p{margin:0;font-size:14.5px;line-height:1.55;color:#4a4b50}
+.csd-tag{display:inline-block;font:700 11px/1 Inter,system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-ink,#c4410f)}
+.csd-link{display:grid;place-items:center}.csd-link svg{width:84px;height:36px;fill:none;stroke:var(--accent,#f15a29);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.csd-line{text-align:center;font:500 clamp(20px,2.2vw,28px)/1.3 "Cormorant Garamond",Georgia,serif;color:#141416;margin:18px auto 8px;max-width:30ch}
+@media (max-width:760px){.csd-pair{grid-template-columns:1fr}.csd-link{padding:10px 0}.csd-link svg{transform:rotate(90deg);width:60px}}
+
+/* aggregate sizes drawn to one scale */
+.csd-scale{display:block;width:100%;max-width:560px;height:auto;margin:6px 0 16px}
+.csd-scale .bl{stroke:rgba(20,20,22,.3);stroke-width:2;stroke-linecap:round}
+.csd-scale .sc{fill:#dcd9d2;stroke:#8d8f94;stroke-width:1.5}.csd-scale .sc.on{fill:var(--accent,#f15a29);fill-opacity:.9;stroke:#fff}
+.csd-scale .sg{fill:#a6a39b}.csd-scale .sg.on{fill:var(--accent,#f15a29)}
+.csd-scale .rf{fill:none;stroke:#2b2c30;stroke-width:1.6;stroke-dasharray:3 3}
+.csd-scale .sl{font:600 11px/1 Inter,system-ui,sans-serif;fill:#6b6c70}.csd-scale .sl.on{fill:var(--accent-ink,#c4410f);font-size:12.5px}
+
+/* the 600 micron comparison */
+.csd-s600{display:block;width:100%;max-width:560px;height:auto;margin:6px 0 14px}
+.csd-s600 .gl{stroke:rgba(20,20,22,.12);stroke-width:1}.csd-s600 .ax{font:600 10.5px/1 Inter,system-ui,sans-serif;fill:#6b6c70}.csd-s600 .ax.t{font-size:11.5px}
+.csd-s600 .zn{font:600 12px/1 Inter,system-ui,sans-serif;fill:#6b6c70}.csd-s600 .zn.on{fill:var(--accent-ink,#c4410f)}
+.csd-s600 .bar{fill:#cfccc4}.csd-s600 .bar.on{fill:var(--accent,#f15a29)}
+.csd-s600 .bv{font:600 11.5px/1 Inter,system-ui,sans-serif;fill:#6b6c70}.csd-s600 .bv.on{fill:var(--accent-ink,#c4410f)}
+
+/* concrete cross-section: each factor lights a different part */
+.csd-x{display:block;width:100%;max-width:560px;height:auto;margin:6px 0 4px;border-radius:14px;box-shadow:0 26px 50px -40px rgba(20,20,22,.5)}
+.csd-x .paste{fill:#ddd8cf;stroke:#b5afa4;stroke-width:1.4}.csd-x .stone{fill:#8e9096;stroke:#6d6f75;stroke-width:1.2;transition:fill .3s}.csd-x .sand{fill:#7c7871;transition:fill .3s}
+.csd-x g{display:none;fill:none}.csd-x g.g-work path{stroke:var(--accent,#f15a29);stroke-width:3;stroke-linecap:round;stroke-dasharray:2 9}
+.csd-x g.g-water circle{stroke:#4f9ccf;stroke-width:3}.csd-x g.g-coh path{stroke:var(--accent,#f15a29);stroke-width:2;stroke-dasharray:5 5}
+.csd-x g.g-seg rect{fill:#9ec9e6;fill-opacity:.7}.csd-x g.g-seg text,.csd-x g.g-finish text{font:600 11px/1 Inter,system-ui,sans-serif;fill:#25506e}
+.csd-x g.g-seg path{stroke:#4a4b50;stroke-width:2.4;stroke-linecap:round;stroke-dasharray:1 6}
+.csd-x g.g-finish path{stroke:var(--accent,#f15a29);stroke-width:7;stroke-linecap:round}.csd-x g.g-finish text{fill:#fff;font-size:11.5px}
+.csd-x[data-f=packing] .sand{fill:var(--accent,#f15a29)}.csd-x[data-f=packing] .stone{fill:#b8b9bd}
+.csd-x[data-f=work] .g-work,.csd-x[data-f=water] .g-water,.csd-x[data-f=coh] .g-coh,.csd-x[data-f=seg] .g-seg,.csd-x[data-f=finish] .g-finish{display:block}
+.csd-x[data-f=paste] .paste{fill:#f2c5b0;stroke:var(--accent,#f15a29);stroke-width:2.4}.csd-x[data-f=paste] .stone{fill:#b8b9bd}.csd-x[data-f=paste] .sand{fill:#a39e96}
+.csd-x[data-f=coh] .sand{fill:#a39e96}.csd-x[data-f=seg] .stone{fill:#7c7e85}
+.csd-xcap{font-size:13px;line-height:1.55;color:#6b6c70;margin:6px 0 16px}
+
+/* fineness modulus helper */
+.csd-fm{padding:22px}.csd-fm-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px}
+.csd-fm-grid label,.csd-build-grid label{display:block;font:600 12.5px/1.2 Inter,system-ui,sans-serif;color:#4a4b50}
+.csd-fm-grid input,.csd-build-grid input,.csd-build-grid select{display:block;width:100%;margin-top:6px;padding:11px 10px;font:500 15px/1.2 Inter,system-ui,sans-serif;color:#141416;background:#fff;border:1px solid rgba(20,20,22,.22);border-radius:10px;min-height:44px;box-sizing:border-box}
+.csd-fm-grid input:focus,.csd-build-grid input:focus,.csd-build-grid select:focus{outline:2px solid var(--accent,#f15a29);outline-offset:1px;border-color:transparent}
+.csd-fm-out{display:grid;grid-template-columns:1fr 1fr;gap:12px 20px;align-items:end;margin-top:18px;padding-top:16px;border-top:1px solid rgba(20,20,22,.1)}
+.csd-fm-out div span{display:block;font:600 11.5px/1 Inter,system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#6b6c70;margin-bottom:6px}
+.csd-fm-out div b{font:600 clamp(20px,2.4vw,30px)/1.1 "Cormorant Garamond",Georgia,serif;color:#141416;overflow-wrap:anywhere}
+.csd-fm-out p{grid-column:1/-1;margin:0;font-size:14px;line-height:1.55;color:#4a4b50}.csd-fm-out .btn{justify-self:start;min-height:40px;padding:8px 16px}
+@media (max-width:760px){.csd-fm-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.csd-fm-out{grid-template-columns:1fr}}
+
+/* water in the aggregate: a picture with no numbers */
+.csd-water{max-width:640px;margin:8px 0 26px}
+.csd-water-bar{display:flex;height:46px;border-radius:12px;overflow:hidden;border:1px solid rgba(20,20,22,.12);background:#fff;--m:.35}
+.csd-water-bar span{display:flex;align-items:center;padding:0 12px;font:600 12.5px/1.1 Inter,system-ui,sans-serif;white-space:nowrap;overflow:hidden;transition:flex-basis .2s}
+.csd-water-bar .w-in{background:#a9c7dd;color:#1d3f58;flex:0 0 calc(var(--m) * 100%)}.csd-water-bar .w-add{background:#f5d9cc;color:#7a2d0e;flex:1 1 0}
+.csd-water{--m:.35}.csd-water label{display:block;margin:16px 0 6px;font:600 13px/1.2 Inter,system-ui,sans-serif;color:#4a4b50}
+.csd-water input[type=range]{width:100%;accent-color:var(--accent,#f15a29);min-height:32px}
+.csd-water .csd-water-bar{--m:inherit}
+
+/* a blank laboratory report template */
+.csd-two{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(24px,4vw,56px);align-items:start}
+@media (max-width:860px){.csd-two{grid-template-columns:1fr}}
+.csd-report{position:relative;background:#fff;border:1px solid rgba(20,20,22,.14);border-radius:12px;padding:20px 22px;box-shadow:0 26px 50px -40px rgba(20,20,22,.5);max-width:420px}
+.csd-report b{display:block;font:700 13px/1 Inter,system-ui,sans-serif;letter-spacing:.12em;color:#4a4b50}.csd-report i{display:block;font:600 11px/1 Inter,system-ui,sans-serif;letter-spacing:.14em;color:var(--accent-ink,#c4410f);margin:8px 0 14px;font-style:normal}
+.csd-report dl{display:grid;grid-template-columns:auto 1fr;gap:10px 14px;margin:0 0 16px;font:500 12.5px/1.2 Inter,system-ui,sans-serif;color:#6b6c70}.csd-report dd{margin:0;border-bottom:1px solid rgba(20,20,22,.22);min-height:16px}.csd-report dt{white-space:nowrap}
+.csd-report .rp-rows span{display:block;height:20px;margin-bottom:6px;border:1px dashed rgba(20,20,22,.18);border-radius:4px}
+
+/* Table 2: the crushed-sand row */
+.csd-hot th,.csd-hot td{background:rgba(241,90,41,.08)}
+
+/* the procurement builder */
+.csd-build{padding:22px}.csd-build-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px 16px}
+@media (max-width:900px){.csd-build-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (max-width:560px){.csd-build-grid{grid-template-columns:1fr}}
+.csd-build-sum{margin:16px 0 4px;overflow-wrap:anywhere}
+
+/* the hero ladder and the long jump bar */
+.csd-reveal .s3d-stage{background:linear-gradient(180deg,#fff,#f3f1ec)}
+
+/* the selection line on a light section: the base styles are for the dark chapter */
+.ap-sec:not(.ap125-dark) .rsj .rail{stroke:rgba(20,20,22,.22)}
+.ap-sec:not(.ap125-dark) .rsj .nd{fill:#fff;stroke:rgba(20,20,22,.38)}
+.ap-sec:not(.ap125-dark) .rsj .rail.on{stroke:var(--accent,#f15a29)}
+.ap-sec:not(.ap125-dark) .rsj .nd.on{fill:var(--accent,#f15a29);stroke:#fff}
+.ap-sec:not(.ap125-dark) .rsj .nd.hot{stroke:#fff}
+
+/* sizes to scale: one rendered still (Cycles, scripts/scale3d/build-scale.py) with the ticks, the labels and a ring under the chosen aggregate */
+.csd-pic{position:relative;container-type:inline-size;aspect-ratio:1000 / 303;width:100%;margin:8px 0 18px}
+.csd-pic picture,.csd-pic img{display:block;width:100%;height:100%}
+.csd-pic-ann{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.csd-pic .csd-tk{stroke:rgba(20,20,22,.34);stroke-width:1.4;vector-effect:non-scaling-stroke;fill:none;transform-box:fill-box;transform-origin:50% 0}
+.csd-pic .csd-ring{fill:rgba(241,90,41,.07);stroke:#F15A29;stroke-width:1.6;stroke-dasharray:5 4;vector-effect:non-scaling-stroke;opacity:0;transform-box:fill-box;transform-origin:center}
+.csd-pic[data-on="sand"] .r-sand,.csd-pic[data-on="4"] .r-4,.csd-pic[data-on="10"] .r-10,.csd-pic[data-on="20"] .r-20,.csd-pic[data-on="40"] .r-40{opacity:1}
+@media (prefers-reduced-motion:no-preference){
+  .csd-pic[data-on="sand"] .r-sand,.csd-pic[data-on="4"] .r-4,.csd-pic[data-on="10"] .r-10,.csd-pic[data-on="20"] .r-20,.csd-pic[data-on="40"] .r-40{animation:csdRing .85s cubic-bezier(.2,.8,.25,1) both}
+  @keyframes csdRing{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:none}}
+}
+.csd-lb{position:absolute;top:90%;transform:translateX(-50%);font:600 clamp(10px,1.6cqw,13px)/1 Inter,system-ui,sans-serif;color:#6b6c70;white-space:nowrap}
+.csd-lb.on{color:var(--accent-ink,#c4410f);font-size:clamp(10.5px,1.75cqw,14.5px)}
+@media (max-width:560px){
+  .csd-pic{aspect-ratio:1000 / 330;margin-bottom:22px}
+  .csd-lb{font-size:10px;top:89%}.csd-lb.on{font-size:10.5px}
+  .csd-lb.lo{top:99%}
+  .csd-pic .csd-tk.lo{transform:scaleY(2.1)}
+}
+
+/* inside concrete, seven factors: a rendered cut face (Cycles, scripts/csx3d/build-csx.py) with the factor drawn over it. Three stills are stacked: the face as it is, the sand lit orange (packing),
+   the paste tinted (paste demand); the other factors draw their marks (SVG) over the plain face */
+.csd-x3{position:relative;aspect-ratio:440 / 250;overflow:hidden;background:#b9a88e;box-shadow:0 0 0 1px rgba(20,20,22,.08),0 26px 50px -36px rgba(20,20,22,.55)}
+.csd-x3 .csd-xl,.csd-x3 .csd-xl img{position:absolute;inset:0;display:block;width:100%;height:100%}
+.csd-x3 .csd-xl-sand,.csd-x3 .csd-xl-paste{opacity:0;transition:opacity .55s ease}
+.csd-x3[data-f=packing] .csd-xl-sand,.csd-x3[data-f=paste] .csd-xl-paste{opacity:1}
+.csd-x3 .csd-xo{position:absolute;inset:0;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 1px 1.5px rgba(10,10,12,.55))}
+.csd-x3 .csd-xo g{display:none;fill:none}
+.csd-x3[data-f=work] .g-work,.csd-x3[data-f=water] .g-water,.csd-x3[data-f=coh] .g-coh,.csd-x3[data-f=seg] .g-seg,.csd-x3[data-f=finish] .g-finish{display:block}
+.csd-x3 g.g-work path{stroke:#fff;stroke-width:3.2;stroke-linecap:round;stroke-dasharray:2 9}
+.csd-x3 g.g-water circle{stroke:#8fd0ff;stroke-width:3}
+.csd-x3 g.g-coh path{stroke:#fff;stroke-width:2.2;stroke-dasharray:5 5}
+.csd-x3 g.g-seg rect{fill:#9ec9e6;fill-opacity:.78}
+.csd-x3 g.g-seg path{stroke:#fff;stroke-width:2.6;stroke-linecap:round;stroke-dasharray:1 6}
+.csd-x3 g.g-finish path{stroke:var(--accent,#f15a29);stroke-width:7;stroke-linecap:round}
+@media (prefers-reduced-motion:reduce){.csd-x3 .csd-xl-sand,.csd-x3 .csd-xl-paste{transition:none}}

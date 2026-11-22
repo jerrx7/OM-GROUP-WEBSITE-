@@ -1,0 +1,32 @@
+/* OM GROUP · Aggregate compression testing machine (6mm aggregates page, paver section). Script: machine3d/compression-machine.js.
+   A studio stage (the empty Cycles studio as its background) holding: the Cycles still (loading state and no-WebGL fallback), the live
+   three.js canvas and the zone overlay for the six considerations. Poster, canvas and overlay share one frame (1754 x 897). */
+.cm3d{position:relative}
+.cm3d-stage{position:relative;aspect-ratio:1754 / 897;border-radius:24px;overflow:hidden;background:#e8e8e9 url(/assets/3d/compression-machine-studio.webp) center / 100% 100% no-repeat;
+  box-shadow:0 0 0 1px var(--line, rgba(20,20,22,.08)), 0 50px 90px -70px rgba(20,20,22,.4);-webkit-tap-highlight-color:transparent}
+.cm3d-poster{position:absolute;inset:0;transition:opacity .6s ease}
+.cm3d-poster img{display:block;width:100%;height:100%;object-fit:cover}
+.cm3d.is-js .cm3d-poster{opacity:0}
+.cm3d.is-js.is-poster .cm3d-poster{opacity:1}
+.cm3d.is-js.is-3d .cm3d-poster{opacity:0;transition-delay:.3s}
+.cm3d-cv{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;transition:opacity .5s ease}
+.cm3d.is-3d .cm3d-cv{opacity:1}
+.cm3d:not(.is-js) .cm3d-cv{display:none}
+/* pinned runway (see the script): the stage holds still, just under the sticky headers, while the press plays */
+.cm3d.is-pin{min-height:calc(var(--cm-h, 50vw) + var(--cm-run, 85vh))}
+.cm3d.is-pin .cm3d-stage{position:sticky;top:var(--cm-top, 140px);z-index:1}
+.cm3d-zones{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+
+/* the paver lab: the machine is the hero, so it takes the full width; the six considerations sit under it in two columns */
+.ap6-lab[data-kind="mould"]{grid-template-columns:minmax(0,1fr);align-items:start}
+.ap6-lab[data-kind="mould"] .ap6-lab-head{max-width:760px}
+/* medium size: the machine should support the text, not dominate the page */
+.ap6-lab[data-kind="mould"] .ap6-lab-fig{width:100%;max-width:760px;margin-inline:auto}
+.ap6-lab[data-kind="mould"] .ap6-lab-fig figcaption{max-width:none}
+.ap6-lab[data-kind="mould"] .ap6-hot{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:clamp(28px,5vw,72px);margin-top:0}
+.ap6-lab[data-kind="mould"] .ap6-hot li{break-inside:avoid}
+@media (max-width:899px){
+  .ap6-lab[data-kind="mould"] .ap6-hot{grid-template-columns:minmax(0,1fr)}
+  .cm3d-stage{border-radius:18px}
+}
+@media (prefers-reduced-motion:reduce){.cm3d-poster,.cm3d-cv{transition:none}}

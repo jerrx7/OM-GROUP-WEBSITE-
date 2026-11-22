@@ -1,0 +1,25 @@
+/* OM GROUP · concrete frame with member sections (20mm aggregates page). Script: frame3d/frame.js.
+   A rendered still of the frame (Cycles, scripts/frame3d/build-frame.py) on the same drafting-paper stage as the other figures, plus an SVG layer on top in the figure's
+   own frame (viewBox 0 20 800 430): transparent hit areas for the five members, dashed highlight rings, pill labels and the section card with its five rendered
+   cross-sections. The tabs, the click-to-select and the auto-play are the page's own (they set data-m on the figure, see .a20f in application-20.css). */
+.fr3d-stage{position:relative;aspect-ratio:800 / 430;border-radius:24px;overflow:hidden;
+  background:
+    radial-gradient(120% 90% at 88% 0%, #ffffff 0%, rgba(255,255,255,0) 58%),
+    linear-gradient(90deg, rgba(20,20,22,.03) 1px, transparent 1px) 0 0 / 2.5% 4.4444%,
+    linear-gradient(0deg, rgba(20,20,22,.03) 1px, transparent 1px) 0 0 / 2.5% 4.4444%,
+    linear-gradient(180deg, #fcfaf6 0%, #f6f2ea 100%);
+  box-shadow:0 0 0 1px var(--line, rgba(20,20,22,.08)), 0 50px 90px -70px rgba(20,20,22,.45);-webkit-tap-highlight-color:transparent}
+.fr3d-img{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:fill;opacity:0;transform:translateY(8px);transition:opacity .9s ease, transform 1.1s cubic-bezier(.2,.7,.2,1)}
+.fr3d.is-in .fr3d-img,.fr3d:not(.is-js) .fr3d-img{opacity:1;transform:none}
+.fr3d-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.fr3d-svg .fm{pointer-events:all;cursor:pointer}
+.fr3d-card{fill:#fff;filter:drop-shadow(0 10px 18px rgba(20,20,22,.10)) drop-shadow(0 1px 2px rgba(20,20,22,.10))}
+.fr3d-svg text{font-family:var(--sans,"Inter",system-ui,sans-serif)}
+.fr3d-sec{font-size:11.5px;font-weight:600;letter-spacing:.3em;fill:#6b6e73}
+.fr3d-ct{font-size:27px;font-weight:700;letter-spacing:-.01em;fill:#141416}
+.fr3d-cs{font-size:11.5px;font-weight:600;letter-spacing:.24em;fill:#6b6e73}
+.fr3d-idle{font-size:15px;font-weight:500;fill:#8a8d92;text-anchor:middle}
+.fr3d-pill rect{fill:#fff;filter:drop-shadow(0 3px 6px rgba(20,20,22,.18))}
+.fr3d-pill text{font-size:14.5px;font-weight:700;letter-spacing:.02em;fill:#141416;text-anchor:middle}
+@media (max-width:899px){.fr3d-stage{border-radius:18px}}
+@media (prefers-reduced-motion:reduce){.fr3d-img{transition:none;opacity:1;transform:none}}

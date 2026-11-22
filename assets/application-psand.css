@@ -1,0 +1,88 @@
+/* Plaster Sand application page: small additions on top of the shared application, Concrete Sand and 3D scene styles */
+
+/* an external wall in section: each exposure factor lights a different group */
+.psd-x{display:block;width:100%;max-width:560px;height:auto;margin:8px 0 2px;border-radius:14px;box-shadow:0 26px 50px -40px rgba(20,20,22,.5)}
+.psd-x .sky{fill:#f3f0e9}.psd-x .gnd{fill:#d8d3c8}.psd-x .sub{fill:#b9bab7;stroke:#8d8f94;stroke-width:1.2}.psd-x .rnd{fill:#d9cfbc;stroke:#a79e8d;stroke-width:1.2}
+.psd-x .lb,.psd-x .in{font:600 11px/1 Inter,system-ui,sans-serif;fill:#6b6c70}.psd-x .in{font-size:13px}
+.psd-x g{display:none;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.psd-x .g-rain path{stroke:#4f9ccf;stroke-width:3}.psd-x .g-wind path{stroke:#6b6c70;stroke-width:3}
+.psd-x .g-sun circle{fill:var(--accent,#f15a29);fill-opacity:.9;stroke:none}.psd-x .g-sun path{stroke:var(--accent,#f15a29);stroke-width:3}.psd-x .g-sun .hot{fill:var(--accent,#f15a29);fill-opacity:.5;stroke:none}
+.psd-x .g-temp path{stroke:var(--accent,#f15a29);stroke-width:3}
+.psd-x .g-wetdry path{fill:#4f9ccf;fill-opacity:.7;stroke:none}.psd-x .g-wetdry .dry{fill:none;stroke:#8d8f94;stroke-width:3;stroke-dasharray:3 7}
+.psd-x .g-moist path{stroke:#4f9ccf;stroke-width:3}
+.psd-x[data-f=rain] .g-rain,.psd-x[data-f=wind] .g-wind,.psd-x[data-f=sun] .g-sun,.psd-x[data-f=temp] .g-temp,.psd-x[data-f=wetdry] .g-wetdry,.psd-x[data-f=moist] .g-moist{display:block}
+.psd-x[data-f=sun] .rnd,.psd-x[data-f=temp] .rnd,.psd-x[data-f=moist] .rnd,.psd-x[data-f=rain] .rnd{stroke:var(--accent,#f15a29);stroke-width:2}
+
+/* finish swatches */
+.psd-sw{display:block;width:100%;max-width:360px;height:auto;margin:8px 0 14px;border-radius:10px;box-shadow:0 20px 40px -32px rgba(20,20,22,.5)}
+
+/* drawn wall surfaces: crack causes and the defect library. Pictures, never a diagnosis */
+.psd-wall{display:block;width:100%;max-width:440px;height:auto;margin:8px 0 14px;border-radius:12px;box-shadow:0 22px 44px -34px rgba(20,20,22,.5)}
+.psd-wall .wl{fill:#d4cfc5;stroke:#b5afa4;stroke-width:1.2}
+.psd-wall .ck{fill:none;stroke:#34322f;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}.psd-wall .ck.f{stroke-width:1;opacity:.75}
+.psd-wall .hl{fill:rgba(241,90,41,.12);stroke:var(--accent,#f15a29);stroke-width:2}.psd-wall .hl.d{stroke-dasharray:7 6}
+.psd-wall .bl{fill:#8f8a80;opacity:.38}.psd-wall .dy{fill:#fff;opacity:.55}.psd-wall .pw{fill:#fff;opacity:.6}
+.psd-wall .st{fill:#8a7d66;opacity:.3}.psd-wall .tm{fill:none;stroke:#a79e8d;stroke-width:2.4;stroke-linecap:round}
+.psd-wall .gd{fill:none;stroke:var(--accent,#f15a29);stroke-width:2;stroke-dasharray:6 6}
+.psd-wall .op{fill:#eceae4;stroke:#a7a39a;stroke-width:2}.psd-wall .sn{fill:none;stroke:var(--accent,#f15a29);stroke-width:2.6;stroke-linecap:round}
+.psd-wall circle.sn{fill:var(--accent,#f15a29);fill-opacity:.85;stroke:none}
+.psd-wall .wt{fill:#4f9ccf;opacity:.8}.psd-wall .bnd{fill:none;stroke:var(--accent,#f15a29);stroke-width:2;stroke-dasharray:5 6}
+.psd-wall .sub2{fill:#8c6f5d}.psd-wall .curl{fill:none;stroke:#6b6c70;stroke-width:2.4}.psd-wall .lbl{font:600 12px/1 Inter,system-ui,sans-serif;fill:#6b6c70}
+
+/* thickness profiles */
+.psd-prof{display:block;width:100%;max-width:560px;height:auto;margin:8px 0 4px}
+.psd-prof .bgf{fill:#b9bab7}.psd-prof .pf{fill:#e0d6c3;stroke:none}.psd-prof .bgl{fill:none;stroke:#6b6c70;stroke-width:2.6;stroke-linejoin:round}
+.psd-prof .tpl{fill:none;stroke:#2b2c30;stroke-width:2;stroke-linejoin:round}.psd-prof .pl{fill:none;stroke:var(--accent,#f15a29);stroke-width:2;stroke-dasharray:7 6}
+.psd-prof .gr{fill:var(--accent,#f15a29)}.psd-prof .cap{font:600 12.5px/1 Inter,system-ui,sans-serif;fill:#4a4b50}
+
+/* the curing timeline */
+.psd-time{display:block;width:100%;max-width:560px;height:auto;margin:8px 0}
+.psd-time .rail{fill:none;stroke:rgba(20,20,22,.3);stroke-width:3;stroke-linecap:round}
+.psd-time .nd{fill:#fff;stroke:rgba(20,20,22,.4);stroke-width:2}.psd-time .nd.hot{fill:var(--accent,#f15a29);stroke:#fff}
+.psd-time text{font:600 12px/1 Inter,system-ui,sans-serif;fill:#4a4b50}.psd-time text.hot{fill:var(--accent-ink,#c4410f)}
+.psd-time .spr path{fill:none;stroke:#4f9ccf;stroke-width:3;stroke-linecap:round}.psd-time .spr text{font-size:11px;fill:#4f9ccf}
+@media (prefers-reduced-motion:no-preference){.psd-time .spr path{stroke-dasharray:4 6;animation:psd-spr 1.4s linear infinite}@keyframes psd-spr{to{stroke-dashoffset:-20}}}
+
+/* the laboratory test: three numbers and a warning */
+.psd-tiles{list-style:none;margin:26px 0 12px;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.psd-tiles li{background:#fff;border:1px solid rgba(20,20,22,.09);border-radius:18px;padding:22px 22px 20px;box-shadow:0 30px 56px -46px rgba(20,20,22,.5)}
+.psd-tiles b{display:block;font:600 clamp(30px,3.6vw,46px)/1.05 "Cormorant Garamond",Georgia,serif;color:var(--accent-ink,#c4410f);letter-spacing:.01em}
+.psd-tiles span{display:block;margin-top:8px;font:700 11.5px/1.2 Inter,system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#141416}
+.psd-tiles p{margin:8px 0 0;font-size:14px;line-height:1.5;color:#4a4b50}
+@media (max-width:760px){.psd-tiles{grid-template-columns:1fr}}
+.psd-warn{margin:14px 0 26px;padding:14px 18px;border-left:4px solid var(--accent,#f15a29);background:rgba(241,90,41,.07);border-radius:0 12px 12px 0;font-size:15px;line-height:1.55;color:#141416}
+.s3d-read table{margin-top:10px}
+
+/* exposure widget: a rendered section through the wall (Cycles, scripts/weather3d/build-weather.py) per weather factor, with the render layer outlined and the layers named */
+.psd-x3{position:relative;container-type:inline-size;aspect-ratio:2080 / 800;overflow:hidden;background:#3a3a38;border-radius:14px;max-width:none}
+.psd-x3 picture,.psd-x3 img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover}
+.psd-xo{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;display:block}
+.psd-xo g,.psd-xo path{display:revert}
+.psd-xo .ol{fill:rgba(241,90,41,.08);stroke:#F15A29;stroke-width:3;vector-effect:non-scaling-stroke}
+.psd-xo .mk path{fill:none;stroke:#F15A29;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke;filter:drop-shadow(0 1px 2px rgba(0,0,0,.6))}
+.psd-xo .mk .fl{fill:#F15A29;stroke:#fff;stroke-width:2}.psd-xo .mk circle.fl{fill:#FFB02E;stroke:#fff}
+.psd-xo .mk .hot{stroke:#F15A29;stroke-width:9;opacity:.8}.psd-xo .mk .dsh{stroke:#fff;stroke-dasharray:3 9}
+.psd-lb{position:absolute;transform:translate(-50%,-50%);background:rgba(255,255,255,.94);color:#141416;border-radius:999px;padding:.42em 1em;font:600 clamp(10px,1.9cqw,14px)/1 Inter,system-ui,sans-serif;white-space:nowrap;box-shadow:0 8px 20px -8px rgba(0,0,0,.5),0 0 0 1px rgba(20,20,22,.06)}
+.psd-lb.top{box-shadow:0 8px 20px -8px rgba(0,0,0,.5),0 0 0 1px rgba(241,90,41,.6)}
+@media (max-width:560px){.psd-lb{font-size:10px;padding:.38em .8em}.psd-x3{aspect-ratio:2080 / 900}.psd-x3 img{object-position:46% 50%}}
+
+/* plaster finishes: a rendered macro sample per finish (Cycles, scripts/finish3d/build-finish.py), raking light from the upper left */
+.psd-sw3{max-width:460px;aspect-ratio:320 / 150;overflow:hidden;background:#cfc9be;box-shadow:0 0 0 1px rgba(20,20,22,.08),0 22px 40px -30px rgba(20,20,22,.55)}
+.psd-sw3 img{display:block;width:100%;height:100%;object-fit:cover}
+
+/* thickness widget: a rendered cut through the plastered wall per view (Cycles, scripts/thick3d/build-thickness.py); the dashed line is the reference plane the guides set */
+.psd-th3{margin:8px 0 4px;max-width:600px}
+.psd-thcap{margin:0 0 4px;font:600 13px/1.4 Inter,system-ui,sans-serif;color:#4a4b50}
+.psd-thimg{position:relative;aspect-ratio:1640 / 600}
+.psd-thimg picture,.psd-thimg img{display:block;width:100%;height:100%}
+.psd-thpl{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.psd-thpl path{fill:none;stroke:var(--accent,#f15a29);stroke-width:2;stroke-dasharray:7 6;vector-effect:non-scaling-stroke}
+
+/* crack causes and defects: a rendered wall surface per item (Cycles, scripts/wall3d/build-wall.py); the original outline / label / sun marks sit on top */
+.psd-wall3{position:relative;aspect-ratio:440 / 230;overflow:hidden;background:#cfc9be;box-shadow:0 0 0 1px rgba(20,20,22,.08),0 22px 44px -30px rgba(20,20,22,.55)}
+.psd-wall3 picture,.psd-wall3 img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover}
+.psd-wo{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;display:block}
+.psd-wo .hl{filter:drop-shadow(0 1px 2px rgba(0,0,0,.4))}
+.psd-wo .lbl{font:700 12px/1 Inter,system-ui,sans-serif;fill:#fff;paint-order:stroke;stroke:rgba(20,20,22,.55);stroke-width:3px;stroke-linejoin:round;letter-spacing:.04em}
+.psd-wo .sn{filter:drop-shadow(0 1px 2px rgba(0,0,0,.45))}
+.psd-wo .bnd,.psd-wo .gd{filter:drop-shadow(0 1px 1.5px rgba(0,0,0,.5))}
