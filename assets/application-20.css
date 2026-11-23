@@ -192,7 +192,7 @@
 .ap20-turn{position:absolute;left:18px;right:18px;top:16px;display:flex;align-items:center;gap:12px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:#6b6b6b;z-index:2}
 .ap20-turn input{flex:1;max-width:260px;accent-color:var(--accent)}
 @media (max-width:899px){.ap20-xp{--k:.72}}
-@media (max-width:560px){.ap20-xp{--k:.46}.ap20-xp .ap125-xp-stage{min-height:360px;padding-bottom:100px}.ap20-xp .ap125-xp-stone b{font-size:17px;bottom:-54px}}
+@media (max-width:560px){.ap20-xp{--k:.46}.ap20-xp .ap125-xp-stage{min-height:370px;padding-bottom:104px}.ap20-xp .ap125-xp-stone b{font-size:17px;bottom:-46px}}
 .ap125-xp-panel .ap20-pts{margin:6px 0 14px;padding:0;list-style:none}
 .ap125-xp-panel .ap20-pts li{position:relative;padding:7px 0 7px 22px;font-size:15px;line-height:1.6;color:var(--grey);border-top:1px solid rgba(255,255,255,.1)}
 .ap125-xp-panel .ap20-pts li::before{content:"";position:absolute;left:0;top:15px;width:10px;height:2px;background:var(--accent)}
@@ -236,7 +236,7 @@
 .aps-svg .fl text{paint-order:stroke;stroke:#fff;stroke-width:4px;stroke-linejoin:round;fill:#2e2f33;font-weight:700;letter-spacing:.1em;pointer-events:none}
 @media (min-width:1024px){.ap20-pair .aps.a20 .aps-svg{--ls:15}.ap20-pair .aps.a20 .aps-svg .lab.call{font-size:calc(var(--ls) * .9px)}}
 
-.aps.a20.a20p .aps-stage{aspect-ratio:800/310}
+.aps.a20.a20p .aps-stage{aspect-ratio:800/328}
 .ap20-pair{align-items:start}
 .ap6-lab .aps.a20 .aps-svg{--ls:18}
 .aps-svg .rs-leg .card-s{font-size:calc(var(--ls) * .85px)}

@@ -125,7 +125,10 @@
 
   /* ---------- road mix: separate fractions → combined grading → job mix formula → paved surface ---------- */
   function roadmix(A, o, narrow) {
-    var cw = 290, ch = 150, X0 = 20, ys = [-560, -388, -216];
+    // phones draw the labels larger (in drawing units), so the cards are wider there: the titles stay inside their card
+    var cw = narrow ? 340 : 290, ch = narrow ? 162 : 150, X0 = 20, ys = [-560, -388, -216];
+    // card text rows (offsets up from the card bottom): phones get more room between the title and the sub-label
+    var tY = narrow ? 31 : 24, sY = narrow ? 8 : 9, seY = narrow ? 56 : 46, piY = narrow ? 60 : 52;
     var cards = [
       { name: 'Coarse aggregate', sub: narrow ? 'INCL. 12.5 MM' : 'INCL. 12.5 MM, WHERE APPROVED', pile: { sr: 5, seed: 71 }, hot: true },
       { name: 'Fine aggregate', sub: '' + 'SAND, CRUSHER FINES', sand: 'm', seed: 72 },
@@ -134,40 +137,40 @@
     var s1 = '', flows = '', J = [X0 + cw + 70, -388 + ch / 2];
     cards.forEach(function (c, i) {
       var y = ys[i];
-      s1 += '<g transform="translate(' + X0 + ' ' + y + ')"><rect x="3" y="6" width="' + cw + '" height="' + ch + '" rx="10" fill="#141416" fill-opacity=".06"/><rect class="card-bg' + (c.hot ? ' hot' : '') + '" width="' + cw + '" height="' + ch + '" rx="10"/><path class="seam" d="M12 ' + (ch - 46) + 'H' + (cw - 12) + '"/>';
+      s1 += '<g transform="translate(' + X0 + ' ' + y + ')"><rect x="3" y="6" width="' + cw + '" height="' + ch + '" rx="10" fill="#141416" fill-opacity=".06"/><rect class="card-bg' + (c.hot ? ' hot' : '') + '" width="' + cw + '" height="' + ch + '" rx="10"/><path class="seam" d="M12 ' + (ch - seY) + 'H' + (cw - 12) + '"/>';
       var body = c.sand ? A.sandHeap(160, 70, c.seed, c.sand) : (function () { var Pl = A.pile(170, 84, c.pile.seed, { sr: c.pile.sr, strata: 1 }); return Pl.shadow + Pl.strata[0]; })();
-      s1 += '<g transform="translate(' + (cw / 2) + ' ' + (ch - 52) + ')">' + body + '</g>';
-      s1 += '<text class="lab card-t start' + (c.hot ? ' hot' : '') + '" x="14" y="' + (ch - 24) + '">' + esc(c.name) + '</text><text class="lab card-s start" x="14" y="' + (ch - 9) + '">' + c.sub + '</text></g>';
+      s1 += '<g transform="translate(' + (cw / 2) + ' ' + (ch - piY) + ')">' + body + '</g>';
+      s1 += '<text class="lab card-t start' + (c.hot ? ' hot' : '') + '" x="14" y="' + (ch - tY) + '">' + esc(c.name) + '</text><text class="lab card-s start" x="14" y="' + (ch - sY) + '">' + c.sub + '</text></g>';
       var ty = y + ch / 2;
       s1 += '<path class="ln faint dash" d="M' + (X0 + cw) + ' ' + F(ty) + 'H' + (J[0] - 24) + 'L' + J[0] + ' ' + F(J[1]) + '"/>';
       flows += H.stones([[X0 + cw, ty], [J[0] - 24, ty], J], { speed: 34, gap: 24 + i * 2, size: c.sand ? [1.4, 2] : [3.4, 5.2], seed: 80 + i });
     });
     // combined grading card (the three streams joined)
-    var CX = J[0] + 70, cw2 = 300, cy = -388 + ch / 2 - 105, ch2 = 210;
-    var mixed = '<g transform="translate(' + CX + ' ' + cy + ')"><rect x="3" y="6" width="' + cw2 + '" height="' + ch2 + '" rx="10" fill="#141416" fill-opacity=".06"/><rect class="card-bg" width="' + cw2 + '" height="' + ch2 + '" rx="10"/><path class="seam" d="M12 ' + (ch2 - 46) + 'H' + (cw2 - 12) + '"/>'
-      + '<g transform="translate(' + (cw2 / 2) + ' ' + (ch2 - 54) + ')">' + (function () { var Pl = A.pile(190, 110, 74, { sr: 3.6, strata: 1 }); return Pl.shadow + Pl.strata[0]; })() + '</g>'
-      + '<text class="lab card-t start" x="14" y="' + (ch2 - 24) + '">Combined grading</text><text class="lab card-s start" x="14" y="' + (ch2 - 9) + '">' + (narrow ? 'THE WHOLE MIX' : 'THE WHOLE MIX, NOT ONE SIZE') + '</text></g>';
+    var CX = J[0] + 70, cw2 = narrow ? 340 : 300, cy = -388 + ch / 2 - 105, ch2 = 210;
+    var mixed = '<g transform="translate(' + CX + ' ' + cy + ')"><rect x="3" y="6" width="' + cw2 + '" height="' + ch2 + '" rx="10" fill="#141416" fill-opacity=".06"/><rect class="card-bg" width="' + cw2 + '" height="' + ch2 + '" rx="10"/><path class="seam" d="M12 ' + (ch2 - seY) + 'H' + (cw2 - 12) + '"/>'
+      + '<g transform="translate(' + (cw2 / 2) + ' ' + (ch2 - piY - 2) + ')">' + (function () { var Pl = A.pile(190, 110, 74, { sr: 3.6, strata: 1 }); return Pl.shadow + Pl.strata[0]; })() + '</g>'
+      + '<text class="lab card-t start" x="14" y="' + (ch2 - tY) + '">Combined grading</text><text class="lab card-s start" x="14" y="' + (ch2 - sY) + '">' + (narrow ? 'THE WHOLE MIX' : 'THE WHOLE MIX, NOT ONE SIZE') + '</text></g>';
     flows += H.stones([J, [J[0] + 40, J[1]], [CX, J[1]]], { speed: 34, gap: 16, size: [1.6, 4.6], seed: 90 });
     // job mix formula (a sheet: lines only, no values)
-    var JX = CX + cw2 + 60, jw = 230, jh = 210, jy = cy;
-    var lines = ''; for (var l = 0; l < 7; l++) lines += '<path d="M' + (22) + ' ' + (62 + l * 18) + 'H' + (jw - 22 - (l % 3) * 26) + '" stroke="#b9b4a9" stroke-width="3" stroke-linecap="round"/>';
+    var JX = CX + cw2 + 60, jw = narrow ? 320 : 230, jh = 210, jy = cy;
+    var lines = ''; for (var l = 0; l < (narrow ? 6 : 7); l++) lines += '<path d="M' + (22) + ' ' + (62 + l * 18) + 'H' + (jw - 22 - (l % 3) * 26) + '" stroke="#b9b4a9" stroke-width="3" stroke-linecap="round"/>';
     var jmf = '<g transform="translate(' + JX + ' ' + jy + ')"><rect x="3" y="6" width="' + jw + '" height="' + jh + '" rx="10" fill="#141416" fill-opacity=".06"/><rect class="card-bg hot" width="' + jw + '" height="' + jh + '" rx="10"/>'
       + '<rect x="22" y="22" width="40" height="12" rx="2" fill="#FF5E29"/>' + lines
-      + '<text class="lab card-t start hot" x="14" y="' + (jh - 24) + '">Job mix formula</text><text class="lab card-s start" x="14" y="' + (jh - 9) + '">' + (narrow ? 'APPROVED FIRST' : 'APPROVED BEFORE PAVING') + '</text></g>';
+      + '<text class="lab card-t start hot" x="14" y="' + (jh - tY) + '">Job mix formula</text><text class="lab card-s start" x="14" y="' + (jh - sY) + '">' + (narrow ? 'APPROVED FIRST' : 'APPROVED BEFORE PAVING') + '</text></g>';
     flows += H.stones([[CX + cw2, J[1]], [JX, J[1]]], { speed: 34, gap: 14, size: [1.8, 4], seed: 91 });
     // the paved surface: the project photograph in a card
     var PX = JX + jw + 60, pw = 390, ph = 260, py = cy - 25;
     var photo = '<g transform="translate(' + PX + ' ' + py + ')"><clipPath id="aps-rm-clip"><rect width="' + pw + '" height="' + ph + '" rx="10"/></clipPath><rect x="3" y="6" width="' + pw + '" height="' + ph + '" rx="10" fill="#141416" fill-opacity=".06"/>'
       + '<image href="' + PHOTO + '12-5mm-aggregate-bituminous-road-construction-640.webp" x="0" y="0" width="' + pw + '" height="' + ph + '" preserveAspectRatio="xMidYMid slice" clip-path="url(#aps-rm-clip)" role="img" aria-label="Asphalt paver laying a bituminous road surface beside a heap of crushed stone"/>'
       + '<rect width="' + pw + '" height="' + ph + '" rx="10" fill="none" stroke="rgba(20,20,22,.18)"/></g>'
-      + '<text class="lab card-t start" x="' + PX + '" y="' + (py + ph + 28) + '">Paved surface</text><text class="lab card-s start" x="' + PX + '" y="' + (py + ph + 44) + '">' + (narrow ? 'SPEC DECIDES' : 'THE SPECIFICATION DECIDES') + '</text>';
+      + '<text class="lab card-t start" x="' + PX + '" y="' + (py + ph + 28) + '">Paved surface</text><text class="lab card-s start" x="' + PX + '" y="' + (py + ph + (narrow ? 52 : 44)) + '">' + (narrow ? 'SPEC DECIDES' : 'THE SPECIFICATION DECIDES') + '</text>';
     flows += H.stones([[JX + jw, J[1]], [PX, J[1]]], { speed: 34, gap: 14, size: [1.8, 4], seed: 92 });
     var ground = '';
-    var ticks = '<path class="aps-gline" d="M-20 34H1560"/>' + [X0 + cw / 2, CX + cw2 / 2, JX + jw / 2, PX + pw / 2].map(function (x) { return '<circle class="ring" cx="' + x + '" cy="34" r="4.5"/>'; }).join('');
+    var ticks = '<path class="aps-gline" d="M-20 34H' + Math.max(1560, PX + pw + 40) + '"/>' + [X0 + cw / 2, CX + cw2 / 2, JX + jw / 2, PX + pw / 2].map(function (x) { return '<circle class="ring" cx="' + x + '" cy="34" r="4.5"/>'; }).join('');
     var sub = narrow ? 100 : 82;
     var labs = label(X0 + cw / 2, 64, 'SEPARATE FRACTIONS') + label(CX + cw2 / 2, 64, 'COMBINED GRADING') + label(JX + jw / 2, 64, 'JOB MIX FORMULA') + label(PX + pw / 2, 64, 'ROAD SURFACE');
     var markup = '<g class="aps-b aps-b1">' + s1 + '</g><g class="aps-b aps-b2">' + mixed + '</g><g class="aps-b aps-b3">' + jmf + '</g><g class="aps-b aps-b4">' + photo + '</g><g class="aps-b aps-b5">' + ticks + labs + '</g><g class="aps-flow">' + flows + '</g>';
-    return { vb: narrow ? [-20, -590, 700, 720] : [-20, -590, 1580, 720], world: [-20, 1560], markup: markup };
+    return { vb: narrow ? [-20, -590, 700, 720] : [-20, -590, 1580, 720], world: [-20, Math.max(1560, PX + pw + 40)], markup: markup };
   }
   roadmix.pan = true;
 

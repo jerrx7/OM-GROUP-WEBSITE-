@@ -128,6 +128,24 @@
   processScene.pan = true; // only this wide scene follows the scroll on phones
   var SCENES = { process: processScene };
 
+  /* the CSS pan (application-scenes.css, .aps.is-pan .aps-cam: cover 22% → cover 72% of the figure) driven by scroll,
+     for browsers without animation-timeline */
+  function jsPan(fig, cam) {
+    if (!cam) return;
+    var dist = parseFloat(cam.style.getPropertyValue('--pan')) || 0, queued = false;
+    var update = function () {
+      queued = false;
+      var r = fig.getBoundingClientRect(), vh = window.innerHeight;
+      if (r.bottom < -vh || r.top > vh * 2) return;
+      var p = (vh - r.top) / (vh + r.height), q = Math.min(1, Math.max(0, (p - 0.22) / 0.5));
+      cam.style.transform = 'translateX(' + F(-dist * q) + 'px)';
+    };
+    var on = function () { if (!queued) { queued = true; requestAnimationFrame(update); } };
+    window.addEventListener('scroll', on, { passive: true });
+    window.addEventListener('resize', on);
+    update();
+  }
+
   /* ---------- mounting ---------- */
   function mount(fig) {
     if (fig.__apsMounted) return; fig.__apsMounted = true;
@@ -139,7 +157,9 @@
     libOrNone.then(function (A) {
       if (!build.noLib) sharedDefs(A);
       var host = fig.querySelector('.aps-stage') || fig;
-      var narrow = !!build.pan && window.innerWidth <= 767 && HAS_TL;
+      // phones always get the narrow (phone-sized, panning) drawing; browsers without scroll-driven animation
+      // (iOS Safari before 26, Firefox) pan it from a scroll listener instead of CSS, see jsPan below
+      var narrow = !!build.pan && window.innerWidth <= 767;
       var run = function () {
         // a figure whose drawing was written into the HTML at build time (pre-rendered, so it paints with the document) is only wired up, not rebuilt
         var svg = host.querySelector('svg.aps-svg'), sc;
@@ -154,7 +174,7 @@
             host.insertBefore(svg, host.firstChild);
           }
         }
-        if (narrow) fig.classList.add('is-pan');
+        if (narrow) { fig.classList.add('is-pan'); if (!HAS_TL && !reduce && svg) jsPan(fig, svg.querySelector('.aps-cam')); }
         fig.classList.add('is-ready');
         fig.__apsSvg = svg;
         var pause = function (p) { if (!svg) return; try { p ? svg.pauseAnimations() : svg.unpauseAnimations(); } catch (e) {} };

@@ -29,7 +29,7 @@ function plant() {
       <div class="hma-tabs s3d-seg hma-scroll" role="group" aria-label="Choose a component">${tabs}</div>
       <div class="hma-states">${states}</div>
     </div>
-    <p class="ap-small">A typical batch-type plant, not an OM GROUP facility. The size ranges shown on the hot-bin and screening pictures are examples: real fractions come from the plant screens and the approved mix design.</p>`);
+    <p class="ap-small">A typical batch-type plant. The size ranges shown on the hot-bin and screening pictures are examples: real fractions come from the plant screens and the approved mix design.</p>`);
 }
 
 /* ============ batch vs drum ============ */
@@ -123,7 +123,6 @@ function process() {
       <div class="hma-nav"><button type="button" class="btn btn-ghost" data-hma-step="-1">← Previous stage</button><button type="button" class="btn btn-accent" data-hma-step="1">Next stage <span class="btn-arrow" aria-hidden="true">→</span></button><button type="button" class="btn btn-ghost hma-play" data-hma-play aria-pressed="false"><span class="hma-play-i" aria-hidden="true"></span><span class="hma-play-t">Play the journey</span></button></div>
     </div>
     <p class="hma-closing" data-rv>From carefully selected materials to a finished pavement, every stage contributes to asphalt quality.</p>
-    <p class="ap-small">The pictures show typical plants and road works, not OM GROUP facilities. They show no mix proportion, temperature, capacity or test result.</p>
     ${ctaRow('process', 'req', 'spec')}`, { bone: true });
 }
 
@@ -143,7 +142,7 @@ function goa() {
       <figure class="hma-cap hma-goa" data-rv>${svg}<figcaption class="ap-small">Conditions as stated in the circular. Read the tender and any later amendment.</figcaption></figure>
       <div class="ap-prose" data-rv>${ul(['<strong>More than ₹3.50 crore:</strong> a batch-type hot mix plant of not lower than 100–120 TPH, conforming to IRC:90-2010 including amendments.', '<strong>Less than ₹3.50 crore:</strong> a 40–60 TPH drum-type plant is allowed until 31 August 2028. After that, the circular states that all road works must switch to batch-type plants.', '<strong>Plant location and arrangement:</strong> the contractor must own, possess, lease or hire the specified plant, installed within Goa.', '<strong>Pothole-filling works:</strong> a batch-type plant of not lower than 100–120 TPH where specified, irrespective of the work amount.', '<strong>Also addressed:</strong> plant availability declarations, a valid Goa State Pollution Control Board certificate, field laboratory requirements for the specified batch-plant category, and quality-control oversight.'])}</div>
     </div>
-    ${warn('<strong>These provisions relate to the relevant Goa PWD contracts.</strong> They are not universal requirements for every private project or every road contract. The tender and any amendment must be checked. This page does not say that OM GROUP owns, leases or operates a plant, or that it meets these conditions.')}`);
+    ${warn('<strong>These provisions relate to the relevant Goa PWD contracts.</strong> They are not universal requirements for every private project or every road contract. The tender and any amendment must be checked.')}`);
 }
 
 module.exports = { plant, batchDrum, process, goa };

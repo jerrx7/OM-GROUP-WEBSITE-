@@ -168,7 +168,7 @@
     var id = ORDER.filter(function (k) { return MENUS[k].href === a.getAttribute('href'); })[0];
     if (!id) return;
     a.setAttribute('data-mega', id); a.setAttribute('aria-expanded', 'false'); a.setAttribute('aria-controls', 'mega-' + id); a.setAttribute('aria-haspopup', 'true');
-    a.insertAdjacentHTML('beforeend', svg('chev', 'mchev')); triggers[id] = a;
+    triggers[id] = a;
   });
 
   var cur = null, closeT = 0, quiet = false;

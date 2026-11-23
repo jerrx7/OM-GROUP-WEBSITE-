@@ -17,7 +17,9 @@
 .aps.a40c .aps-stage{aspect-ratio:800/460}
 .aps.a40r .aps-stage{aspect-ratio:800/380}
 @media (max-width:1023px){.aps.a40 .aps-svg{--ls:15}}
-@media (max-width:767px){.aps.a40 .aps-svg{--ls:24}.aps.a40 .aps-svg .lab.call{font-size:calc(var(--ls) * .68px);letter-spacing:.08em}.aps.a40 .aps-stage{border-radius:16px}.aps.a40c .aps-stage{aspect-ratio:400/950}.aps.a40c .aps-svg{--ls:13}.aps.a40h .aps-stage{aspect-ratio:800/740}}
+@media (max-width:767px){.aps.a40 .aps-svg{--ls:24}.aps.a40 .aps-svg .lab.call{font-size:calc(var(--ls) * .68px);letter-spacing:.08em}.aps.a40 .aps-stage{border-radius:16px}.aps.a40c .aps-stage{aspect-ratio:400/950}.aps.a40c .aps-svg{--ls:13}.aps.a40h .aps-stage{aspect-ratio:800/770}}
+/* phones: the three material cards are 400 units wide, so their notes and subtitle are set smaller to fit on one line each */
+@media (max-width:767px){.aps.a40 .aps-svg .lab.mt-note{font-size:calc(var(--ls) * .55px);letter-spacing:.06em}.aps.a40 .aps-svg .lab.mt-sub{font-size:calc(var(--ls) * .64px);letter-spacing:.1em}.aps.a40 .aps-svg .lab.ht-ax{font-size:calc(var(--ls) * .62px);letter-spacing:.1em}}
 
 /* graphite panel (the mass-concrete chapter) keeps its stages on paper, like the 12.5 and 20 mm RMC panel */
 .ap40-chap{margin-top:clamp(56px,7vw,96px)}

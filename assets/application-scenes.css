@@ -136,6 +136,7 @@
   .aps{margin-top:24px}
   .aps-stage{border-radius:18px;aspect-ratio:700 / 780}
   .aps-svg{--ls:25}
+  .aps.is-pan .aps-svg .lab.card-t{font-size:calc(var(--ls) * 1.15px)}   /* card titles: room between the heap, the title and the sub-label */
   .aps-cap{width:86%;left:5%;top:4.5%}
   .aps-cap-s{display:none}
   .aps-cap-t{font-size:22px}

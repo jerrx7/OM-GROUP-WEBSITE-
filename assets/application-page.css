@@ -324,7 +324,7 @@ mark.todo{display:inline-block;margin:4px 0}
   .ap-cmp caption{display:block;padding:0 0 14px;border:0}
   .ap-cmp tr{background:#fff;border:1px solid var(--line);border-radius:2px;margin-bottom:12px;padding:6px 0}
   .ap-cmp tbody th{padding:12px 14px 4px;border:0;font-size:15.5px}
-  .ap-cmp td{display:grid;grid-template-columns:64px minmax(0,1fr);gap:10px;border:0;padding:6px 14px}
+  .ap-cmp td{display:grid;grid-template-columns:minmax(min-content,40%) minmax(0,1fr);gap:12px;border:0;padding:6px 14px}   /* the label column fits its longest word (CHARACTERISTIC, CLASSIFICATION) */
   .ap-cmp td::before{content:attr(data-label);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink);padding-top:3px}
   .ap-cmp tbody tr:hover{background:#fff}
 }

@@ -84,6 +84,7 @@ const SCENES = {
   bldlab: () => import('/assets/application-s3d-bldlab.js'),
   bldequip: () => import('/assets/application-s3d-bldequip.js'),
   bldretain: () => import('/assets/application-s3d-bldretain.js'),
+  hmapave: () => import('/assets/application-s3d-hmapave.js'),
 };
 
 /* ───────── shared renderer, studio light ───────── */

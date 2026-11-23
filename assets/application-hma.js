@@ -274,7 +274,7 @@
     }
     f.addEventListener('input', calc);
     $('#hmaCalcClear').addEventListener('click', function () { ['len', 'wid', 'thk', 'den'].forEach(function (k) { q(k).value = ''; }); calc(); });
-    $('#hmaCalcEx').addEventListener('click', function () { q('len').value = '1000'; q('wid').value = '7'; q('thk').value = '50'; q('den').value = '2.40'; calc(); msg.textContent = 'Worked example filled in. The 2.40 t/m³ density is illustrative only, not an OM GROUP or a recommended density.'; });
+    $('#hmaCalcEx').addEventListener('click', function () { q('len').value = '1000'; q('wid').value = '7'; q('thk').value = '50'; q('den').value = '2.40'; calc(); msg.textContent = 'Worked example filled in. The 2.40 t/m³ density is an example only, not a recommended density.'; });
     calc();
   })();
 

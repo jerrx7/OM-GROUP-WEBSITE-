@@ -139,7 +139,6 @@ ${CSS.map(c => `<link rel="stylesheet" href="/assets/${c}.css" />`).join('\n')}
           ${cta(MSG.req, 'hot_mix_quote_click', 'hero', 'Discuss Your Hot Mix Requirement', 'btn-ghost', false)}
         </div>
         <p class="ap-small" style="margin-top:14px"><a class="ap-link" href="/?category=Stone%20Aggregates&amp;message=${L.enc(MSG.spec)}#contact" data-ev="hot_mix_quote_click" data-loc="hero_spec">Submit your mix specification</a></p>
-        <p class="psd-warn" role="note" style="margin-top:18px"><strong>An educational guide to Hot Mix Asphalt.</strong> It explains the material, the plant and the road works. It does not state that OM GROUP manufactures or supplies Hot Mix; availability and supply arrangements are confirmed per enquiry.</p>
       </div>
       <div class="ap-hero-media hma-hero-media">
         ${fig('hot-mix-asphalt-road-construction', 'Plant, tipper, paver and roller: the Hot Mix chain', heroAlt, { eager: true, rv: false, sizes: '(max-width:899px) 92vw, 52vw', cls: 'hma-hero-ph' })}
@@ -156,7 +155,6 @@ ${CSS.map(c => `<link rel="stylesheet" href="/assets/${c}.css" />`).join('\n')}
       <a href="#paving" data-ev="hot_mix_process_interaction" data-loc="indicator">${pic('asphalt-paver-hot-mix-laying', 'An asphalt paver and screed laying a fresh Hot Mix Asphalt mat', { sizes: '(max-width:899px) 92vw, 360px' })}<span><strong>How it is laid</strong><small>Paver, screed and rollers</small></span></a>
       <a href="#quality" data-ev="hot_mix_process_interaction" data-loc="indicator">${pic('asphalt-pavement-core-sampling', 'A technician drilling a core sample from a compacted asphalt road surface', { sizes: '(max-width:899px) 92vw, 360px' })}<span><strong>How it is checked</strong><small>Tests, cores and acceptance</small></span></a>
     </div>
-    <p class="ap-small" style="margin-top:18px">The pictures show a typical asphalt plant and road works. They are not OM GROUP facilities, and no capacity, mix proportion, temperature or test result is shown.</p>
   </div>
 </section>
 

@@ -8,12 +8,15 @@
 .ap125-ladder text{font-family:var(--sans);font-weight:700;fill:var(--grey);font-size:12.5px;letter-spacing:.04em}
 .ap125-ladder text.hot{fill:var(--accent-ink);font-size:17px}
 .ap125-ladder .sub{font-size:8.6px;font-weight:600;letter-spacing:.14em;fill:var(--grey)}
+/* the end labels align to the outer edge of their node, so a long one ("Fractions · OM GROUP", "Prepared subgrade") never runs off the screen */
+.ap125-ladder text:first-of-type{text-anchor:start;transform:translateX(-12px)}
+.ap125-ladder text:last-of-type{text-anchor:end;transform:translateX(12px)}
 .ap125-ladder .rail{stroke:rgba(20,20,22,.28);stroke-width:2;fill:none;stroke-linecap:round}
 .ap125-ladder .rail.on{stroke:var(--accent);stroke-width:3}
 .ap125-ladder .nd{fill:#fff;stroke:rgba(20,20,22,.4);stroke-width:2}
 .ap125-ladder .nd.hot{fill:var(--accent);stroke:#fff;stroke-width:3}
 @media (prefers-reduced-motion:no-preference){
-  .ap125-ladder .rail.on{stroke-dasharray:140;stroke-dashoffset:140;animation:ap125Draw 1.4s var(--ease) .7s forwards}
+  .ap125-ladder .rail.on{stroke-dasharray:400;stroke-dashoffset:400;animation:ap125Draw 1.4s var(--ease) .7s forwards}
   .ap125-ladder .nd.hot{transform-box:fill-box;transform-origin:center;animation:ap125Pop .9s var(--ease) 1.5s both}
 }
 @keyframes ap125Draw{to{stroke-dashoffset:0}}
@@ -41,7 +44,7 @@
 .ap125-term{font-family:var(--serif);font-weight:500;font-size:1.22em;color:var(--ink);font-variant-numeric:lining-nums}
 
 /* ---------- graphite panels (selective darkness) ---------- */
-.ap125-dark{--ink:#f4f1ea;--grey:#c3c0b8;--grey-2:#a09d95;--line:rgba(255,255,255,.14);--bone:#202125;background:#16171a;color:#e9e7e2;position:relative;overflow:hidden}
+.ap125-dark{--ink:#f4f1ea;--grey:#c3c0b8;--grey-2:#a09d95;--line:rgba(255,255,255,.14);--bone:#202125;background:#16171a;color:#e9e7e2;position:relative;overflow:hidden;overflow:clip}   /* clip, not hidden: a hidden section is a scroll container and freezes the view timelines of the figures inside it */
 .ap125-dark::before{content:"";position:absolute;left:-10%;top:-25%;width:60%;height:90%;background:radial-gradient(closest-side,rgba(241,90,41,.14),rgba(241,90,41,0));pointer-events:none}
 .ap125-dark .wrap{position:relative}
 .ap125-dark .ap-kicker{color:#FF8C63}
@@ -192,9 +195,12 @@
   .ap125-facts{grid-template-columns:minmax(0,1fr)}
   .ap125-facts li,.ap125-facts li:nth-child(n){border-left:0;padding:22px 0}
   .ap125-facts li+li{border-top:1px solid var(--line)}
-  .ap125-xp-stage{min-height:340px;padding:22px 12px 78px;gap:8px}
+  /* phones: the size names sit in their own band above the note (which wraps to two lines at 360px), axis under the stones */
+  .ap125-xp-stage{min-height:360px;padding:22px 12px 104px;gap:8px}
   .ap125-xp-stone img{width:calc(var(--s) * .56px)}
-  .ap125-xp-stone b{font-size:18px;bottom:-56px}
+  .ap125-xp-stone b{font-size:18px;bottom:-46px}
+  .ap125-xp-axis{bottom:100px}
+  .ap125-xp-note{bottom:12px;padding:0 14px;line-height:1.5}
   .ap125-def p{margin-left:0}
   .ap125-desig div{grid-template-columns:78px minmax(0,1fr);gap:4px 14px}
   .ap125-desig b{font-size:28px}

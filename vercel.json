@@ -25,6 +25,24 @@
   ],
   "headers": [
     {
+      "source": "/(HANDOVER.md|gtm_setup_report.md|gtm_container_setup.json|google-apps-script.js|package-lock.json|package.json)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        }
+      ]
+    },
+    {
+      "source": "/scripts/:path*",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        }
+      ]
+    },
+    {
       "source": "/img/:path*",
       "headers": [
         {

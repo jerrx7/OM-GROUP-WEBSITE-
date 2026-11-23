@@ -47,7 +47,7 @@ function answers() {
     ['Why is compaction important?', 'Compaction helps achieve the required pavement density, aggregate contact, volumetric structure and surface profile.'],
     ['How is Hot Mix quantity calculated?', 'For a uniform rectangular road section, theoretical compacted volume is length times width times compacted thickness. Multiplying the volume by the approved compacted density gives the theoretical mass.'],
     ['What tests are performed on Hot Mix?', 'Depending on the mix and project: aggregate gradation, binder content, bulk specific gravity, maximum theoretical specific gravity, air voids, VMA, VFB, Marshall properties, density and core testing.'],
-    ['Does OM GROUP supply Hot Mix in Goa?', L.HMA.verified ? 'VERIFIED STATE: replace with the confirmed supply statement.' : '<strong>This page does not state that OM GROUP manufactures or supplies Hot Mix Asphalt.</strong> OM GROUP\'s catalogue covers crushed aggregates, GSB, WMM, boulders and other construction materials. Any Hot Mix supply is confirmed only after the plant, mix types, binder grade, documentation and delivery coverage for a given requirement are verified.']
+    ['How do I enquire about Hot Mix in Goa?', '<strong>Share the mix type, governing specification, quantity, delivery location and schedule with OM GROUP.</strong> OM GROUP\'s catalogue covers crushed aggregates, GSB, WMM, boulders and other construction materials.']
   ];
   return sec('answers', '', `
     <p class="ap-kicker">Direct answers</p>
@@ -109,7 +109,7 @@ function types() {
   return sec('types', '', `
     ${head('types', 'Types of Hot Mix', 'Different mixes. Different pavement functions.', 'Hot Mix Asphalt is not one universal mixture. Different bituminous mixes are designed for different pavement layers, traffic conditions and construction requirements.')}
     <div class="hma-types">${T.map((t, i) => `<article class="hma-type" data-rv><span class="hma-type-n">${String(i + 1).padStart(2, '0')}</span><b class="hma-type-k">${t[0]}</b><h3 class="ap-h4">${t[1]}</h3><p>${t[2]}</p></article>`).join('')}</div>
-    ${warn('<strong>The correct mix type must be selected from the contract specification.</strong> Open-graded premix carpet and other surface treatments are different materials and should not be confused with dense graded DBM or BC. Not every mix is suitable for every application, and this page does not state which mixes OM GROUP can supply.')}
+    ${warn('<strong>The correct mix type must be selected from the contract specification.</strong> Open-graded premix carpet and other surface treatments are different materials and should not be confused with dense graded DBM or BC. Not every mix is suitable for every application.')}
     <div class="ap-cta-row"><a href="#pavement" class="btn btn-accent" data-ev="hot_mix_process_interaction" data-loc="types">Understand DBM vs BC <span class="btn-arrow" aria-hidden="true">→</span></a></div>`, { bone: true });
 }
 

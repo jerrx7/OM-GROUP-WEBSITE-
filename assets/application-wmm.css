@@ -48,7 +48,7 @@
 .wmb .bl{font:600 9.2px/1 Inter,system-ui,sans-serif;fill:#6b6c70}.wmb .bl.on{fill:var(--accent-ink,#c4410f);font-weight:700}
 .wmd-journey .s3d-step{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
 /* drying timeline */
-.wmd-dry{max-width:700px;margin:12px 0 4px}.wmt{display:block;width:100%;height:auto}
+.wmd-dry{max-width:700px;margin:12px 0 4px}.wmt{display:block;width:100%;height:auto;overflow:visible}   /* end labels ("Final compaction") may run past the rail ends */
 .wmt .rail{fill:none;stroke:rgba(20,20,22,.2);stroke-width:4;stroke-linecap:round}.wmt .rail.on{stroke:var(--accent,#f15a29)}.wmt .nd{fill:#fff;stroke:rgba(20,20,22,.4);stroke-width:2.4}.wmt .nd.hot{fill:var(--accent,#f15a29);stroke:#fff}
 .wmt .bl{font:600 11.5px/1 Inter,system-ui,sans-serif;fill:#4a4b50}.wmt .bl.on{fill:var(--accent-ink,#c4410f);font-weight:700}.wmt .ref{font:600 10.5px/1 Inter,system-ui,sans-serif;fill:#6b6c70}
 /* field report template */

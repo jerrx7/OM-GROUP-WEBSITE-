@@ -55,11 +55,13 @@
       + '<rect x="' + X0 + '" y="' + Y0 + '" width="' + W + '" height="' + Hh + '" fill="none" stroke="#232427" stroke-width="1.4"/></g>';
     var cut = '<rect x="' + (X0 - 5) + '" y="' + (Y0 - 5) + '" width="' + (W + 10) + '" height="' + (Hh + 10) + '" rx="3" fill="none" stroke="#FF5E29" stroke-width="2.4" stroke-dasharray="9 7"/>';
     var LX = X0 + W + DX + 26;
+    // a label block is one <text>; on phones its lines are spaced in em so the spacing grows with the larger type (fixed 18-unit steps overlapped there), elsewhere the original 18 units
+    var stack = function (x, y, rows) { return '<text class="lab start" x="' + x + '" y="' + y + '">' + rows.map(function (r, k) { return '<tspan class="lab start ' + r[1] + '" x="' + x + '"' + (k ? ' dy="' + (window.innerWidth <= 767 ? '1.14em' : '18') + '"' : '') + '>' + esc(r[0]) + '</tspan>'; }).join('') + '</text>'; };
     var labels = '<g class="mx-lbl">'
       + '<g class="mx-lc" style="--d:2.2s">' + lab(X0, Y0 - 86, 'CUT SECTION THROUGH A SLAB', 'start acc-t') + '</g>'
-      + '<g class="mx-lc" style="--d:3.0s">' + lab(LX, 150, 'COARSE', 'start call') + lab(LX, 168, 'AGGREGATE', 'start call') + lab(LX, 186, '20 mm', 'start faint-t') + lead('M' + (LX - 8) + ' 160L' + F(big.x + big.r * 0.6) + ' ' + F(big.y), [big.x + big.r * 0.6, big.y]) + '</g>'
-      + '<g class="mx-lc" style="--d:3.25s">' + lab(LX, 270, 'FINE', 'start call') + lab(LX, 288, 'AGGREGATE', 'start call') + lab(LX, 306, 'sand grains', 'start faint-t') + lead('M' + (LX - 8) + ' 280L' + F(free ? free[0] : X0 + 300) + ' ' + F(free ? free[1] : Y0 + 150), free) + '</g>'
-      + '<g class="mx-lc" style="--d:3.5s">' + lab(LX, 390, 'CEMENT', 'start call') + lab(LX, 408, 'PASTE', 'start call') + lab(LX, 426, 'binds it all', 'start faint-t') + lead('M' + (LX - 8) + ' 400L' + F(X0 + W - 20) + ' ' + F(Y0 + Hh - 10), [X0 + W - 20, Y0 + Hh - 10]) + '</g>'
+      + '<g class="mx-lc" style="--d:3.0s">' + stack(LX, 150, [['COARSE', 'call'], ['AGGREGATE', 'call'], ['20 mm', 'faint-t']]) + lead('M' + (LX - 8) + ' 160L' + F(big.x + big.r * 0.6) + ' ' + F(big.y), [big.x + big.r * 0.6, big.y]) + '</g>'
+      + '<g class="mx-lc" style="--d:3.25s">' + stack(LX, 270, [['FINE', 'call'], ['AGGREGATE', 'call'], ['sand grains', 'faint-t']]) + lead('M' + (LX - 8) + ' 280L' + F(free ? free[0] : X0 + 300) + ' ' + F(free ? free[1] : Y0 + 150), free) + '</g>'
+      + '<g class="mx-lc" style="--d:3.5s">' + stack(LX, 390, [['CEMENT', 'call'], ['PASTE', 'call'], ['binds it all', 'faint-t']]) + lead('M' + (LX - 8) + ' 400L' + F(X0 + W - 20) + ' ' + F(Y0 + Hh - 10), [X0 + W - 20, Y0 + Hh - 10]) + '</g>'
       + '</g>';
     return { vb: [0, 60, 800, 410], markup: '<defs>' + set.defs + '</defs>' + top + side + section + '<g class="mx-cut">' + cut + '</g>' + '<g class="mx-ring"><circle class="aps-pulse" cx="' + F(big.x) + '" cy="' + F(big.y) + '" r="' + F(big.r + 8) + '" fill="none" stroke="#FF5E29" stroke-width="2.4"/></g>' + labels };
   }
@@ -131,7 +133,13 @@
       + label(700, 64, 'BELTS') + sl(700, 'WEIGHED, THEN LIFTED')
       + label(990, 64, narrow ? 'MIXER' : 'MIXING TOWER') + sl(990, 'BLENDED TO THE MIX DESIGN')
       + label(tx0 + 250, 64, narrow ? 'TRUCK' : 'TRANSIT MIXER') + sl(tx0 + 250, 'DELIVERY');
-    var tags = kinds.map(function (c, i) { return '<text class="lab' + (c.hot ? ' acc-t' : '') + '" x="' + bx(i) + '" y="-404" style="font-weight:700;letter-spacing:.12em">' + c.name + '</text>' + (c.hot ? '<circle class="ring-on" cx="' + bx(i) + '" cy="-388" r="4"/>' : ''); }).join('');
+    // phones: the bins sit 128 units apart but the type is larger, so a two-word tag is set on two lines (it would run into M-SAND)
+    var tagText = function (c, i) {
+      var words = c.name.split(' ');
+      if (!narrow || words.length < 2 || /MM$/.test(c.name)) return c.name;
+      return words.map(function (w, k) { return '<tspan x="' + bx(i) + '" dy="' + (k ? '1.05em' : '-1.05em') + '">' + w + '</tspan>'; }).join('');
+    };
+    var tags = kinds.map(function (c, i) { return '<text class="lab' + (c.hot ? ' acc-t' : '') + '" x="' + bx(i) + '" y="-404" style="font-weight:700;letter-spacing:.12em">' + tagText(c, i) + '</text>' + (c.hot ? '<circle class="ring-on" cx="' + bx(i) + '" cy="-388" r="4"/>' : ''); }).join('');
     var markup = back + ground
       + '<g class="aps-b aps-b1">' + statics + heaps + gates + '</g>'
       + '<g class="aps-b aps-b2">' + H.belt(A, P.gather) + H.belt(A, P.incline) + mixDrive + '</g>'
@@ -219,12 +227,11 @@
     var chains = '<g class="pc-hook"><path class="ln" d="M400 30V120" /><path class="ln" d="M400 120L' + (mx0 + 40) + ' ' + (my - 8) + 'M400 120L' + (mx1 - 40) + ' ' + (my - 8) + '"/><circle class="ring-on" cx="400" cy="120" r="5"/></g>';
     var el = '<g class="pc-el">' + fill + cage + '</g>';
     var labs = '<g class="lbl">'
-      + lab(mx0 - 40, my + 128, 'MOULD GEOMETRY', 'start call') + lead('M' + (mx0 - 22) + ' ' + (my + 60) + 'L' + (mx0 - 30) + ' ' + (my + 112), [mx0 - 22, my + 60])
-      + lab(mx1 - 150, my + 128, 'REINFORCEMENT', 'start call') + lead('M' + (mx1 - 64) + ' ' + (my + 20) + 'L' + (mx1 - 50) + ' ' + (my + 112), [mx1 - 64, my + 20])
-      + lab(400, my + 168, 'AGGREGATE: 20 mm only where the section allows it', 'acc-t')
-      + '</g>';
+      + lab(mx0 - 40, my + 152, 'MOULD GEOMETRY', 'start call') + lead('M' + (mx0 - 22) + ' ' + (my + 60) + 'L' + (mx0 - 30) + ' ' + (my + 134), [mx0 - 22, my + 60])
+      + lab(mx1 - 150, my + 152, 'REINFORCEMENT', 'start call') + lead('M' + (mx1 - 64) + ' ' + (my + 20) + 'L' + (mx1 - 50) + ' ' + (my + 134), [mx1 - 64, my + 20])
+      + '</g>';   /* (an "AGGREGATE: 20 mm only where the section allows it" line used to sit at y 480, outside the frame, never shown; the step text says it) */
     var markup = '<defs>' + set.defs + '</defs>' + ground + table + mould + '<g class="pc-hang"><g class="pc-pos">' + el + chains + '</g></g>' + bucket + vib + cure + labs;
-    return { vb: [0, 150, 800, 310], markup: markup };
+    return { vb: [0, 150, 800, 328], markup: markup };   /* the labels sit below the steel table (it ends at y 430) */
   }
 
   /* ---------- pavement build-up: one stack per figure (o.kind 'c' concrete, 'b' bituminous) ---------- */

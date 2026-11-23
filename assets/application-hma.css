@@ -218,7 +218,7 @@
 }
 @media (max-width:899px){
   .hma-hero .ap-hero-grid{grid-template-columns:1fr}
-  .hma-pair,.hma-st,.hma-grade-grid,.hma-temp .hma-grade-grid{grid-template-columns:1fr;gap:24px}
+  .hma-pair,.hma-st,.hma-grade-grid,.hma-temp .hma-grade-grid{grid-template-columns:minmax(0,1fr);gap:24px}
   .hma-pair--rev>:first-child{order:0}
   .hma-two,.hma-trio{grid-template-columns:1fr}
   .hma-trio .hma-ph{aspect-ratio:3/2}
@@ -416,10 +416,45 @@
 .hma-co b i{display:block;font:500 .86em/1.25 Inter,sans-serif;color:#6a6c71;font-style:normal}
 .hma-co--up::before{bottom:0}.hma-co--up b{bottom:calc(var(--l) * 1cqw)}
 .hma-co--dn::before{top:0}.hma-co--dn b{top:calc(var(--l) * 1cqw)}
-.hma-st:has(.hma-r--drum){grid-template-columns:1fr}
+.hma-st:has(.hma-r--drum){grid-template-columns:minmax(0,1fr)}
+.hma-st>*{min-width:0} /* a wide figure must scroll inside .hma-r-sc, never widen the grid column (and the page) */
 .hma-st:has(.hma-r--drum) .hma-st-tx{max-width:900px}
 .hma-st:has(.hma-r--drum) .hma-r{margin-top:0}
 @media (max-width:700px){
   .hma-r--drum .hma-r-in{min-width:860px}
   .hma-r--jmf .hma-r-in{min-width:620px}
+  .hma-r figcaption::before{content:"Swipe sideways to see the whole picture. ";display:block;margin-bottom:4px;font-weight:600;color:var(--accent-ink,#c9441a)}
 }
+
+/* ---------- the 3D paving train (scene hmapave): buttons move the camera ---------- */
+.hma-pave3d{margin-top:8px}
+.hma-pave3d .s3d-seg{flex-wrap:wrap}
+@media (max-width:640px){.hma-pave3d .s3d-stage{aspect-ratio:4/3.3}}
+
+/* ---------- defect cards: Blender cut-away stills with an orange annotation layer (scripts/hma3d/def-figs.js) ---------- */
+.hma-def{background:linear-gradient(180deg,#fdfbf7,#f6f2ea);box-shadow:0 22px 46px -34px rgba(40,28,14,.45)}
+.hma-def-fig,.hma-def-fig{display:block;background:radial-gradient(130% 95% at 50% 0%,#fffdf9 0%,#f3eee5 100%);padding:16px 16px 6px}
+.hma-dl{margin:0 0 4px;font:700 clamp(14px,1.5vw,17px)/1.25 Inter,sans-serif;letter-spacing:-.005em;color:var(--accent,#F15A29)}
+.hma-df{position:relative}
+.hma-df picture,.hma-df img{display:block;width:100%;height:auto}
+.hma-def-fig .hma-do{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;pointer-events:none;border-radius:0;filter:drop-shadow(0 0 1.6px rgba(0,0,0,.5))}
+.hma-do .o-line{fill:none;stroke:#ff6a2e;stroke-width:2.6px;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.hma-do .o-thin{stroke-width:1.8px}
+.hma-do .o-dash{stroke-dasharray:6 5}
+.hma-do .o-blue{stroke:#2b7be0}
+.hma-dl--pin{position:absolute;transform:translate(-50%,-100%);margin:0;white-space:nowrap}
+@media (max-width:520px){.hma-def-fig{padding:12px 12px 4px}.hma-do .o-line{stroke-width:2.2px}}
+.hma-def-fig{text-align:left}
+.hma-dl--two{position:relative;height:1.25em;margin:0 0 4px}
+.hma-dl--two span{position:absolute;top:0;transform:translateX(-50%);white-space:nowrap}
+.hma-def-fig p.hma-dl{margin:0 0 4px;max-width:none;width:auto;text-align:left}
+.hma-def-fig p.hma-dl--two{position:relative;width:100%;height:1.3em}
+.hma-def-fig p.hma-dl--two span{position:absolute;top:0;transform:translateX(-50%);white-space:nowrap}
+.hma-def .hma-def-fig p.hma-dl{width:100%!important;max-width:100%!important;margin-left:0!important;margin-right:0!important;justify-self:stretch!important;text-align:left!important}
+
+/* ---------- prime / tack coat cards and the three cut faces of the mat: Blender stills inside the white .hma-cap cards ---------- */
+.hma-cap .hma-def-fig--cap{background:none;padding:0;box-shadow:none}
+.hma-cap .hma-def-fig p.hma-dl{width:100%!important;max-width:100%!important;margin:0 0 4px!important;text-align:left!important}
+.hma-cap .hma-df img{border-radius:10px}
+.hma-lp{position:absolute;transform:translate(0,-50%);font:600 clamp(9px,.78vw,11.5px)/1.2 Inter,sans-serif;color:#1b1c1f;background:rgba(255,255,255,.88);padding:.3em .62em;border-radius:6px;white-space:nowrap;box-shadow:0 5px 12px -8px rgba(0,0,0,.6);pointer-events:none}
+@media (max-width:520px){.hma-lp{font-size:10px}}

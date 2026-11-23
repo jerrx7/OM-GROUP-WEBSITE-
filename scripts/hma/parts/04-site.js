@@ -19,7 +19,7 @@ function quality() {
   return sec('quality', '', `
     ${head('quality', 'Interactive 10 · Quality control explorer', 'Quality must be checked at every stage.', 'Hot Mix Asphalt is an engineered material. Its quality depends on the consistency of the raw materials, the mix design, production, transport and construction. Quality control is not a visual inspection of black asphalt.')}
     ${ex('hma-qc', 'qc', Q.map(q => [q[0], q[1]]), states, { label: 'Choose a stage of checking', ev: 'hot_mix_process_interaction', scroll: true })}
-    ${warn('<strong>A good-looking asphalt surface does not prove that the mix meets its acceptance criteria.</strong> Testing must follow the applicable project quality plan. The contract determines the tests, frequency and acceptance limits. No test reading, certificate or result is shown on this page.')}
+    ${warn('<strong>A good-looking asphalt surface does not prove that the mix meets its acceptance criteria.</strong> Testing must follow the applicable project quality plan. The contract determines the tests, frequency and acceptance limits.')}
     <h3 class="ap-h3" style="margin-top:44px">What the quality records cover</h3>
     ${tbl('Quality record categories', ['Quality category', 'Example information'], [['Aggregate', 'Gradation and material test results'], ['Binder', 'Grade and certificate information'], ['Mix design', 'JMF and optimum binder content'], ['Production', 'Plant settings and production records'], ['Temperature', 'Production, delivery and laying observations'], ['Compaction', 'Field density and core results'], ['Finished pavement', 'Thickness, level and surface inspection']])}
     ${small('Numerical values are shown only when they are actual test records from an approved mix design or test report.')}
@@ -117,6 +117,20 @@ function paverSvg() {
     <text class="lb" x="446" y="206">Screed</text><text class="lb" x="688" y="126" text-anchor="middle">Roller</text><text class="lb" x="560" y="214">Fresh mat</text>
   </svg>`;
 }
+/* the paving train in 3D (shared engine, scene 'hmapave': assets/application-s3d-hmapave.js, models from scripts/hma3d/build-paving.py); the buttons move the camera */
+function paver3d(P) {
+  const poster = n => `/img/applications/hot-mix-asphalt/s3d/hma-paving-${n}.webp`;
+  const alt = 'A paving train in 3D: an OM GROUP tipper discharging Hot Mix into the hopper of a tracked asphalt paver, the paver laying a steaming mat behind its screed, and a tandem steel-drum roller compacting the mat';
+  const V = [['all', 'Whole train', 'The paving train', 'Tipper, paver and roller work as one train', 'The tipper discharges the Hot Mix into the hopper at the front of the paver, the paver spreads it across the prepared surface, and rolling follows behind the paver.']].concat(P.map(x => [x[0], x[1], x[1], x[4], x[5]]));
+  return `<div class="s3d-box s3d-wide hma-pave3d" data-s3d="hmapave" data-evbox="hot_mix_process_interaction" data-init='{"view":"all"}'>
+      <div class="s3d-grid">
+        <figure class="s3d-fig"><div class="s3d-stage"><img class="s3d-poster" src="${poster(1000)}" srcset="${poster(640)} 640w, ${poster(1000)} 1000w" sizes="(max-width:1000px) 92vw, 60vw" width="1000" height="625" alt="${alt}" loading="lazy" decoding="async" /><canvas class="s3d-cv" tabindex="0" role="img" aria-label="${alt}. Drag to turn the view; use the arrow keys when focused."></canvas><div class="s3d-labels"></div><div class="s3d-tools"><button type="button" data-zoom="out" aria-label="Zoom out">−</button><button type="button" data-zoom="in" aria-label="Zoom in">+</button><button type="button" class="rs" data-zoom="reset" aria-label="Reset the view">Reset</button></div><div class="s3d-hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18M8 7l4-4 4 4M8 17l4 4 4-4M7 8l-4 4 4 4M17 8l4 4-4 4"/></svg>Drag to turn</div></div><figcaption>The paving train at work. The Conveyor and Auger views cut away the near half of the paver to show the mix inside.</figcaption></figure>
+        <div class="s3d-ctl"><p class="s3d-lbl">Choose a part of the paving train</p><div class="s3d-seg" role="group" aria-label="Choose a part of the paving train">${V.map((x, i) => `<button type="button" data-set="view:${x[0]}" aria-pressed="${i === 0}">${x[1]}</button>`).join('')}</div>
+          <div class="s3d-read" aria-live="polite">${V.map(x => `<div data-when="view:${x[0]}"><span class="tag">${x[2]}</span><h4>${x[3]}</h4><p>${x[4]}</p></div>`).join('')}</div>
+        </div>
+      </div>
+    </div>`;
+}
 function paving() {
   const P = [
     ['hopper', 'Hopper', 'asphalt-paver-hot-mix-laying', 'An asphalt paver and its screed laying a fresh mat', 'The hopper receives the mix', 'The tipper discharges the Hot Mix into the hopper at the front of the paver. The paver and the tipper work together at a steady pace so the mix keeps flowing.'],
@@ -129,13 +143,7 @@ function paving() {
   const states = P.map(x => [`<div class="hma-pvfig">${paverSvg()}</div>`, `<span class="tag">Paving</span><h4>${x[4]}</h4><p>${x[5]}</p>`]);
   return sec('paving', '', `
     ${head('paving', 'Interactive 07 · Paving process explorer', 'Controlled placement creates the pavement profile.', 'The asphalt paver receives the mix and spreads it across the prepared surface. The conveyor, auger and screed work together to distribute and level the material, to the specified width, thickness, profile, crossfall and surface consistency.')}
-    <div class="s3d-box ex-box hma-ex hma-paver" data-ex data-evbox="hot_mix_process_interaction" data-init='{"pv":"hopper"}'>
-      <p class="s3d-lbl hma-lbl">Choose a part of the paving train</p>
-      <div class="hma-tabs s3d-seg" role="group" aria-label="Choose a part of the paving train">${P.map((x, i) => `<button type="button" data-set="pv:${x[0]}" aria-pressed="${i === 0}">${x[1]}</button>`).join('')}</div>
-      <div class="hma-pvwrap">${paverSvg()}</div>
-      <div class="hma-states hma-states--tx">${P.map(x => `<div class="hma-st" data-when="pv:${x[0]}"><div class="hma-st-tx"><span class="tag">${x[1]}</span><h4>${x[4]}</h4><p>${x[5]}</p></div></div>`).join('')}</div>
-    </div>
-    <p class="ap-small">A simplified side view of a paving train, not a particular machine.</p>
+    ${paver3d(P)}
     <div class="hma-two" style="margin-top:36px">${fig('asphalt-paver-hot-mix-laying', 'The paver and its screed', 'A close view of an asphalt paver screed forming a fresh black Hot Mix mat')}${fig('hot-mix-asphalt-road-construction', 'Plant, tipper, paver and roller', 'A plant with a tipper, an asphalt paver and a roller on a fresh road surface')}</div>
     ${ctaRow('paving', 'req')}`);
 }
@@ -204,7 +212,7 @@ function defects() {
   ];
   return sec('defects', '', `
     ${head('defects', 'Common pavement defects', 'Understand the problems that good design and construction help control.', 'This section helps explain why asphalt mix design and construction quality matter. Each card shows a technical cross-section of the defect, its common contributing factors and the considerations that help control it.')}
-    <div class="hma-defs">${D.map((d, i) => `<article class="hma-def" data-rv><div class="hma-def-fig">${defSvg(d[0])}</div><div class="hma-def-tx"><span class="hma-type-n">${String(i + 1).padStart(2, '0')}</span><h3 class="ap-h4">${d[1]}</h3><p>${d[2]}</p><p class="ap-label">Common contributing factors</p>${ul(d[3])}<p class="ap-label">Prevention and control</p><p>${d[4]}</p></div></article>`).join('')}</div>
+    <div class="hma-defs">${D.map((d, i) => `<article class="hma-def" data-rv><div class="hma-def-fig">${require("../../hma3d/def-figs").figHtml(d[0]).replace(/^<div class="hma-def-fig">|</div>$/g, "")}</div><div class="hma-def-tx"><span class="hma-type-n">${String(i + 1).padStart(2, '0')}</span><h3 class="ap-h4">${d[1]}</h3><p>${d[2]}</p><p class="ap-label">Common contributing factors</p>${ul(d[3])}<p class="ap-label">Prevention and control</p><p>${d[4]}</p></div></article>`).join('')}</div>
     ${warn('<strong>No single mix characteristic prevents every defect, and a defect is not always caused by the mix alone.</strong> Pavement design, drainage, the subgrade, traffic and construction quality all matter. The drawings are simplified cross-sections, not to scale.')}`, { bone: true });
 }
 

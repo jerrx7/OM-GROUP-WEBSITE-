@@ -1,25 +1,41 @@
+# OM GROUP - https://www.omgroupco.com/
+# Everything public is open to search engines and to AI search / answer engines.
+
+# Search engines and AI answer engines (named so the intent is explicit)
 User-agent: Googlebot
-Allow: /
-Allow: /assets/
-Allow: /img/
-Allow: /favicon.ico
-Allow: /apple-touch-icon.png
-
+User-agent: Googlebot-Image
 User-agent: Bingbot
+User-agent: Applebot
+User-agent: DuckDuckBot
+User-agent: YandexBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: GPTBot
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: Google-Extended
+User-agent: Applebot-Extended
 Allow: /
 Allow: /assets/
 Allow: /img/
-Allow: /favicon.ico
-
-User-agent: *
 Disallow: /admin/
 Disallow: /dashboard/
 Disallow: /private/
 Disallow: /login/
 Disallow: /uploads/
+
+# Everyone else
+User-agent: *
+Allow: /
 Allow: /assets/
 Allow: /img/
-Allow: /
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /private/
+Disallow: /login/
+Disallow: /uploads/
 
-# Sitemap
 Sitemap: https://www.omgroupco.com/sitemap.xml

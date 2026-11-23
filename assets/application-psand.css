@@ -36,7 +36,7 @@
 .psd-prof .gr{fill:var(--accent,#f15a29)}.psd-prof .cap{font:600 12.5px/1 Inter,system-ui,sans-serif;fill:#4a4b50}
 
 /* the curing timeline */
-.psd-time{display:block;width:100%;max-width:560px;height:auto;margin:8px 0}
+.psd-time{display:block;width:100%;max-width:560px;height:auto;margin:8px 0;overflow:visible}   /* end labels may run past the rail ends */
 .psd-time .rail{fill:none;stroke:rgba(20,20,22,.3);stroke-width:3;stroke-linecap:round}
 .psd-time .nd{fill:#fff;stroke:rgba(20,20,22,.4);stroke-width:2}.psd-time .nd.hot{fill:var(--accent,#f15a29);stroke:#fff}
 .psd-time text{font:600 12px/1 Inter,system-ui,sans-serif;fill:#4a4b50}.psd-time text.hot{fill:var(--accent-ink,#c4410f)}

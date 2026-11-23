@@ -79,7 +79,7 @@ function quantity() {
         <p class="ap-small" id="hmaCalcMsg">Enter the four values. The density must come from your approved mix design; none is assumed.</p>
         <div class="ap-cta-row"><button type="button" class="btn btn-ghost" id="hmaCalcEx">Try the worked example</button><button type="button" class="btn btn-ghost" id="hmaCalcClear">Clear</button></div>
       </form>
-      <div class="ap-prose" data-rv><h3 class="ap-h3">Worked example</h3><p>Road length 1,000 m, width 7 m, compacted thickness 50 mm (0.05 m).</p><p><code class="hma-code">1,000 × 7 × 0.05 = 350 m³</code></p><p>With an illustrative density of 2.40 tonnes/m³:</p><p><code class="hma-code">350 × 2.40 = 840 tonnes</code></p><p class="hma-badge">Illustrative calculation only</p><p class="ap-small">This is not an OM GROUP production density or a recommended density for any mix. Final procurement and payment quantities must follow the approved mix density, the BOQ and the applicable measurement method.</p></div>
+      <div class="ap-prose" data-rv><h3 class="ap-h3">Worked example</h3><p>Road length 1,000 m, width 7 m, compacted thickness 50 mm (0.05 m).</p><p><code class="hma-code">1,000 × 7 × 0.05 = 350 m³</code></p><p>With an illustrative density of 2.40 tonnes/m³:</p><p><code class="hma-code">350 × 2.40 = 840 tonnes</code></p><p class="hma-badge">Illustrative calculation only</p><p class="ap-small">This is not a recommended density for any mix. Final procurement and payment quantities must follow the approved mix density, the BOQ and the applicable measurement method.</p></div>
     </div>
     <h3 class="ap-h3" style="margin-top:44px" id="pricingTitle">What affects Hot Mix pricing?</h3>
     <div class="ap-prose" data-rv><p>Hot Mix is not assigned one fixed universal price. A quotation is prepared against the specified mix type, quantity, delivery location and current commercial conditions. No price is shown on this page.</p></div>
@@ -98,7 +98,6 @@ function whyOm() {
       <div class="ap-why" data-rv><h3><span>03</span>Boulders, sands and RMC</h3><div><p>Construction boulders, M-Sand, river and washed sand and ready-mix concrete for associated civil works.</p></div></div>
       <div class="ap-why" data-rv><h3><span>04</span>Transport and logistics</h3><div><p>OM GROUP operates a transport fleet, and supply is coordinated across North Goa and South Goa.</p></div></div>
     </div>
-    ${warn('<strong>This page does not state that OM GROUP manufactures or supplies Hot Mix Asphalt.</strong> It makes no claim about a plant, plant type, capacity, mix types, binder grade, laboratory, certification, delivery fleet or supply coverage for Hot Mix. If you need Hot Mix for a project, share the requirement; availability and supply arrangements are confirmed against it.')}
     <ul class="ap-rel hma-rel" data-rv>
       <li><a href="/products/granular-sub-base" data-ev="hot_mix_gsb_click" data-loc="why_om"><span class="stg"><picture><source type="image/avif" srcset="/img/products/showcase/granular-sub-base-560.avif" /><img src="/img/products/showcase/granular-sub-base-560.webp" width="560" height="342" alt="" loading="lazy" decoding="async" style="--w:98%" /></picture></span><span class="nm">GSB</span><small>Granular Sub-Base</small></a></li>
       <li><a href="/products/wmm" data-ev="hot_mix_wmm_click" data-loc="why_om"><span class="stg"><picture><source type="image/avif" srcset="/img/products/showcase/wmm-560.avif" /><img src="/img/products/showcase/wmm-560.webp" width="560" height="361" alt="" loading="lazy" decoding="async" style="--w:98%" /></picture></span><span class="nm">WMM</span><small>Wet Mix Macadam aggregate</small></a></li>
@@ -205,7 +204,7 @@ const FAQ = [
     ['How much Hot Mix is needed per kilometre of road?', 'It depends on the road width, the compacted thickness and the approved compacted density. Use the calculator on this page with your own values; no figure is assumed.'],
     ['How is Hot Mix quantity calculated?', 'Compacted volume = length × width × compacted thickness. Theoretical mass = volume × the approved compacted density. Final quantities follow the BOQ and measurement method.'],
     ['What affects Hot Mix prices?', 'Aggregate, binder, filler and additive costs, mix type, plant and fuel costs, quality control, transport distance, delivery schedule, quantity and the contract conditions.'],
-    ['Who supplies Hot Mix in Goa?', L.HMA.verified ? 'VERIFIED STATE: replace with the confirmed statement.' : 'This page does not name a supplier. For works under the Goa PWD circular, the plant must be installed within Goa and meet the plant conditions. OM GROUP does not state on this page that it supplies Hot Mix; if you need it, share the requirement and availability will be confirmed.'],
+    ['Who supplies Hot Mix in Goa?', 'For works under the Goa PWD circular, the plant must be installed within Goa and meet the plant conditions. To discuss a Hot Mix requirement with OM GROUP, share the mix type, specification, quantity, delivery location and schedule.'],
     ['How do I request a DBM quotation?', 'Share the mix type, governing specification, grading, binder grade, approved JMF, quantity, delivery location and schedule using the enquiry builder above.'],
     ['How do I request a BC quotation?', 'The same way: mix type, specification, JMF, quantity, delivery location and schedule. Availability and the commercial response are confirmed against your requirement.'],
     ['What documents are required before ordering Hot Mix?', 'Where required: the approved JMF, binder certificate, aggregate test results, production records, temperature records, mix test results and the delivery challan.']]]
@@ -223,7 +222,7 @@ function enquire() {
   return `\n<section class="final on-dark" id="enquire" aria-labelledby="enqTitle"><div class="wrap">
     <span class="eyebrow">Planning a road construction project?</span>
     <h2 id="enqTitle">The quality of the road begins with the quality of the mix.</h2>
-    <p>Share your required mix type, governing specification, quantity, delivery location and project schedule. If you have the approved JMF or BOQ, mention it. OM GROUP can review the requirement and confirm what can be done against it: Hot Mix availability and supply arrangements are not assumed and are confirmed per enquiry.</p>
+    <p>Share your required mix type, governing specification, quantity, delivery location and project schedule. If you have the approved JMF or BOQ, mention it. OM GROUP will review the requirement and respond.</p>
     <div class="cta-row">
       ${cta(MSG.req, 'hot_mix_quote_click', 'final', 'Discuss Your Hot Mix Requirement')}
       ${cta(MSG.spec, 'hot_mix_quote_click', 'final_spec', 'Submit Your Mix Specification', 'btn-ghost', false)}
@@ -266,7 +265,7 @@ function related() {
     <li><strong>IRC:27-2009,</strong> Specifications for Bituminous Macadam, where adopted and applicable. <strong>IRC:111,</strong> Specification for Dense Graded Bituminous Mixes (verify the applicable edition).</li>
     <li><strong>Aggregate-testing standards</strong> referenced by the governing specification and mix design.</li>
   </ol>
-  <p class="ap-small">Check the editions, amendments and the contract that apply to your project. This page is general guidance on Hot Mix Asphalt. It is not engineering advice, a mix design or an approval of any mix, and it makes no claim about any OM GROUP plant, product or test result.</p>
+  <p class="ap-small">Check the editions, amendments and the contract that apply to your project.</p>
 </div></section>
 `;
 }
