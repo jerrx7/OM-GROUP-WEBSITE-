@@ -12,9 +12,7 @@
 .cm3d-cv{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;transition:opacity .5s ease}
 .cm3d.is-3d .cm3d-cv{opacity:1}
 .cm3d:not(.is-js) .cm3d-cv{display:none}
-/* pinned runway (see the script): the stage holds still, just under the sticky headers, while the press plays */
-.cm3d.is-pin{min-height:calc(var(--cm-h, 50vw) + var(--cm-run, 85vh))}
-.cm3d.is-pin .cm3d-stage{position:sticky;top:var(--cm-top, 140px);z-index:1}
+/* no pinned runway any more: the machine sits in the page like any picture and plays its own press cycle (see the script) */
 .cm3d-zones{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
 
 /* the paver lab: the machine is the hero, so it takes the full width; the six considerations sit under it in two columns */
@@ -28,5 +26,10 @@
 @media (max-width:899px){
   .ap6-lab[data-kind="mould"] .ap6-hot{grid-template-columns:minmax(0,1fr)}
   .cm3d-stage{border-radius:18px}
+}
+/* a phone on its side is short: size the machine to the visible height (less the pinned jump bar and bottom bar) so the whole press is in view at once.
+   1.9554 = 1754 / 897, the frame's proportions. */
+@media (orientation:landscape) and (max-height:500px){
+  .ap6-lab[data-kind="mould"] .ap6-lab-fig{max-width:min(760px,calc((100svh - 104px) * 1.9554))}
 }
 @media (prefers-reduced-motion:reduce){.cm3d-poster,.cm3d-cv{transition:none}}

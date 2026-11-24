@@ -9,11 +9,12 @@
    - three.js (here): renders that GLB live with a camera that is the Blender camera (orthographic, pitched down 7°), studio
      environment + key light with soft shadows, a baked contact shadow and a faint mirrored copy of the low parts as the floor
      reflection. The poster, the live canvas and the zone overlay all share one frame (1754 × 897), so they line up exactly.
-   - Motion: ONE timeline. The reveal builds the machine up in five steps; afterwards the platen is driven by the page scroll
-     (the figure moving from low to centre on screen presses the aggregate by a few millimetres; scrolling back releases it).
-     Springs and chamber settle with the load; the aggregate compresses (instance matrices), the console screen plots the run.
+   - Motion: ONE timeline, and it plays by itself (nothing follows the page scroll, nothing is pinned). The reveal builds the machine
+     up in five steps; afterwards a test cycle repeats for as long as the figure is on screen: rest, the platen presses the aggregate,
+     holds under load, releases, rest. Springs and chamber settle with the load; the aggregate compresses (instance matrices), the
+     console screen plots the run and keeps the finished result while the platen lifts. Off screen or in a hidden tab it stops.
    - Loading: nothing blocks the page; the poster shows while three.js and the model load (they start ~900 px before the figure).
-   Reduced motion: no reveal, no scroll-driven press; the machine stands in the reference pose. */
+   Reduced motion: no reveal, no press; the machine stands in the reference pose. */
 (() => {
   'use strict';
   const els = [...document.querySelectorAll('[data-cm3d]')];
@@ -42,6 +43,17 @@
     [['ControlConsole', 'CorrugatedCable', 'CableGland', 'CableGlandConsole'], 1.55, 0.65],
   ];
   const INTRO = 2.5;
+  // the repeating test cycle, in seconds: rest in the reference pose, press, hold under load, release, rest again
+  const CYC = { rest: 0.9, down: 2.4, hold: 1.5, up: 1.9, gap: 0.9 };
+  CYC.total = CYC.rest + CYC.down + CYC.hold + CYC.up + CYC.gap;
+  function cyc(t) {   // -> { p: platen position 0..1, ps: what the console screen shows (it keeps the finished result while the platen lifts) }
+    t %= CYC.total;
+    if (t < CYC.rest) return { p: 0, ps: 0 };
+    t -= CYC.rest; if (t < CYC.down) { const p = t / CYC.down; return { p, ps: p }; }
+    t -= CYC.down; if (t < CYC.hold) return { p: 1, ps: 1 };
+    t -= CYC.hold; if (t < CYC.up) return { p: 1 - t / CYC.up, ps: 1 };
+    return { p: 0, ps: 0 };
+  }
   const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
   const sm = t => t * t * (3 - 2 * t);
   const easeOut = t => 1 - Math.pow(1 - t, 3);
@@ -72,14 +84,14 @@
     constructor(el) {
       this.el = el; this.stage = el.querySelector('.cm3d-stage'); this.cv = el.querySelector('.cm3d-cv');
       this.vis = false; this.ratio = 0; this.ready = false; this.failed = false; this.intro = 'none'; this.t0 = 0;
-      this.pS = 0; this.force = null; this.dirty = true; this.raf = 0; this.last = 0; this.k = 0; this.scr = null; this.scrP = -1; this.q = 1; this.moving = false; this.gapAvg = 16; this.nGap = 0; this.lastBusy = 0; this.shadowDirty = true; this.lastD = -1;
+      this.pS = 0; this.ct = 0; this.psc = 0; this.force = null; this.dirty = true; this.raf = 0; this.last = 0; this.k = 0; this.scr = null; this.scrP = -1; this.q = 1; this.moving = false; this.gapAvg = 16; this.nGap = 0; this.lastBusy = 0; this.shadowDirty = true; this.lastD = -1;
       el.classList.add('is-js');
-      // Pinned runway: the stage stays in place for about one screen of extra scrolling while the press plays, so the change can be seen
-      // (without it the figure scrolled past before anything visibly moved). Not for reduced motion: there the machine just stands.
-      if (!reduce) el.classList.add('is-pin');
-      const fit = () => { el.style.setProperty('--cm-h', this.stage.offsetHeight + 'px'); el.style.setProperty('--cm-run', Math.round(innerHeight * 0.75) + 'px'); this.pinTop = parseFloat(getComputedStyle(this.stage).top) || 0; };
-      fit(); new ResizeObserver(() => { fit(); this.dirty = true; this.wake(); }).observe(this.stage);
-      addEventListener('resize', fit, { passive: true });
+      // no pinned runway and no scroll coupling: the figure sits in the page like any other picture and plays its own cycle
+      new ResizeObserver(() => { this.dirty = true; this.wake(); }).observe(this.stage);
+    }
+    shown() {   // enough of the figure is on screen to begin: 70 % of it, or over half the screen when the figure is taller than a short landscape screen
+      const r = this.stage.getBoundingClientRect(), seenH = Math.min(r.bottom, innerHeight) - Math.max(r.top, 0);
+      return seenH >= Math.min(0.7 * r.height, 0.55 * innerHeight);
     }
 
     /* ---------- three.js ---------- */
@@ -166,7 +178,7 @@
         await new Promise(r => (window.requestIdleCallback ? requestIdleCallback(r, { timeout: 600 }) : setTimeout(r, 80)));
         this.shadowDirty = true; this.applyPress(0); this.render(true);
         this.ready = true; this.dirty = true;
-        if (this.intro === 'none' && this.ratio >= 0.7) this.start(); else if (this.el.classList.contains('is-poster') && this.intro !== 'none') this.swap();
+        if (this.intro === 'none' && this.vis && this.shown()) this.start(); else if (this.el.classList.contains('is-poster') && this.intro !== 'none') this.swap();
         this.wake();
       } catch (e) { console.warn('cm3d: staying on the poster', e); this.failed = true; this.el.classList.add('is-poster'); }
     }
@@ -195,15 +207,8 @@
       this.three.R.toneMappingExposure = 0.9 + 0.32 * e; this.mirror.fade.value = t == null ? 1 : easeOut(clamp((t - 1.0) / 1.2));
     }
 
-    /* ---------- press (scroll-driven) ---------- */
-    target() {
-      if (this.force != null) return this.force; if (reduce) return 0;
-      const r = this.el.getBoundingClientRect(), runway = r.height - this.stage.offsetHeight;
-      if (runway < 40) return 0;
-      const s = clamp((this.pinTop - r.top) / runway);          // 0 when the stage pins, 1 when it lets go
-      return clamp((s - 0.1) / 0.72);                            // hold the reference pose first, press over the middle, hold pressed at the end
-    }
-    applyPress(p) {
+    /* ---------- press (self-running cycle, see CYC) ---------- */
+    applyPress(p, ps) {
       const N = this.N, e = sm(p), D = M.travel * e;
       const free = Math.min(D, M.contact), push = Math.max(0, D - M.contact);
       const d = M.drop * sm(clamp(push / (M.travel - M.contact)));
@@ -212,7 +217,7 @@
       const sy = (M.spring.h - d) / M.spring.h; for (let i = 1; i <= 4; i++) { const s = N['Spring_0' + i]; if (s) s.scale.y = sy; }
       const k = clamp(Math.max(0, push - d) / (M.bed.top - M.bed.bot), 0, 0.2);
       if (Math.abs(k - this.k) > 1e-6) { this.k = k; this.squeeze(k); }
-      this.drawScr(p);
+      this.drawScr(ps == null ? p : ps);
     }
     squeeze(k) {     // the bed compresses toward its floor; stones keep their size (instance matrices only)
       for (const im of this.stones || []) {
@@ -231,9 +236,14 @@
       this.raf = 0; const dt = Math.min(0.06, Math.max(0, (now - this.last) / 1000)); this.last = now; let busy = false;
       if (this.ready && !this.lost && this.intro !== 'none') {
         if (this.intro === 'run') { const t = (now - this.t0) / 1000; if (t >= INTRO) { this.intro = 'done'; this.setReveal(null); } else this.setReveal(t); busy = true; this.dirty = true; }
-        const tg = this.vis ? this.target() : this.pS, diff = tg - this.pS;
-        if (Math.abs(diff) > 0.0004) { this.pS += reduce ? diff : diff * (1 - Math.exp(-dt * 6)); busy = true; this.dirty = true; } else if (this.pS !== tg) { this.pS = tg; this.dirty = true; }
-        if (this.dirty) { this.dirty = false; this.applyPress(this.pS); this.render(); }
+        // the platen: a test hook can force a position; otherwise it rests until the build-up has finished, then repeats the cycle while the figure is on screen
+        let tg = this.pS, auto = false;
+        if (this.force != null) tg = this.force;
+        else if (reduce || this.intro !== 'done') tg = 0;
+        else if (this.vis) { auto = true; this.ct += dt; const c = cyc(this.ct); tg = c.p; this.psc = c.ps; }
+        if (auto) { this.pS = tg; busy = true; this.dirty = true; }
+        else { const diff = tg - this.pS; if (Math.abs(diff) > 0.0004) { this.pS += reduce ? diff : diff * (1 - Math.exp(-dt * 6)); busy = true; this.dirty = true; } else if (this.pS !== tg) { this.pS = tg; this.dirty = true; } }
+        if (this.dirty) { this.dirty = false; this.applyPress(this.pS, auto ? this.psc : this.pS); this.render(); }
       }
       if (busy && this.vis) this.wake();
     }
@@ -242,7 +252,8 @@
       const d0 = window.devicePixelRatio || 1;
       // always sharp, also while scrolling: at least 2x the screen's pixels (supersampling), within a pixel budget. The figure is medium sized,
       // so this stays cheap; a lower resolution while moving made it visibly soft mid-scroll.
-      const dpr = Math.min(Math.max(d0, 2), Math.sqrt(4.5e6 / (w * h))), pw = Math.round(w * dpr), ph = Math.round(h * dpr);
+      // The press now runs continuously while the figure is on screen, so touch screens (phones, tablets) get a smaller pixel budget to stay smooth.
+      const dpr = coarse ? Math.min(Math.max(d0, 1.5), 2, Math.sqrt(2.4e6 / (w * h))) : Math.min(Math.max(d0, 2), Math.sqrt(4.5e6 / (w * h))), pw = Math.round(w * dpr), ph = Math.round(h * dpr);
       if (this.cv.width !== pw || this.cv.height !== ph) { T.R.setPixelRatio(dpr); T.R.setSize(w, h, false); }
       if (this.shadowDirty) { T.R.shadowMap.needsUpdate = true; this.shadowDirty = false; }
       T.R.render(T.scene, T.cam);
@@ -305,14 +316,12 @@
   const near = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { near.unobserve(e.target); e.target.__cm3d.boot(); } }), { rootMargin: '900px 0px' });
   const seen = new IntersectionObserver(es => es.forEach(e => {
     const f = e.target.__cm3d; f.vis = e.isIntersecting; f.ratio = e.intersectionRatio;
-    if (f.vis) { if (f.ratio >= 0.7) f.start(); f.dirty = true; f.wake(); }   // build up once most of it is on screen (it is then about to pin)
-  }), { threshold: [0, 0.7] });
+    if (f.vis) { if (f.intro === 'none' && f.shown()) f.start(); f.dirty = true; f.wake(); }   // build up once most of it is on screen
+  }), { threshold: [0, 0.3, 0.7] });
   all.forEach(f => { f.stage.__cm3d = f; near.observe(f.el); seen.observe(f.stage); });
-  addEventListener('scroll', () => all.forEach(f => {
-    if (!f.vis) return;
-    if (f.intro === 'none' && f.stage.getBoundingClientRect().top <= f.pinTop + 6) f.start();   // very short screens never show 70 % of it: start when it pins
-    f.wake();
-  }), { passive: true });
+  // a figure taller than a short landscape screen never shows 70 % of itself: start it as soon as over half the screen is figure
+  const onScroll = () => { let waiting = false; all.forEach(f => { if (f.intro !== 'none') return; waiting = true; if (f.vis && f.shown()) f.start(); }); if (!waiting) removeEventListener('scroll', onScroll); };
+  addEventListener('scroll', onScroll, { passive: true });
   document.addEventListener('visibilitychange', () => { if (!document.hidden) all.forEach(f => { f.dirty = true; f.wake(); }); });
   addEventListener('pagehide', e => { if (!e.persisted) all.forEach(f => f.destroy()); });
 })();
