@@ -6,6 +6,34 @@
 (function () {
   'use strict';
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  /* jump bar: a single highlight glides to the section being read (the pages' own scripts mark it with a.on).
+     It replaces the old underline, which sat on the same edge as the orange progress line and merged with it. Runs for everyone, motion or not. */
+  (function tocHighlight() {
+    var nav = document.getElementById('toc'), ul = nav && nav.querySelector('ul');
+    if (!ul || !ul.querySelector('a')) return;
+    var ind = document.createElement('span'); ind.className = 'ap-tocpill'; ind.setAttribute('aria-hidden', 'true');
+    ul.insertBefore(ind, ul.firstChild); nav.classList.add('has-ind');
+    var place = function (instant) {
+      var a = ul.querySelector('a.on');
+      if (!a) { ind.classList.remove('is-set'); return; }
+      var first = !ind.classList.contains('is-set');
+      if (instant || first) ind.classList.add('is-instant');
+      ind.style.left = a.offsetLeft + 'px'; ind.style.width = a.offsetWidth + 'px'; ind.classList.add('is-set');
+      if (instant || first) { void ind.offsetWidth; requestAnimationFrame(function () { ind.classList.remove('is-instant'); }); }
+    };
+    if ('MutationObserver' in window) {
+      var mo = new MutationObserver(function () { place(false); });
+      [].forEach.call(ul.querySelectorAll('a'), function (a) { mo.observe(a, { attributes: true, attributeFilter: ['class'] }); });
+    }
+    var again = function () { place(true); };
+    window.addEventListener('resize', again, { passive: true });
+    window.addEventListener('orientationchange', again);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(again);
+    window.addEventListener('load', again);
+    place(true);
+  })();
+
   if (reduce || !('IntersectionObserver' in window)) return;
 
   var doc = document, vh = window.innerHeight || 800;
@@ -93,7 +121,7 @@
       ms.forEach(function (m) {
         var t = m.target;
         if (!t.classList.contains('rv-on') || (m.oldValue || '').split(' ').indexOf('rv-on') > -1) return;
-        if (t.matches('.rv-stagger,.rv-photo,.ap-stages,.ap-check,.ap-steps,.ap-ind,.ap-rel,.ap-roles,.ap-qa,.ap-split,.ap-arts,.ap6-steps6,.ap6-pair,.ap125-trio,.gallery li')) return;
+        if (t.matches('.rv-stagger,.rv-photo,.ap-stages,.ap-check,.ap-steps,.ap-tocpill,.ap-rel,.ap-roles,.ap-qa,.ap-split,.ap-arts,.ap6-steps6,.ap6-pair,.ap125-trio,.gallery li')) return;
         t.style.setProperty('--mo-d', Math.min(n++, 4) * 90 + 'ms');
       });
     });

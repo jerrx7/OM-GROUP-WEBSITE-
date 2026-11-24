@@ -10,6 +10,25 @@
 
 :root{--mo-ease:cubic-bezier(.16,1,.3,1);--mo-ease-io:cubic-bezier(.77,0,.18,1)}
 
+/* ---------- 0 · jump bar: one highlight for "where you are", one rail for "how far you've read" ----------
+   The old design drew the active section as a 2px orange underline on the bottom edge of the bar, exactly where the orange progress line also runs,
+   so the two stacked into a glitchy double line wherever they met. Now the active section is a soft pill that glides between sections, lifted clear
+   of the bottom edge, and the progress rail is the only thing that touches that edge. (Set up by application-motion.js; without it nothing changes.) */
+.ap-toc ul{position:relative}
+.ap-toc.has-ind{--ind-v:9px}
+.ap-toc.has-ind ul{gap:2px;padding-inline:20px}
+.ap-toc.has-ind a{position:relative;z-index:1;padding:15px 12px 13px;border-bottom-color:transparent;border-radius:999px;transition:color .25s ease,background-color .25s ease}
+.ap-toc.has-ind a.on,.ap-toc.has-ind a:hover{color:var(--ink)}
+.ap-toc.has-ind a.on{border-bottom-color:transparent}
+@media (hover:hover) and (pointer:fine){.ap-toc.has-ind a:not(.on):hover{background:rgba(20,20,22,.045)}}
+.ap-tocpill{position:absolute;left:0;top:var(--ind-v,9px);bottom:var(--ind-v,9px);width:0;border-radius:999px;background:var(--accent-soft,rgba(241,90,41,.10));box-shadow:inset 0 0 0 1px var(--accent-line,rgba(241,90,41,.22));opacity:0;pointer-events:none;z-index:0}
+.ap-tocpill.is-set{opacity:1;transition:left .6s var(--mo-ease),width .6s var(--mo-ease),opacity .35s ease}
+.ap-tocpill.is-instant{transition:none}
+.ap-progress{height:2px;bottom:-1px}
+@media (max-width:899px){.ap-toc.has-ind ul{padding-inline:8px}}
+@media (orientation:landscape) and (max-height:500px){.ap-toc.has-ind{--ind-v:6px}.ap-toc.has-ind a{padding:11px 12px 9px}}
+@media (prefers-reduced-motion:reduce){.ap-tocpill.is-set{transition:opacity .01s}}
+
 /* ---------- 1 · headings: word by word, out of a mask ---------- */
 .mo-split .mw{display:inline-block;vertical-align:top;padding:.1em .06em .22em;margin:-.1em -.06em -.22em}
 .mo-h:not(.mo-done) .mw{overflow:hidden}
@@ -45,9 +64,9 @@
 /* children cascade: stagger blocks and grids whose children are the visual units */
 .rv-stagger>*{transform:translateY(34px)}
 .rv-stagger.rv-on>*{transition:opacity 1s var(--mo-ease) calc(var(--si,0) * 85ms + 120ms),transform 1.2s var(--mo-ease) calc(var(--si,0) * 85ms + 120ms)}
-.rv.ap-check,.rv.ap-steps,.rv.ap-ind,.rv.ap-rel,.rv.ap-roles,.rv.ap-qa,.rv.ap-split,.rv.ap-arts,.rv.ap6-steps6,.rv.ap6-pair,.rv.ap125-trio{opacity:1;transform:none}
-.rv.ap-check>*,.rv.ap-steps>*,.rv.ap-ind>*,.rv.ap-rel>*,.rv.ap-roles>*,.rv.ap-qa>*,.rv.ap-split>*,.rv.ap-arts>*,.rv.ap6-steps6>*,.rv.ap6-pair>*,.rv.ap125-trio>*{opacity:0;transform:translateY(34px)}
-.rv.rv-on.ap-check>*,.rv.rv-on.ap-steps>*,.rv.rv-on.ap-ind>*,.rv.rv-on.ap-rel>*,.rv.rv-on.ap-roles>*,.rv.rv-on.ap-qa>*,.rv.rv-on.ap-split>*,.rv.rv-on.ap-arts>*,.rv.rv-on.ap6-steps6>*,.rv.rv-on.ap6-pair>*,.rv.rv-on.ap125-trio>*{
+.rv.ap-check,.rv.ap-steps,.rv.ap-tocpill,.rv.ap-rel,.rv.ap-roles,.rv.ap-qa,.rv.ap-split,.rv.ap-arts,.rv.ap6-steps6,.rv.ap6-pair,.rv.ap125-trio{opacity:1;transform:none}
+.rv.ap-check>*,.rv.ap-steps>*,.rv.ap-tocpill>*,.rv.ap-rel>*,.rv.ap-roles>*,.rv.ap-qa>*,.rv.ap-split>*,.rv.ap-arts>*,.rv.ap6-steps6>*,.rv.ap6-pair>*,.rv.ap125-trio>*{opacity:0;transform:translateY(34px)}
+.rv.rv-on.ap-check>*,.rv.rv-on.ap-steps>*,.rv.rv-on.ap-tocpill>*,.rv.rv-on.ap-rel>*,.rv.rv-on.ap-roles>*,.rv.rv-on.ap-qa>*,.rv.rv-on.ap-split>*,.rv.rv-on.ap-arts>*,.rv.rv-on.ap6-steps6>*,.rv.rv-on.ap6-pair>*,.rv.rv-on.ap125-trio>*{
   opacity:1;transform:none;transition:opacity 1s var(--mo-ease) calc(var(--mi,0) * 80ms + 100ms),transform 1.2s var(--mo-ease) calc(var(--mi,0) * 80ms + 100ms)}
 .rv>*:nth-child(1){--mi:0}.rv>*:nth-child(2){--mi:1}.rv>*:nth-child(3){--mi:2}.rv>*:nth-child(4){--mi:3}.rv>*:nth-child(5){--mi:4}.rv>*:nth-child(6){--mi:5}
 .rv>*:nth-child(7){--mi:6}.rv>*:nth-child(8){--mi:7}.rv>*:nth-child(9){--mi:8}.rv>*:nth-child(n+10){--mi:9}
@@ -86,7 +105,7 @@
 @media (max-width:767px){
   .mo-b{transform:translateY(24px)}
   .rv{transform:translateY(30px) scale(.99)}
-  .rv-stagger>*,.rv.ap-check>*,.rv.ap-steps>*,.rv.ap-ind>*,.rv.ap-rel>*,.rv.ap-roles>*,.rv.ap-qa>*,.rv.ap-split>*,.rv.ap-arts>*,.rv.ap6-steps6>*,.rv.ap6-pair>*,.rv.ap125-trio>*{transform:translateY(24px)}
+  .rv-stagger>*,.rv.ap-check>*,.rv.ap-steps>*,.rv.ap-tocpill>*,.rv.ap-rel>*,.rv.ap-roles>*,.rv.ap-qa>*,.rv.ap-split>*,.rv.ap-arts>*,.rv.ap6-steps6>*,.rv.ap6-pair>*,.rv.ap125-trio>*{transform:translateY(24px)}
   .mo-h.mo-in .mwi{transition-duration:1s;transition-delay:calc(var(--i,0) * 42ms + 30ms)}
   .gallery li.rv{transform:translateY(30px) scale(.97)}
 }
