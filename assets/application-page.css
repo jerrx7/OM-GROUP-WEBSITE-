@@ -18,7 +18,7 @@ html{scroll-padding-top:132px}
 .ap-hero h1{font-size:clamp(36px,4.5vw,64px);line-height:1.04;letter-spacing:-.02em;margin-bottom:24px}
 .ap-hero h1 em,.ap-h2 em{color:var(--accent);font-style:italic;font-weight:500}
 .ap-hero p{font-size:16.5px;color:var(--grey);line-height:1.8;max-width:600px;margin-bottom:14px}
-.ap-hero p.ap-hero-lead{font-size:18px;color:var(--ink);line-height:1.7}
+/* the opening paragraph reads exactly like the paragraphs after it (same size, colour, spacing): no separate .ap-hero-lead style */
 .ap-hero .cta-row{margin-top:30px}
 .ap-hero-media{display:flex;justify-content:center}
 .ap-hero-media img{width:100%;max-width:560px;height:auto;filter:drop-shadow(0 28px 26px rgba(20,20,22,.18))}
@@ -30,6 +30,13 @@ html{scroll-padding-top:132px}
 .ap-toc a{display:block;white-space:nowrap;padding:15px 0 13px;font-size:12.5px;font-weight:600;letter-spacing:.02em;color:var(--grey);border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
 .ap-toc a:hover{color:var(--ink)}
 .ap-toc a.on{color:var(--ink);border-bottom-color:var(--accent)}
+/* phones on their side: the site header scrolls away (applications.css), so the jump bar + progress line pin to the very top.
+   This sits here, after the base rule above, because applications.css loads first and its top:0 was being overridden. */
+@media (orientation:landscape) and (max-height:500px){
+  .ap-toc{top:0}
+  .ap-toc a{padding:11px 0 9px}
+  html{scroll-padding-top:56px}
+}
 
 /* ---------- sections ---------- */
 .ap-sec{padding:104px 0}

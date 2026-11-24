@@ -128,27 +128,26 @@
     flows += H.stones([[P.chute.x, P.chute.y + 8], [P.chute.x, -168]], { speed: 40, gap: 10, size: [2.4, 4.4], seed: 240 });
     var sub = narrow ? 100 : 82;
     var ticks = '<path class="aps-gline" d="M-40 34H1440"/>' + [256, 700, 990, tx0 + 250].map(function (x) { return '<circle class="ring" cx="' + x + '" cy="34" r="4.5"/>'; }).join('');
-    var sl = function (x, t) { return narrow ? '' : label(x, sub, t, 'faint-t'); };
-    var labs = label(256, 64, narrow ? 'BINS' : 'AGGREGATE BINS') + sl(256, 'SEPARATE FRACTIONS')
+    var sl = function (x, t) { return label(x, sub, t, 'faint-t'); };
+    var lt = H.lt;
+    var labs = label(256, 64, lt('AGGREGATE BINS', 'BINS')) + sl(256, 'SEPARATE FRACTIONS')
       + label(700, 64, 'BELTS') + sl(700, 'WEIGHED, THEN LIFTED')
-      + label(990, 64, narrow ? 'MIXER' : 'MIXING TOWER') + sl(990, 'BLENDED TO THE MIX DESIGN')
-      + label(tx0 + 250, 64, narrow ? 'TRUCK' : 'TRANSIT MIXER') + sl(tx0 + 250, 'DELIVERY');
+      + label(990, 64, lt('MIXING TOWER', 'MIXER')) + sl(990, 'BLENDED TO THE MIX DESIGN')
+      + label(tx0 + 250, 64, lt('TRANSIT MIXER', 'TRUCK')) + sl(tx0 + 250, 'DELIVERY');
     // phones: the bins sit 128 units apart but the type is larger, so a two-word tag is set on two lines (it would run into M-SAND)
     var tagText = function (c, i) {
       var words = c.name.split(' ');
-      if (!narrow || words.length < 2 || /MM$/.test(c.name)) return c.name;
-      return words.map(function (w, k) { return '<tspan x="' + bx(i) + '" dy="' + (k ? '1.05em' : '-1.05em') + '">' + w + '</tspan>'; }).join('');
+      return H.binTag(c.name, bx(i));
     };
-    var tags = kinds.map(function (c, i) { return '<text class="lab' + (c.hot ? ' acc-t' : '') + '" x="' + bx(i) + '" y="-404" style="font-weight:700;letter-spacing:.12em">' + tagText(c, i) + '</text>' + (c.hot ? '<circle class="ring-on" cx="' + bx(i) + '" cy="-388" r="4"/>' : ''); }).join('');
+    var tags = kinds.map(function (c, i) { return '<text class="lab bin-t' + (c.hot ? ' acc-t' : '') + '" x="' + bx(i) + '" y="-404" style="font-weight:700;letter-spacing:.12em">' + tagText(c, i) + '</text>' + (c.hot ? '<circle class="ring-on" cx="' + bx(i) + '" cy="-388" r="4"/>' : ''); }).join('');
     var markup = back + ground
       + '<g class="aps-b aps-b1">' + statics + heaps + gates + '</g>'
       + '<g class="aps-b aps-b2">' + H.belt(A, P.gather) + H.belt(A, P.incline) + mixDrive + '</g>'
       + '<g class="aps-b aps-b3">' + truck + '<path class="pipe" d="M' + P.chute.x + ' ' + P.chute.y + 'V-168"/></g>'
       + '<g class="aps-b aps-b4">' + ticks + labs + tags + '</g>'
       + '<g class="aps-flow">' + flows + '</g>';
-    return { vb: narrow ? [-40, -700, 720, 800] : [-40, -700, 1480, 800], world: [-40, 1440], markup: markup };
+    return { vb: [-40, -700, 1480, 800], world: [-40, 1440], markup: markup };
   }
-  blend20.pan = true;
 
   /* ---------- member cross-sections (shared by frame20 insets and rccsel) ---------- */
   // returns markup centred on (0,0). k: 'slab' | 'beam' | 'column' | 'footing' | 'foundation'; dims: draw t / s / c dimension lines

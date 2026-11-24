@@ -1,0 +1,102 @@
+/* OM GROUP · application pages: scroll choreography (shared by the hub and all 16 guides).
+   One house style for everything that comes into view as the page is scrolled:
+     - section headings rise word by word out of a mask, the kicker rule draws itself,
+     - a hairline draws across the top of every new section (a dark panel also breathes its glow in),
+     - paragraphs, lists, cards and table rows arrive in a quiet cascade (opacity + transform only),
+     - pictures open from a curtain while the photograph settles from a slow zoom,
+     - cards respond to the pointer (fine pointers only).
+   Everything is armed by application-motion.js only for items that begin below the fold, so with no script, with reduced motion,
+   or when printing, every word is simply there. Only transform and opacity animate (plus clip-path on pictures): nothing reflows. */
+
+:root{--mo-ease:cubic-bezier(.16,1,.3,1);--mo-ease-io:cubic-bezier(.77,0,.18,1)}
+
+/* ---------- 1 · headings: word by word, out of a mask ---------- */
+.mo-split .mw{display:inline-block;vertical-align:top;padding:.1em .06em .22em;margin:-.1em -.06em -.22em}
+.mo-h:not(.mo-done) .mw{overflow:hidden}
+.mo-split .mwi{display:inline-block}
+.mo-h{animation:none!important}   /* the older scroll-scrubbed lift is replaced by this */
+.mo-h .mwi{transform:translateY(115%) rotate(4deg);transform-origin:0 100%}
+.mo-h.mo-in .mwi{transform:none;transition:transform 1.2s var(--mo-ease) calc(var(--i,0) * 55ms + 40ms)}
+
+/* ---------- 2 · kicker: the rule draws, the words slide in after it ---------- */
+.mo-k{opacity:0;transform:translateX(-16px)}
+.mo-k::before{animation:none!important;transform:scaleX(0);transform-origin:left}
+.mo-k.mo-in{opacity:1;transform:none;transition:opacity .9s var(--mo-ease) .12s,transform 1.1s var(--mo-ease) .12s}
+.mo-k.mo-in::before{transform:none;transition:transform 1.15s var(--mo-ease)}
+
+/* ---------- 3 · sections: a hairline draws across the top edge; a dark panel's glow breathes in ---------- */
+.mo-sec{position:relative}
+.mo-rule{position:absolute;left:0;right:0;top:0;height:1px;pointer-events:none;z-index:2}
+.mo-rule::after{content:"";position:absolute;top:0;bottom:0;left:max(32px,calc((100% - var(--wrap,1200px)) / 2 + 32px));right:max(32px,calc((100% - var(--wrap,1200px)) / 2 + 32px));
+  background:linear-gradient(90deg,var(--accent,#F15A29) 0,rgba(241,90,41,.4) 18%,var(--line,rgba(20,20,22,.12)) 52%,transparent 100%);transform-origin:left}
+.ap125-dark .mo-rule::after,.on-dark .mo-rule::after{background:linear-gradient(90deg,#FF8C63 0,rgba(255,140,99,.4) 18%,rgba(255,255,255,.16) 52%,transparent 100%)}
+.mo-arm>.mo-rule::after{transform:scaleX(0)}
+.mo-arm.mo-in>.mo-rule::after{transform:none;transition:transform 1.9s var(--mo-ease) .05s}
+.mo-arm.ap125-dark::before{opacity:0;transform:scale(.72)}
+.mo-arm.ap125-dark.mo-in::before{opacity:1;transform:none;transition:opacity 2.2s ease .1s,transform 2.6s var(--mo-ease) .1s}
+
+/* ---------- 4 · reading blocks: a quiet rise, in reading order ---------- */
+.mo-b{opacity:0;transform:translateY(34px);animation:none!important}
+.mo-b.mo-in{opacity:1;transform:none;transition:opacity 1s var(--mo-ease) var(--mo-d,0ms),transform 1.2s var(--mo-ease) var(--mo-d,0ms)}
+
+/* ---------- 5 · blocks the page marks with data-rv (script in each page adds .rv, then .rv-on as they come into view) ---------- */
+.rv{opacity:0;transform:translateY(46px) scale(.985);transform-origin:50% 100%}
+.rv.rv-on{opacity:1;transform:none;transition:opacity 1s var(--mo-ease) var(--mo-d,0ms),transform 1.3s var(--mo-ease) var(--mo-d,0ms)}
+/* children cascade: stagger blocks and grids whose children are the visual units */
+.rv-stagger>*{transform:translateY(34px)}
+.rv-stagger.rv-on>*{transition:opacity 1s var(--mo-ease) calc(var(--si,0) * 85ms + 120ms),transform 1.2s var(--mo-ease) calc(var(--si,0) * 85ms + 120ms)}
+.rv.ap-check,.rv.ap-steps,.rv.ap-ind,.rv.ap-rel,.rv.ap-roles,.rv.ap-qa,.rv.ap-split,.rv.ap-arts,.rv.ap6-steps6,.rv.ap6-pair,.rv.ap125-trio{opacity:1;transform:none}
+.rv.ap-check>*,.rv.ap-steps>*,.rv.ap-ind>*,.rv.ap-rel>*,.rv.ap-roles>*,.rv.ap-qa>*,.rv.ap-split>*,.rv.ap-arts>*,.rv.ap6-steps6>*,.rv.ap6-pair>*,.rv.ap125-trio>*{opacity:0;transform:translateY(34px)}
+.rv.rv-on.ap-check>*,.rv.rv-on.ap-steps>*,.rv.rv-on.ap-ind>*,.rv.rv-on.ap-rel>*,.rv.rv-on.ap-roles>*,.rv.rv-on.ap-qa>*,.rv.rv-on.ap-split>*,.rv.rv-on.ap-arts>*,.rv.rv-on.ap6-steps6>*,.rv.rv-on.ap6-pair>*,.rv.rv-on.ap125-trio>*{
+  opacity:1;transform:none;transition:opacity 1s var(--mo-ease) calc(var(--mi,0) * 80ms + 100ms),transform 1.2s var(--mo-ease) calc(var(--mi,0) * 80ms + 100ms)}
+.rv>*:nth-child(1){--mi:0}.rv>*:nth-child(2){--mi:1}.rv>*:nth-child(3){--mi:2}.rv>*:nth-child(4){--mi:3}.rv>*:nth-child(5){--mi:4}.rv>*:nth-child(6){--mi:5}
+.rv>*:nth-child(7){--mi:6}.rv>*:nth-child(8){--mi:7}.rv>*:nth-child(9){--mi:8}.rv>*:nth-child(n+10){--mi:9}
+/* tables: the block rises, then its rows follow one by one */
+.rv.ap-tbl-wrap .ap-tbl tbody tr{opacity:0;transform:translateY(16px)}
+.rv.rv-on.ap-tbl-wrap .ap-tbl tbody tr{opacity:1;transform:none;transition:opacity .9s var(--mo-ease) calc(var(--ri,0) * 55ms + 380ms),transform 1s var(--mo-ease) calc(var(--ri,0) * 55ms + 380ms),background .25s ease}
+/* pictures: a curtain opens, the photograph settles from a slow zoom */
+.rv.rv-photo.rv-on{transition:clip-path 1.6s var(--mo-ease-io)}
+.rv-photo .ap-photo-in{transform:scale(1.16)}
+.rv-photo.rv-on .ap-photo-in{transition:transform 2.4s var(--mo-ease)}
+
+/* ---------- 6 · hub page: the product tiles ---------- */
+.gallery li.rv{opacity:0;transform:translateY(48px) scale(.96)}
+.gallery li.rv.rv-on{opacity:1;transform:none;transition:opacity 1s var(--mo-ease) var(--d,0ms),transform 1.3s var(--mo-ease) var(--d,0ms)}
+.gallery li.rv .name{opacity:0;transform:translateY(14px)}
+.gallery li.rv.rv-on .name{opacity:1;transform:none;transition:opacity .9s var(--mo-ease) calc(var(--d,0ms) + 320ms),transform 1s var(--mo-ease) calc(var(--d,0ms) + 320ms)}
+
+/* ---------- 7 · pointer response (mouse and trackpad only; touch gets none of it) ---------- */
+@media (hover:hover) and (pointer:fine){
+  .ap-why.rv-on:hover,.ap-why:not(.rv):hover{transform:translateY(-7px);box-shadow:0 34px 60px -36px rgba(20,20,22,.38);border-color:var(--accent-line,rgba(241,90,41,.22));transition:transform .6s var(--mo-ease),box-shadow .6s var(--mo-ease),border-color .4s ease}
+  .ap-photo:hover img{transform:scale(1.025);transition:transform 1.4s var(--mo-ease)}
+}
+
+/* ---------- touch screens (phones, Android tablets): rise only, never scale large text blocks ---------- */
+@media (pointer:coarse){
+  .rv{transform:translateY(30px)}
+  .gallery li.rv{transform:translateY(30px)}
+  .mo-arm.ap125-dark::before{transform:none}
+}
+/* ---------- lighter mode (Data Saver, 2 GB or fewer, or a dual-core processor): short travel, no mask, no glow ---------- */
+.mo-lite .rv,.mo-lite .mo-b,.mo-lite .gallery li.rv{transform:translateY(16px)}
+.mo-lite .rv.rv-on,.mo-lite .mo-b.mo-in{transition-duration:.6s}
+.mo-lite .mo-arm.ap125-dark::before{opacity:1!important;transform:none!important;transition:none!important}
+
+/* ---------- small screens: shorter travel, quicker words ---------- */
+@media (max-width:767px){
+  .mo-b{transform:translateY(24px)}
+  .rv{transform:translateY(30px) scale(.99)}
+  .rv-stagger>*,.rv.ap-check>*,.rv.ap-steps>*,.rv.ap-ind>*,.rv.ap-rel>*,.rv.ap-roles>*,.rv.ap-qa>*,.rv.ap-split>*,.rv.ap-arts>*,.rv.ap6-steps6>*,.rv.ap6-pair>*,.rv.ap125-trio>*{transform:translateY(24px)}
+  .mo-h.mo-in .mwi{transition-duration:1s;transition-delay:calc(var(--i,0) * 42ms + 30ms)}
+  .gallery li.rv{transform:translateY(30px) scale(.97)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .mo-h .mwi,.mo-k,.mo-b,.rv,.rv>*,.gallery li.rv,.gallery li.rv .name,.rv.ap-tbl-wrap .ap-tbl tbody tr{opacity:1!important;transform:none!important;transition:none!important}
+  .mo-k::before,.mo-arm>.mo-rule::after{transform:none!important;transition:none!important}
+  .mo-arm.ap125-dark::before{opacity:1!important;transform:none!important}
+}
+@media print{
+  .mo-h .mwi,.mo-k,.mo-b,.rv,.rv>*,.gallery li.rv,.gallery li.rv .name,.rv.ap-tbl-wrap .ap-tbl tbody tr{opacity:1!important;transform:none!important;transition:none!important}
+  .mo-rule{display:none}
+}

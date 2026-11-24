@@ -14,7 +14,6 @@
   'use strict';
   var BASE = '/assets/operations-motion/';
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches;
-  var HAS_TL = !!(window.CSS && CSS.supports && CSS.supports('animation-timeline: view()'));
   var F = function (n) { return Math.round(n * 10) / 10; };
 
   /* ---------- loading ---------- */
@@ -66,6 +65,14 @@
       function (_, x, y, r, tf, inner) { return '<g transform="' + tf + '"><g class="aps-spin" style="--sp:' + F(2 * Math.PI * (+r) / 42) + 's">' + inner + '</g></g>'; });
   }
   var label = function (x, y, text, cls) { return '<text class="lab ' + (cls || '') + '" x="' + F(x) + '" y="' + F(y) + '">' + text + '</text>'; };
+  // a label with a long and a short wording; CSS shows the short one on phones (so a rotated phone gets the right one without a rebuild)
+  var lt = function (long, short) { return '<tspan class="t-long">' + long + '</tspan><tspan class="t-short">' + short + '</tspan>'; };
+  // a bin tag: one line normally, two stacked lines ("12.5" over "MM") on phones, where the type is larger than the 128-unit bin pitch allows
+  var binTag = function (name, x) {
+    var w = name.split(' ');
+    if (w.length < 2) return name;
+    return '<tspan class="t-long">' + name + '</tspan>' + w.map(function (t, k) { return '<tspan class="t-short" x="' + F(x) + '" dy="' + (k ? '1.05em' : '-1.05em') + '">' + t + '</tspan>'; }).join('');
+  };
   var esc = function (s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;'); };
 
   /* ---------- scene: aggregate processing (feed → VSI crusher → vibrating screen → graded fractions) ---------- */
@@ -125,26 +132,7 @@
     return { vb: narrow ? [0, -650, 700, 780] : [-20, -650, 1580, 780], world: [-20, 1560], markup: markup };
   }
 
-  processScene.pan = true; // only this wide scene follows the scroll on phones
   var SCENES = { process: processScene };
-
-  /* the CSS pan (application-scenes.css, .aps.is-pan .aps-cam: cover 22% → cover 72% of the figure) driven by scroll,
-     for browsers without animation-timeline */
-  function jsPan(fig, cam) {
-    if (!cam) return;
-    var dist = parseFloat(cam.style.getPropertyValue('--pan')) || 0, queued = false;
-    var update = function () {
-      queued = false;
-      var r = fig.getBoundingClientRect(), vh = window.innerHeight;
-      if (r.bottom < -vh || r.top > vh * 2) return;
-      var p = (vh - r.top) / (vh + r.height), q = Math.min(1, Math.max(0, (p - 0.22) / 0.5));
-      cam.style.transform = 'translateX(' + F(-dist * q) + 'px)';
-    };
-    var on = function () { if (!queued) { queued = true; requestAnimationFrame(update); } };
-    window.addEventListener('scroll', on, { passive: true });
-    window.addEventListener('resize', on);
-    update();
-  }
 
   /* ---------- mounting ---------- */
   function mount(fig) {
@@ -157,9 +145,8 @@
     libOrNone.then(function (A) {
       if (!build.noLib) sharedDefs(A);
       var host = fig.querySelector('.aps-stage') || fig;
-      // phones always get the narrow (phone-sized, panning) drawing; browsers without scroll-driven animation
-      // (iOS Safari before 26, Firefox) pan it from a scroll listener instead of CSS, see jsPan below
-      var narrow = !!build.pan && window.innerWidth <= 767;
+      // every device gets the complete drawing, scaled to fit its frame: nothing is cropped, panned or tied to the scroll position
+      var narrow = false;
       var run = function () {
         // a figure whose drawing was written into the HTML at build time (pre-rendered, so it paints with the document) is only wired up, not rebuilt
         var svg = host.querySelector('svg.aps-svg'), sc;
@@ -170,11 +157,15 @@
             svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
             svg.setAttribute('class', 'aps-svg'); svg.setAttribute('viewBox', sc.vb.join(' ')); svg.setAttribute('aria-hidden', 'true'); svg.setAttribute('focusable', 'false');
             svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
-            svg.innerHTML = narrow ? '<g class="aps-cam" style="--pan:' + F(sc.world[1] - sc.world[0] - sc.vb[2] + 40) + 'px">' + sc.markup + '</g>' : sc.markup;
+            svg.innerHTML = sc.markup;
             host.insertBefore(svg, host.firstChild);
           }
         }
-        if (narrow) { fig.classList.add('is-pan'); if (!HAS_TL && !reduce && svg) jsPan(fig, svg.querySelector('.aps-cam')); }
+        // the frame takes the drawing's own proportions, so it never letterboxes or crops on any screen
+        if (svg && !host.classList.contains('aps-stage--lab') && !fig.classList.contains('aps-in')) {
+          var vbx = (svg.getAttribute('viewBox') || '').trim().split(/[\s,]+/).map(Number);
+          if (vbx.length === 4 && vbx[2] > 0 && vbx[3] > 0) { host.style.aspectRatio = vbx[2] + ' / ' + vbx[3]; host.style.setProperty('--ar', (vbx[2] / vbx[3]).toFixed(4)); }
+        }
         fig.classList.add('is-ready');
         fig.__apsSvg = svg;
         var pause = function (p) { if (!svg) return; try { p ? svg.pauseAnimations() : svg.unpauseAnimations(); } catch (e) {} };
@@ -182,7 +173,8 @@
         pause(true);
         // run only while visible
         new IntersectionObserver(function (es) {
-          es.forEach(function (en) { fig.classList.toggle('is-live', en.isIntersecting); pause(!en.isIntersecting); });
+          // the scene plays by itself: its stages build in one after another the first time it is on screen (time-based, never scroll-linked)
+          es.forEach(function (en) { fig.classList.toggle('is-live', en.isIntersecting); if (en.isIntersecting) fig.classList.add('is-played'); pause(!en.isIntersecting); });
         }, { threshold: 0.12 }).observe(fig);
       };
       // build off the critical path: the heaps are drawn stone by stone
@@ -197,6 +189,6 @@
     var io = new IntersectionObserver(function (es) { es.forEach(function (en) { if (en.isIntersecting) { io.unobserve(en.target); mount(en.target); } }); }, { rootMargin: '900px 0px 900px 0px' });
     figs.forEach(function (f) { io.observe(f); });
   }
-  window.APS = { SCENES: SCENES, mount: mount, helpers: { stones: stones, belt: belt, at: at, grp: grp, label: label } };
+  window.APS = { SCENES: SCENES, mount: mount, helpers: { stones: stones, belt: belt, at: at, grp: grp, label: label, lt: lt, binTag: binTag } };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();

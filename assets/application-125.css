@@ -68,6 +68,16 @@
 .ap125-dark .ap-tbl td{color:#cfccc4}
 .ap125-dark .ap-tbl caption{color:#a09d95}
 .ap125-dark .ap-tbl-wrap{border-color:rgba(255,255,255,.14);background:transparent}
+/* phones: each comparison row becomes a graphite card. The base rule paints these cards white, which hid the white
+   row title and washed out the pale values on dark sections. Here: a smoked-glass surface, a fine hairline, one orange
+   top rule, the criterion set in the serif, orange size labels, ivory values. */
+@media (max-width:767px){
+  .ap125-dark .ap-cmp tr,.ap125-dark .ap-cmp tbody tr:hover{background:linear-gradient(165deg,rgba(255,255,255,.085),rgba(255,255,255,.025) 70%);border:1px solid rgba(255,255,255,.13);border-top:2px solid var(--accent);border-radius:2px;box-shadow:0 22px 44px -28px rgba(0,0,0,.85);padding:0 0 12px;margin-bottom:14px}
+  .ap125-dark .ap-cmp tbody th{font-family:var(--serif);font-weight:500;font-size:21px;line-height:1.25;letter-spacing:.005em;color:#f4f1ea;padding:18px 18px 13px;margin-bottom:8px;border-bottom:1px solid rgba(255,255,255,.1)}
+  .ap125-dark .ap-cmp td{padding:7px 18px;font-size:15.5px;line-height:1.55;color:#ece9e2;border:0}
+  .ap125-dark .ap-cmp td::before{color:#FF8C63;letter-spacing:.12em}
+  .ap125-dark .ap-cmp caption{padding-bottom:18px}
+}
 .ap125-dark .ap-small{color:#a8a59d}
 .ap125-dark a.ap-link{color:#FF8C63}
 .ap125-dark :focus-visible{outline-color:#fff}
