@@ -1,5 +1,5 @@
 /* OM GROUP · Applications hub (TEMPORARY TEST BUILD, local only).
-   Premium borderless product gallery: hero, 15 product cutouts, product-click transition, FAQ, quote band, footer.
+   Premium borderless product gallery: hero, 16 product cutouts, product-click transition, FAQ, quote band, footer.
    The previous card/menu version is backed up in _review/applications-hub-v1/. */
 
 /* Fallback faces sized to Cormorant / Inter so the webfont swap does not shift layout (same values as /products) */
@@ -96,7 +96,6 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:500;font-variant-numeric:lining
 .gal-more a{color:var(--accent);font-weight:600;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:2px}
 .gal-more a:hover,.gal-more a:focus-visible{color:#000}
 .gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px 14px}
-.gallery li:last-child{grid-column:1/-1;width:calc(50% - 7px);justify-self:center}
 .tile{display:block;text-align:center;-webkit-tap-highlight-color:transparent;border-radius:6px}
 .tile:focus-visible{outline:3px solid var(--ink);outline-offset:6px}
 .stage{display:flex;align-items:flex-end;justify-content:center;aspect-ratio:5/4}
@@ -114,11 +113,12 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:500;font-variant-numeric:lining
 .gallery li.rv.rv-on{opacity:1;transform:none;transition:opacity .8s var(--ease),transform .9s var(--ease);transition-delay:var(--d,0ms)}
 @media (min-width:700px){
   .gallery{grid-template-columns:repeat(3,minmax(0,1fr));gap:56px 20px}
-  .gallery li:last-child{grid-column:auto;width:auto;justify-self:stretch}
+  .gallery li:last-child{grid-column:2}
   .name{font-size:15px}
 }
 @media (min-width:1080px){
   .gallery{grid-template-columns:repeat(5,minmax(0,1fr));gap:64px 24px}
+  .gallery li:last-child{grid-column:3}
   .name{font-size:15.5px;margin-top:20px}
 }
 
